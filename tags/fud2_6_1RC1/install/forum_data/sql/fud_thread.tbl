@@ -1,0 +1,37 @@
+#   copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
+#   email                : forum@prohost.org
+#
+#   $Id: fud_thread.tbl,v 1.7 2004/01/04 16:38:26 hackie Exp $
+#
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 2 of the License, or
+#       (at your option) any later version.
+
+DROP TABLE IF EXISTS {SQL_TABLE_PREFIX}thread;
+
+CREATE TABLE {SQL_TABLE_PREFIX}thread
+(
+	id		INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	forum_id	INT NOT NULL DEFAULT 0,
+	root_msg_id	INT NOT NULL DEFAULT 0,
+	last_post_date 	BIGINT NOT NULL DEFAULT 0,
+	replies		INT NOT NULL DEFAULT 0,
+	views		INT NOT NULL DEFAULT 0,
+	rating		INT NOT NULL DEFAULT 0,
+	n_rating	INT NOT NULL DEFAULT 0,
+	last_post_id	INT NOT NULL DEFAULT 0,
+	moved_to	INT NOT NULL DEFAULT 0,
+	orderexpiry	BIGINT NOT NULL DEFAULT 0,
+	thread_opt	INT NOT NULL DEFAULT 0
+);
+
+CREATE INDEX {SQL_TABLE_PREFIX}thread_i_flm ON {SQL_TABLE_PREFIX}thread (forum_id,last_post_date,moved_to);
+CREATE INDEX {SQL_TABLE_PREFIX}thread_i_t ON {SQL_TABLE_PREFIX}thread (thread_opt);
+CREATE INDEX {SQL_TABLE_PREFIX}thread_i_rmi ON {SQL_TABLE_PREFIX}thread (root_msg_id);
+CREATE INDEX {SQL_TABLE_PREFIX}thread_i_r ON {SQL_TABLE_PREFIX}thread (replies);
+
+# 1 locked
+# 2 is_sticky ANNOUNCE
+# 4 is_sticky STICKY
+# ordertype (removed)
