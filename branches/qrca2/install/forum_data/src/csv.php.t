@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: csv.php.t,v 1.1.2.1 2004/10/05 21:53:20 hackie Exp $
+* $Id: csv.php.t,v 1.1.2.2 2004/10/07 23:38:00 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -15,7 +15,7 @@
 
 	$_GET['id'] = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-	if (($usr->users_opt & (524288|1048576))) {
+	if (!($usr->users_opt & (524288|1048576))) {
 		invl_inp_err();
 	}
 	if (!$_GET['id'] || !q_singleval("SELECT id FROM {SQL_TABLE_PREFIX}thread WHERE id={$_GET['id']}")) {
