@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: users.inc.t,v 1.131 2004/06/11 14:50:25 hackie Exp $
+* $Id: users.inc.t,v 1.131.2.1 2004/10/07 15:47:37 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -572,20 +572,49 @@ function init_user()
 
 	header('P3P: CP="ALL CUR OUR IND UNI ONL INT CNT STA"'); /* P3P Policy */
 
-	$sq = 0;
-	/* fetch an object with the user's session, profile & theme info */
-	if (!($u = ses_get())) {
-		/* new anon user */
-		$u = ses_anon_make();
+	$good = $sq = 0;
+	
+	if (!empty($_GET['p'])) { /* encrypted id */
+		fud_use('mcrypt.inc', 1);
+		$parts = decode_strings(array($_GET['p']));
+		$parts = explode("-", $parts[0]);
+		if (count($parts) == 4 && ($qrca_id = (int)$parts[3])) {
+			$diff = mktime(0,1,1, $parts[0], $parts[1], $parts[2]) - __request_timestamp__;
+			if ($diff < 0) {
+				$diff *= -1;
+			}
+			/* clear old session entries */
+			q("DELETE FROM {SQL_TABLE_PREFIX}ses WHERE time_sec + ".$GLOBALS['SESSION_TIMEOUT']." < ".__request_timestamp__);
+
+			/* valid time */
+			if ($diff < 86400 * 2 && ($uid = q_singleval("SELECT id FROM {SQL_TABLE_PREFIX}users WHERE qrca_id=".$qrca_id))) {
+				q('DELETE FROM {SQL_TABLE_PREFIX}ses WHERE user_id='.$uid);
+				do {
+					$ses_id = md5($uid . __request_timestamp__ . getmypid());
+				} while (!($sud = db_li("INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, user_id) VALUES ('".$ses_id."', ".__request_timestamp__.", '".ses_make_sysid()."', ".$uid.")", $ef, 1)));
+				$GLOBALS['new_sq'] = regen_sq();
+				q("UPDATE {SQL_TABLE_PREFIX}users SET sq='".$GLOBALS['new_sq']."' WHERE id=".$id);
+
+				$u = ses_get($sud);
+				$good = 1;
+			}
+		}
+	} else  if (!($u = ses_get()) || $u->id == 1) {
+		if (strpos($_SERVER['PATH_TRANSLATED'], '/adm/') !== false) { /* admin control panel */
+			if (!$u) {
+				$u = ses_anon_make();
+			}
+			$good = 1;
+		}
 	} else if ($u->id != 1 && (!$GLOBALS['is_post'] || sq_check(1, $u->sq, $u->id, $u->ses_id))) { /* store the last visit date for registered user */
 		header("Expires: Mon, 21 Jan 1980 06:01:01 GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
 		header("Pragma: no-cache");
 
 		q('UPDATE {SQL_TABLE_PREFIX}users SET last_visit='.__request_timestamp__.' WHERE id='.$u->id);
-		if ($GLOBALS['FUD_OPT_3'] & 1) {
+		/* if ($GLOBALS['FUD_OPT_3'] & 1) { */
 			setcookie($GLOBALS['COOKIE_NAME'], $u->ses_id, 0, $GLOBALS['COOKIE_PATH'], $GLOBALS['COOKIE_DOMAIN']);
-		}
+		/* } */
 		if (!$u->sq || __request_timestamp__ - $u->last_visit > 180) {
 			$u->sq = $sq = regen_sq($u->id);
 			if (!$GLOBALS['is_post']) {
@@ -596,7 +625,14 @@ function init_user()
 		} else {
 			$sq =& $u->sq;
 		}
+		$good = 1;
 	}
+	
+	if (!$good) {
+		header("Location: http://www.qrca.org/members/forumlinkreturn.asp?u=".base64_encode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']));
+		exit;
+	}
+
 	if ($u->data) {
 		$u->data = @unserialize($u->data);
 	}
