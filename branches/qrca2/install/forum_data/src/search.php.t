@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: search.php.t,v 1.47 2004/10/04 13:25:02 hackie Exp $
+* $Id: search.php.t,v 1.47.2.1 2004/10/08 15:16:56 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -27,7 +27,14 @@
 	$sort_order = (isset($_GET['sort_order']) && $_GET['sort_order'] == 'ASC') ? 'ASC' : 'DESC';
 	if (!empty($_GET['author'])) {
 		$author = $_GET['author'];
-		$author_id = q_singleval("SELECT id FROM {SQL_TABLE_PREFIX}users WHERE alias='".addslashes($_GET['author'])."'");
+		$author_id = array();
+		$c = uq("SELECT id FROM {SQL_TABLE_PREFIX}users WHERE alias LIKE '".addslashes(str_replace('*', '%', $author))."'");
+		while (($r = db_rowarr($c))) {
+			$author_id[] = $r[0];
+		}
+		if (!$author_id) {
+			$author_id[] = 0;
+		}
 	} else {
 		$author = $author_id = '';
 	}
@@ -83,7 +90,7 @@ function fetch_search_cache($qry, $start, $count, $logic, $srch_type, $order, $f
 		$qry_lmt = '';
 	}
 	if ($GLOBALS['author_id']) {
-		$qry_lmt = ' AND m.poster_id='.$GLOBALS['author_id'].' ';
+		$qry_lmt = ' AND m.poster_id IN ('.implode(',', $GLOBALS['author_id']).') ';
 	}
 
 	$qry_lck = "'" . $qry_lck . "'";
@@ -123,6 +130,49 @@ function fetch_search_cache($qry, $start, $count, $logic, $srch_type, $order, $f
 		ORDER BY sc.n_match DESC, m.post_stamp '.$order.' LIMIT '.qry_limit($count, $start));
 }
 
+function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$total)
+{
+	if ($forum_limiter) {
+		if ($forum_limiter[0] != 'c') {
+			$qry_lmt = ' AND f.id=' . (int)$forum_limiter . ' ';
+		} else {
+			$qry_lmt = ' AND c.id=' . (int)substr($forum_limiter, 1) . ' ';
+		}
+	} else {
+		$qry_lmt = '';
+	}
+
+	if (!($total = q_singleval('SELECT count(*) FROM {SQL_TABLE_PREFIX}msg m
+			INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
+			INNER JOIN {SQL_TABLE_PREFIX}forum f ON t.forum_id=f.id
+			INNER JOIN {SQL_TABLE_PREFIX}cat c ON f.cat_id=c.id
+			LEFT JOIN {SQL_TABLE_PREFIX}mod mm ON mm.forum_id=f.id AND mm.user_id='._uid.'
+			LEFT JOIN {SQL_TABLE_PREFIX}group_cache g2 ON g2.user_id='._uid.' AND g2.resource_id=f.id
+			WHERE
+				m.poster_id IN('.implode(',', $author_id).') AND m.apr=1'.$qry_lmt.
+				($GLOBALS['usr']->users_opt & 1048576 ? '' : ' AND (mm.id IS NOT NULL OR ((CASE WHEN g2.id IS NOT NULL THEN g2.group_cache_opt ELSE g1.group_cache_opt END) & 262146) >= 262146)')
+			)
+	)) {
+		return;			
+	}				
+
+	return uq('SELECT u.alias, f.name AS forum_name, f.id AS forum_id,
+			m.poster_id, m.id, m.thread_id, m.subject, m.poster_id, m.foff, m.length, m.post_stamp, m.file_id, m.icon
+		FROM {SQL_TABLE_PREFIX}msg m
+		INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
+		INNER JOIN {SQL_TABLE_PREFIX}forum f ON t.forum_id=f.id
+		INNER JOIN {SQL_TABLE_PREFIX}cat c ON f.cat_id=c.id
+		INNER JOIN {SQL_TABLE_PREFIX}group_cache g1 ON g1.user_id='.(_uid ? '2147483647' : '0').' AND g1.resource_id=f.id
+		LEFT JOIN {SQL_TABLE_PREFIX}users u ON m.poster_id=u.id
+		LEFT JOIN {SQL_TABLE_PREFIX}mod mm ON mm.forum_id=f.id AND mm.user_id='._uid.'
+		LEFT JOIN {SQL_TABLE_PREFIX}group_cache g2 ON g2.user_id='._uid.' AND g2.resource_id=f.id
+		WHERE
+			m.poster_id IN('.implode(',', $author_id).') AND m.apr=1
+			'.$qry_lmt.'
+			'.($GLOBALS['usr']->users_opt & 1048576 ? '' : ' AND (mm.id IS NOT NULL OR ((CASE WHEN g2.id IS NOT NULL THEN g2.group_cache_opt ELSE g1.group_cache_opt END) & 262146) >= 262146)').'
+		ORDER BY m.poster_id, m.post_stamp '.$order.' LIMIT '.qry_limit($count, $start));	
+}
+
 /*{POST_HTML_PHP}*/
 
 	$search_options = tmpl_draw_radio_opt('field', "all\nsubject", "{TEMPLATE: search_entire_msg}\n{TEMPLATE: search_subect_only}", $field, '{TEMPLATE: radio_button}', '{TEMPLATE: radio_button_selected}', '{TEMPLATE: radio_button_separator}');
@@ -134,8 +184,11 @@ function fetch_search_cache($qry, $start, $count, $logic, $srch_type, $order, $f
 	ses_update_status($usr->sid, '{TEMPLATE: search_update}');
 
 	$page_pager = '';
-	if ($srch) {
-		if (!($c =& fetch_search_cache($srch, $start, $ppg, $search_logic, $field, $sort_order, $forum_limiter, $total))) {
+	if ($srch || $author_id) {
+		if (
+			($srch && !($c =& fetch_search_cache($srch, $start, $ppg, $search_logic, $field, $sort_order, $forum_limiter, $total))) || 
+			($author_id && !($c =& by_author_search($author_id, $sort_order, $forum_limiter, $start, $ppg, $total)))
+		) {
 			$search_data = '{TEMPLATE: no_search_results}';
 		} else {
 			$i = 0;

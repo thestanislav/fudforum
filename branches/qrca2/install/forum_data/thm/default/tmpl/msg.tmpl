@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: msg.tmpl,v 1.42.2.1 2004/10/05 21:38:33 hackie Exp $
+* $Id: msg.tmpl,v 1.42.2.2 2004/10/08 15:16:56 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -225,5 +225,5 @@ fud_msg_focus("{VAR: mid}");
 {SECTION: END}
 
 {SECTION: msg_csv_link_lnk}
-{ROOT}?t=csv&amp;id={VAR: th}
+{ROOT}?t=csv&amp;id={VAR: th}&amp;{DEF: _rsid}
 {SECTION: END}
