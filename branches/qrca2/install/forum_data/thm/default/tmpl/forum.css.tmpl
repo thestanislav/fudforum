@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: forum.css.tmpl,v 1.60.2.1 2004/10/12 14:50:03 hackie Exp $
+* $Id: forum.css.tmpl,v 1.60.2.2 2004/10/19 23:29:36 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -11,9 +11,8 @@
 
 {PHP_FILE: input: forum.css.t; output: forum.css;}
 
-{PAGE: FORUM_CSS forum's css styles}
-body {
-	background: #ffffff;
+{PAGE: FORUM_CSS forum's css styles}body {
+	background: #ffffcc;
 	margin: 2px;
 	font-family: Tahoma, Verdana, "Myriad Web", Syntax, sans-serif;
 	font-size: 12px;
@@ -39,12 +38,12 @@ text, .GenText {
 }
 
 .ForumBackground {
-	background: #FFFFFF;
-	border: 1px solid #AEBDC4;
+	background: #ffffcc;
+	border: 1px solid #ffffcc;
 }
 
 a:link, a:visited, a:active, a.PagerLink {
-	color: #0e6356;
+	color: #000000;
 	text-decoration: underline;
 }
 
@@ -62,12 +61,13 @@ a.CatLink {
 }
 
 a.UserControlPanel {
-	color: #0e6356;
+	color: #000000;
 	text-decoration: none;
+        font-weight: bold
 }
 
 div.UserControlPanel {
-	margin-bottom: 5px;
+	margin-top: 5px;
 	text-align: right;
 }
 
@@ -130,7 +130,7 @@ a.thLnk:visited {
 }
 
 .MsgToolBar {
-	background: #DEE2E6;
+	background: #99cc99;
 	padding-left: 3px;
 	padding-right: 3px;
 }
@@ -302,11 +302,11 @@ img {
 }
 
 .MsgR1 {
-	background: #DEE2E6;
+	background: #99cc99;
 }
 
 .MsgR3 {
-	background: #F4F4F4;
+	background: #FFFFFF;
 }
 
 .mnavMsg {
@@ -341,7 +341,7 @@ table.tt {
 }
 
 a.big:link, a.big:active, a.big:visited {
-	color: #0e6356;
+	color: #000000;
 	font-size: 13px;
 }
 
@@ -351,7 +351,7 @@ a.big:link, a.big:active, a.big:visited {
 }
 
 a.small:link, a.small:active, a.small:visited {
-	color: #0e6356;
+	color: #000000;
 }
 
 td.msgot, td.msgud {
@@ -599,5 +599,4 @@ div.ctb {text-align: center;}
 div.ctb table {margin: 0 auto; text-align: left;}
 div.foot { padding: 3px; margin: 3px;}
 div.ip { overflow: auto; margin: 0px; padding: 2px; width: 600px; height: 400px; }
-span.vt { padding-left: 20px; }
-{PAGE: END}
+span.vt { padding-left: 20px; }{PAGE: END}
