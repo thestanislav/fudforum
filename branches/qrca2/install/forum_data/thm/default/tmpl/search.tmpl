@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: search.tmpl,v 1.24.2.2 2004/10/13 22:55:55 hackie Exp $
+* $Id: search.tmpl,v 1.24.2.3 2004/10/13 22:58:39 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -92,7 +92,8 @@
 	<td><select class="SmallText" name="sort_order">{TEMPLATE-DATA: sort_options}</select></td>
 </tr>
 <tr class="RowStyleA">
-	<td>{MSG: search_user_filter}</td>
+	<td>{MSG: search_user_filter}<br/><span class="SmallText">You may use the * wildcard to search
+by partial user names.</span></td>
 	<td><input class="SmallText" type="text" value="{VAR-HTML: author}" name="author"></td>
 </tr>
 <tr class="RowStyleB">
