@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: search.tmpl,v 1.24.2.1 2004/10/08 16:26:00 hackie Exp $
+* $Id: search.tmpl,v 1.24.2.2 2004/10/13 22:55:55 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -70,25 +70,37 @@
 {TEMPLATE: show_links}{TEMPLATE-DATA: admin_cp}
 <form name="search" method="get" action="{TEMPLATE: SEARCH_PAGE_lnk3}">{DEF: _hs}<input type="hidden" name="t" value="search">
 <table cellspacing="1" cellpadding="2" class="ContentTable">
-<tr><th>{MSG: search_forum_search}</th><th class="wa">{MSG: search_options}</th></tr>
+<tr><th colspan="2">{MSG: search_forum_search}</th></tr>
 <tr class="RowStyleA">
-	<td class="vt nw" rowspan="2"><input type="text" name="srch" tabindex="1" value="{VAR-HTML: srch}"> <input type="submit" tabindex="2" class="button" name="btn_submit" value="{MSG: search}"><br /><span class="SmallText">{TEMPLATE-DATA: search_options}</span></td>
-	<td class="RowStyleB SmallText">
-<div class="sr">{MSG: search_in_forum}<br /><select class="SmallText" name="forum_limiter"><option value="">{MSG: search_all_forums}</option>{TEMPLATE-DATA: forum_limit_data}</select></div>
-<div class="sr">{MSG: search_logic}<br /><select class="SmallText" name="search_logic">{TEMPLATE-DATA: logic_options}</select></div>
-<div class="sr">{MSG: search_sorting}<br /><select class="SmallText" name="sort_order">{TEMPLATE-DATA: sort_options}</select></div>
-<div class="sr">{MSG: search_user_filter}<br /><input class="SmallText" type="text" value="{VAR-HTML: author}" name="author"></div>
-</td>
+	<td class="vt nw">Search For: </td>
+	<td><input type="text" name="srch" tabindex="1" value="{VAR-HTML: srch}"></td>
 </tr>
-<tr>
-	<td class="RowStyleB SmallText">
-		<table cellspacing="1" cellpadding="2">
-		<tr class="RowStyleB">
-			<td class="GenText SmallText">{MSG: mnav_newer}<br /><input tabindex="1" type="text" name="rng" value="{VAR: rng}" maxlength="10" size="11"></td>
-			<td class="GenText SmallText">{MSG: mnav_older}<br /><input tabindex="2" type="text" name="rng2" value="{VAR: rng2}" maxlength="10" size="11"></td>
-			<td class="al vb" width="60%"><select name="u" tabindex="3">{TEMPLATE-DATA: mnav_time_unit}</select></td></tr>
-		</tr></table>
-	</td>
+<tr class="RowStyleA">
+	<td class="vt nw"> </td>
+	<td><span class="SmallText">{TEMPLATE-DATA: search_options}</span></td>
+</tr>
+<tr class="RowStyleB">
+	<td>{MSG: search_in_forum}</td>
+	<td><select class="SmallText" name="forum_limiter"><option value="">{MSG: search_all_forums}</option>{TEMPLATE-DATA: forum_limit_data}</select></td>
+</tr>
+<tr class="RowStyleA">
+	<td class="vt nw">{MSG: search_logic}</td>
+	<td><select class="SmallText" name="search_logic">{TEMPLATE-DATA: logic_options}</select></td>
+</tr>
+<tr class="RowStyleB">
+	<td>{MSG: search_sorting}</td>
+	<td><select class="SmallText" name="sort_order">{TEMPLATE-DATA: sort_options}</select></td>
+</tr>
+<tr class="RowStyleA">
+	<td>{MSG: search_user_filter}</td>
+	<td><input class="SmallText" type="text" value="{VAR-HTML: author}" name="author"></td>
+</tr>
+<tr class="RowStyleB">
+	<td>Date Range: </td>
+	<td><select name="rng">{TEMPLATE-DATA: rng_sel}</select></td>
+</tr>
+<tr class="RowStyleC ac">
+	<td colspan="2"><input type="submit" tabindex="2" class="button" name="btn_submit" value="{MSG: search}"></td>
 </tr>
 </table></form>
 <script>

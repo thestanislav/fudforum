@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: search.php.t,v 1.47.2.2 2004/10/08 16:25:59 hackie Exp $
+* $Id: search.php.t,v 1.47.2.3 2004/10/13 22:55:54 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -23,11 +23,11 @@
 	$srch = isset($_GET['srch']) ? trim($_GET['srch']) : '';
 	$forum_limiter = isset($_GET['forum_limiter']) ? $_GET['forum_limiter'] : '';
 	$field = !isset($_GET['field']) ? 'all' : ($_GET['field'] == 'subject' ? 'subject' : 'all');
-	$search_logic = (isset($_GET['search_logic']) && $_GET['search_logic'] == 'OR') ? 'OR' : 'AND';
+	$search_logic = (isset($_GET['search_logic']) && $_GET['search_logic'] == 'AND') ? 'AND' : 'OR';
 	$sort_order = (isset($_GET['sort_order']) && $_GET['sort_order'] == 'ASC') ? 'ASC' : 'DESC';
 	$rng = isset($_GET['rng']) ? (float) $_GET['rng'] : 0;
-	$rng2 = isset($_GET['rng2']) ? (float) $_GET['rng2'] : 0;
-	$unit = isset($_GET['u']) ? (int) $_GET['u'] : 86400;
+	$rng2 = !empty($_GET['rng2']) ? (float) $_GET['rng2'] : 0;
+	$unit = !empty($_GET['u']) ? (int) $_GET['u'] : 86400;
 
 	if (!empty($_GET['author'])) {
 		$author = $_GET['author'];
@@ -197,9 +197,10 @@ function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$
 /*{POST_HTML_PHP}*/
 
 	$search_options = tmpl_draw_radio_opt('field', "all\nsubject", "{TEMPLATE: search_entire_msg}\n{TEMPLATE: search_subect_only}", $field, '{TEMPLATE: radio_button}', '{TEMPLATE: radio_button_selected}', '{TEMPLATE: radio_button_separator}');
-	$logic_options = tmpl_draw_select_opt("AND\nOR", "{TEMPLATE: search_and}\n{TEMPLATE: search_or}", $search_logic, '{TEMPLATE: search_normal_option}', '{TEMPLATE: search_selected_option}');
+	$logic_options = tmpl_draw_select_opt("OR\nAND", "{TEMPLATE: search_or}\n{TEMPLATE: search_and}", $search_logic, '{TEMPLATE: search_normal_option}', '{TEMPLATE: search_selected_option}');
 	$sort_options = tmpl_draw_select_opt("DESC\nASC", "{TEMPLATE: search_desc_order}\n{TEMPLATE: search_asc_order}", $sort_order, '{TEMPLATE: search_normal_option}', '{TEMPLATE: search_selected_option}');
 	$mnav_time_unit = tmpl_draw_select_opt("60\n3600\n86400\n604800\n2635200", "{TEMPLATE: mnav_minute}\n{TEMPLATE: mnav_hour}\n{TEMPLATE: mnav_day}\n{TEMPLATE: mnav_week}\n{TEMPLATE: mnav_month}", $unit, '', '');
+	$rng_sel = tmpl_draw_select_opt("0\n365\n93\n31", "Forever all messages\nWithin the last 12 months\nWithin the last 3 months\nWithin the last month", $rng, '', '');
 
 	$TITLE_EXTRA = ': {TEMPLATE: search_title}';
 
@@ -232,7 +233,6 @@ function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$
 	} else {
 		$search_data = '';
 	}
-
 
 /*{POST_PAGE_PHP_CODE}*/
 ?>
