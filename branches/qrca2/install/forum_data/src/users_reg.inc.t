@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: users_reg.inc.t,v 1.72 2004/06/14 16:46:49 hackie Exp $
+* $Id: users_reg.inc.t,v 1.72.2.1 2004/10/04 21:48:59 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -103,7 +103,8 @@ class fud_user_reg extends fud_user
 				home_page,
 				bio,
 				users_opt,
-				reg_ip
+				reg_ip,
+				qrca_id
 			) VALUES (
 				'".addslashes($this->login)."',
 				'".addslashes($this->alias)."',
@@ -133,7 +134,8 @@ class fud_user_reg extends fud_user
 				".ssn(htmlspecialchars($this->home_page)).",
 				".ssn($this->bio).",
 				".$this->users_opt.",
-				".ip2long($reg_ip)."
+				".ip2long($reg_ip).",
+				".(int)$this->qrca_id."
 			)
 		");
 
@@ -149,10 +151,8 @@ class fud_user_reg extends fud_user
 
 		$rb_mod_list = (!($this->users_opt & 524288) && ($is_mod = q_singleval("SELECT id FROM {SQL_TABLE_PREFIX}mod WHERE user_id={$this->id}")) && (q_singleval("SELECT alias FROM {SQL_TABLE_PREFIX}users WHERE id={$this->id}") == $this->alias));
 
-		q("UPDATE {SQL_TABLE_PREFIX}users SET ".$passwd."
-			name='".addslashes(htmlspecialchars($this->name))."',
+		q("UPDATE {SQL_TABLE_PREFIX}users SET
 			alias='".addslashes($this->alias)."',
-			email='".addslashes($this->email)."',
 			icq=".$this->icq.",
 			aim=".ssn(urlencode($this->aim)).",
 			yahoo=".ssn(urlencode($this->yahoo)).",
@@ -216,27 +216,13 @@ function &usr_reg_get_full($id)
 
 function user_login($id, $cur_ses_id, $use_cookies)
 {
-	if (!$use_cookies && isset($_COOKIE[$GLOBALS['COOKIE_NAME']])) {
-		/* remove cookie so it does not confuse us */
-		setcookie($GLOBALS['COOKIE_NAME'], '', __request_timestamp__-100000, $GLOBALS['COOKIE_PATH'], $GLOBALS['COOKIE_DOMAIN']);
-	}
-	if ($GLOBALS['FUD_OPT_2'] & 256 && ($s = db_saq('SELECT ses_id, sys_id FROM {SQL_TABLE_PREFIX}ses WHERE user_id='.$id))) {
-		if ($use_cookies) {
-			setcookie($GLOBALS['COOKIE_NAME'], $s[0], __request_timestamp__+$GLOBALS['COOKIE_TIMEOUT'], $GLOBALS['COOKIE_PATH'], $GLOBALS['COOKIE_DOMAIN']);
-		}
-		if ($s[1]) {
-			q("UPDATE {SQL_TABLE_PREFIX}ses SET sys_id='' WHERE ses_id='".$s[0]."'");
-		}
-		return $s[0];
-	} else {
-		/* if we can only have 1 login per account, 'remove' all other logins */
-		q("DELETE FROM {SQL_TABLE_PREFIX}ses WHERE user_id=".$id." AND ses_id!='".$cur_ses_id."'");
-		q("UPDATE {SQL_TABLE_PREFIX}ses SET user_id=".$id.", sys_id='".ses_make_sysid()."' WHERE ses_id='".$cur_ses_id."'");
-		$GLOBALS['new_sq'] = regen_sq();
-		q("UPDATE {SQL_TABLE_PREFIX}users SET sq='".$GLOBALS['new_sq']."' WHERE id=".$id);
+	/* if we can only have 1 login per account, 'remove' all other logins */
+	q("DELETE FROM {SQL_TABLE_PREFIX}ses WHERE user_id=".$id." AND ses_id!='".$cur_ses_id."'");
+	q("UPDATE {SQL_TABLE_PREFIX}ses SET user_id=".$id.", sys_id='".ses_make_sysid()."' WHERE ses_id='".$cur_ses_id."'");
+	$GLOBALS['new_sq'] = regen_sq();
+	q("UPDATE {SQL_TABLE_PREFIX}users SET sq='".$GLOBALS['new_sq']."' WHERE id=".$id);
 
-		return $cur_ses_id;
-	}
+	return $cur_ses_id;
 }
 
 function rebuildmodlist()

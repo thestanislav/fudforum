@@ -2,13 +2,15 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: reg_conf.php.t,v 1.8 2004/01/29 22:58:32 hackie Exp $
+* $Id: reg_conf.php.t,v 1.8.2.1 2004/10/04 21:48:59 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
 * Free Software Foundation; either version 2 of the License, or
 * (at your option) any later version.
 ***************************************************************************/
+
+exit;
 
 /*{PRE_HTML_PHP}*/
 
