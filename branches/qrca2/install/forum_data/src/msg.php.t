@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: msg.php.t,v 1.74.2.1 2004/10/05 21:23:24 hackie Exp $
+* $Id: msg.php.t,v 1.74.2.2 2004/10/05 21:53:20 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -184,7 +184,8 @@
 		LEFT JOIN {SQL_TABLE_PREFIX}poll p ON m.poll_id=p.id
 		LEFT JOIN {SQL_TABLE_PREFIX}msg m2 ON m2.id=m.reply_to
 		LEFT JOIN {SQL_TABLE_PREFIX}users u2 ON u2.id=m2.poster_id
-		LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id='._uid.' ORDER BY m.id ASC');
+		LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id='._uid.' 
+	ORDER BY m.id ASC');
 
 	$obj2 = $message_data = '';
 
