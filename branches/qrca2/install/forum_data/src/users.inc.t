@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: users.inc.t,v 1.131.2.3 2004/10/21 00:09:32 hackie Exp $
+* $Id: users.inc.t,v 1.131.2.4 2004/10/21 21:03:36 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -612,9 +612,7 @@ function init_user()
 		header("Pragma: no-cache");
 
 		q('UPDATE {SQL_TABLE_PREFIX}users SET last_visit='.__request_timestamp__.' WHERE id='.$u->id);
-		/* if ($GLOBALS['FUD_OPT_3'] & 1) { */
-			setcookie($GLOBALS['COOKIE_NAME'], $u->ses_id, 0, $GLOBALS['COOKIE_PATH'], $GLOBALS['COOKIE_DOMAIN']);
-		/* } */
+
 		if (!$u->sq || __request_timestamp__ - $u->last_visit > 180) {
 			$u->sq = $sq = regen_sq($u->id);
 			if (!$GLOBALS['is_post']) {
@@ -629,9 +627,16 @@ function init_user()
 	}
 	
 	if (!$good) {
-		header("Location: http://www.qrca.org/members/forumlinkreturn.asp?u=".base64_encode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']));
+		$return_url = "http://".$_SERVER['SERVER_NAME'].trim($_SERVER['REQUEST_URI'], '&');
+		if (strpos($return_url, '?') === false) {
+			$return_url .= 'index.php?t=i';
+		}
+		setcookie($GLOBALS['COOKIE_NAME'], '');
+		header("Location: http://www.qrca.org/members/forumlinkreturn.asp?u=".base64_encode($return_url));
 		exit;
 	}
+
+	setcookie($GLOBALS['COOKIE_NAME'], $u->ses_id);
 
 	if ($u->data) {
 		$u->data = @unserialize($u->data);
