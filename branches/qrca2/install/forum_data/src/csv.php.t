@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: csv.php.t,v 1.1.2.2 2004/10/07 23:38:00 hackie Exp $
+* $Id: csv.php.t,v 1.1.2.3 2004/10/08 00:05:02 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -22,9 +22,11 @@
 		invl_inp_err();
 	}
 	
-	$r = uq("SELECT m.*, u.login FROM {SQL_TABLE_PREFIX}msg m
+	$r = uq("SELECT m.*, u.login, f.name FROM {SQL_TABLE_PREFIX}msg m
 		INNER JOIN {SQL_TABLE_PREFIX}users u ON m.poster_id=u.id
-		WHERE u.thread_id=".$_GET['id']." AND apr=1  ORDER BY id ASC");
+		INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
+		INNER JOIN {SQL_TABLE_PREFIX}forum f ON f.id=t.forum_id
+		WHERE m.thread_id=".$_GET['id']." AND m.apr=1  ORDER BY m.id ASC");
 	
 	header("Content-type: application/vnd.ms-excel");
 	header("Content-Disposition: inline; filename=thread_{$_GET['id']}.csv");	

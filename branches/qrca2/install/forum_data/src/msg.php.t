@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: msg.php.t,v 1.74.2.2 2004/10/05 21:53:20 hackie Exp $
+* $Id: msg.php.t,v 1.74.2.3 2004/10/08 00:05:02 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -37,7 +37,7 @@
 			$mid = '#msg_'.$mid;
 		} else if ($_GET['goto']) { /* verify that the thread & msg id are valid */
 			if (!isset($_GET['th'])) {
-				$_GET['th'] = (int) q_singleval('SELECT thread_id FROM {SQL_TABLE_PREFIX}msg WHERE id='.$_GET['goto']);
+				$th = $_GET['th'] = (int) q_singleval('SELECT thread_id FROM {SQL_TABLE_PREFIX}msg WHERE id='.$_GET['goto']);
 			}
 			if (!($pos = q_singleval("SELECT count(*) FROM {SQL_TABLE_PREFIX}msg WHERE thread_id=".$_GET['th']." AND id<=".$_GET['goto']." AND apr=1"))) {
 				invl_inp_err();
@@ -92,6 +92,7 @@
 	if (!$frm) { /* bad thread, terminate request */
 		invl_inp_err();
 	}
+
 	if ($frm->moved_to) { /* moved thread, we could handle it, but this case is rather rare, so it's cleaner to redirect */
 		if ($FUD_OPT_2 & 32768) {
 			header('Location: {FULL_ROOT}{ROOT}/m/'.$frm->root_msg_id.'/'._rsidl);
