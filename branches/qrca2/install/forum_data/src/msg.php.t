@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: msg.php.t,v 1.74 2004/06/11 14:24:02 hackie Exp $
+* $Id: msg.php.t,v 1.74.2.1 2004/10/05 21:23:24 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -172,7 +172,8 @@
 		u.sig, u.custom_status, u.icq, u.jabber, u.affero, u.aim, u.msnm, u.yahoo, u.users_opt, u.last_visit AS time_sec,
 		l.name AS level_name, l.level_opt, l.img AS level_img,
 		p.max_votes, p.expiry_date, p.creation_date, p.name AS poll_name, p.total_votes,
-		pot.id AS cant_vote
+		pot.id AS cant_vote,
+		u2.alias AS reply_to_auth
 	FROM
 		{SQL_TABLE_PREFIX}_mtmp_'.__request_timestamp__.' mt
 		INNER JOIN {SQL_TABLE_PREFIX}msg m ON m.id=mt.id
@@ -181,6 +182,8 @@
 		LEFT JOIN {SQL_TABLE_PREFIX}users u ON m.poster_id=u.id
 		LEFT JOIN {SQL_TABLE_PREFIX}level l ON u.level_id=l.id
 		LEFT JOIN {SQL_TABLE_PREFIX}poll p ON m.poll_id=p.id
+		LEFT JOIN {SQL_TABLE_PREFIX}msg m2 ON m2.id=m.reply_to
+		LEFT JOIN {SQL_TABLE_PREFIX}users u2 ON u2.id=m2.poster_id
 		LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id='._uid.' ORDER BY m.id ASC');
 
 	$obj2 = $message_data = '';
@@ -218,6 +221,7 @@
 
 	$pdf_link = $FUD_OPT_2 & 2097152 ? '{TEMPLATE: msg_pdf_link}' : '';
 	$xml_link = $FUD_OPT_2 & 1048576 ? '{TEMPLATE: msg_xml_link}' : '';
+	$msg_csv_link = ($usr->users_opt & (524288|1048576)) ? '{TEMPLATE: msg_csv_link}' : '';
 
 /*{POST_PAGE_PHP_CODE}*/
 ?>

@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: reported.php.t,v 1.29 2004/06/11 14:09:33 hackie Exp $
+* $Id: reported.php.t,v 1.29.2.1 2004/10/05 21:23:24 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -36,7 +36,8 @@
 			mr.id AS report_id, mr.stamp AS report_stamp, mr.reason AS report_reason,
 			u2.id AS report_user_id, u2.alias AS report_user_login, u2.last_visit AS time_sec_r,
 			m2.subject AS thread_subject,
-			pot.id AS cant_vote
+			pot.id AS cant_vote,
+			u3.alias AS reply_to_auth
 		FROM {SQL_TABLE_PREFIX}msg_report mr
 			INNER JOIN {SQL_TABLE_PREFIX}msg m ON mr.msg_id=m.id
 			INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
@@ -48,6 +49,8 @@
 			LEFT JOIN {SQL_TABLE_PREFIX}level l ON u.level_id=l.id
 			LEFT JOIN {SQL_TABLE_PREFIX}poll p ON m.poll_id=p.id
 			LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id='._uid.'
+			LEFT JOIN {SQL_TABLE_PREFIX}msg m3 ON m2.id=m.reply_to
+			LEFT JOIN {SQL_TABLE_PREFIX}users u3 ON u3.id=m3.poster_id
 		ORDER BY mr.id');
 
 	$perms = perms_from_obj($r, ($usr->users_opt & 1048576));

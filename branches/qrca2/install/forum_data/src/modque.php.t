@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: modque.php.t,v 1.42 2004/06/10 16:42:58 hackie Exp $
+* $Id: modque.php.t,v 1.42.2.1 2004/10/05 21:23:24 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -57,7 +57,8 @@
 		u.sig, u.custom_status, u.icq, u.jabber, u.affero, u.aim, u.msnm, u.yahoo, u.last_visit AS time_sec, u.users_opt,
 		l.name AS level_name, l.level_opt, l.img AS level_img,
 		p.max_votes, p.expiry_date, p.creation_date, p.name AS poll_name, p.total_votes,
-		pot.id AS cant_vote
+		pot.id AS cant_vote,
+		u2.alias AS reply_to_auth
 	FROM
 		{SQL_TABLE_PREFIX}msg m
 	INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
@@ -69,6 +70,8 @@
 	LEFT JOIN {SQL_TABLE_PREFIX}level l ON u.level_id=l.id
 	LEFT JOIN {SQL_TABLE_PREFIX}poll p ON m.poll_id=p.id
 	LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id="._uid."
+	LEFT JOIN {SQL_TABLE_PREFIX}msg m2 ON m2.id=m.reply_to
+	LEFT JOIN {SQL_TABLE_PREFIX}users u2 ON u2.id=m2.poster_id
 	WHERE (f.forum_opt>=2 AND (f.forum_opt & 2) > 0) AND m.apr=0
 	ORDER BY v.id, m.post_stamp DESC LIMIT ".$POSTS_PER_PAGE);
 

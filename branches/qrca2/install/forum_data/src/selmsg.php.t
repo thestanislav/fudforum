@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: selmsg.php.t,v 1.52 2004/07/14 13:52:42 hackie Exp $
+* $Id: selmsg.php.t,v 1.52.2.1 2004/10/05 21:23:24 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -147,6 +147,7 @@ function path_info_lnk($var, $val)
 			r.last_view,
 			mm.id AS md,
 			m2.subject AS thr_subject,
+			u2.alias AS reply_to_auth,
 			'.$fields.'
 		FROM
 			{SQL_TABLE_PREFIX}msg m
@@ -163,6 +164,8 @@ function path_info_lnk($var, $val)
 			LEFT JOIN {SQL_TABLE_PREFIX}poll p ON m.poll_id=p.id
 			LEFT JOIN {SQL_TABLE_PREFIX}poll_opt_track pot ON pot.poll_id=p.id AND pot.user_id='._uid.'
 			LEFT JOIN {SQL_TABLE_PREFIX}mod mm ON mm.forum_id=f.id AND mm.user_id='._uid.'
+			LEFT JOIN {SQL_TABLE_PREFIX}msg	m3 ON m3.id=m.reply_to
+			LEFT JOIN {SQL_TABLE_PREFIX}users u2 ON u2.id=m3.poster_id
 		WHERE
 			m.apr=1
 			'.$date_limit.'

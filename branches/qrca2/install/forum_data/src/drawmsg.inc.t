@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: drawmsg.inc.t,v 1.88 2004/06/07 15:24:53 hackie Exp $
+* $Id: drawmsg.inc.t,v 1.88.2.1 2004/10/05 21:23:24 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -385,6 +385,11 @@ function tmpl_drawmsg($obj, $usr, $perms, $hide_controls, &$m_num, $misc)
 				$lnk = d_thread_view;
 			} else {
 				$lnk =& $_GET['t'];
+			}
+			if (empty($obj->reply_to_auth)) {
+				$reply_to_user = $GLOBALS['ANON_NICK'];
+			} else {
+				$reply_to_user = $obj->reply_to_auth;
 			}
 			$rpl = '{TEMPLATE: dmsg_reply_to}';
 		} else {
