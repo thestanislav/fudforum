@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: tree.tmpl,v 1.55 2004/07/02 16:54:28 hackie Exp $
+* $Id: tree.tmpl,v 1.55.2.1 2004/10/05 21:38:33 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -227,7 +227,7 @@
 {TEMPLATE-DATA: rate_thread}
 {TEMPLATE-DATA: forum_select}
 <br /><div class="wa ac">-=] <a href="javascript://" onClick="chng_focus('page_top');">{MSG: back_to_top}</a> [=-</div>
-<div class="ar SmallText">{TEMPLATE-DATA: pdf_link} {TEMPLATE-DATA: xml_link}</div>
+<div class="ar SmallText">{TEMPLATE-DATA: msg_csv_link} {TEMPLATE-DATA: pdf_link} {TEMPLATE-DATA: xml_link}</div>
 {TEMPLATE: curtime}
 {TEMPLATE-DATA: page_stats}
 {TEMPLATE: footer}
@@ -263,4 +263,12 @@
 
 {SECTION: rate_thread_lnk3}
 {ROOT}?t=ratethread
+{SECTION: END}
+
+{SECTION: msg_csv_link}
+[ <a href="{TEMPLATE: msg_csv_link_lnk}">{MSG: cvs_arch_download}</a> ]
+{SECTION: END}
+
+{SECTION: msg_csv_link_lnk}
+{ROOT}?t=csv&amp;id={VAR: th}
 {SECTION: END}
