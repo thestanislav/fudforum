@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: search.php.t,v 1.47.2.1 2004/10/08 15:16:56 hackie Exp $
+* $Id: search.php.t,v 1.47.2.2 2004/10/08 16:25:59 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -25,6 +25,10 @@
 	$field = !isset($_GET['field']) ? 'all' : ($_GET['field'] == 'subject' ? 'subject' : 'all');
 	$search_logic = (isset($_GET['search_logic']) && $_GET['search_logic'] == 'OR') ? 'OR' : 'AND';
 	$sort_order = (isset($_GET['sort_order']) && $_GET['sort_order'] == 'ASC') ? 'ASC' : 'DESC';
+	$rng = isset($_GET['rng']) ? (float) $_GET['rng'] : 0;
+	$rng2 = isset($_GET['rng2']) ? (float) $_GET['rng2'] : 0;
+	$unit = isset($_GET['u']) ? (int) $_GET['u'] : 86400;
+
 	if (!empty($_GET['author'])) {
 		$author = $_GET['author'];
 		$author_id = array();
@@ -38,6 +42,14 @@
 	} else {
 		$author = $author_id = '';
 	}
+
+	$date_limit = '';
+	if ($rng) {
+		$date_limit .= ' AND m.post_stamp > '.(__request_timestamp__ - round($rng * $unit)).' ';
+	}
+	if ($rng2) {
+		$date_limit .= ' AND m.post_stamp < '.(__request_timestamp__ - round($rng2 * $unit)).' ';
+	} 
 
 function fetch_search_cache($qry, $start, $count, $logic, $srch_type, $order, $forum_limiter, &$total)
 {
@@ -89,6 +101,11 @@ function fetch_search_cache($qry, $start, $count, $logic, $srch_type, $order, $f
 	} else {
 		$qry_lmt = '';
 	}
+
+	if ($GLOBALS['date_limit']) {
+		 $qry_lmt .= $GLOBALS['date_limit'];
+	}
+
 	if ($GLOBALS['author_id']) {
 		$qry_lmt = ' AND m.poster_id IN ('.implode(',', $GLOBALS['author_id']).') ';
 	}
@@ -142,6 +159,10 @@ function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$
 		$qry_lmt = '';
 	}
 
+	if ($GLOBALS['date_limit']) {
+		 $qry_lmt .= $GLOBALS['date_limit'];
+	}
+
 	if (!($total = q_singleval('SELECT count(*) FROM {SQL_TABLE_PREFIX}msg m
 			INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id
 			INNER JOIN {SQL_TABLE_PREFIX}forum f ON t.forum_id=f.id
@@ -178,6 +199,7 @@ function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$
 	$search_options = tmpl_draw_radio_opt('field', "all\nsubject", "{TEMPLATE: search_entire_msg}\n{TEMPLATE: search_subect_only}", $field, '{TEMPLATE: radio_button}', '{TEMPLATE: radio_button_selected}', '{TEMPLATE: radio_button_separator}');
 	$logic_options = tmpl_draw_select_opt("AND\nOR", "{TEMPLATE: search_and}\n{TEMPLATE: search_or}", $search_logic, '{TEMPLATE: search_normal_option}', '{TEMPLATE: search_selected_option}');
 	$sort_options = tmpl_draw_select_opt("DESC\nASC", "{TEMPLATE: search_desc_order}\n{TEMPLATE: search_asc_order}", $sort_order, '{TEMPLATE: search_normal_option}', '{TEMPLATE: search_selected_option}');
+	$mnav_time_unit = tmpl_draw_select_opt("60\n3600\n86400\n604800\n2635200", "{TEMPLATE: mnav_minute}\n{TEMPLATE: mnav_hour}\n{TEMPLATE: mnav_day}\n{TEMPLATE: mnav_week}\n{TEMPLATE: mnav_month}", $unit, '', '');
 
 	$TITLE_EXTRA = ': {TEMPLATE: search_title}';
 
@@ -187,7 +209,7 @@ function by_author_search($author_id, $order, $forum_limiter, $start, $count, &$
 	if ($srch || $author_id) {
 		if (
 			($srch && !($c =& fetch_search_cache($srch, $start, $ppg, $search_logic, $field, $sort_order, $forum_limiter, $total))) || 
-			($author_id && !($c =& by_author_search($author_id, $sort_order, $forum_limiter, $start, $ppg, $total)))
+			(!$srch && $author_id && !($c =& by_author_search($author_id, $sort_order, $forum_limiter, $start, $ppg, $total)))	
 		) {
 			$search_data = '{TEMPLATE: no_search_results}';
 		} else {
