@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: users.inc.t,v 1.131.2.1 2004/10/07 15:47:37 hackie Exp $
+* $Id: users.inc.t,v 1.131.2.2 2004/10/20 22:18:32 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -592,7 +592,7 @@ function init_user()
 				do {
 					$ses_id = md5($uid . __request_timestamp__ . getmypid());
 				} while (!($sud = db_li("INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, user_id) VALUES ('".$ses_id."', ".__request_timestamp__.", '".ses_make_sysid()."', ".$uid.")", $ef, 1)));
-				$GLOBALS['new_sq'] = regen_sq();
+				$GLOBALS['new_sq'] = regen_sq($uid);
 				q("UPDATE {SQL_TABLE_PREFIX}users SET sq='".$GLOBALS['new_sq']."' WHERE id=".$id);
 
 				$u = ses_get($sud);
