@@ -1,7 +1,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: register.tmpl,v 1.51 2004/09/23 19:13:44 hackie Exp $
+* $Id: register.tmpl,v 1.51.2.1 2004/10/04 22:46:41 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -58,16 +58,9 @@
 <option value="{VAR: t[0]}"{VAR: selected}>{VAR: t[1]}</option>
 {SECTION: END}
 
-{SECTION: change_passwd_link}
-&nbsp;<span class="SmallText">[ <a href="javascript://" onClick="javascript: window_open(\'{TEMPLATE: change_passwd_link_lnk1}\',\'rpass\',380,250);">{MSG: register_change_passwd}</a> ]</span>
-{SECTION: END}
-
 {SECTION: update_user update user section, is used when a registered user is editing their profile}
 <tr class="RowStyleA"><td>{MSG: register_login}</td><td class="fb">{VAR: user_login}</td></tr>
 {TEMPLATE-DATA: reg_alias_t}
-<tr class="RowStyleA"><td>{MSG: register_your_pass}{VAR: reg_confirm_passwd_err}</td><td><input type="password" name="reg_confirm_passwd" size=25 maxlength=16>{TEMPLATE-DATA: change_passwd_link}</td></tr>
-<tr class="RowStyleA"><td>{MSG: register_email_addr}{VAR: reg_email_err}<br /><span class="SmallText">{MSG: register_email_desc}</span>{TEMPLATE-DATA: email_warning_msg}</td><td><input type="text" name="reg_email" size=25 value="{VAR: reg_email}"></td></tr>
-<tr class="RowStyleA"><td>{MSG: register_name}{VAR: reg_name_err}</td><td><input type="text" name="reg_name" size=25 value="{VAR: reg_name}"></td></tr>
 <tr><td colspan=2 class="ac RowStyleC"><input type="submit" class="button" name="fud_submit" value="{MSG: register_update}"></td></tr>
 {SECTION: END}
 

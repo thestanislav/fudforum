@@ -2,7 +2,7 @@
 /***************************************************************************
 * copyright            : (C) 2001-2004 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: register.php.t,v 1.127 2004/09/23 19:13:43 hackie Exp $
+* $Id: register.php.t,v 1.127.2.1 2004/10/04 22:46:41 hackie Exp $
 *
 * This program is free software; you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the
@@ -103,76 +103,11 @@ function sanitize_login($login, $is_alias=0)
 
 function register_form_check($user_id)
 {
-	/* new user specific checks */
-	if (!$user_id) {
-		if (($reg_limit_reached = $GLOBALS['REG_TIME_LIMIT'] + q_singleval('SELECT join_date FROM {SQL_TABLE_PREFIX}users WHERE id='.q_singleval('SELECT MAX(id) FROM {SQL_TABLE_PREFIX}users')) - __request_timestamp__) > 0) {
-			set_err('reg_time_limit', '{TEMPLATE: register_err_time_limit}');
-		}
-
-		$_POST['reg_plaintext_passwd'] = trim($_POST['reg_plaintext_passwd']);
-
-		if (strlen($_POST['reg_plaintext_passwd']) < 6) {
-			set_err('reg_plaintext_passwd', '{TEMPLATE: register_err_shortpasswd}');
-		}
-
-		$_POST['reg_plaintext_passwd_conf'] = trim($_POST['reg_plaintext_passwd_conf']);
-
-		if ($_POST['reg_plaintext_passwd'] !== $_POST['reg_plaintext_passwd_conf']) {
-			set_err('reg_plaintext_passwd', '{TEMPLATE: register_err_passwdnomatch}');
-		}
-
-		$_POST['reg_login'] = trim(sanitize_login($_POST['reg_login']));
-
-		if (strlen($_POST['reg_login']) < 4) {
-			set_err('reg_login', '{TEMPLATE: register_err_short_login}');
-		} else if (is_login_blocked($_POST['reg_login'])) {
-			set_err('reg_login', '{TEMPLATE: register_err_login_notallowed}');
-		} else if (get_id_by_login($_POST['reg_login'])) {
-			set_err('reg_login', '{TEMPLATE: register_err_loginunique}');
-		}
-
-		if (!($GLOBALS['FUD_OPT_3'] & 128) && (empty($_POST['turing_test']) || empty($_POST['turing_res']) || md5(strtoupper(trim($_POST['turing_test']))) != $_POST['turing_res'])) {
-			set_err('reg_turing', '{TEMPLATE: register_err_turing}');
-		}
-
-		$_POST['reg_email'] = trim($_POST['reg_email']);
-
-		/* E-mail validity check */
-		if (validate_email($_POST['reg_email'])) {
-			set_err('reg_email', '{TEMPLATE: register_err_invalidemail}');
-		} else if (get_id_by_email($_POST['reg_email'])) {
-			set_err('reg_email', '{TEMPLATE: register_err_emailexists}');
-		} else if (is_email_blocked($_POST['reg_email'])) {
-			set_err('reg_email', '{TEMPLATE: register_err_emailexists}');
-		}
-	} else {
-		if (empty($_POST['reg_confirm_passwd']) || !q_singleval("SELECT login FROM {SQL_TABLE_PREFIX}users WHERE id=".(!empty($_POST['mod_id']) ? __fud_real_user__ : $user_id)." AND passwd='".md5($_POST['reg_confirm_passwd'])."'")) {
-			if (!empty($_POST['mod_id'])) {
-				set_err('reg_confirm_passwd', '{TEMPLATE: register_err_adminpasswd}');
-			} else {
-				set_err('reg_confirm_passwd', '{TEMPLATE: register_err_enterpasswd}');
-			}
-		}
-
-		/* E-mail validity check */
-		if (validate_email($_POST['reg_email'])) {
-			set_err('reg_email', '{TEMPLATE: register_err_invalidemail}');
-		} else if (($email_id = get_id_by_email($_POST['reg_email'])) && $email_id != $user_id) {
-			set_err('reg_email', '{TEMPLATE: register_err_notyouremail}');
-		}
-	}
-
-	$_POST['reg_name'] = trim($_POST['reg_name']);
 	$_POST['reg_home_page'] = sanitize_url(trim($_POST['reg_home_page']));
 	$_POST['reg_user_image'] = !empty($_POST['reg_user_image']) ? sanitize_url(trim($_POST['reg_user_image'])) : '';
 
 	if (!empty($_POST['reg_icq']) && !(int)$_POST['reg_icq']) { /* ICQ # can only be an integer */
 		$_POST['reg_icq'] = '';
-	}
-
-	/* User's name or nick name */
-	if (strlen($_POST['reg_name']) < 2) {
-		set_err('reg_name', '{TEMPLATE: register_err_needname}');
 	}
 
 	/* Image count check */
@@ -716,7 +651,6 @@ function decode_uent(&$uent)
 		$avatar_err = draw_err('avatar');
 
 		$user_login = htmlspecialchars($uent->login);
-		$change_passwd_link = !$mod_id ? '{TEMPLATE: change_passwd_link}' : '';
 		$user_info_heading = '{TEMPLATE: update_user}';
 		$submit_button = '{TEMPLATE: update_button}';
 
