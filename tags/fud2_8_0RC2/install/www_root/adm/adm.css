@@ -1,0 +1,167 @@
+body, body.popup {
+	background: #aabbaa;
+	font-family: Tahoma, Verdana, "Myriad Web", Syntax, sans-serif;
+	font-size: 11px;
+}
+
+body.popup {
+	vertical-align: top;
+	background: #ccddee;
+}
+a {
+	text-decoration: none;
+}
+a:visited, a:link {
+	color: #224422;
+}
+a:active, a:hover {
+	color: red;
+}
+.admin_fixed {
+	font-family: courier;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+table.headtable {
+	background: #527bbd;
+	color: white;
+	width: 100%;
+	height: 50px;
+}
+
+table.maintable {
+	background: #ddefed;
+	border-spacing: 0px;
+	border: 0px;
+	padding: 0px;
+}
+
+table.linktable {
+	text-align: center;
+	border: 0px;
+	border-spacing: 0px;
+	padding: 0px;
+	padding-top: 10px;
+	font-size: small;
+}
+
+.linkdata {
+	vertical-align: text-top;
+}
+
+.maindata {
+	vertical-align: top;
+	background: #ccddee;
+	width: 100%;
+	padding-left: 5px;
+}
+span.linkhead {
+	color: #fff; 
+	font-weight: bold;
+	font-size: x-large;
+}
+
+span.linkgroup {
+	color: #339966;
+	font-weight: bold;
+	font-size: 11px;
+}
+.linktable a {
+	font-size: small;
+}
+
+.datatable {
+	border: 0px;
+	border-spacing: 1px;
+	padding:	3px;
+}
+
+.resulttable {
+	border: 0px;
+	border-spacing: 3px;
+	padding: 1px;
+}
+
+
+.fulltable {
+	border: 1px dashed black;
+	width: 100%;
+}
+
+.solidtable {
+	border-spacing: 0px;
+}
+.field {
+	background: #deeffe;
+}
+
+.field .fieldtopic {
+	background: #cddeed;
+}
+
+.field .field {
+	background: #dddeed;
+}
+
+.field:hover {
+        background: #eeeffe;
+} 
+
+.tiny {
+	font-size: x-small;
+}
+
+
+.fieldaction {
+	background: transparent;
+}
+
+.fieldtopic {
+	background: transparent;
+}
+
+.resulttopic {
+	background: #deefef;
+}
+
+.resultrow1 {
+	background: #d0d0d0;
+}
+
+.resultrow2 {
+	background: #f0f0f0;
+}
+
+.resultrow3 {
+	background: #00BB00;
+}
+
+.tutor {
+	background: #fffeee;
+}
+
+.alert {
+	margin: 11px;
+	color: red;
+	background-color: #ffcccc;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
+	border: 1px outset #bb9999;
+	border-right-width: 10px;
+	border-right-color: red;
+}
+
+phpinfo {border-collapse: collapse;}
+.center {text-align: center;}
+.center table { margin-left: auto; margin-right: auto; text-align: left;}
+.center th { text-align: center !important; }
+.p {text-align: left;}
+.e {background-color: #ccccff; font-weight: bold; color: #000000;}
+.h {background-color: #9999cc; font-weight: bold; color: #000000;}
+.v {background-color: #cccccc; color: #000000;}
+.vr {background-color: #cccccc; text-align: right; color: #000000;}
+hr {width: 600px; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
+
+img {float: right; border: 0px;}
