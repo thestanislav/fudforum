@@ -1,0 +1,26 @@
+/***************************************************************************
+* copyright            : (C) 2001-2009 Advanced Internet Designs Inc.
+* email                : forum@prohost.org
+* $Id: footer.tmpl,v 1.21 2009/07/19 20:09:10 frank Exp $
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; version 2 of the License.
+***************************************************************************/
+
+{MAIN_SECTION: footer forum's footer}
+</td></tr></table><div class="ForumBackground ac foot">
+<b>.::</b> <a href="mailto:{GVAR: ADMIN_EMAIL}">{MSG: forum_contact}</a> <b>::</b> <a href="{TEMPLATE: footer_lnk}">{MSG: forum_home}</a> <b>::.</b>
+<p>
+<span class="SmallText">{MSG: powered-by}</span>
+</p>
+</div></body></html>
+{MAIN_SECTION: END}
+
+{MAIN_SECTION: footer_plain forum's footer for plain pages such as popups}
+</td></tr></table></body></html>
+{MAIN_SECTION: END}
+
+{SECTION: footer_lnk}
+{ROOT}?t=index&amp;{DEF: _rsid}
+{SECTION: END}
