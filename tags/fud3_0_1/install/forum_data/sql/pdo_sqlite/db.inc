@@ -50,7 +50,7 @@ function db_lock($tables)
 		fud_sql_error_handler('Recursive Lock', 'internal', 'internal', get_version());
 	}
 	
-	q('BEGIN IMMEDIATE');
+	db::$db->beginTransaction();
 
 	$GLOBALS['__DB_INC_INTERNALS__']['db_locked'] = 1;
 }
@@ -67,7 +67,7 @@ function db_unlock()
 		fud_sql_error_handler('DB_UNLOCK: unlock overcalled', 'internal', 'internal', get_version());
 	}
 
-	q('COMMIT');
+	db::$db->commit();
 
 	unset($GLOBALS['__DB_INC_INTERNALS__']['db_locked']);
 }
