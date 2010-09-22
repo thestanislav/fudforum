@@ -167,12 +167,12 @@ function cleandir($dir)
 	<td>
 	<?php
 		$dp = opendir($DATA_DIR.'/thm/default/i18n');
-		readdir($dp); readdir($dp);
+		// readdir($dp); readdir($dp);
 		$selopt = '';
 		if ( !$thm_lang ) $thm_lang = 'english';
 		while ( $de = readdir($dp) ) {
 			$dr = $DATA_DIR.'/thm/default/i18n/'.$de;
-			if ( $de == 'CVS' || !is_dir($dr) ) continue;
+			if ( $de == 'CVS' || $de == '.' || $de == '..' || !is_dir($dr) ) continue;
 			$sel = $thm_lang == $de ? ' selected' : '';
 			$selopt .= '<option'.$sel.'>'.$de.'</option>';
 			$locales[$de]['locale'] = trim(filetomem($dr.'/locale'));
