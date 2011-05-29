@@ -22,7 +22,7 @@ function draw_info($cnt)
 function delete_zero($tbl, $q)
 {
 	if (__dbtype__ == 'mysql') {	// MySQL is full of crap (can't specify target table for update in FROM).
-		q('DELETE '. $tbl .' '. substr($q, 7, strpos($q, '.') - 7) .' '. strstr($q, 'FROM'));
+		q('DELETE '. substr($q, 7, strpos($q, '.') - 7) .' '. strstr($q, 'FROM'));
 		draw_info(db_affected());
 	} else {	// All other databases.
 		q('DELETE FROM '. $tbl .' WHERE id IN ('. $q .')');
@@ -123,6 +123,28 @@ While it is running, your forum will be disabled!
 
 	$tbl = $DBHOST_TBL_PREFIX;
 	$tbls = get_fud_table_list();
+
+	draw_stat('Checking for presence of forum lock tables');
+	$tbl_k = array_flip($tbls);
+	$tmp = array();
+	$c = uq('SELECT id FROM '. $tbl .'forum');
+	while ($f = db_rowarr($c)) {
+		if (!isset($tbl_k[$tbl .'fl_'. $f[0]])) {
+			$tmp[] = (int)$f[0];
+		}
+		
+	}
+	unset($c);
+	foreach ($tmp as $v) { // Add lock tables.
+		q('CREATE TABLE '. $tbl .'fl_'. $v .' (id INT)');
+	}
+
+	/* Add private message lock tables. */
+	if (!isset($tbl_k[$tbl.'fl_pm'])) {
+		q('CREATE TABLE '. $tbl .'fl_pm (id INT)');
+	}
+	unset($tmp);
+	draw_stat('Done: Checking for presence of forum lock tables');
 
 	// Add view tables as needed.
 	foreach (db_all('SELECT id FROM '. $tbl .'forum') as $v) {
@@ -280,28 +302,6 @@ While it is running, your forum will be disabled!
 	}
 	unset($tmp);
 	draw_stat('Done: Validating Forum Order');
-
-	draw_stat('Checking for presence of forum lock tables');
-	$tbl_k = array_flip($tbls);
-	$tmp = array();
-	$c = uq('SELECT id FROM '. $tbl .'forum');
-	while ($f = db_rowarr($c)) {
-		if (!isset($tbl_k[$tbl .'fl_'. $f[0]])) {
-			$tmp[] = (int)$f[0];
-		}
-		
-	}
-	unset($c);
-	foreach ($tmp as $v) { // Add lock tables.
-		q('CREATE TABLE '. $tbl .'fl_'. $v .' (id INT)');
-	}
-
-	/* Add private message lock tables. */
-	if (!isset($tbl_k[$tbl.'fl_pm'])) {
-		q('CREATE TABLE '. $tbl .'fl_pm (id INT)');
-	}
-	unset($tmp);
-	draw_stat('Done: Checking for presence of forum lock tables');
 
 	draw_stat('Checking thread_exchange');
 	delete_zero($tbl .'thr_exchange', 'SELECT te.id FROM '. $tbl .'thr_exchange te LEFT JOIN '. $tbl .'thread t ON t.id=te.th LEFT JOIN '. $tbl .'forum f ON f.id=te.frm WHERE t.id IS NULL or f.id IS NULL');
