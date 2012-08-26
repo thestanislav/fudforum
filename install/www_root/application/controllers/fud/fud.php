@@ -51,7 +51,7 @@ class Fud extends CI_Controller
         $this->load->view('fud/index.php', $data);
     }
 
-    public function category( $cid = 0 )
+    public function category( $cid )
     {
 		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
 		$cat = $this->FUD->fetch_categories( $cid );
@@ -149,17 +149,17 @@ class Fud extends CI_Controller
 		if( !strcasecmp( $_SERVER['method'], 'post' ) )
 		{
 			if( array_key_exists( 'preview', $_POST ) )
-				$this->reply_preview( $tid, $mid = null, $do_quote = FALSE, $preview = TRUE );
+				$this->_reply_preview( $tid, $mid = null, $do_quote = FALSE, $preview = TRUE );
 			else if( array_key_exists( 'submit', $_POST ) )
-				$this->reply_post( $tid, $mid = null, $do_quote = FALSE );
+				$this->_reply_post( $tid, $mid = null, $do_quote = FALSE );
 		}
 		else
 		{
-			$this->reply_new( $tid, $mid = null, $do_quote = FALSE );
+			$this->_reply_new( $tid, $mid = null, $do_quote = FALSE );
 		}
 	}
 
-	function reply_new( $tid, $mid = null, $do_quote = FALSE )
+	private function _reply_new( $tid, $mid = null, $do_quote = FALSE )
 	{
 		$topic = $this->FUD->fetch_full_topic( $tid );
 		$reply_to_id = null == $mid ? $topic->root_msg_id : $mid;
@@ -172,12 +172,12 @@ class Fud extends CI_Controller
         $this->load->view('fud/reply.php', $data);
 	}
 
-	function reply_preview( $tid, $mid = null, $do_quote = FALSE )
+	private function _reply_preview( $tid, $mid = null, $do_quote = FALSE )
 	{
 
 	}
 
-	function reply_post( $tid, $mid = null, $do_quote = FALSE )
+	private function _reply_post( $tid, $mid = null, $do_quote = FALSE )
 	{
 	}
 }
