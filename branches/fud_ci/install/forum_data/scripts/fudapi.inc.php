@@ -4,6 +4,7 @@
  * the FUDforum's GLOBALS.php file.
  */
 // require_once('/path/to/GLOBALS.php');
+require_once('GLOBALS.php');
 
 /*
 General Information
@@ -195,6 +196,61 @@ function fetch_fetch_msg_by_user($arg)
 	return _fud_msg_multi(arg, 'SELECT id FROM '. $GLOBALS['DBHOST_TBL_PREFIX'] .'msg WHERE poster_id IN ({ARG}) AND apr=1');
 }
 
+
+/* {{{ proto: mixed fud_fetch_forum_topics(mixed arg) }}}
+ * This function returns information about specified topics.
+ * Fields:
+stdClass Object
+(
+ 
+)
+ */
+function fud_fetch_forum_topics($arg, $sort = FALSE, $limit = null)
+{
+	$arg = is_numeric($arg) ? array($arg) : $arg;
+        
+	if( $limit AND (!is_array($limit) OR (count($limit)!=2) ) )
+            return FALSE;
+
+	$result = array();	
+        
+        $q = 'SELECT
+		m.attach_cnt, m.poll_id, m.subject, m.icon, m.post_stamp,
+		u.alias, u.id,
+		u2.id, u2.alias,
+		m2.id, m2.post_stamp,
+		t.id AS topic_id, t.moved_to, t.root_msg_id, t.replies, t.rating, t.thread_opt, t.views, t.tdescr, t.last_post_id
+		FROM '. $GLOBALS['DBHOST_TBL_PREFIX'] .'thread t
+                INNER JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'msg m ON t.root_msg_id=m.id
+                INNER JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'msg m2 ON m2.id=t.last_post_id
+                LEFT JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users u ON u.id=m.poster_id
+                LEFT JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users u2 ON u2.id=m2.poster_id
+                WHERE t.forum_id IN('. implode(',', $arg) .')';
+        if( $sort )
+            $q .= " ORDER BY m.post_stamp DESC";
+        if( $limit )
+            $q .= " LIMIT {$limit[0]}, {$limit[1]}";
+	$c = uq( $q );
+        //die($q);
+
+	while ($r = db_rowobj($c)) {
+		$r->replies++;
+		$r->type = $r->thread_opt > 1 ? ($r->thread_opt & 4 ? 'sticky' : 'announcement') : NULL;
+		if ($GLOBALS['FUD_OPT_2'] & 4096 && $r->rating) {
+			$r->rating = NULL;
+		}
+		unset($r->thread_opt);
+		$result[] = $r;
+	}
+	unset($c, $r);
+
+	if (count($result) == 1) {
+                return array_pop($result);
+        } else {
+                return $result;
+        }
+}
+
 /* {{{ proto: mixed fud_fetch_topic(mixed arg) }}}
  * This function returns information about specified topics.
  * Fields:
@@ -222,8 +278,8 @@ function fud_fetch_topic($arg)
 	$arg = is_numeric($arg) ? array($arg) : $arg;
 
 	$result = array();	
-
-	$c = uq('SELECT
+        
+        $q = 'SELECT
 		m.attach_cnt, m.poll_id, m.subject, m.icon, m.post_stamp,
 		u.alias, u.id,
 		u2.id, u2.alias,
@@ -234,7 +290,8 @@ function fud_fetch_topic($arg)
 			INNER JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'msg	m2	ON m2.id=t.last_post_id
 			LEFT JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users	u	ON u.id=m.poster_id
 			LEFT JOIN '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users	u2	ON u2.id=m2.poster_id
-			WHERE t.id IN('. implode(',', $arg) .')');
+			WHERE t.id IN('. implode(',', $arg) .')';
+	$c = uq( $q );
 
 	while ($r = db_rowobj($c)) {
 		$r->replies++;
@@ -407,6 +464,7 @@ function fud_fetch_cat($arg = null, $sort = FALSE)
     return _fud_simple_fetch_query( $arg, $q );
 }
 
+
 /* {{{ proto: mixed fud_fetch_cat_forums(mixed arg, boolean sort) }}}
  * This function returns information about forum(s) inside specified categories.
  * The output is identical to that of the fud_fetch_forum() function.
@@ -418,7 +476,7 @@ function fud_fetch_cat_forums( $arg = null, $sort = FALSE )
         $q .= " WHERE cat_id IN ({ARG})";
     if( $sort )
         $q .= " ORDER BY view_order";
-    return _fud_simple_fetch_query( $arg, $q );
+    return _fud_simple_fetch_query( $arg, $q, FALSE );
 }
 
 /* {{{ proto: mixed fud_forum_stats() }}}
@@ -578,7 +636,7 @@ function fud_fetch_top_poster()
  *	home_page - Home Page URL
  *	bio - Biography
  *	users_opt - Account settings, consult fud_users.sql inside the sql/ directory for details.
- *	registration_ip - Registration IP, will default to ::1 (127.0.0.1)
+ *	reg_ip - Registration IP, will default to 127.0.0.1
  */
 function fud_add_user($vals, &$err)
 {
@@ -641,14 +699,14 @@ function fud_add_user($vals, &$err)
 	if ($o2 & 1) {
 		$o2 ^= 1;
 	}
-	$registration_ip = '::1';
+	$reg_ip = '127.0.0.1';
 	$last_visit = $last_read = $join_date = __request_timestamp__;
 
 	// Make sure all fields are set.
 	foreach( array('login','alias','passwd','name','email','icq','aim','yahoo','msnm','jabber','google','skype','twitter',
 		'affero','posts_ppg','time_zone','birthday','last_visit','conf_key','user_image',
 		'join_date','location','theme','occupation','interests','referer_id','last_read',
-		'sig','home_page','bio','users_opt','registration_ip') as $v) {
+		'sig','home_page','bio','users_opt','reg_ip') as $v) {
 		if (empty($vals[$v])) {
 			$vals[$v] = isset($$v) ? $$v : '';
 		}
@@ -688,7 +746,7 @@ function fud_add_user($vals, &$err)
 				home_page,
 				bio,
 				users_opt,
-				registration_ip
+				reg_ip
 			) VALUES (
 				'. _esc($vals['login']) .',
 				'. _esc($vals['alias']) .',
@@ -722,7 +780,7 @@ function fud_add_user($vals, &$err)
 				'. ssn(htmlspecialchars($vals['home_page'])) .',
 				'. ssn($vals['bio']) .',
 				'. (int)$vals['users_opt'] .',
-				'. $vals['registration_ip'] .'
+				'. ip2long($vals['reg_ip']) .'
 			)
 		');
 }
@@ -787,7 +845,7 @@ function fud_update_user($uid, $vals, &$err)
 	foreach( array('login','alias','passwd', 'salt', 'name','email','icq','aim','yahoo','msnm','jabber','google','skype','twitter',
 		'affero','posts_ppg','time_zone','birthday','last_visit','conf_key','user_image',
 		'join_date','location','theme','occupation','interests','referer_id','last_read',
-		'sig','home_page','bio','users_opt','registration_ip') as $v) {
+		'sig','home_page','bio','users_opt','reg_ip') as $v) {
 		if (isset($vals[$v])) {
 			$qry .= $v .'='. _esc($vals[$v]) .',';
 		}
@@ -988,8 +1046,9 @@ function _fud_msg_multi($arg, $query)
 {
 	$arg = is_numeric($arg) ? array($arg) : (int)$arg;
 	$ids = array();
-	$r = uq(str_replace('{ARG}', implode(',', $arg), $query));
-	while ($row = db_rowarr($r)) {
+        $q = str_replace('{ARG}', implode(',', $arg), $query);
+        $r = uq($q);
+        while ($row = db_rowarr($r)) {
 		$ids[] = $row[0];
 	}
 	if (!$ids) {
@@ -1001,30 +1060,30 @@ function _fud_msg_multi($arg, $query)
 
 function _fud_simple_fetch_query($arg, $query, $check_count = TRUE)
 {
-	if ($arg) {    
+        if ($arg) {    
 		$arg = is_numeric($arg) ? array($arg) : $arg;
 	} else {
 		$arg = array();
 	}
 	$result = array();
         
-    $r = uq(str_replace('{ARG}', implode(',', $arg), $query));
+        $r = uq(str_replace('{ARG}', implode(',', $arg), $query));
 	while ($row = db_rowobj($r)) {
 		$result[] = $row;    
 	}
-	unset($r);
+        unset($r);
 
-	if( $check_count ) {
-		if ($arg && count($result) != count($arg)) {      
-				return FALSE;
-		} 
-	}
-	
-	if (count($result) == 1) {
-		return array_pop($result);
-	} else {
-		return $result;
-	}
+        if( $check_count ) {
+            if ($arg && count($result) != count($arg)) {      
+                    return FALSE;
+            } 
+        }
+        
+        if (count($result) == 1) {
+            return array_pop($result);
+        } else {
+            return $result;
+        }
 }
 
 function _fud_decode_forum($data)
