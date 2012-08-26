@@ -4,9 +4,9 @@
 * email                : forum@prohost.org
 * $Id$
 *
-* This program is free software; you can redistribute it and/or modify it 
-* under the terms of the GNU General Public License as published by the 
-* Free Software Foundation; version 2 of the License. 
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; version 2 of the License.
 ***************************************************************************/
 
 // define('fud_debug', 1);
@@ -37,7 +37,7 @@ function modules_enabled()
 	return $status;
 }
 
-function databases_enabled() 
+function databases_enabled()
 {
 	$module_status = modules_enabled();
 	$supported_databases = array(/*'cubrid'=>'CUBRID',*/ 'ibm_db2'=>'IBM DB2', 'interbase'=>'Firebird', 'mysql'=>'MySQL', 'mysqli'=>'MySQL Improved', 'oci8'=>'Oracle', 'pgsql'=>'PostgreSQL', 'sqlsrv' => 'SQL Server (Microsoft)', 'pdo_mysql'=>'PDO: MySQL', 'pdo_pgsql'=>'PDO: PostgreSQL', 'pdo_sqlite'=>'PDO: SQLite', 'pdo_sqlsrv'=>'PDO: SQL Server (Microsoft)');
@@ -310,7 +310,7 @@ span.linkhead {color: #fff; font-weight: bold; font-size: xx-large;}
 }
 .field:hover {
 	background: #dddeed; border-bottom: 1px solid red;
-} 
+}
 .field td {
 	border-bottom: 2px inset #fff; padding: 2px; margin: 3px;
 }
@@ -369,9 +369,9 @@ function dialog_end($section)
 			if ($section == 'welcome') {
 				echo '<td align="right"><input class="button forward" type="submit" title="Install FUDforum on your system." name="submit" value="Start installer &gt;&gt;" />';
 			} else {
-				echo '<td align="right"><input class="button forward" type="submit" title="Go to the next step." name="submit" value="Next &gt;&gt;" />';		
+				echo '<td align="right"><input class="button forward" type="submit" title="Go to the next step." name="submit" value="Next &gt;&gt;" />';
 			}
-		} 
+		}
 		echo '</td></tr></table><br />';
 	} else {
 		echo '</table><br />';
@@ -383,7 +383,7 @@ function input_row($title, $var, $def, $descr=NULL, $type='text', $extra='')
 	echo '<tr class="field"><td><b>'. $title .'</b>'. ($descr ? '<br /><span class="descr">'. $descr .'</span>' : '') .'</td><td valign="bottom">'. (isset($GLOBALS['errors'][$var]) ? $GLOBALS['errors'][$var] : '') .'<input type="'. $type .'" name="'. $var .'" id="'. $var .'" value="'. htmlspecialchars($def) .'" size="40" '. $extra .' /></td></tr>';
 }
 
-function prereq_row($title, $descr=NULL, $value=NULL, $status='green') 
+function prereq_row($title, $descr=NULL, $value=NULL, $status='green')
 {
 	echo '<tr class="field"><td><b>'. $title .'</b><br /><span class="descr">'. $descr .'</span></td><td><span style="color:'. $status .'">'. $value .'</span></td></tr>';
 }
@@ -432,7 +432,7 @@ function make_into_query($data)
 	// Expand date.
 	$q = str_replace('{UNIX_TIMESTAMP}', time(), $q);
 	// OR bitmap values together (i.e. 1|2 -> 3) as different databases handle them differently.
-	$q = preg_replace_callback('/\b(\d[\d\|]+\d\b)/', 
+	$q = preg_replace_callback('/\b(\d[\d\|]+\d\b)/',
 		create_function('$matches',
 			'$or=0; foreach( explode(\'|\', $matches[0]) as $val) {$or = $or|$val;} return $or;'),
 			$q);
@@ -566,7 +566,7 @@ if (php_sapi_name() == 'cli') {
 	}
 }
 
-/* In GUI/Web mode we will execute one section at a time, progressing through all section. 
+/* In GUI/Web mode we will execute one section at a time, progressing through all section.
    However, in command line mode we will sequentially run through them all.
   */
 $section = isset($_POST['section']) ? $_POST['section'] : (isset($_GET['section']) ? $_GET['section'] : '');
@@ -595,7 +595,7 @@ if ($section == 'stor_path' || php_sapi_name() == 'cli') {
 			if ($_POST['SERVER_ROOT'] && is_wr($_POST['SERVER_ROOT'])) {
 				break;
 			}
-			echo 'ERROR: ['. $_POST['SERVER_ROOT'] ."] does not exist or the installer does not have the required permissions to create it\n";
+			echo "ERROR: [{$_POST['SERVER_ROOT']}] does not exist or the installer does not have the required permissions to create it\n";
 		}
 
 		/* Prompt for file path of the forum's web files. */
@@ -608,9 +608,9 @@ if ($section == 'stor_path' || php_sapi_name() == 'cli') {
 			} else if (is_wr($_POST['SERVER_DATA_ROOT'])) {
 				break;
 			}
-			echo 'ERROR: ['. $_POST['SERVER_DATA_ROOT'] ."] does not exist or the installer does not have the required permissions to create it\n";
+			echo "ERROR: [{$_POST['SERVER_DATA_ROOT']}] does not exist or the installer does not have the required permissions to create it\n";
 		}
-		
+
 		echo "Copy forum files.\n";
 	}
 
@@ -743,7 +743,7 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 				$_POST['DBHOST_DBTYPE'] = $db;
 				break;
 			}
-			echo 'ERROR: ['. $db ."] is not available or not supported.\n";
+			echo "ERROR: [{$db}] is not available or not supported.\n";
 			echo 'Choose from: '. wordwrap(implode(', ', $db_types), 60, "\n\t") .".\n";
 		}
 
@@ -807,6 +807,23 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 			'DBHOST_TBL_PREFIX'	=> $_POST['DBHOST_TBL_PREFIX'],
 			'DBHOST_DBTYPE'		=> $_POST['DBHOST_DBTYPE'],
 		));
+
+		/* Write CodeIgniter database settings */
+		$fpath = "{$_POST['SERVER_ROOT']}/application/config/database.php";
+		$contents = file_get_contents( $fpath );
+		// TODO: conform error output to standard (NeXuS)
+		if( !$contents )
+			die( "Cannot find file {$fpath} for modification" );
+		$output_string = "\$db['fud']['hostname'] = '{$_POST['DBHOST']}';\n".
+		                 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
+		                 "\$db['fud']['password'] = '{$_POST['DBHOST_PASSWORD']}';\n".
+		                 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
+		                 "\$db['fud']['dbdriver'] = '{$_POST['DBHOST_DBTYPE']}';\n".
+		                 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
+		                 "\n".
+		                 "/* End of file database.php */";
+		$contents = str_replace( "/* End of file database.php */", $output_string, $contents );
+		file_put_contents( $fpath, $contents );
 	}
 
 	if (!isset($GLOBALS['errors'])) {
@@ -904,10 +921,10 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 	}
 
 	/* Import seed data. */
-	if (!isset($GLOBALS['errors'])) {					
+	if (!isset($GLOBALS['errors'])) {
 		foreach ($sql as $t) {
 			$file = str_replace(array("\r\n", "\r"), "\n", file_get_contents($t));
-			foreach (explode(";\n", $file) as $q) { 
+			foreach (explode(";\n", $file) as $q) {
 				$q = make_into_query($q);
 				if ($q) {
 					try {
@@ -924,6 +941,23 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 			}
 		}
 	}
+
+	/* Generate and write CodeIgniter encryption key */
+	function random_string($max = 20){
+        $chars = explode(" ", "a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9");
+        for($i = 0; $i < $max; $i++){
+            $rnd = array_rand($chars);
+            $rtn .= base64_encode(md5($chars[$rnd]));
+        }
+        return substr(str_shuffle(strtolower($rtn)), 0, $max);
+    }
+	$key = random_string(20);
+    $fpath = "{$_POST['SERVER_ROOT']}/application/config/config.php";
+    if( !$contents )
+			die( "Cannot find file {$fpath} for modification" );
+	$output_string = "\$config['encryption_key'] = '{$key}';";
+	$contents = str_replace( "\$config['encryption_key'] = '';", $output_string, $contents );
+	file_put_contents( $fpath, $contents );
 
 	if (!isset($GLOBALS['errors'])) {
 		$display_section = 'cookies';
@@ -1091,7 +1125,8 @@ if ($section == 'admin' || php_sapi_name() == 'cli') {
 			'NOTIFY_FROM' => $_POST['ADMIN_EMAIL']
 		));
 
-		/* Build theme. */
+		/* Build theme. --- Not required with CI! */
+		/*
 		require($INCLUDE .'compiler.inc');
 		try {
 			$lang  = strtok($_POST['LANGUAGE'], '::');
@@ -1100,8 +1135,9 @@ if ($section == 'admin' || php_sapi_name() == 'cli') {
 		} catch (Exception $e) {
 			die('Unable to compile theme '. $templ .' ('. $lang .'): '.  $e->getMessage());
 		}
-
+		*/
 		$display_section = 'done';
+
 	}
 }
 
@@ -1143,9 +1179,9 @@ switch ($section) {
 		if (get_magic_quotes_gpc()) {
 			prereq_row('Magic quotes gpc:', 'For performance reasons we recommend keeping this option OFF.', 'enabled', 'orange');
 		}
-		prereq_row('MBsting Exension:', 'The Multibyte String extention provides UTF-8 support (required).', 
+		prereq_row('MBsting Exension:', 'The Multibyte String extention provides UTF-8 support (required).',
 			($module_status['mbstring'] ? 'enabled' : 'disabled'), ($module_status['mbstring'] ? 'green' : 'red'));
-		prereq_row('PCRE Extension:', 'Perl Compatible Regular Expression (required).', 
+		prereq_row('PCRE Extension:', 'Perl Compatible Regular Expression (required).',
 			($module_status['pcre'] ? 'enabled' : 'disabled'), ($module_status['pcre'] ? 'green' : 'red'));
 		prereq_row('Zlib Extension:', 'The zlib extension is optional, however we recommend enabling it. This extension allow you to compress your forum backups as well as use zlib compression for your pages.',
 			($module_status['zlib'] ? 'enabled' : 'disabled'), ($module_status['zlib'] ? 'green' : 'orange'));
@@ -1154,30 +1190,30 @@ switch ($section) {
 	dialog_end('prereq');
 
 	dialog_start('Database information: <span class="descr">(at least <u>one</u> of the database extensions below must be enabled)</span>', '');
-	prereq_row('MySQL Improved Extention:', 'Improved interface to the MySQL server (mysqli), RECOMMENDED', 
+	prereq_row('MySQL Improved Extention:', 'Improved interface to the MySQL server (mysqli), RECOMMENDED',
 			($module_status['mysqli'] ? 'enabled' : 'disabled'), ($module_status['mysqli'] ? 'green' : 'orange'));
-	prereq_row('MySQL Extention:', 'Interface to the MySQL server, which is the recommended database for FUDforum.', 
+	prereq_row('MySQL Extention:', 'Interface to the MySQL server, which is the recommended database for FUDforum.',
 			($module_status['mysql'] ? 'enabled' : 'disabled'), ($module_status['mysql'] ? 'green' : 'orange'));
-	prereq_row('MySQL PDO Extension:', 'PDO interface to the MySQL server (pdo_mysql).', 
+	prereq_row('MySQL PDO Extension:', 'PDO interface to the MySQL server (pdo_mysql).',
 			($module_status['pdo_mysql'] ? 'enabled' : 'disabled'), ($module_status['pdo_mysql'] ? 'green' : 'orange'));
 	// FOR FUTURE IMPLEMENTATION:
-	// prereq_row('CUBRID Extension:', 'Interface to CUBRID database (cubrid).', 
+	// prereq_row('CUBRID Extension:', 'Interface to CUBRID database (cubrid).',
 	// 		($module_status['cubrid'] ? 'enabled' : 'disabled'), ($module_status['cubrid'] ? 'green' : 'orange'));
-	prereq_row('Firebird Extension:', 'Interface to Firebird/Interbase database (ibase).', 
+	prereq_row('Firebird Extension:', 'Interface to Firebird/Interbase database (ibase).',
 			($module_status['interbase'] ? 'enabled' : 'disabled'), ($module_status['interbase'] ? 'green' : 'orange'));
-	prereq_row('Oracle OCI8 Extension:', 'Interface to Oracle database server (oci8).', 
+	prereq_row('Oracle OCI8 Extension:', 'Interface to Oracle database server (oci8).',
 			($module_status['oci8'] ? 'enabled' : 'disabled'), ($module_status['oci8'] ? 'green' : 'orange'));
-	prereq_row('IBM DB2 Extension:', 'Interface to IBM DB2 database server (ibm_db2).', 
+	prereq_row('IBM DB2 Extension:', 'Interface to IBM DB2 database server (ibm_db2).',
 			($module_status['ibm_db2'] ? 'enabled' : 'disabled'), ($module_status['ibm_db2'] ? 'green' : 'orange'));
-	prereq_row('PostgreSQL Extension:', 'Interface to the PostgreSQL server.', 
+	prereq_row('PostgreSQL Extension:', 'Interface to the PostgreSQL server.',
 			($module_status['pgsql'] ? 'enabled' : 'disabled'), ($module_status['pgsql'] ? 'green' : 'orange'));
-	prereq_row('PostgreSQL PDO Extension:', 'PDO interface to the PostgreSQL server (pdo_pgsql).', 
+	prereq_row('PostgreSQL PDO Extension:', 'PDO interface to the PostgreSQL server (pdo_pgsql).',
 			($module_status['pdo_pgsql'] ? 'enabled' : 'disabled'), ($module_status['pdo_pgsql'] ? 'green' : 'orange'));
-	prereq_row('SQLite PDO Extension:', 'PDO interface to the SQLite server (pdo_sqlite).', 
+	prereq_row('SQLite PDO Extension:', 'PDO interface to the SQLite server (pdo_sqlite).',
 			($module_status['pdo_sqlite'] ? 'enabled' : 'disabled'), ($module_status['pdo_sqlite'] ? 'green' : 'orange'));
-	prereq_row('SQL Server Extention:', 'Interface to Microsoft SQL Server (sqlsrv).', 
+	prereq_row('SQL Server Extention:', 'Interface to Microsoft SQL Server (sqlsrv).',
 			($module_status['sqlsrv'] ? 'enabled' : 'disabled'), ($module_status['sqlsrv'] ? 'green' : 'orange'));
-	prereq_row('SQL Server PDO Extension:', 'PDO interface to Microsoft SQL Server (sqlsrv).', 
+	prereq_row('SQL Server PDO Extension:', 'PDO interface to Microsoft SQL Server (sqlsrv).',
 			($module_status['pdo_sqlsrv'] ? 'enabled' : 'disabled'), ($module_status['pdo_sqlsrv'] ? 'green' : 'orange'));
 
 	dialog_end('prereq');
@@ -1263,7 +1299,7 @@ switch ($section) {
 			$DBHOST_TBL_PREFIX = 'fud30_';
 			if (isset($db_types['mysql']) || isset($db_types['mysqli']) || isset($db_types['pdo_mysql'])) {
 				$DBHOST      = '127.0.0.1';
-				$DBHOST_USER = 'root';					
+				$DBHOST_USER = 'root';
 			}
 		}
 
