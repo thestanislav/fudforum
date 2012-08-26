@@ -43,7 +43,11 @@ $route['404_override'] = '';
 
 /* FUD routes */
 $route['category/:num'] = "fud/fud/category/$1";
+$route['forum/:num/:num'] = "fud/fud/forum/$1/$2";
+$route['forum/:num/:num/:num'] = "fud/fud/forum/$1/$2/$3";
 $route['forum/:num/:num/:num/:num'] = "fud/fud/forum/$1/$2/$3/$4";
+$route['topic/:num/:num/:num'] = "fud/fud/topic/$1/$2/$3";
+$route['topic/:num/:num/:num/:num'] = "fud/fud/topic/$1/$2/$3/$4";
 $route['topic/:num/:num/:num/:num/:num'] = "fud/fud/topic/$1/$2/$3/$4/$5";
 $route['reply/:num'] = "fud/fud/reply/$1";
 $route['reply/:num/:num'] = "fud/fud/reply/$1/$2";
