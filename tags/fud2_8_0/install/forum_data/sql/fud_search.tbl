@@ -1,0 +1,18 @@
+#   copyright            : (C) 2001-2009 Advanced Internet Designs Inc.
+#   email                : forum@prohost.org
+#
+#   $Id: fud_search.tbl,v 1.11 2009/01/29 18:37:17 frank Exp $
+#
+#       This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; version 2 of the License.
+
+DROP TABLE IF EXISTS {SQL_TABLE_PREFIX}search;
+
+CREATE TABLE {SQL_TABLE_PREFIX}search
+(
+	id	INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	word	VARCHAR(50) NOT NULL
+);
+
+CREATE UNIQUE INDEX {SQL_TABLE_PREFIX}search_i_w ON {SQL_TABLE_PREFIX}search (word);

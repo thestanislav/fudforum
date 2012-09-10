@@ -1,0 +1,245 @@
+@import "elements.less";
+@Gainsboro: #DCDCDC;
+
+body {
+    font-family: Verdana,Geneva,Lucida,'Lucida Grande',Arial,Helvetica,Sans-serif;
+    font-size: 10pt; 
+}
+
+.fora_table {
+	color: black;
+}
+
+.vertical_top {
+    vertical-align: top;
+}
+
+.vertical_middle {
+    vertical-align: middle;
+}
+
+.vertical_bottom {
+    vertical-align: bottom;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.text_right {
+    text-align: right;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.width_25 {
+    width: 25%;
+}
+
+.width_40 {
+    width: 40%;
+}
+
+.width_49 {
+    width: 49%;
+}
+
+.width_50 {
+    width: 50%;
+}
+
+.width_75 { 
+    width: 75%;
+}
+
+.width_100 {
+    width: 100%;
+}
+
+.width_auto {
+    width: auto;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
+.inline {
+    display: inline;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.clear-right {
+    clear: right;
+}
+
+.clear {
+    clear: both;
+}
+
+/*--- pagination links ---*/
+
+.fud_pagination {
+	background-color: @Gainsboro;
+	padding: 5px;
+	margin-bottom: 5px;
+	.rounded( 5px );
+    border: 1px solid gray;
+}
+
+/*--- navigation links ---*/
+
+div#fud_navigation {
+	background-color: @Gainsboro;
+	padding: 5px;
+	margin-bottom: 5px;
+	.rounded( 5px );
+    border: 1px solid gray;
+}
+
+/*--- table ---*/
+
+.fud_table {
+    width: 100%;
+    font-size: 10pt; 
+    .rounded( 5px );
+    padding: 0;
+    border: 1px solid gray;
+}
+
+/*--- thead ---*/
+
+.fud_table thead {
+    background-color: @Gainsboro;
+}
+
+.fud_table th {
+    padding: 2px 5px 2px 5px;
+}
+
+/*--- tbody ---*/
+
+.fud_table tbody tr.odd {
+    background-color: lighten( @Gainsboro, 10% );
+}
+
+.fud_table tbody tr.even {
+    background-color: lighten( @Gainsboro, 5% );
+}
+
+.fud_table td {
+    padding: 2px 5px 2px 5px;
+}
+
+/*--- List of fora ---*/
+
+#fora_table td.messages {
+    .text_center;
+}
+
+#fora_table td.topics {
+    .text_center;
+}
+
+#fora_table td.last_message {
+    .text_center;
+    font-size: small;
+}
+
+#fora_table tr .category {
+    background-color: darken( @Gainsboro, 10% );
+}
+
+#fora_table td span.date {
+    font-size: smaller;
+}
+
+/*--- List of topics within a forum ---*/
+
+#topics_table td.replies {
+    .text_center;
+}
+
+#topics_table td.views {
+    .text_center;
+}
+
+#topics_table td.last_message {
+    .text_center;
+}
+
+#topics_table td.last_message span.author {
+    font-size: small;
+}
+
+#topics_table td.topic div.author_and_date {
+    .text_right;
+}
+
+#topics_table td span.date {
+    font-size: smaller;
+}
+
+/*--- List of messages within a topic ---*/
+
+.fud_post {
+    background-color: Gainsboro;
+    border: 1px solid;
+    margin-bottom: 5px;
+    .rounded(5px);
+}
+
+.fud_post div.header {
+    border-bottom: 1px solid gray;
+    padding: 5px 5px 5px 5px;
+}
+
+.fud_post div.header span.subject {
+    font-weight: bold;
+    margin-right: 1.5em;
+    vertical-align: middle;
+}
+
+.fud_post div.header span.id {
+    font-size: small;
+    margin-right: 3em;
+    vertical-align: middle;
+}
+
+.fud_post div.header span.date {
+    font-size: small;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.fud_post div.author {
+    border-bottom: 1px solid gray;
+    padding: 5px 5px 5px 5px;
+    background-color: lighten( @Gainsboro, 5% );
+}
+
+.fud_post div.body {
+    padding: 10px 5px 10px 5px;
+    background-color: lighten( @Gainsboro, 10% );
+}
+
+.fud_post div.actions span {
+	padding: 5px 5px 5px 5px;
+}
