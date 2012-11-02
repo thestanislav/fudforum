@@ -85,7 +85,7 @@ class Fud extends CI_Controller
         }
 
         $this->load->library('pagination');
-        $config['uri_segment'] = 6;
+        $config['uri_segment'] = 5;
         $config['num_links'] = 10;
         $config['base_url'] = "/forum/{$cid}/{$fid}/{$per_page}/";
         $config['per_page'] = $per_page;
@@ -124,7 +124,7 @@ class Fud extends CI_Controller
         $total = count($topic);
 
         $this->load->library('pagination');
-        $config['uri_segment'] = 6;
+        $config['uri_segment'] = 5;
         $config['num_links'] = 2;
         $config['base_url'] = "/topic/{$cid}/{$tid}/{$per_page}/";
         $config['per_page'] = $per_page;
@@ -179,5 +179,6 @@ class Fud extends CI_Controller
 
 	private function _reply_post( $tid, $mid = null, $do_quote = FALSE )
 	{
+
 	}
 }

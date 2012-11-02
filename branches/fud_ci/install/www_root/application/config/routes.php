@@ -42,6 +42,7 @@ $route['default_controller'] = "fud/fud";
 $route['404_override'] = '';
 
 /* FUD routes */
+$route['fora'] = "fud/fud/index";
 $route['category/(:num)'] = "fud/fud/category/$1";
 $route['forum/(:num)/(:num)'] = "fud/fud/forum/$1/$2";
 $route['forum/(:num)/(:num)/(:num)'] = "fud/fud/forum/$1/$2/$3";
