@@ -199,62 +199,65 @@ function fud_logerror($error_msg, $logfile, $extra_data=null) {
 }
 
 /** Database error handler. */
-function fud_sql_error_handler($query, $error_string, $error_number, $db_version)
+if( !function_exists( "fud_sql_error_handler" ) )
 {
-	if (db_locked() && !in_array($query, array('COMMIT', 'COMMIT WORK', 'UNLOCK TABLES'))) {
-		db_unlock();
-	}
+	function fud_sql_error_handler($query, $error_string, $error_number, $db_version)
+	{
+		if (db_locked() && !in_array($query, array('COMMIT', 'COMMIT WORK', 'UNLOCK TABLES'))) {
+			db_unlock();
+		}
 
-	$_SERVER['PATH_TRANSLATED'] = '';
-	foreach (debug_backtrace() as $v) {
-		$_SERVER['PATH_TRANSLATED'] .= "{$v['file']}:{$v['line']}<br />\n";
-	}
+		$_SERVER['PATH_TRANSLATED'] = '';
+		foreach (debug_backtrace() as $v) {
+			$_SERVER['PATH_TRANSLATED'] .= "{$v['file']}:{$v['line']}<br />\n";
+		}
 
-	$error_msg = '('. $_SERVER['PATH_TRANSLATED'] .') '. $error_number .': '. $error_string ."<br />\n";
-	$error_msg .= 'Query: '. htmlspecialchars($query) ."<br />\n";
-	if (!empty($_GET)) {
-		$error_msg .= '_GET: ';
-		if (count($_GET, 1) < 100) {
-			$error_msg .= htmlspecialchars(var_export($_GET, 1));
+		$error_msg = '('. $_SERVER['PATH_TRANSLATED'] .') '. $error_number .': '. $error_string ."<br />\n";
+		$error_msg .= 'Query: '. htmlspecialchars($query) ."<br />\n";
+		if (!empty($_GET)) {
+			$error_msg .= '_GET: ';
+			if (count($_GET, 1) < 100) {
+				$error_msg .= htmlspecialchars(var_export($_GET, 1));
+			} else {
+				$error_msg .= 'Too many vars to list: '. count($_GET, 1);
+			}
+			$error_msg .= "<br />\n";
+		}
+		if (!empty($_POST)) {
+			$error_msg .= '_POST: ';
+			if (count($_POST, 1) < 100) {
+				$error_msg .= htmlspecialchars(var_export($_POST, 1));
+			} else {
+				$error_msg .= 'Too many vars: '. count($_POST, 1);
+			}
+			$error_msg .= "<br />\n";
+		}
+		$error_msg .= 'Database version: '. $db_version ."<br />\n";
+		if (isset($_SERVER['HTTP_REFERER'])) {
+			$error_msg .= '[Referring Page] '. htmlspecialchars($_SERVER['HTTP_REFERER']) ."<br />\n";
+		}
+
+		fud_logerror($error_msg, 'sql_errors');
+
+		if (empty($GLOBALS['ADMIN_EMAIL'])) {
+			$public_msg = 'SQL error has occurred! Please contact the administrator and have them look at the Error Log Viewer in the forum\'s Admin Control Panel.';
 		} else {
-			$error_msg .= 'Too many vars to list: '. count($_GET, 1);
+			$public_msg = 'SQL error has occurred! Please contact the <a href="mailto:'. $GLOBALS['ADMIN_EMAIL'] .'?subject=SQL%20Error">administrator</a> and have them look at the Error Log Viewer in the forum\'s Admin Control Panel.';
 		}
-		$error_msg .= "<br />\n";
-	}
-	if (!empty($_POST)) {
-		$error_msg .= '_POST: ';
-		if (count($_POST, 1) < 100) {
-			$error_msg .= htmlspecialchars(var_export($_POST, 1));
+
+		if (isset($GLOBALS['usr']->users_opt) && $GLOBALS['usr']->users_opt & 1048576) { // Admin user.
+			// ACP may try to catch DB errors, e.g. temp table check in admglobal.php.
+			throw new Exception($error_msg);
+		} elseif (defined('fud_debug')) {	// Debug mode.
+			echo '<hr><pre>'. $error_msg .'</pre><hr>';
 		} else {
-			$error_msg .= 'Too many vars: '. count($_POST, 1);
+			trigger_error($public_msg, E_USER_ERROR);
+			if (ini_get('display_errors') !== '1') {
+				echo $public_msg;
+			}
 		}
-		$error_msg .= "<br />\n";
+		exit;
 	}
-	$error_msg .= 'Database version: '. $db_version ."<br />\n";
-	if (isset($_SERVER['HTTP_REFERER'])) {
-		$error_msg .= '[Referring Page] '. htmlspecialchars($_SERVER['HTTP_REFERER']) ."<br />\n";
-	}
-
-	fud_logerror($error_msg, 'sql_errors');
-
-	if (empty($GLOBALS['ADMIN_EMAIL'])) {
-		$public_msg = 'SQL error has occurred! Please contact the administrator and have them look at the Error Log Viewer in the forum\'s Admin Control Panel.';
-	} else {
-		$public_msg = 'SQL error has occurred! Please contact the <a href="mailto:'. $GLOBALS['ADMIN_EMAIL'] .'?subject=SQL%20Error">administrator</a> and have them look at the Error Log Viewer in the forum\'s Admin Control Panel.';
-	}
-
-	if (isset($GLOBALS['usr']->users_opt) && $GLOBALS['usr']->users_opt & 1048576) { // Admin user.
-		// ACP may try to catch DB errors, e.g. temp table check in admglobal.php.
-		throw new Exception($error_msg);
-	} elseif (defined('fud_debug')) {	// Debug mode.
-		echo '<hr><pre>'. $error_msg .'</pre><hr>';
-	} else {
-		trigger_error($public_msg, E_USER_ERROR);
-		if (ini_get('display_errors') !== '1') {
-			echo $public_msg;
-		}
-	}
-	exit;
 }
 
 ?>

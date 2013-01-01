@@ -471,9 +471,9 @@ function fud_fetch_cat($arg = null, $sort = FALSE)
  */
 function fud_fetch_cat_forums( $arg = null, $sort = FALSE )
 {
-    $q = "SELECT * FROM {$GLOBALS['DBHOST_TBL_PREFIX']}forum";
-    if( null != $arg)
-        $q .= " WHERE cat_id IN ({ARG})";
+	$q = "SELECT * FROM {$GLOBALS['DBHOST_TBL_PREFIX']}forum";
+	if( null != $arg)
+        $q .= " WHERE cat_id IN ({$arg})";
     if( $sort )
         $q .= " ORDER BY view_order";
     return _fud_simple_fetch_query( $arg, $q, FALSE );

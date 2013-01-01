@@ -54,7 +54,7 @@ class Fud_Library
 
     function fetch_forums_by_category( $categories = null, $sort = FALSE )
     {
-        return fud_fetch_cat_forums( $categories, $sort );
+		return fud_fetch_cat_forums( $categories, $sort );
     }
 
     function fetch_forums( $frmId = null, $sort = FALSE )

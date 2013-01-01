@@ -55,14 +55,21 @@ class Fud extends CI_Controller
     {
 		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
 		$cat = $this->FUD->fetch_categories( $cid );
-		$navigation = "<div id=\"fud_navigation\"><a href=\"/fora\">Home</a>".
-		              "<a href=\"/category/{$cid}\">{$cat->name}</a></div>";
+		
+		$home_url = site_url( "fora" );
+		$cat_url = site_url( "category/{$cid}" );
+		
+		$navigation = "<div id=\"fud_navigation\"><a href=\"{$home_url}\">Home</a>".
+		              "<a href=\"{$cat_url}\">{$cat->name}</a></div>";
 
         $fora = $this->FUD->fetch_forums_by_category( $cid, TRUE );
-        foreach( $fora as $forum )
-        {
-            echo $forum->name."<br/>";
-        }
+		
+		if( !is_array($fora) )
+			$fora = array( $fora );		
+		
+		$data = array( 'forums' => $fora, 'navigation'=> $navigation,
+                       'cat_id' => $cid  );
+        $this->load->view('fud/category.php', $data);
     }
 
     public function forum( $cid, $fid, $per_page = 20, $start = 0 )
@@ -73,10 +80,13 @@ class Fud extends CI_Controller
 		$topics = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
         if( !is_array( $topics ) )
 			$topics = array( $topics );
-
-		$navigation = "<div id=\"fud_navigation\"><a href=\"/fora\">Home</a> >> ".
-		              "<a href=\"/category/{$cid}\">{$cat->name}</a> >> ".
-		              "<a href=\"/forum/{$cid}/{$fid}\">{$forum->name}</a></div>";
+		
+		$home_url = site_url( "fora" );
+		$cat_url = site_url( "category/{$cid}" );
+		$forum_url = site_url( "forum/{$cid}/{$fid}" );
+		$navigation = "<div id=\"fud_navigation\"><a href=\"{$home_url}\">Home</a> >> ".
+		              "<a href=\"{$cat_url}\">{$cat->name}</a> >> ".
+		              "<a href=\"{$forum_url}\">{$forum->name}</a></div>";
 
         foreach( $topics as $topic )
         {
@@ -87,14 +97,13 @@ class Fud extends CI_Controller
         $this->load->library('pagination');
         $config['uri_segment'] = 5;
         $config['num_links'] = 10;
-        $config['base_url'] = "/forum/{$cid}/{$fid}/{$per_page}/";
+        $config['base_url'] = site_url( "forum/{$cid}/{$fid}/{$per_page}/" );
         $config['per_page'] = $per_page;
 		$config['total_rows'] = $forum->thread_count;
 		$config['last_link'] = '>>';
 		$config['first_link'] = '<<';
-		//~ $config['full_tag_close'] = '<div id="fud_forum_pagination" class="fud_pagination">';
-		//~ $config['full_tag_close'] = '</div>';
 		$this->pagination->initialize($config);
+		
 		$pages  = ceil( $forum->thread_count / $per_page );
 		$pagination = $this->pagination->create_links();
 		$pagination = empty( $pagination ) ? $pagination : "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
@@ -113,11 +122,16 @@ class Fud extends CI_Controller
 		$topic = $this->FUD->fetch_full_topic( $tid );
         if( !is_array($topic) )
             $topic = array($topic);
-
-        $navigation = "<div id=\"fud_navigation\"><a href=\"/fora\">Home</a> >> ".
-		              "<a href=\"/category/{$cid}\">{$cat->name}</a> >> ".
-		              "<a href=\"/forum/{$cid}/{$fid}\">{$forum->name}</a> >> ".
-		              "<a href=\"/topic/{$cid}/{$fid}/{$tid}\">{$topic[0]->subject}</a></div>";
+		
+		$home_url = site_url( "fora" );
+		$cat_url = site_url( "category/{$cid}" );
+		$forum_url = site_url( "forum/{$cid}/{$fid}" );
+		$topic_url = site_url( "topic/{$cid}/{$fid}/{$tid}" );
+		
+        $navigation = "<div id=\"fud_navigation\"><a href=\"{$home_url}\">Home</a> >> ".
+		              "<a href=\"{$cat_url}\">{$cat->name}</a> >> ".
+		              "<a href=\"{$forum_url}\">{$forum->name}</a> >> ".
+		              "<a href=\"{$topic_url}\">{$topic[0]->subject}</a></div>";
 
         $permissions = $this->FUD->check_permissions( $fid, $uid );
 
@@ -126,7 +140,7 @@ class Fud extends CI_Controller
         $this->load->library('pagination');
         $config['uri_segment'] = 5;
         $config['num_links'] = 2;
-        $config['base_url'] = "/topic/{$cid}/{$tid}/{$per_page}/";
+        $config['base_url'] = site_url( "topic/{$cid}/{$tid}/{$per_page}/" );
         $config['per_page'] = $per_page;
 		$config['total_rows'] = $total;
 		$config['last_link'] = '>>';

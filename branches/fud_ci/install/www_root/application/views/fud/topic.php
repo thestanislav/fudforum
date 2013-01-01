@@ -4,8 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" ></meta>
-    <link rel="stylesheet/less" type="text/css" href="/theme/default/theme.css" ></link>
-    <script src="/js/less-1.3.0.min.js" type="text/javascript"></script>
+    <link rel="stylesheet/less" type="text/css" href="<?php echo site_url('theme/default/theme.css'); ?>" ></link>
+    <script src="<?php echo  site_url('js/less-1.3.0.min.js'); ?>" type="text/javascript"></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@ if( !$permissions['READ'] )
         $out .= "        </div>";
         $out .= "        <div class=\"actions width_100 float_left\">";
         $out .= "        <span class=\"float_left \">Profile</span> <span class=\"float_left\">PM</span>";
-        $out .= $permissions['REPLY'] ? "        <span class=\"float_right\"><a href=\"/reply/{$message->thread_id}/{$message->id}\">Reply</a></span> <span class=\"float_right\"><a href=\"/reply/{$message->thread_id}/{$message->id}/1\">Quote</a></span>" : "";
+        $out .= $permissions['REPLY'] ? "        <span class=\"float_right\"><a href=\"reply/{$message->thread_id}/{$message->id}\">Reply</a></span> <span class=\"float_right\"><a href=\"reply/{$message->thread_id}/{$message->id}/1\">Quote</a></span>" : "";
         $out .= "        </div><div class=\"clear\"></div>";
         $out .= "    </div>\n";
 
