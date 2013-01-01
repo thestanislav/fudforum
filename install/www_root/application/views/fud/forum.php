@@ -4,8 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" ></meta>
-    <link rel="stylesheet/less" type="text/css" href="/theme/default/theme.css" ></link>
-    <script src="/js/less-1.3.0.min.js" type="text/javascript"></script>
+    <link rel="stylesheet/less" type="text/css" href="<?php echo site_url('theme/default/theme.css'); ?>" ></link>
+    <script src="<?php echo  site_url('js/less-1.3.0.min.js'); ?>" type="text/javascript"></script>
 </head>
 
 <body>
@@ -38,12 +38,13 @@
         $date = date( "D, j F Y", $topic->root_message->post_stamp );
         $last_author = $topic->last_message->login;
         $last_date = date( "D, j F Y H:m", $topic->last_message->post_stamp );
+		$topic_url = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
 
         $out = "        " .
                "<tr class=\"{$row_cl}\" >" .
                "<td class=\"topic\">".
                "<div>".
-               "<div class=\"width_100\"><a href=\"/topic/{$cid}/{$fid}/{$topic->topic_id}\">{$topic->subject}</a></div>".
+               "<div class=\"width_100\"><a href=\"{$topic_url}\">{$topic->subject}</a></div>".
                "<div class=\"width_100 inline_block\">{$desc}</div>".
                "<div class=\"width_100 author_and_date\"><span class=\"author\">by {$author}</span> <span class=\"date\">on {$date}</span></div>" .
                "</div>" .

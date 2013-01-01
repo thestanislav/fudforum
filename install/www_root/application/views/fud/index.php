@@ -4,8 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" ></meta>
-    <link rel="stylesheet/less" type="text/css" href="/theme/default/theme.css" ></link>
-    <script src="/js/less-1.3.0.min.js" type="text/javascript"></script>
+    <link rel="stylesheet/less" type="text/css" href="<?php echo site_url('theme/default/theme.css'); ?>" ></link>
+    <script src="<?php echo  site_url('js/less-1.3.0.min.js'); ?>" type="text/javascript"></script>
 </head>
 
 <table id="fora_table" class="fud_table" border="0" cellspacing="1" cellpadding="2">
@@ -28,7 +28,7 @@ foreach( $cats as $cat )
     if( !is_array($forums) )
         $forums = array($forums);
 
-    $out .= "<tr><td class=\"category\" colspan=\"4\" ><a href=\"/category/{$cat->id}\">{$cat->name}</a> {$cat->description}</td></tr>";
+    $out .= "<tr><td class=\"category\" colspan=\"4\" ><a href=\"category/{$cat->id}\">{$cat->name}</a> {$cat->description}</td></tr>";
 
     foreach( $forums as $forum )
     {
@@ -46,7 +46,7 @@ foreach( $cats as $cat )
             $last_date = date( "D, j F Y", $forum->last_post->post_stamp );
 
         $out .= "<tr class=\"{$row_cl}\">";
-        $out .= "<td class=\"forum\"><a href=\"/forum/{$cat->id}/{$forum->id}\">{$forum->name}</a><br/>{$desc}</td>";
+        $out .= "<td class=\"forum\"><a href=\"forum/{$cat->id}/{$forum->id}\">{$forum->name}</a><br/>{$desc}</td>";
         $out .= "<td class=\"messages\">{$forum->post_count}</td>";
         $out .= "<td class=\"topics\">{$forum->thread_count}</td>";
         $out .= "<td class=\"last_message\" >";
