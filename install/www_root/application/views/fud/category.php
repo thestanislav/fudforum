@@ -8,6 +8,9 @@
     </thead>
     <tbody>
 <?php
+
+echo $navigation;
+
 $i = 0;
 
 $out = "		";
