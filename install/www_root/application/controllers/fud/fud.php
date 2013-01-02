@@ -48,7 +48,11 @@ class Fud extends CI_Controller
             }
         }
         $data = array( 'cats' => $cats, 'catForums' => $visibleForums );
-        $this->load->view('fud/index.php', $data);
+        
+		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_body = $this->load->view('fud/index.php', $data, true);
+		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 
     public function category( $cid )
@@ -69,7 +73,11 @@ class Fud extends CI_Controller
 		
 		$data = array( 'forums' => $fora, 'navigation'=> $navigation,
                        'cat_id' => $cid  );
-        $this->load->view('fud/category.php', $data);
+        
+		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_body = $this->load->view('fud/category.php', $data, true);
+		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 
     public function forum( $cid, $fid, $per_page = 20, $start = 0 )
@@ -111,7 +119,11 @@ class Fud extends CI_Controller
         $data = array( 'forum' => $forum, 'topics' => $topics,
 		               'pagination' => $pagination, 'fid' => $fid,
 		               'navigation' => $navigation, 'cid' => $cid );
-        $this->load->view('fud/forum.php', $data);
+        
+		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_body = $this->load->view('fud/forum.php', $data, true);
+		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 
     public function topic( $cid, $fid, $tid, $per_page = 40, $start = 0 )
@@ -155,7 +167,11 @@ class Fud extends CI_Controller
         $data = array( 'topic' => $topic, 'pagination' => $pagination,
                        'cid' => $cid, 'navigation' => $navigation,
                        'permissions' => $permissions, 'fid' => $fid );
-        $this->load->view('fud/topic.php', $data);
+		
+		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_body = $this->load->view('fud/topic.php', $data, true);
+		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 
     public function reply( $tid, $mid = null, $do_quote = FALSE )
@@ -183,7 +199,11 @@ class Fud extends CI_Controller
 
 		$data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
 		               'quote' => $quote, 'reply_to_id' => $reply_to_id );
-        $this->load->view('fud/reply.php', $data);
+       
+		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_body = $this->load->view('fud/reply.php', $data, true);
+		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+		$this->load->view( 'fud/html_page.php', $html_parts );
 	}
 
 	private function _reply_preview( $tid, $mid = null, $do_quote = FALSE )
