@@ -170,6 +170,7 @@ class Fud extends CI_Controller
 		
 		$html_head = $this->load->view('fud/html_head.php', null, true);
 		$html_body = $this->load->view('fud/topic.php', $data, true);
+		$html_body = fix_relative_urls( $html_body );
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 		$this->load->view( 'fud/html_page.php', $html_parts );
     }
