@@ -1,12 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" ></meta>
-    <link rel="stylesheet/less" type="text/css" href="<?php echo site_url('theme/default/theme.css'); ?>" ></link>
-    <script src="<?php echo  site_url('js/less-1.3.0.min.js'); ?>" type="text/javascript"></script>
-</head>
 
 <table id="fora_table" class="fud_table" border="0" cellspacing="1" cellpadding="2">
     <thead class="table_header" >
@@ -64,5 +55,3 @@ foreach( $cats as $cat )
 echo $out;
 ?>
     </tbody>
-</table>
-</html>
