@@ -79,11 +79,15 @@ if( !class_exists('FUD_users_opt') ) {
   */
 function fix_relative_urls( $html_body )
 {
-	$url = site_url('');
-	$pattern = array( '#src(\s*)=(\s*)"(?!http(s+)://)(.*)"#',
-	                  '#href(\s*)=(\s*)"(?!http(s+)://)(.*)"#' );
-	$replacement = array( 'src = "'.$url.'\4"',
-	                      'href = "'.$url.'\4"' );
-	
-	return preg_replace( $pattern, $replacement, $html_body );
+	$pattern = array( '#(src|href)(\s*)=(\s*)"(.*)"#' );
+	return preg_replace_callback( $pattern, "preg_callback", $html_body );
+}
+
+function preg_callback( $matches )
+{
+	$pos = strpos( $matches[4], 'http' );
+	if( FALSE === $pos )
+		return $matches[1].' = "'.site_url( $matches[4] ).'"';
+	else
+		return $matches[0];
 }
