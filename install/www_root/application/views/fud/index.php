@@ -1,4 +1,6 @@
 
+<?php echo $navigation ?>
+
 <table id="fora_table" class="fud_table" border="0" cellspacing="1" cellpadding="2">
     <thead class="table_header" >
         <th class="th forum">Forum</th>
@@ -19,11 +21,12 @@ foreach( $cats as $cat )
     if( !is_array($forums) )
         $forums = array($forums);
 
-    $out .= "<tr><td class=\"category\" colspan=\"4\" ><a href=\"category/{$cat->id}\">{$cat->name}</a> {$cat->description}</td></tr>";
+	$cat_url = site_url( "category/{$cat->id}" );
+
+    $out .= "<tr><td class=\"category\" colspan=\"4\" ><a href=\"{$cat_url}\">{$cat->name}</a> {$cat->description}</td></tr>";
 
     foreach( $forums as $forum )
     {
-        //die(print_r($forum,true));
         $row_cl = "";
         if( $i % 2 )
             $row_cl .= " odd";
@@ -35,9 +38,11 @@ foreach( $cats as $cat )
         $last_date = null;
         if( isset($forum->last_post->post_stamp) )
             $last_date = date( "D, j F Y", $forum->last_post->post_stamp );
-
+		
+		$forum_url = site_url( "forum/{$cat->id}/{$forum->id}" );
+		
         $out .= "<tr class=\"{$row_cl}\">";
-        $out .= "<td class=\"forum\"><a href=\"forum/{$cat->id}/{$forum->id}\">{$forum->name}</a><br/>{$desc}</td>";
+        $out .= "<td class=\"forum\"><a href=\"{$forum_url}\">{$forum->name}</a><br/>{$desc}</td>";
         $out .= "<td class=\"messages\">{$forum->post_count}</td>";
         $out .= "<td class=\"topics\">{$forum->thread_count}</td>";
         $out .= "<td class=\"last_message\" >";

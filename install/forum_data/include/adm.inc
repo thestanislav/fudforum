@@ -36,6 +36,7 @@ if (!defined('shell_script')) {
 	}
 
 	if (!count($_POST)) {
+		// NeXuS: WTH is this?
 		sq_check(0, $GLOBALS['usr']->sq);
 	}
 }
