@@ -70,7 +70,11 @@ class Fud extends CI_Controller
     public function index()
     {
 		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
-        $visibleForums = array();
+        
+		$nav = $this->_get_navigation();
+		$navigation = $nav->navigation;
+		
+		$visibleForums = array();
         $cats = $this->FUD->fetch_categories( null, TRUE );
         foreach( $cats as $cat )
         {
@@ -97,7 +101,8 @@ class Fud extends CI_Controller
                 }
             }
         }
-        $data = array( 'cats' => $cats, 'catForums' => $visibleForums );
+        $data = array( 'cats' => $cats, 'catForums' => $visibleForums,
+					   'navigation' => $navigation );
         
 		$html_head = $this->load->view('fud/html_head.php', null, true);
 		$html_body = $this->load->view('fud/index.php', $data, true);

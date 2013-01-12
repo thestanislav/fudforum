@@ -1130,7 +1130,7 @@ if ($section == 'admin' || php_sapi_name() == 'cli') {
 		));
 
 		/* Build theme. --- Not required with CI! REMOVE LATER! */
-		/*
+		
 		require($INCLUDE .'compiler.inc');
 		try {
 			$lang  = strtok($_POST['LANGUAGE'], '::');
@@ -1139,7 +1139,7 @@ if ($section == 'admin' || php_sapi_name() == 'cli') {
 		} catch (Exception $e) {
 			die('Unable to compile theme '. $templ .' ('. $lang .'): '.  $e->getMessage());
 		}
-		*/
+		
 		$display_section = 'done';
 
 	}
