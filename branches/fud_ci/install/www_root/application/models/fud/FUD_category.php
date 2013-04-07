@@ -1,6 +1,6 @@
 <?php
 
-class Category extends CI_Model
+class FUD_Category extends FUD_Model
 {
 	private forums;
 	
@@ -8,21 +8,18 @@ class Category extends CI_Model
     {
 	   	parent::__construct();
 	    
-		$this->load->helper( 'fud' );
-        $this->load->helper( 'br2nl' );
-		
 		$this->id = $cid;
-		
 		$this->forums = array();
 		
+		// Retrieve the category from DB
 		$cat = $this->FUD->fetch_categories( $cid );		
 		foreach( array_keys( $cat ) as $key )
 		{
 			$this->$$key = $cat[$key];
 		}
 		
-		$this->_fetchForums();
-		
+		// Retrieve the forums
+		$this->_fetchForums();		
 	}
 	
 	private function _fetchForums()

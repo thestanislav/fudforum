@@ -257,9 +257,9 @@ class Fud extends CI_Controller
     }
 
 	/**
-	* Shows the forums in a category.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
-	* Shows the forums in a category.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
 	* @author  Massimo Fierro <massimo.fierro@gmail.com>
 	*	
@@ -284,9 +284,9 @@ class Fud extends CI_Controller
 	}
 
 	/**
-	* Shows a new reply page.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
-	* Shows a new reply page.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
 	* @author  Massimo Fierro <massimo.fierro@gmail.com>
 	*	
@@ -313,9 +313,9 @@ class Fud extends CI_Controller
 	}
 
 	/**
-	* Shows a new reply page with preview.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
-	* Shows a new reply page with preview.
+	* XXXXXXXXXXXXXXXXXXXXXXXXXX
 	*
 	* @author  Massimo Fierro <massimo.fierro@gmail.com>
 	*
@@ -334,3 +334,4 @@ class Fud extends CI_Controller
 
 	}
 }
+
