@@ -211,12 +211,13 @@ reported_reported_msg:Пријавени пораки
 modque_pending_approval:Пораки кои чекаат на одобрение
 modque_approve:Одобри
 modque_delete:Избриши
+modque_deleteall:Бришење на сите од корисникот
 modque_no_message:Нема пораки кои чекаат на одобрение
 pmsg_new_messages:Непрочитана приватна порака
 pmsg_old_messages:Прочитана приватна порака
 deny_recipt:одбиј потврда
 deny_recipt_desc:Не сакам да испратам потврда дека сум ја прочитал оваа порака
-restore_to:Врати во:
+restore_to:Возобнови во:
 move_to:Премести во:
 list_referes_referrals:Поканети
 list_referes_members:Поканети членови
@@ -420,7 +421,7 @@ forum_rules_13:<p>Сите корисници под 13 години прво т
 coppa_conf:COPPA-потврда
 coppa_before:Пред {TEMPLATE: coppa_date}
 coppa_after:По {TEMPLATE: coppa_date}
-coppa_link:Кликнете на врската која соодветствува на вашиот датум на раѓање
+coppa_link:Стиснете на врската која соодветствува на вашиот датум на раѓање
 coppa:<p>За да може да се заврши регистрацијата на лице под 13 годишна возраст, неговиот родител или старател мора да му испрати потпишана дозвола (образец) на администраторот на овој форум.</p><p>За повеќе информации обратете се на <a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a></
 prereg_info:Правила на форумот
 prereg_agree:Се согласувам
@@ -589,7 +590,7 @@ email_error_subject:Треба наслов
 email_error_namerequired:Името е задолжително
 email_error_invaliduser:Неважечки корисник
 emailconf_err_invkey_title:Грешка
-emailconf_err_invkey_msg:Неважечки потврден код. Проверете во вашата е-пошта дали го имате внесено правилно. Ако ја имате проверено врската два пати, сметката може веќе да ви е потврдена. Најавете се на форумот за да побарате друг клуч.
+emailconf_err_invkey_msg:Неважечки потврден код. Проверете во вашата е-пошта дали го имате внесено правилно. Ако ја имате проверено врската двапати, сметката може веќе да ви е потврдена. Најавете се на форумот за да побарате друг клуч.
 err_inc_criticaltitle:Критична грешка
 err_inc_criticalmsg:Се појави грешка. Нажалост има проблем и во системот за пријавување грешки.
 finduser_update:Пребарување на корисници
@@ -672,7 +673,7 @@ reset_err_rstconf_title:Информации
 reset_err_rstconf_msg:Би требало да добиете напатствија по е-пошта во текот на следните неколку минути.
 reset_newpass_title:Смени лозинка
 reset_newpass_msg:Здраво,\n\nКако што побаравте, еве ги вашите податоци за најава:\n\nКорисничко име: {VAR: ui[1]}\nЛозинка: {VAR: passwd}\n\nИмајте предвид дека вашата лозинка е заменета со горенаведената. Ако сакате да ја смените, одете на корисничката контролна табла на:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Лозинката ви е испратена по е-пошта. Би требало да ја добиете во тек од следните неколку минути.<br />
+reset_login_notify:Лозинката ви е испратена по е-пошта. Би требало да ја добиете во тек од следните неколку минути.
 search_update:Пребарување на пораки
 selmsg_update:Ги разгледува <a href="{TEMPLATE: selmsg_update_lnk}">денешните пораки</a>
 showposts_update:Ги разгледува пораките од: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -1104,7 +1105,7 @@ move_msg_th_expl:Назначете ID на темата во која ќе се
 captcha_img_alt:„Captcha“ антибот проверка: ќе треба да го препознаете текстот на сликава.
 captcha_img_help:На сликата нема нула или единица.
 powered-by:Со поддршка од: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Авторски права &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Авторски права &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Код:
 code_select_all:Избери сè
 code_show_hide:Прикажи / скриј

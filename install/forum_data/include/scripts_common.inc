@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -13,14 +13,14 @@
 function match_user_to_post($from_email, $from_name, $create_users, &$user_id, $reg_date=0)
 {
 	/* Try to identify user by email. */
-	$user = db_sab('SELECT id, users_opt FROM '. sql_p .'users WHERE email='. _esc($from_email));
+	$user = db_sab('SELECT /* USE MASTER */ id, users_opt FROM '. sql_p .'users WHERE email='. _esc($from_email));
 
 	/* If user was not found via email, try to look the user up by login. */
 	if (empty($user->id) && !empty($from_name)) {
 		if ($GLOBALS['FUD_OPT_2'] & 128) {	// USE_ALIASES
-			$user = db_sab('SELECT id, users_opt FROM '. sql_p .'users WHERE alias='. _esc(make_alias($from_name)));
+			$user = db_sab('SELECT /* USE MASTER */ id, users_opt FROM '. sql_p .'users WHERE alias='. _esc(make_alias($from_name)));
 		} else {
-			$user = db_sab('SELECT id, users_opt FROM '. sql_p .'users WHERE login='. _esc($from_name));
+			$user = db_sab('SELECT /* USE MASTER */ id, users_opt FROM '. sql_p .'users WHERE login='. _esc($from_name));
 		}
 	}
 
@@ -34,15 +34,18 @@ function match_user_to_post($from_email, $from_name, $create_users, &$user_id, $
 	return $user->id;
 }
 
-/** Create new confirmed forum user without sending an E-mail notification. */
+/** Create new forum users without sending cotification.
+  *
+  * We assume every user created from a USENT group or mailing list is already 'confirmed'.
+  * This function creates users, but without sending E-mail confirmations.
+  */
 function create_new_user($from_name, $from_email, $reg_date=0)
 {
-	/* Since we assume every user created from a mailing list is already 'confirmed'
-	 * this disables sending of the email confirmation.
-	 */
+	// Set the login name.
+	$login = empty($from_name) ? $from_email : $from_name;
 
-	$login = empty($from_name) ? preg_replace('/[^a-zA-Z0-9-\s]/', '', $from_email) : $from_name;
-	$i = 1;
+	// Remove all non-UTF8 characters from login.
+	$login = @iconv('UTF-8', 'UTF-8//IGNORE', $login);
 
 	$user = new fud_user_reg;
 	if (strlen(htmlspecialchars($login)) + 4 > $GLOBALS['MAX_LOGIN_SHOW']) {
@@ -55,13 +58,14 @@ function create_new_user($from_name, $from_email, $reg_date=0)
 	 * This code ensures that creation of user does not fail in the event another user on the forum
 	 * is already signed up under the same login name and/or alias.
 	 */
-	while ($login = q_singleval('SELECT login FROM '. sql_p .'users WHERE login='. _esc($user->login))) {
+	$i = 1;
+	while (q_singleval('SELECT id FROM '. sql_p .'users WHERE login='. _esc($user->login))) {
 		$user->login = $login .'['. $i++ .']';
 	}
 
 	$alias = $user->alias = htmlspecialchars($user->login);
 
-	while ($alias = q_singleval('SELECT alias FROM '. sql_p .'users WHERE alias='. _esc($user->alias))) {
+	while (q_singleval('SELECT id FROM '. sql_p .'users WHERE alias='. _esc($user->alias))) {
 		$user->alias = $alias .'['. $i++ .']';
 	}
 
@@ -84,11 +88,13 @@ function get_fud_reply_id($complex, $forum_id, $subject, $data)
 		}
 
 		foreach ($data as $reply_id) {
+			// We have a Message ID:
 			if (($r = db_saq('SELECT m.id, m.thread_id FROM '. sql_p .'msg m INNER JOIN '. sql_p .'thread t ON m.thread_id=t.id WHERE m.mlist_msg_id='. _esc($reply_id) .' AND t.forum_id='. $forum_id .' ORDER BY m.post_stamp DESC LIMIT 1'))) {
 				break;
 			}
 		}
 	}
+
 	if (empty($r) && $complex) {
 		// This is slow, but only way to match 'rouge' replies in the event no reference fields are available.
 		// Reply prefix for most languages is "Re:",  "AW:" for German, etc.
@@ -97,29 +103,34 @@ function get_fud_reply_id($complex, $forum_id, $subject, $data)
 			if (!$r) {
 				$r = db_saq('SELECT m.id, m.thread_id FROM '. sql_p .'msg m INNER JOIN '. sql_p .'thread t ON m.thread_id=t.id WHERE t.forum_id='. $forum_id .' AND m.subject LIKE '. addcslashes(_esc(trim($matches[1]) .'%'),'_') .' ORDER BY m.post_stamp DESC LIMIT 1');
 			}
+
+			// No parent with 'Re:' prefix.
+			// At least try to group replies with the same subject together.
+			if (!$r) {
+				$r = db_saq('SELECT m.id, m.thread_id FROM '. sql_p .'msg m INNER JOIN '. sql_p .'thread t ON m.thread_id=t.id WHERE t.forum_id='. $forum_id .' AND m.subject='. _esc(trim($subject)) .' ORDER BY m.post_stamp');
+			}
 		}
 	}
 
 	return !empty($r) ? array((int)$r[0], (int)$r[1]) : array(0, 0);
 }
 
-/** Parse an IP address. */
+/** Extract IP address from a string.
+  * 
+  * @assert ('Received: from EXIGE.hsc.net.ou.edu ([10.101.1.10]) by...') == '10.101.1.10'
+  * @assert ('Received: from MAILBOXSRV.AGARIK.MUT ([fe80::7591:a37:50f3:25a5]) by...') == 'fe80::7591:a37:50f3:25a5'
+  */
 function parse_ip($str)
 {
-//@TODO: IPv6 compatibility.
+	// Try to match an IPv4 address. 
 	if (preg_match('!([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})!', $str, $m)) {
+		return $m[1];
+	// Try to match an IPv6 address.
+	} else if (preg_match('!\[([0-9a-f\:]+)\]!', $str, $m)) {
 		return $m[1];
 	} else {
 		return;
 	}
-}
-
-if (extension_loaded('iconv')) {
-	function charset_convert($str, $from, $to) { return @iconv($from, $to, $str); }
-} else if (extension_loaded('recode')) {
-	function charset_convert($str, $from, $to) { return @recode_string($from .'..'. $to, $str); }
-} else {
-	function charset_convert($str, $from, $to) { return $str; }
 }
 
 /** Change the encoding of a string. */
@@ -134,26 +145,42 @@ function decode_string($str, $encoding, $charset='')
 
 	/* Convert character set if possible. */
 	if ($charset && $charset != $GLOBALS['CHARSET']) {
-		$str = charset_convert($str, $charset, $GLOBALS['CHARSET']);
+		if (extension_loaded('iconv')) {
+			$str = @iconv($charset, $GLOBALS['CHARSET'], $str);
+		} else if (extension_loaded('recode')) {
+			$str = @recode_string($charset .'..'. $GLOBALS['CHARSET'], $str);
+		}
 	}
 
 	return $str;
 }
 
-/** Change the encoding of a header value. */
+/** Decode MIME-encoded header values.
+  *
+  * @param string $val Value to decode
+  * @return string Decoded value
+  * @assert ('=?UTF-8?B?RXVnZW4gQmFiacSH?=') == 'Eugen Babić'
+  * @assert ('=?iso-8859-1?b?THV6b26uMTQ=?= dot CoM') == 'Luzon®14 dot CoM'
+  * @assert ('Can we break it: áèíóüñ / действующая / 방점;傍點') == 'Can we break it: áèíóüñ / действующая / 방점;傍點'
+  */
 function decode_header_value($val)
 {
-	// Should string be decoded? If not, this function may strip accented characters.
-	if (strpos($val, '?') === false) {
+	// Do we need to decoded it?
+	if (!preg_match("/=\?/", $val)) {
 		return trim($val);
 	}
 
-	// Better to let PHP do it as it will also deal with non-UTF-8 characters.
-	if (function_exists('iconv_mime_decode')) {
-		return iconv_mime_decode(trim($val), 2, $GLOBALS['CHARSET']);
+	// Convert MIME-encoded text to UTF-8.
+	if (function_exists('imap_utf8')) {
+		return imap_utf8(trim($val));
 	}
 
-	// Decode string.
+	// Still not converted? Try iconv_mime_decode().
+	if (function_exists('iconv_mime_decode')) {
+		return iconv_mime_decode(trim($val), ICONV_MIME_DECODE_CONTINUE_ON_ERROR, $GLOBALS['CHARSET']);
+	}
+
+	// Still not converted? Decode it manually (may strip accented characters).
 	if (preg_match_all('!(.*?)(=\?([^?]+)\?(Q|B)\?([^?]*)\?=)([^=]*)!i', $val, $m)) {
 		$newval = '';
 

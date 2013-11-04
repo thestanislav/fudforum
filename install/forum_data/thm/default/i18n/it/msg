@@ -3,6 +3,7 @@
 # Author: Beta16
 # Author: Danmaz74
 # Author: Giallu
+# Author: Isiond
 # Author: McDutchie
 # Author: Naudefj
 # Author: Nemo bis
@@ -18,7 +19,7 @@ administrator:Amministratore
 attachment:Allegato:
 avatar:Avatar:
 average_post_count:{PLURAL: u->posted_msg_count|$1 Messaggio|$1 Messaggi} (Media di {PLURAL: avg|$1 messaggio|$1 messaggi} al giorno)
-biography:Bio:
+biography:Biografia:
 birth_date:Data di nascita:
 by:Da:
 by_mod:dal moderatore
@@ -218,6 +219,7 @@ reported_reported_msg:Messaggi segnalati
 modque_pending_approval:Messaggi in attesa di approvazione
 modque_approve:Approva
 modque_delete:Cancella
+modque_deleteall:Cancella tutto dell'utente
 modque_no_message:Non ci sono messaggi in attesa di approvazione
 pmsg_new_messages:Messaggio personale non letto
 pmsg_old_messages:Messaggio personale letto
@@ -309,7 +311,7 @@ register_specify_url:Specifica URL
 register_uploaded:Carica avatar
 register_login:Login:
 register_password:Password:
-register_conf_pass:Conferma Password:
+register_conf_pass:Conferma password:
 register_email_desc:Per favore, inserisci un indirizzo email valido. Puoi decidere di renderlo non visibile nelle opzioni del tuo profilo utente.
 register_name:Nome:
 register_your_pass:Password:
@@ -639,7 +641,7 @@ post_reply_update:Risponde a <a href="{TEMPLATE: msg_post_lnk}">{VAR: thr->subje
 post_topic_update:Scrive un nuovo argomento in <a href="{TEMPLATE: post_topic_update_lnk}">{VAR: frm->name}</a>
 post_error_generic:Si è verificato un errore
 postcheck_max_images_err:Sono consentite un massimo di {GVAR: MAX_IMAGE_COUNT} immagini per messaggio; per cortesia, riduci il numero di immagini
-postcheck_no_links_allowed:Non puoi usare i link finche' non avrai postato almeno {PLURAL: posts_before_links|$1 messaggio|$1 messaggi}.
+postcheck_no_links_allowed:Non puoi usare i link finché non avrai postato almeno {PLURAL: posts_before_links|$1 messaggio|$1 messaggi}.
 postcheck_subj_needed:Oggetto necessario
 postcheck_no_such_user:Non c'è alcun utente "{FUNC: char_fix(htmlspecialchars($v))}" in questo forum
 postcheck_ignored:Non puoi spedire un messaggio personale a "{FUNC: char_fix(htmlspecialchars($v))}", perchè questo utente ha deciso di ignorarti.
@@ -679,7 +681,7 @@ reset_err_rstconf_title:Informazioni
 reset_err_rstconf_msg:Dovresti ricevere istruzioni nella tua casella di posta elettronica nel giro di pochi minuti
 reset_newpass_title:Reimposta la password
 reset_newpass_msg:Ciao,\n\nCome da te richiesto, ti sta per essere inviato il tuo .\nQui di seguito trovi le informazioni per il login:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nNota che la password è stata reimpostata con il valore che leggi qui sopra. Se desideri\nmodificarla puoi farlo utilizzando il pannello di controllo:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:La tua password ti è stata inviata per posta elettronica. Dovresti riceverla entro pochi minuti. Controlla la tua casella di posta elettronica per i dati di login e password.<br />.<br />.<br />
+reset_login_notify:La tua password ti è stata inviata per posta elettronica. Dovresti riceverla entro pochi minuti.
 search_update:Cerca negli argomenti
 selmsg_update:Sfoglia <a href="{TEMPLATE: selmsg_update_lnk}">Messaggi odierni</a>
 showposts_update:Stai guardando i post di: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a
@@ -1089,7 +1091,7 @@ post_common_align_right:Allinea a destra
 post_common_link:Inserisci un link
 post_common_link_popup:Posizione del collegamento:
 post_common_email:Inserisci un indirizzo e-mail
-post_common_email_popup:Indirizzo E-mail:
+post_common_email_popup:Indirizzo e-mail:
 post_common_image:Inserisci un'immagine
 post_common_image_popup:URL dell'Immagine:
 post_common_nlist:Aggiungi lista numerata
@@ -1111,7 +1113,7 @@ move_msg_th_expl:Specifica l'ID dell'argomento di destinazione (può essere in a
 captcha_img_alt:Captcha Verification: devi riconoscere il testo che compare in questa immagine.
 captcha_img_help:Non ci sono nè zero ne uno in questa immagine.
 powered-by:Powered by: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Codice:
 code_select_all:Seleziona tutto
 code_show_hide:mostra/nascondi

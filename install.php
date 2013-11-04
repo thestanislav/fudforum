@@ -814,14 +814,38 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 		// TODO: conform error output to standard (NeXuS)
 		if( !$contents )
 			die( "Cannot find file {$fpath} for modification" );
-		$output_string = "\$db['fud']['hostname'] = '{$_POST['DBHOST']}';\n".
-		                 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
-		                 "\$db['fud']['password'] = '{$_POST['DBHOST_PASSWORD']}';\n".
-		                 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
-		                 "\$db['fud']['dbdriver'] = '{$_POST['DBHOST_DBTYPE']}';\n".
-		                 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
-		                 "\n".
-		                 "/* End of file database.php */";
+		
+		// TODO: Add all possible PDO driver definitions
+		$output_string = '';
+		if( $_POST['DBHOST_DBTYPE'] == 'pdo_sqlite' )  {
+		$output_string = "\$db['fud']['hostname'] = 'sqlite:{$_POST['DBHOST']}';\n".
+						 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
+						 "\$db['fud']['password'] = '{$_POST['DBHOST_PASSWORD']}';\n".
+						 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
+						 "\$db['fud']['dbdriver'] = 'pdo';\n".
+						 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
+						 "\n".
+						 "/* End of file database.php */";
+		} else if( $_POST['DBHOST_DBTYPE'] == 'pdo_mysql' ) {
+			$output_string = "\$db['fud']['hostname'] = 'mysql:host={$_POST['DBHOST']};dbname={$_POST['DBHOST_DBNAME']}';\n".
+							 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
+							 "\$db['fud']['password'] = '{$_POST['DBHOST_PASSWORD']}';\n".
+							 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
+							 "\$db['fud']['dbdriver'] = 'pdo';\n".
+							 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
+							 "\n".
+							 "/* End of file database.php */";
+		} else {
+			// Standard driver
+			$output_string = "\$db['fud']['hostname'] = '{$_POST['DBHOST']}';\n".
+							 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
+							 "\$db['fud']['password'] = '{$_POST['DBHOST_PASSWORD']}';\n".
+							 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
+							 "\$db['fud']['dbdriver'] = '{$_POST['DBHOST_DBTYPE']}';\n".
+							 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
+							 "\n".
+							 "/* End of file database.php */";
+		}
 		$contents = str_replace( "/* End of file database.php */", $output_string, $contents );
 		file_put_contents( $fpath, $contents );
 	}

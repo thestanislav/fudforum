@@ -1,15 +1,16 @@
 # Messages for Dutch (Nederlands)
 # Exported from translatewiki.net
+# Author: HanV
 # Author: McDutchie
 # Author: Naudefj
 # Author: SPQRobin
 # Author: Siebrand
 
-action:handeling
+action:Handeling
 add_to_buddy_list:toevoegen aan uw vriendenlijst
 admin:Beheer
 admin_control_panel:Beheer
-administrator:beheerder
+administrator:Beheerder
 attachment:Bijlage:
 avatar:Avatar:
 average_post_count:{PLURAL: u->posted_msg_count|$1 bericht|$1 berichten} ({PLURAL: avg|$1 bericht|$1 berichten} gemiddeld per dag)
@@ -23,7 +24,7 @@ date_posted:Berichtdatum
 date_registered:Registratiedatum:
 download_counter:{PLURAL: v[3]|$1 keer|$1 keer} keer gedownload
 pmsg_download_counter:{PLURAL: r->dlcount|$1 keer|$1 keer} keer gedownload
-email:E-mail:
+email:E-mailadres:
 email_to_friend:Vriend e-mailen
 email_to_friend_desc:De URL naar deze pagina naar een of meer vrienden zenden via e-mail
 email_user:E-mail naar deze gebruiker zenden
@@ -57,7 +58,7 @@ index_url_redirection:Doorverwijzing
 interests:Interesses:
 last_post:Laatste bericht
 last_thread_msg:Naar het laatste bericht in dit onderwerp gaan
-legend:Legenda:
+legend:Legenda
 location:Locatie:
 lock_thread:Onderwerp sluiten
 locked:Gesloten
@@ -75,7 +76,7 @@ cal_day_heading:Gebeurtenissen voor dag
 cal_no_events:Geen gebeurtenissen voor dag.
 cal_update:De forumkalender aan het bekijken
 cal_birthday:Verjaardag: {VAR: user}
-cal_birthday_age:({PLURAL: age|$1 jaar|$1 jaar}).
+cal_birthday_age:({PLURAL: age|$1 jaar|$1 jaar} oud).
 message:Bericht
 message_counter:Onze gebruikers hebben in totaal <b>{PLURAL: post_count|$1 bericht|$1 berichten}</b> geplaatst in <b>{PLURAL: thread_count|$1 onderwerp|$1 onderwerpen}</b>.
 message_index:Berichtenlijst
@@ -92,7 +93,7 @@ more_unread_messages_desc:Meer ongelezen berichten weergeven en de huidig berich
 move_thread:Verplaatsen
 moved:Naar een ander forum verplaatst
 moved_thread_message:Dit onderwerp is verplaatst naar een ander forum
-na:leeg
+na:n.v.t.
 new_posts:Nieuwe berichten
 new_private_messages:U hebt <span class="GenTextRed">({VAR: c})</span> ongelezen {PLURAL: c|privébericht|privéberichten}
 new_thread:Nieuw onderwerp starten
@@ -112,10 +113,10 @@ no_unread_msg_unreg:De gelezen en ongelezen berichten kunnen alleen door geregis
 num_pages:Pagina's ({VAR: ttl_pg}):
 num_votes:{VAR: obj->total_votes} {PLURAL: obj->total_votes|stem|stemmen}
 occupation:Beroep:
-off:Uit
-on:Aan
+off:uit
+on:aan
 page_timings:Totale tijd voor paginaaanmaak: {PLURAL: page_gen_time|$1 seconden}
-pm:Privébericht
+pm:Privéberichten
 poll:Stemming:
 post_count:Aantal berichten {VAR: u_pcount}
 post_count_l:Aantal berichten:
@@ -123,7 +124,7 @@ posts:Berichten
 posts_c:Berichten:
 prev_thread:Vorige onderwerp:
 usrinfo_private_message:Privébericht:
-profile:Profiel
+profile:Configuratiescherm
 profile_desc:Gebruikersbeheer
 rate_thread:Onderwerp beoordelen
 rating:Waardering
@@ -143,7 +144,7 @@ sel_todays_posts_desc:Berichtenfilter 'vandaag' wisselen (geeft alleen berichten
 sel_unanswered_posts:Onbeantwoorde berichten
 sel_unanswered_posts_desc:Onbeantwoorde berichtenfilter wisselen (geeft alleen onbeantwoorde berichten weer)
 sel_unread_messages:Ongelezen berichten
-sel_unread_messages_desc:Zet de &quot;ongelezen berichten&quot; filter aan (dit laat enkel de ongelezen berichten zien)
+sel_unread_messages_desc:Filter ongelezen berichten in/uitschakelen (alleen ongelezen berichten weergeven)
 send:Verzenden
 send_pm_desc:Privébericht naar deze gebruiker verzenden
 sender_email:E-mailadres afzender:
@@ -193,12 +194,12 @@ updated_on:Bijgewerkt op:
 user:Gebruiker
 user_counter:We hebben <b>{VAR: st_obj->user_count}</b> geregistreerde {PLURAL: st_obj->user_count|gebruiker|gebruikers}.
 user_info:Gebruikersgegevens
-user_info_l:Ledeninformatie {VAR: u->alias}
+user_info_l:Ledengegevens {VAR: u->alias}
 user_offline:{VAR: obj->login} is op dit moment afwezig
 user_online:{VAR: obj->login} is op dit moment aanwezig
 usrinfo_last_post:Laatste bericht:
 view_results:Resultaten bekijken
-views:keer bekeken
+views:Keer bekeken
 vote:{PLURAL: frm->n_rating|$1 stem|$1 stemmen}
 vote_button:Stemmen
 vote_for_thread:Stemmen
@@ -213,6 +214,7 @@ reported_reported_msg:Gerapporteerde berichten
 modque_pending_approval:Berichten die nog goedgekeurd moeten worden
 modque_approve:Goedkeuren
 modque_delete:Verwijderen
+modque_deleteall:Alles van gebruiker verwijderen
 modque_no_message:Er zijn geen berichten die nog goedgekeurd moeten worden
 pmsg_new_messages:Ongelezen privébericht
 pmsg_old_messages:Gelezen privébericht
@@ -228,7 +230,7 @@ referals_refered_by:Forumleden ingebracht door: <b><a href="{TEMPLATE: referals_
 referals_post_count:Berichtenteller
 referals_registered_on:Geregistreerd op
 referals_action:Handeling
-pmsg_all:ieder
+pmsg_all:alle
 pmsg_none:geen
 folder:Map:
 pmsg_replied:beantwoord
@@ -239,7 +241,7 @@ pmsg_time:Tijd
 pmsg_selected:Geselecteerd
 pmsg_delete:Verwijderen
 cur_ppage_pm:Privéberichten
-writing_pm:Een privébericht schrijven
+writing_pm:Privébericht schrijven
 browsing_folder:Bezig met het bekijken van de map <b>{VAR: folders[$folder_id]}</b>
 inbox:Postvak IN
 draft:Concepten
@@ -305,7 +307,7 @@ register_uploaded:Avatar uploaden
 register_login:Gebruikersnaam:
 register_password:Wachtwoord:
 register_conf_pass:Wachtwoord bevestigen:
-register_email_desc:Geef alstublieft een geldig e-mailadres op. U kunt bij Voorkeuren aangeven dit te verbergen voor andere gebruikers.
+register_email_desc:Geef een geldig e-mailadres op. U kunt bij Voorkeuren aangeven dit te verbergen voor andere gebruikers.
 register_name:Naam:
 register_your_pass:Uw wachtwoord:
 register_update:Bijwerken
@@ -321,7 +323,7 @@ register_register:Registreren
 register_required:Vereiste informatie
 register_required_desc:Alle velden zijn verplicht.  Let op: wachtwoorden zijn hoofdlettergevoelig.
 register_optional:Optionele gegevens
-register_optional_desc:Het is aangewezen dat u geen persoonlijke of identificerende info weergeeft in uw profiel.  Alle info zal zichtbaar zijn voor andere forum leden.
+register_optional_desc:We raden u aan geen persoonlijke of identificerende gegevens op te nemen in uw profiel.  Alle gegevens zijn zichtbaar voor andere forumleden.
 register_location:Locatie:
 register_occupation:Beroep:
 register_interests:Interesses:
@@ -348,7 +350,7 @@ register_msg_per_page:Berichten per pagina:
 register_show_sig:Ondertekeningen weergeven:
 register_show_sig_desc:Maakt het mogelijk om de ondertekeningen van andere forumgebruikers weer te geven of te verbergen.
 register_use_sig_default:Standaard ondertekening gebruiken:
-register_use_sig_default_desc:Voeg automatisch uw ondertekening toe aan elk geplaatst bericht.
+register_use_sig_default_desc:Voeg automatisch uw handtekening toe aan elk geplaatst bericht.
 register_timezone:Tijdzone:
 register_ignore_admin:Adminstratieve berichten negeren:
 register_invisible_mode:Onzichtbaarheidsmodus:
@@ -365,7 +367,7 @@ buddy_status:Status
 my_buddies:Mijn vrienden
 add_buddy:Vriend toevoegen
 add:Toevoegen
-buddy_search:Geef de gebruikersnaam van de gebruiker die u wilt toevoegen op.
+buddy_search:Geef de gebruikersnaam op van de gebruiker die u wilt toevoegen.
 member_search:Of gebruik de optie <a href="javascript://" onclick="javascript: window_open('{FULL_ROOT}{ROOT}?t=pmuserloc&amp;{DEF: _rsid}&amp;js_redr=buddy_add.add_login&amp;overwrite=1', 'user_list', 400,250);">Gebruiker zoeken</a> om een gebruiker te vinden.
 buddy_remove:verwijderen
 post_normal:Normaal
@@ -390,21 +392,21 @@ post_mod_opt:Moderatorinstellingen:
 post_thread_type:Onderwerptype:
 post_thread_expiry:Verlooptijd onderwerp:
 post_locked:Onderwerp gesloten
-post_icons:Berichticoontje:
+post_icons:Berichticoon:
 post_no_icon:Geen icoon
 post_smiley:Smiley's
 post_format_tools:Opmaakgereedschappen:
 post_upload_file:Bestand uploaden
 post_file_del:Verwijderen
 post_file_name:Naam
-post_file_size:Groote
+post_file_size:Grootte
 file_attachments:Bijlagen:
 allowed_files:Toegelaten bestandsextensies:
 max_file_size:Maximale bestandsgroote:
 max_files_per_msg:Maximaal aantal bestanden per bericht:
 post_notification:Berichtwaarschuwing
 include_sig:Ondertekening toevoegen
-include_sig_desc:De ondertekening uit uw profiel toevoegen.
+include_sig_desc:Handtekening uit uw profiel toevoegen.
 disable_smilies:Smiley's in dit bericht uitschakelen
 spell_check_msg:Spellingscontrole uitvoeren voor berichten
 post_form:Nieuw bericht schrijven
@@ -417,12 +419,12 @@ post_cancel_btn:Annuleren
 ignore_users:Genegeerde gebruikers
 add_ignore:Gebruiker negeren
 forum_terms:Algemene Voorwaarden van dit forum
-forum_rules:<p>De registratie tot dit forum is gratis!  We staan er op dat u zich aan de onderstaande regels houdt en het onderstaande beleid volgt. Als u akkoord gaat met de algemene voorwaarden, klik dan alstublieft op de knop "<b>Ik ga akkoord</b>" onderaan de pagina. Let op: Door op de knop te drukken verklaart u dat u <b>ouder dan 13 jaar</b> bent. Als u 13 jaar of jonger bent, gebruik dan dit registratieformulier.</p><p>Alhoewel de beheerders en moderatoren van dit forum proberen om alle berichten van dit forum redelijk te houden, is het onmogelijk voor ons om alle berichten te controleren. Alle berichten drukken de visie van de auteur uit, en de eigenaren van dit forum of de ontwikkelaars kunnen niet verantwoordelijk geacht worden voor de inhoud van enig bericht.</p><p>Door op de knop "Ik ga akkoord" te klikken, verklaart u geen obscene, vulgaire, sexueel getinte, haatdragende, bedreigende berichten te plaatsen of berichten te plaatsen die enige wet overtreden.</p><p>De eigenaren van dit forum hebben het recht om ieder onderwerp te bewerken, verplaatsen, verwijderen of te sluiten zonder opgave van reden.</p>
+forum_rules:<p>De registratie tot dit forum is gratis!  We staan er op dat u zich aan de onderstaande regels houdt en het onderstaande beleid volgt. Als u akkoord gaat met de algemene voorwaarden, klik dan op de knop "<b>Ik ga akkoord</b>" onderaan de pagina. Let op: Door op de knop te drukken verklaart u dat u <b>ouder dan 13 jaar</b> bent. Als u 13 jaar of jonger bent, gebruik dan dit registratieformulier.</p><p>Alhoewel de beheerders en moderatoren van dit forum proberen om alle berichten van dit forum redelijk te houden, is het onmogelijk voor ons om alle berichten te controleren. Alle berichten drukken de visie van de auteur uit, en de eigenaren van dit forum of de ontwikkelaars kunnen niet verantwoordelijk geacht worden voor de inhoud van enig bericht.</p><p>Door op de knop "Ik ga akkoord" te klikken, verklaart u geen obscene, vulgaire, seksueel getinte, haatdragende, bedreigende berichten te plaatsen of berichten te plaatsen die enige wet overtreden.</p><p>De eigenaren van dit forum hebben het recht om ieder onderwerp te bewerken, verplaatsen, verwijderen of te sluiten zonder opgave van reden.</p>
 forum_rules_13:<p>Alle leden <b>jonger dan 13</b> moeten de toestemming van hun ouder of voogd hebben alvorens lid te kunnen worden van de forums. Hoewel we deelname van leden jonger dan 13 jaar niet ontmoedigen, vereisen we een door ouder of voogd ondertekend formulier dat per fax of post aan ons wordt verzonden voordat we het lidmaatschap toekennen.</p><p>Als u het registratieproces wilt starten voordat wij de toestemming ontvangen, klik dan op de knop "Ik ga akkoord" hieronder. Indien u de registratie wilt annuleren klik dan op "Niet Akkoord" om terug te keren naar de inhoudsopgave van het forum.</p><p>Een kopie van het toestemmingsformulier kan hier gedownload worden. Voor meer informatie over het registratieproces kunt u een e-mail zenden naar<a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a>.</p>
 coppa_conf:COPPA-bevestiging
 coppa_before:Voor {TEMPLATE: coppa_date}
 coppa_after:Na {TEMPLATE: coppa_date}
-coppa_link:Klik op de verwijzing die overeenstemt met uw leeftijd
+coppa_link:Klik op de koppeling die overeenstemt met uw leeftijd
 coppa:Een ouder of voogd moet via fax of post een getekend toestemmingsformulier verzenden naar de beheerder van dit forum voordat een gebruiker <b>jonger dan 13</b> de registratie kan voltooien.</p><p>Voor meer informatie kunt u contact opnemen met <a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a></p>.
 prereg_info:Forumregels
 prereg_agree:Ik ga akkoord
@@ -440,13 +442,13 @@ coppa_fax_relation:Verwantschap met kind:
 coppa_fax_telephone:Telefoonnummer:
 coppa_fax_email:E-mailadres:
 coppa_fax_date:Datum:
-coppa_fax_questions:Neem bij vragen alstublieft contact op met <a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a>
+coppa_fax_questions:Neem bij vragen contact op met <a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a>
 coppa_fax_login:Gebruikersnaam
 coppa_fax_passwd:Wachtwoord
 coppa_fax_remail:E-mail
 coppa_fax_name:Naam
 login_not_logedin:U bent niet aangemeld. Dit kan verschillende redenen hebben:
-login_cookie_expired:Uw cookie is verlopen, en u moet opnieuw aanmelden om uw cookie te vernieuwen.
+login_cookie_expired:Uw cookie is verlopen. Meld u opnieuw aan om uw cookie te vernieuwen.
 login_perm_denied:U hebt geen toegang tot de gevraagde gegevens als anonieme gebruiker. U moet aanmelden om toegang te krijgen tot de gegevens.
 login_want_to_register:Wilt u zich registreren?
 login_forgot_passwd:Wachtwoord vergeten
@@ -475,14 +477,14 @@ ruser_cur_login:Huidige gebruikersnaam:
 ruser_new_login:Nieuwe gebruikersnaam:
 ruser_cur_pass:Huidige wachtwoord:
 login_passwd:Wachtwoord:
-reset_email:E-mail:
+reset_email:E-mailadres:
 reset_reset_button:Wachtwoord opnieuw instellen
 rate_this_thread:Beoordelen
 report_reporting_about:Rapport over:
 report_subject:Onderwerp:
 report_by:Door:
 report_posted_on:Toegegevoegd op:
-report_give_reason:Geef alstublieft op waarom u dit bericht rapporteert:
+report_give_reason:Geef op waarom u dit bericht rapporteert:
 report_submit_report:Rapport verzenden
 search_entire_msg:Volledig bericht
 search_subject_only:Alleen op onderwerp
@@ -532,7 +534,7 @@ ppost_to:Aan:
 ppost_from_buddy_list:Uit vriendenlijst selecteren
 ppost_find_User:Gebruiker zoeken
 ppost_track_msg:Dit bericht volgen
-ppost_track_msg_desc:Waarschuw mij (via privé bericht) wanner dit bericht gelezen wordt.
+ppost_track_msg_desc:U waarschuwen (via privé bericht) wanneer dit bericht gelezen wordt.
 ppost_send:Verzenden
 ppost_save_draft:Concept opslaan
 poll_blank_option:U kunt geen lege optie toevoegen.
@@ -546,7 +548,7 @@ poll_disablesmilies:Smiley's uitschakelen
 poll_create_poll:Stemming aanmaken
 poll_update_poll:Stemming bijwerken
 poll_delete:Verwijderen
-poll_updateoption:Update Optie
+poll_updateoption:Optie bijwerken
 poll_addoption:Optie toevoegen
 poll_unlimited:Onbeperkt
 poll_day:dag
@@ -578,32 +580,32 @@ buddy_list_err_cantadd:U kunt uzelf niet aan uw vriendenlijst toevoegen
 buddy_list_err_dup:Deze gebruiker staat al op uw vriendenlijst
 buddy_list_err_nouser:De gebruiker die u aan uw vriendelijst probeerde toe te voegen is niet aangetroffen.
 buddy_list_err_nouser_title:Het was niet mogelijk om de gebruiker toe te voegen
-buddy_list_err_ignore:Het is niet mogelijk om gebruikers die u negeren, toe te voegen aan uw vriendenlijst.
+buddy_list_err_ignore:Het is niet mogelijk om gebruikers die u negeren toe te voegen aan uw vriendenlijst.
 buddy_list_update:Eigen vriendenlijst aan het bekijken
 core_err_invinp_title:Ongeldige invoer
-core_err_invinp_err:U hebt een ongeldige verwijzing gevolgd. Neem alstublieft contact op met de <a href="mailto:{GVAR: ADMIN_EMAIL}">webmaster</a> en geef aan hoe u hier bent gekomen.
+core_err_invinp_err:U hebt een ongeldige koppeling gevolgd. Neem contact op met de <a href="mailto:{GVAR: ADMIN_EMAIL}">webmaster</a> en geef aan hoe u hier bent gekomen.
 core_adm_login_msg:<a href="{GVAR: WWW_ROOT}adm/admloginuser.php">Aanmelden als beheerder</a>
 email_err_unabletoemail_title:FOUT: het was niet mogelijk om een e-mail te verzenden
 email_err_unabletoemail_msg:Het e-mailsysteem is uitgeschakeld door de beheerder.
-email_error_unabletolocaddr:Sorry, het systeem was niet in staat om {VAR-HTML: _POST['tx_name']} te mailen omdat het niet in staat was dit mail adres te vinden
+email_error_unabletolocaddr:Het systeem was helaas niet in staat om {VAR-HTML: _POST['tx_name']} te mailen omdat het e-mailadres niet gevonden kon worden.
 email_error_body:Een bericht kan pas verzonden worden als het inhoud heeft
 email_error_subject:Een bericht kan pas verzonden worden als het een onderwerp heeft
 email_error_namerequired:Het is verplicht een naam op te geven
 email_error_invaliduser:Ongeldige gebruiker
 emailconf_err_invkey_title:Fout
-emailconf_err_invkey_msg:De bevestigingssleutel is ongeldig. Controleer uw e-mail en zorg dat u de juist URL hebt ingegeven.
+emailconf_err_invkey_msg:De bevestigingssleutel is ongeldig. Controleer uw e-mail en zorg dat u de juiste URL hebt opgegeven.
 err_inc_criticaltitle:Er is een kritieke fout opgetreden
 err_inc_criticalmsg:Er is een fout opgetreden. Helaas is er ook een probleem met het rapportagesysteem.
 finduser_update:Bezig met het zoeken naar gebruikers
-help_index_update:De <a href="{TEMPLATE: help_index_update_lnk}">F.A.Q.</a> lezen
+help_index_update:<a href="{TEMPLATE: help_index_update_lnk}">Hulppagina's</a>
 iemail_thr_subject:Nieuw antwoord op {VAR: thr_subject} door {VAR: poster_login}
-iemail_thr_bodyemail:Ga naar {VAR: goto_url['email']} om ongelezen antwoorden te lezen.\n\nAls u geen verdere waarschuwingen over dit onderwerp wilt ontvangen, volg dan de volgende verwijzing: {VAR: unsub_url['email']}
+iemail_thr_bodyemail:Ga naar {VAR: goto_url['email']} om ongelezen antwoorden te lezen.\n\nAls u geen verdere waarschuwingen over dit onderwerp wilt ontvangen, volg dan de volgende koppeling: {VAR: unsub_url['email']}
 iemail_frm_subject:Nieuw onderwerp {VAR: thr_subject} door {VAR: poster_login} in forum {VAR: frm_name}
-iemail_frm_bodyemail:Volg de volgende verwijzing om het onderwerp te bekijken:\n{VAR: goto_url['email']}\n\nAls u geen verdere waarschuwingen over nieuwe onderwerpen in dit forum wilt ontvangen, volg dan de volgende verwijzing: {VAR: unsub_url['email']}
-iemail_participate:Volg de volgende verwijzing om deel te nemen in de discussie:
+iemail_frm_bodyemail:Volg de volgende koppeling om het onderwerp te bekijken:\n{VAR: goto_url['email']}\n\nAls u geen verdere waarschuwingen over nieuwe onderwerpen in dit forum wilt ontvangen, volg dan de volgende koppeling: {VAR: unsub_url['email']}
+iemail_participate:Volg de volgende koppeling om deel te nemen in de discussie:
 ignore_list_err_info_title:Informatie
 ignore_list_err_dup_msg:Deze gebruiker staat al op uw negeerlijst
-ignore_list_err_nu_title:De gebruikers is niet gevonden
+ignore_list_err_nu_title:Gebruikers niet gevonden
 ignore_list_err_nu_msg:De gebruiker die u aan uw negeerlijst probeerde toe te voegen is niet gevonden.
 ignore_list_cantign_msg:U kunt deze gebruiker niet in uw negeerlijst opnemen
 ignore_list_update:Eigen negeerlijst aan het bekijken
@@ -618,7 +620,7 @@ post_err_lockedthread_title:Fout: het onderwerp is gesloten
 post_err_lockedthread_msg:Dit onderwerp is gesloten. Berichten toevoegen is niet mogelijk.
 err_coppa_title:Fout: uw gebruiker is nog niet bevestigd
 err_coppa_msg:We hebben geen toestemming ontvangen van uw ouder of voogd. Dit is nodig om berichten toe te kunnen voegen. Als u uw COPPA-formulier kwijt bent, kunt u het <a href="{TEMPLATE: err_coppa_msg_lnk}">opnieuw bekijken</a>.
-err_banned_acct_title:Fout: U bent geblokkeerd.
+err_banned_acct_title:Fout: u bent geblokkeerd.
 err_banned_acct_msg:Uw gebruiker is {IF: $ban_expiry}tijdelijk geblokkeerd tot {DATE: ban_expiry %a, %d %B %Y %H:%M}{ELSE}permanent geblokkeerd{ENDI}. U hebt geen toegang tot de site wegens het overtreden van de forumregels.
 post_err_edttimelimit_title:Fout
 post_err_edttimelimit_msg:Dit bericht kan niet meer gewijzigd worden
@@ -633,8 +635,8 @@ post_err_passwd:Het wachtwoord is onjuist.
 post_reply_update:<a href="{TEMPLATE: msg_post_lnk}">{VAR: thr->subject}</a> in {VAR: frm->name} aan het beantwoorden
 post_topic_update:Nieuw onderwerp in <a href="{TEMPLATE: post_topic_update_lnk}">{VAR: frm->name}</a> aan het schrijven
 post_error_generic:Er is een fout opgetreden
-postcheck_max_images_err:Er zijn per bericht maximaal {GVAR: MAX_IMAGE_COUNT} afbeeldingen toegestaan. Verklein het aantal afbeeldingen alstublieft.
-postcheck_no_links_allowed:U kunt geen verwijzingen gebruiken totdat u meer dan {PLURAL: posts_before_links|$1 bericht|$1 berichten} hebt toegevoegd.
+postcheck_max_images_err:Er zijn per bericht maximaal {GVAR: MAX_IMAGE_COUNT} afbeeldingen toegestaan. Verklein het aantal afbeeldingen.
+postcheck_no_links_allowed:U kunt geen koppelingen gebruiken totdat u meer dan {PLURAL: posts_before_links|$1 bericht|$1 berichten} hebt geplaatst.
 postcheck_subj_needed:U moet een onderwerp opgeven
 postcheck_no_such_user:Er is geen gebruiker met de naam "{FUNC: char_fix(htmlspecialchars($v))}" in dit forum.
 postcheck_ignored:U kunt geen privéberichten verzenden naar "{FUNC: char_fix(htmlspecialchars($v))}", omdat deze gebruiker u negeert.
@@ -652,30 +654,30 @@ register_err_emailexists:Er is al een gebruiker met dit e-mailadres. Als u uw wa
 register_err_shortpasswd:Wachtwoorden moeten minstens zes tekens lang zijn.
 register_err_passwdnomatch:De wachtwoorden komen niet overeen. Probeer het nog eens.
 register_err_invalidemail:Het e-mailadres dat u hebt opgegeven lijkt niet geldig te zijn.
-register_err_needname:Om deze registratie succesvol af te sluiten moet u uw naam opgeven.
+register_err_needname:Geef uw naam op om deze registratie af te sluiten.
 register_err_enterpasswd:U moet uw huidige wachtwoord opgeven om de wijzigingen te maken.
 register_err_adminpasswd:U moet uw <b>beheerderswachtwoord</b> opgeven om de wijzigingen door te voeren.
 register_err_notyouremail:Er is al iemand geregistreerd die dit e-mailadres gebruikt.
 register_err_avatartobig:Het bestand dat u probeert te uploaden is te groot. De limiet is {GVAR: CUSTOM_AVATAR_MAX_SIZE} bytes
 register_err_avatarnotallowed:De avatar die u probeert te uploaden is niet toegestaan. Controleer of het bestand van een toegelaten bestandstype is.
 register_conf_subject:Registratiebevestiging
-register_conf_msg:Dank u voor uw registratie.\nVolg de volgende verwijzing om uw gebruiker te activeren:\n\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: uent->conf_key}\n\nAls uw gebruiker is geactiveerd, wordt u aangemeld bij het forum en automatisch doorverwezen naar de hoofdpagina.
+register_conf_msg:Dank u voor uw registratie.\nVolg de volgende koppeling om uw gebruiker te activeren:\n\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: uent->conf_key}\n\nAls uw gebruiker is geactiveerd, wordt u aangemeld bij het forum en automatisch doorverwezen naar de hoofdpagina.
 register_welcome_subject:Bevestiging van forumregistratie
-register_welcome_msg:Dank u voor uw registratie.\n\nHier volgen uw aanmeldgegevens voor het forum:\n\nURL van het forum: {TEMPLATE: index_update_lnk}\nGebruikersnaam: {VAR: uent->login}\nWachtwoord: {VAR: _POST['reg_plaintext_passwd']}\n\nLet op: wachtwoorden zijn hoofdlettergevoelig!\nOm uw instellingen of profiel aan te passen, kunt u de volgende verwijzing volgen:\n{FULL_ROOT}{ROOT}?t=register
+register_welcome_msg:Dank u voor uw registratie.\n\nHier volgen uw aanmeldgegevens voor het forum:\n\nURL van het forum: {TEMPLATE: index_update_lnk}\nGebruikersnaam: {VAR: uent->login}\nWachtwoord: {VAR: _POST['reg_plaintext_passwd']}\n\nLet op: wachtwoorden zijn hoofdlettergevoelig!\nOm uw instellingen of profiel aan te passen, kunt u de volgende koppeling volgen:\n{FULL_ROOT}{ROOT}?t=register
 register_err_cantreg_title:Fout: het was niet mogelijk om te registreren
-regsiter_err_cantreg_msg:Het was niet mogelijk om uw gebruiker aan te maken. Neem alstublieft contact op met de beheerder via het e-mailadres <a href="mailto:{VAR: ADMIN_EMAIL}">{VAR: ADMIN_EMAIL}</a>
+regsiter_err_cantreg_msg:Het was niet mogelijk om uw gebruiker aan te maken. Neem contact op met de beheerder via het e-mailadres <a href="mailto:{VAR: ADMIN_EMAIL}">{VAR: ADMIN_EMAIL}</a>
 register_profile_update:Eigen profiel bekijken
 register_register_update:Registratiepagina
 report_err_nosuchmsg_title:Fout
-report_err_nosuchmsg_msg:onbekend bericht
+report_err_nosuchmsg_msg:Onbekend bericht
 reset_err_invalidkey_title:Fout
 reset_err_invalidkey_msg:Er is een ongeldige sleutel voor het opnieuw instellen van het wachtwoord opgegeven. Het is mogelijk dat uw e-mailprogramma deze pagina al automatisch heeft geopend, waardoor de sleutel ongeldig is geworden. Als dit het geval is, dan ontvangt u snel een e-mail met uw nieuwe wachtwoord. Als u zo'n e-mail niet ontvangt, probeer dan opnieuw het wachtwoord opnieuw in te stellen.
 reset_err_rstconf_title:Gegevens
 reset_err_rstconf_msg:U ontvangt meestal binnen enkele minuten een e-mail met instructies.
 reset_newpass_title:Wachtwoord opnieuw instellen
 reset_newpass_msg:Hallo.\n\nZoals gevraagd zijn uw aanmeldgegevens naar u verzonden.\nHier zijn uw gegevens:\n\nGebruikersnaam: {VAR: ui[1]}\nWachtwoord: {VAR: passwd}\n\nLet op: uw wachtwoord is opnieuw ingesteld naar de bovenstaande waarde. Als u toch een ander wachtwoord wilt instellen, kunt u dat via uit gebruikersinstellingen doen:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Uw wachtwoord is naar u verzonden. Meestal ontvangt u de e-mail binnen enige minuten.<br />
-search_update:Zoeken naar berichten
+reset_login_notify:Uw wachtwoord is naar u verzonden. Meestal ontvangt u de e-mail binnen enige minuten.
+search_update:Berichten zoeken
 selmsg_update:<a href="{TEMPLATE: selmsg_update_lnk}">Berichten van vandaag</a> aan het bekijken
 showposts_update:Berichten van <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a> aan het bekijken
 subscribed_update:Eigen abonnementen bekijken
@@ -683,7 +685,7 @@ bookmarked_update:Eigen bladwijzers bekijken
 thread_update:Forum <a href="{TEMPLATE: thread_update_lnk}">{VAR: frm->name}</a> aan het bekijken
 tree_update:Onderwerp <a href="{TEMPLATE: tree_update_lnk}">{VAR: frm->subject}</a> aan het bekijken in boomstructuur
 userinfo_update:Profiel van <a href="{TEMPLATE: userinfo_update_lnk}">{VAR: u->alias}</a> aan het bekijken
-ERR_login_msg2:<legend>Fout: U bent niet aangemeld</legend>Enkel leden van dit forum kunnen dit bekijken.
+ERR_login_msg2:<legend>Fout: u bent niet aangemeld</legend>Alleen leden van dit forum kunnen dit bekijken.
 ERR_disabled_ttl:Uitgeschakelde optie
 ERR_disabled_msg:Deze optie is uitgeschakeld door de beheerder.
 ERR_access_ttl:FOUT: onvoldoende rechten
@@ -691,11 +693,11 @@ ERR_access_msg:U hebt niet de vereiste rechten om deze handeling uit te voeren.
 ERR_registration_disabled_ttl:Registratie is uitgeschakeld
 ERR_registration_disabled_msg:De beheerder heeft registratie uitgeschakeld. Probeer het later opnieuw.
 ERR_emailconf_ttl:Fout: uw gebruiker is nog niet bevestigd
-ERR_emailconf_msg:U hebt uw gebruiker nog niet via e-mail bevestigd.<br /><table border="0"><tr><td><ol><li><a href="{TEMPLATE: ERR_emailconf_msg_lnk}">Hebt u nog geen bevestigingse-mail ontvangen?</a></li><li><a href="{TEMPLATE: ERR_emailconf_msg_lnk2}">Is {VAR: usr_d->email} niet uw e-mailadres?</a></li></ol></td></tr></table>
+ERR_emailconf_msg:U hebt uw gebruiker nog niet via e-mail bevestigd.<br /><table border="0"><tr><td><ol><li><a href="{TEMPLATE: ERR_emailconf_msg_lnk}">Hebt u nog geen bevestiging per e-mail ontvangen?</a></li><li><a href="{TEMPLATE: ERR_emailconf_msg_lnk2}">Is {VAR: usr_d->email} niet uw e-mailadres?</a></li></ol></td></tr></table>
 ERR_user_ttl:Fout: gebruiker bestaat niet
 ERR_user_msg:Deze gebruiker bestaat niet
 ERR_systemerr_ttl:Fout: systeemfout
-ERR_systemerr_msg:Er is een systeemfout opgetreden. Meld dit alstublieft aan de <a href="mailto:{GVAR: ADMIN_EMAIL}">webmaster</a>.
+ERR_systemerr_msg:Er is een systeemfout opgetreden. Meld dit aan de <a href="mailto:{GVAR: ADMIN_EMAIL}">webmaster</a>.
 email_title:E-mailformulier
 finduser_title:Gebruiker zoeken
 help_title:Hulp
@@ -708,7 +710,7 @@ error_title:Foutformulier
 index_title:Welkom bij het forum
 search_title:Zoeken naar {VAR-HTML: srch}
 remail_emailsent:De e-mail is verzonden
-remail_email:Hallo.\n\nEr is een interessant onderwerp over "{VAR: data->subject}" op het forum {GVAR: FORUM_TITLE} dat u misschien wel wilt lezen. U kunt dit onderwerp bekijken via de volgende verwijzing:\n  {FULL_ROOT}{ROOT}?t=rview&amp;th={VAR: data->id}&amp;rid={DEF: _uid}\n\n Groet,\n\n {VAR: usr->alias}
+remail_email:Hallo.\n\nEr is een interessant onderwerp over "{VAR: data->subject}" op het forum {GVAR: FORUM_TITLE} dat u misschien wel wilt lezen. U kunt dit onderwerp bekijken via de volgende koppeling:\n  {FULL_ROOT}{ROOT}?t=rview&amp;th={VAR: data->id}&amp;rid={DEF: _uid}\n\n Groet,\n\n {VAR: usr->alias}
 poll_add_option:Optie toevoegen:
 post_opt_html_on:<b>HTML-code</b> staat <b>aan</b>
 post_opt_fud_on:<a href="{TEMPLATE: post_opt_fud_on_lnk}" target="_blank"><b>BBcode</b> staat <b>aan</b></a>
@@ -755,12 +757,12 @@ groupmgr_delete:Verwijderen
 group_mgr_anon:Anoniem
 group_mgr_reged:Alle geregistreerde gebruikers
 show_show:Weergeven:
-group_mgr:Groep(en) Beheerder
+group_mgr:Groepsbeheerder
 group_mgr_edit_btn:Groep bewerken
 group_mgr_heading:Groep bewerken
 group_mgr_group:Groep:
 permission_denied_title:U hebt geen toegang!
-permission_denied_msg:Uw gebruikersrechten staan u niet toe deze actie uit te voeren.
+permission_denied_msg:Uw gebruikersrechten staan u niet toe deze handeling uit te voeren.
 p_READ:Lezen
 p_POST:Opslaan
 p_REPLY:Antwoorden
@@ -791,10 +793,10 @@ pm_no_space_msg:De grootte van uw map met privébericht overschrijdt de toegelat
 pm_space_indct_msg:Uw map voor privéberichten is voor {VAR: percent_full}% gevuld.
 th_expr_never:Nooit
 th_expr_one_hr:1 uur
-th_expr_three_hr:3 uren
-th_expr_four_hr:4 uren
-th_expr_eight_hr:8 uren
-th_expr_sixteen_hr:16 uren
+th_expr_three_hr:3 uur
+th_expr_four_hr:4 uur
+th_expr_eight_hr:8 uur
+th_expr_sixteen_hr:16 uur
 th_expr_one_day:1 dag
 th_expr_two_day:2 dagen
 th_expr_four_day:4 dagen
@@ -820,7 +822,7 @@ minimsg_thread_view:Onderwerpen bekijken
 split_th_post_by:Bericht van:
 split_th_posted_on:Geplaatst op:
 split_th_subject:Onderwerp:
-split_th_new_thread_title:Onderwerp wijzigen:
+split_th_new_thread_title:Nieuwe naam onderwerp:
 split_th_forum:Forum:
 split_th_split_sel:Geselecteerde berichten splitsen
 split_th_split_unsel:Niet-geselecteerde berichten splitsen
@@ -843,8 +845,8 @@ report_empty_report:U kunt geen lege rapporten verzenden.  Geef een reden voor d
 report_already_reported_title:Bericht is al gerapporteerd
 report_already_reported_msg:Dit bericht is al gerapporteerd en het rapport staat in de wachtrij voor moderatoren.
 register_err_toomanyimages:U probeert meer dan de maximale toegelaten {GVAR: FORUM_IMG_CNT_SIG} afbeeldingen in uw ondertekening te gebruiken.
-pmsg_next_msg:Volgend bericht
-pmsg_prev_msg:Vorig bericht
+pmsg_next_msg:Volgende bericht
+pmsg_prev_msg:Vorige bericht
 post_proc_reveal_spoiler:Spoiler wisselen
 register_jabber:Jabber-gebruiker:
 register_skype:Skype-gebruiker:
@@ -870,7 +872,7 @@ imsg_err_message_msg:Het bericht dat u wilt bekijken bestaat niet.
 poll_edit:Bewerken
 register_err_not_valid_img:De opgegeven URL bevat geen geldige afbeelding.
 pmsg_recepient:Ontvanger
-register_err_taken_alias:De alias die u hebt gekozen wordt al door een ander forumlid gebruikt. Kies alstublieft een andere alias.
+register_err_taken_alias:De alias die u hebt gekozen wordt al door een ander forumlid gebruikt. Geef een andere alias op.
 register_alias:Alias:
 register_alias_desc:Als u in het forum een bijnaam wilt gebruiken die afwijkt van uw gebruikersnaam, voer die dan hier in.
 register_allow_pm_msg:Privéberichten toestaan
@@ -906,7 +908,7 @@ unread_message:Ongelezen berichten
 read_message:Berichten lezen
 threadt_more:&lt;meer&gt;
 threadt_disabled_ttl:Boomstructuur voor het weergeven van onderwerpen is uitgeschakeld.
-threadt_disabled_desc:De beheerder heeft weergeven in boomstructuur voor voor onderwerpen uitgeschakeld. Gebruik alstublieft de platte weergave.
+threadt_disabled_desc:De beheerder heeft weergeven in boomstructuur voor voor onderwerpen uitgeschakeld. Gebruik de platte weergave.
 threadt_update:Forum <a href="{TEMPLATE: threadt_update_lnk}">{VAR: frm->name}</a> in boomstructuur aan het bekijken
 mmod_delete_cofirm_ttl:Bevestig verwijderen van onderwerp of bericht
 spell_alts:geen alternatieven
@@ -932,7 +934,7 @@ remove_from_buddy_list:van vriendenlijst verwijderen
 iemail_msg_author:<b>Van:</b> {VAR: obj->alias}
 iemail_msg_subject:<b>Onderwerp:</b> {VAR: obj->subject}
 iemail_msg_date:<b>Datum:</b> {TEMPLATE: dmsg_post_date}
-iemail_msg_reply:Beantwoorden
+iemail_msg_reply:Antwoorden
 iemail_msg_quote:Citeren
 iemail_msg_view:Onderwerp/bericht bekijken
 threadt_sticky:sticky
@@ -940,25 +942,25 @@ threadt_announce:aankondiging
 reported_no_messages:Er zijn geen gerapporteerde berichten.
 poll_no_polls:Er zijn geen stemmingen beschikbaar.
 no_unread_messages:Er zijn geen ongelezen berichten die aan de zoekopdracht voldoen.
-thread_mark_all_read:alle berichten als gelezen markeren
+thread_mark_all_read:Alle berichten als gelezen markeren
 thread_mark_all_read_desc:Alle ongelezen berichten in dit forum worden als gelezen gemarkeerd
 private_no_messages:Er zijn geen berichten in deze map
 register_email_change_subject:Wijziging e-mailadres bevestigen
-register_email_change_msg:Bevestig alstublieft uw nieuwe e-mailadres "{VAR: uent->email}" ter vervanging van uw oude e-mailadres "{VAR: old_email}" door de volgende verwijzing te volgen:\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: conf_key}\n\nAls u uw nieuwe e-mailadres bevestigt, wordt uw gebruiker weer geactiveerd.
-iemail_thread_unsub:Abonnenment op dit onderwerp opheffen
+register_email_change_msg:Bevestig uw nieuwe e-mailadres "{VAR: uent->email}" ter vervanging van uw oude e-mailadres "{VAR: old_email}" door de volgende koppeling te volgen:\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: conf_key}\n\nAls u uw nieuwe e-mailadres bevestigt, wordt uw gebruiker weer geactiveerd.
+iemail_thread_unsub:Abonnement op dit onderwerp opheffen
 iemail_forum_unsub:Abonnement op dit forum opheffen
 primary_group_prefix:Primaire groep voor forum:
 group_resources:Deze groep beheert de rechten voor de volgende forums
 register_admin_newuser_title:Een nieuwe gebruiker heeft zich geregistreerd en moet nog bevestigd worden
-register_admin_newuser_msg:De nieuwe gebruiker {VAR: uent->login} is zojuist aangemeld voor het forum. Omdat gebruikersbevestiging is ingeschakeld, is de gebruiker pas bruikbaar nadat u of een andere beheeder de gebruiker bevestigt. Ga voor bevestigen alstublieft naar: {GVAR: WWW_ROOT}adm/admuserapr.php\n\nDit is een automatisch verzonden bericht. Antwoord hier niet op.\nE-mailberichten over nieuwe gebruikers uitschakelen is mogelijk via de instelling "Waarschuwingen nieuwe gebruikers" in de beheerdersinstellingen.
+register_admin_newuser_msg:De nieuwe gebruiker {VAR: uent->login} is zojuist aangemeld voor het forum. Omdat gebruikersbevestiging is ingeschakeld, is de gebruiker pas bruikbaar nadat u of een andere beheeder de gebruiker bevestigt. Ga voor bevestigen naar: {GVAR: WWW_ROOT}adm/admuserapr.php\n\nDit is een automatisch verzonden bericht. Antwoord hier niet op.\nE-mailberichten over nieuwe gebruikers uitschakelen is mogelijk via de instelling "Waarschuwingen nieuwe gebruikers" in de beheerdersinstellingen.
 post_mod_msg_notify_title:Nieuw bericht in het forum "{VAR: frm->name}" wacht op goedkeuring
-post_mod_msg_notify_msg:Het bericht "{VAR: msg_post->subject}" is zojuist geplaatst in een door u gemodereerd forum. Volg de volgende verwijzing om het bericht te beoordelen: {FULL_ROOT}{ROOT}?t=modque#{VAR: msg_post->id}\n\nDit is een automatisch verzonden bericht. Antwoord hier niet op.
-thread_printable_pdf:PDF genereren
+post_mod_msg_notify_msg:Het bericht "{VAR: msg_post->subject}" is zojuist geplaatst in een door u gemodereerd forum. Volg de volgende koppeling om het bericht te beoordelen: {FULL_ROOT}{ROOT}?t=modque#{VAR: msg_post->id}\n\nDit is een automatisch verzonden bericht. Antwoord hier niet op.
+thread_printable_pdf:Pdf maken
 thread_syndicate:Dit forum syndiceren (XML)
 reg_conf_title:Registratiebevestiging
 reg_conf_email:<b>E-mailbevestiging</b><br />Er is een e-mail naar u verzonden die een speciale URL bevat waarop u moet klikken om uw gebruiker te activeren. Als u deze e-mail niet ontvangt binnen enkele minuten, meld u zich dan aan en bevestig dat het opgegeven e-mailadres correct is. Na de bevestiging van uw gebruiker hebt u toegang hebben de functies die beperkt zijn tot bevestigde geregistreerde gebruikers.
 reg_conf_account:<b>Gebruikersbevestiging</b><br />Voordat uw gebruiker geactiveerd wordt moet uw aanvraag goedgekeurd worden door een beheerder. Daarna ontvangt u een e-mail die aangeeft dat uw gebruikersaanvraag bevestigd is. Voor die tijd kunt u zich al aanmelden, maar hebt u nog geen toegang tot functies die beperkt zijn tot goedgekeurde gebruikers.
-forum_banned_user:Door uw voorgaande handelingen bent u voortaan geblokkeerd op dit forum. Vaarwel.
+forum_banned_user:Door uw eerdere handelingen bent u voortaan geblokkeerd op dit forum. Vaarwel.
 mnav_description:Berichtennavigatie
 mnav_date_limit:Periode:
 mnav_forum_limit:Alleen zoeken in:
@@ -970,21 +972,21 @@ mnav_invalid_date:The periode die u hebt opgegeven is groter dan door de beheerd
 mnav_no_results:Er zijn geen resultaten voor uw zoekopdracht.
 mnav_posted_by:Geplaatst door:
 mnav_more:Meer &raquo;&raquo;
-mnav_minute:Minuut(en)
-mnav_hour:Uur(en)
-mnav_day:Dag(en)
+mnav_minute:Minuten
+mnav_hour:Uur
+mnav_day:Dagen
 mnav_week:We(e)k(en)
-mnav_month:Maand(en)
+mnav_month:Maanden
 mnav_title:Navigatie
 mnav_update:Met <a href="{TEMPLATE: mnav_update_lnk}">Berichtennavigator</a> door berichten bladeren
 pm_notify_subject:[{GVAR: FORUM_TITLE}] U hebt een nieuw privébericht
-pm_notify_body_email:U hebt een nieuw privébericht met het onderwerp "{VAR: subject}" van "{VAR: from}" in het forum "{GVAR: FORUM_TITLE}".\nVolg de volgende verwijzing om het bericht te bekijken: {FULL_ROOT}{ROOT}?t=pmsg_view&id={VAR: pid}\n\nOm waarschuwingen on de toekomst niet meer te ontvangen, kunt u deze uitschakelen via de instelling "Waarschuwingen voor privéberichten" in uw gebruikersinstellingen.
+pm_notify_body_email:U hebt een nieuw privébericht met het onderwerp "{VAR: subject}" van "{VAR: from}" in het forum "{GVAR: FORUM_TITLE}".\nVolg de volgende koppeling om het bericht te bekijken: {FULL_ROOT}{ROOT}?t=pmsg_view&id={VAR: pid}\n\nOm waarschuwingen on de toekomst niet meer te ontvangen, kunt u deze uitschakelen via de instelling "Waarschuwingen voor privéberichten" in uw gebruikersinstellingen.
 register_pm_notification:Waarschuwingen voor privéberichten:
 register_pm_notification_desc:Als deze instelling actief is, wordt u op de hoogte gesteld als u een privébericht hebt ontvangen.
 findu_admin_opts_header:Beheerdersinstellingen
 findu_unban:Deblokkeren
 findu_ban:Blokkeren
-findu_edit:Wijzigen
+findu_edit:Bewerken
 findu_delete:Verwijderen
 dmsg_reply_to:is een antwoord op
 dmsg_reply_num:bericht #{VAR: obj->reply_to}
@@ -999,10 +1001,10 @@ split_cp:Beheervenster voor het splisen van onderwerpen
 groups_perms_header:Rechten <span class="small">(ga met uw muis over het recht om het type te bekijken)</span>
 register_err_sig_too_long:Uw ondertekening is langer dan het maximaal aantal toegelaten tekens ({GVAR: FORUM_SIG_ML})
 register_sig_limit:{GVAR: FORUM_SIG_ML} tekens <a href="javascript: alert('Uw ondertekening is '+document.forms['fud_register'].reg_sig.value.length+' tekens lang. Het maximale aantal toegelaten tekens is {GVAR: FORUM_SIG_ML}.');" class="SmallText">Pas de lengte van uw ondertekening aan</a>.
-adm_account_accepted:Uw gebruiker '{VAR: login}' is goedgekeurd door een beheerder en is nu actief. U kunt nu het forum {GVAR: FORUM_TITLE}' gebruiken als bevestigde, geregistreerde gebruiker.
-adm_account_accepted_s:Uw accountaanvraag voor '{GVAR: FORUM_TITLE}' is aanvaard.
+adm_account_accepted:Uw gebruiker "{VAR: login}" is goedgekeurd door een beheerder en is nu actief. U kunt nu het forum {GVAR: FORUM_TITLE}' gebruiken als bevestigde, geregistreerde gebruiker.
+adm_account_accepted_s:Uw gebruikersaanvraag voor '{GVAR: FORUM_TITLE}' is geaccepteerd.
 adm_account_rejected:Uw gebruiker '{VAR: login}' is niet goedgekeurd door een beheerder. Als u de achterliggende reden wilt weten, neem dan contact op met een beheerder via '{GVAR: ADMIN_EMAIL}'.
-adm_account_rejected_s:Uw accountaanvraag voor '{GVAR: FORUM_TITLE}' is verworpen.
+adm_account_rejected_s:Uw gebruikersaanvraag voor '{GVAR: FORUM_TITLE}' is afgewezen.
 thread_on:op
 userinfo_buddy:Vriend:
 register_email_addr:E-mailadres:
@@ -1010,27 +1012,27 @@ reset_suffix:Als u dit bericht onterecht hebt ontvangen, negeer het dan. Als u m
 usrinfo_last_visit:Laatst bezocht:
 mnav_newer:nieuwer dan
 mnav_older:ouder dan
-ip_search_by_ip:Gebruikers zoeken volgens IP-adres
-ip_search_syntax:Toegelaten syntax: 1.2.3.4, 1.2.3, 1.2, 1
+ip_search_by_ip:Gebruikers zoeken op IP-adres
+ip_search_syntax:Toegelaten opmaak: 1.2.3.4, 1.2.3, 1.2, 1
 ip_search:Zoeken
 ip_analyze_usage:IP-gebruik analyseren
-ip_analyze_usage_descr:Geef a.u.b. de exacte gebruikersnaam op.
+ip_analyze_usage_descr:Geef de exacte gebruikersnaam op.
 ip_users_using:Gebruikers die het IP-adres "{VAR: ip}" gebruiken
 ip_all_ips:Alle IP-adressen die door "{VAR: user}" gebruikt worden
-ip_title:IP-browser
+ip_title:IP browser
 userinfo_real_name:Echte naam:
 register_err_alias_notallowed:Deze alias is niet toegestaan
 post_err_mod_forum_edit_ttl:Fout
 post_err_mod_forum_edit_msg:U mag geen berichten bewerken in een gemodereerd forum
 dmsg_num:bericht #{VAR: obj->id}
-postcheck_session_invalid:Uw sessie is verlopen. Sla het formulier alstublieft opnieuw op. Excuses voor het ongemak.
+postcheck_session_invalid:Uw sessie is verlopen. Sla het formulier opnieuw op. Excuses voor het ongemak.
 delete_message_extra_desc:<b>Optioneel</b><br />Geen een reden op voor het verwijderen van het bericht. Dit wordt naar de auteur verzonden via een privébericht.
 delete_message_extra_body:De inhoud van het verwijdere bericht aan het bericht aan de auteur toevoegen.
 delete_msg_removed_ttl:Uw bericht is verwijderd door een beheerder.
 delete_msg_pm_body:Oorspronkelijk bericht
 delete_msg_pm_subject:Onderwerp: {VAR: data[15]}
 ip_no_whois:WHOIS-infromatie voor het IP-adres <b>{VAR: ip}</b> is niet beschikbaar.
-ip_whois_title:ISP-informatie
+ip_whois_title:ISP-gegevens
 register_theme:Thema:
 pmsg_trash:Lege prullenbak
 uc_new_pm:Nieuwe privéberichten
@@ -1044,7 +1046,7 @@ search_user_filter:Op gebruiker filteren:
 register_none:Mij niet waarschuwen
 findu_no_conf:onbevestigde gebruiker
 register_max_sig_len:Maximale lengte:
-register_turing:Geef de onderstaande code op:
+register_turing:Voer de onderstaande code in:
 register_err_turing:Ongeldige bevestigingscode.
 modque_cat:Categorie
 modque_forum:Forum
@@ -1054,7 +1056,7 @@ mmd_mov_title:Onderwerpen verplaatsen
 mmd_move_threads_to:Doelforum:
 mmd_abort_move:Annuleren
 mmd_move:Onderwerpen verplaatsen
-pmsg_pdf_btn:PDF-archief maken
+pmsg_pdf_btn:Pdfarchief maken
 search_results_hdr:{VAR: total} resultaten gevonden
 thread_del_all:Selectie verwijderen
 thread_mov_all:Selectie verplaatsen
@@ -1065,15 +1067,15 @@ err_blockedaccnt_title:Fout: uw gebruiker is uitgefilterd.
 err_blockedaccnt_msg:Uw gebruiker is verbannen van het forum vanwege een ingestelde filter.
 merge_th_page_list:Onderwerppaginaselectie
 most_users_online:Het hoogste aantal actieve gebruikers was <b>{VAR: st_obj->most_online}</b> op <b>{DATE: st_obj->most_online_time %a, %d %B %Y %H:%M}</b>
-sub_unsub_all_forums:Abbonement van alle forums opheffen
-sub_unsub_all_topics:Abbonement van alle onderwerpen opheffen
+sub_unsub_all_forums:Abonnement op alle forums opheffen
+sub_unsub_all_topics:Abonnement op alle onderwerpen opheffen
 unbookmark_all_topics:Alle bladwijzers verwijderen
 tabs_own_posts:Eigen berichten weergeven
 sml_emoticon:Emoticon
 sml_code:Code
 mnav_sub_only:Alleen zoeken in geabonneerde forums
 register_topics_per_page:Onderwerpen per pagina:
-login_min_time:Dit forum staat iedere {VAR: MIN_TIME_BETWEEN_LOGIN} seconden een aanmeldpoging toe. Wacht alstublieft {FUNC: ($usr_d->last_login + $MIN_TIME_BETWEEN_LOGIN - __request_timestamp__)} voor uw volgende poging.
+login_min_time:Dit forum staat iedere {VAR: MIN_TIME_BETWEEN_LOGIN} seconden een aanmeldpoging toe. Wacht {FUNC: ($usr_d->last_login + $MIN_TIME_BETWEEN_LOGIN - __request_timestamp__)} voor uw volgende poging.
 post_not_logged_in:U bent niet aangemeld. Dit bericht wordt anomien opgeslagen.
 post_common_bold:Vet
 post_common_italics:Cursief
@@ -1081,15 +1083,15 @@ post_common_underline:Onderstrepen
 post_common_align_left:Link uitlijnen
 post_common_align_center:Centreren
 post_common_align_right:Rechts uitlijnen
-post_common_link:Een verwijzing invoegen
-post_common_link_popup:Verwijzingslocatie:
-post_common_email:Een e-mailadres invoegen
+post_common_link:Koppeling invoegen
+post_common_link_popup:Koppelingslocatie:
+post_common_email:E-mailadres invoegen
 post_common_email_popup:E-mailadres:
 post_common_image:Een afbeelding invoegen
 post_common_image_popup:Afbeeldings-URL:
-post_common_nlist:Een genummerde lijst toevoegen
+post_common_nlist:Genummerde lijst toevoegen
 post_common_blist:Een ongenummerde lijst toevoegen
-post_common_quote:Een citaat toevoegen
+post_common_quote:Citaat toevoegen
 post_common_code:Code toevoegen
 rating_delete:Verwijderen
 post_always_on_top:Het onderwerp altijd bovenaan de onderwerpenlijst weergeven
@@ -1106,13 +1108,13 @@ move_msg_th_expl:Geef het nummer van het doelonderwerp (kan zich in een ander fo
 captcha_img_alt:Captchacontrole: u moet de tekst in deze afbeelding herkennen
 captcha_img_help:Er is geen nul of een in de afbeelding.
 powered-by:Maakt gebruik van FUDforum {GVAR: FORUM_VERSION}.
-copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Code:
 code_select_all:Alles selecteren
 code_show_hide:Weergeven/verbergen
 social_sites:Sociale netwerksites:
 postcheck_min_len_err:Uw bericht is te kort. De minimale lengte is {PLURAL: post_min_len|$1 karakter|$1 karakters}.
-postcheck_dup_err:Maak alstublieft geen dubbele onderwerpen aan.
+postcheck_dup_err:Maak geen dubbele onderwerpen aan.
 btn_new_topic:Nieuw onderwerp
 btn_new_pm:Nieuw privébericht
 btn_post_reply:Reactie plaatsen

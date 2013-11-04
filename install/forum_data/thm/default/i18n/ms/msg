@@ -211,6 +211,7 @@ reported_reported_msg:Pesanan yang Dilaporkan
 modque_pending_approval:Pesanan-pesanan yang menunggu kelulusan
 modque_approve:Luluskan
 modque_delete:Padamkan
+modque_deleteall:Hapuskan kesemua drpd pengguna ini
 modque_no_message:Tiada mesej yang menunggu kelulusan
 pmsg_new_messages:Pesanan peribadi yang belum dibaca
 pmsg_old_messages:Pesanan peribadi yang sudah dibaca
@@ -672,7 +673,7 @@ reset_err_rstconf_title:Maklumat
 reset_err_rstconf_msg:Anda sepatutnya menerima arahan dalam e-mel anda beberapa minit kemudian.
 reset_newpass_title:Set Semula Kata Laluan
 reset_newpass_msg:Apa khabar,\n\nSeperti yang dimohon, maklumat log masuk anda adalah seperti berikut:\n\nNama Log Masuk: {VAR: ui[1]}\nKata Laluan: {VAR: passwd}\n\nSila ingati bahawa kata laluan anda telah diset semula kepada nilai di atas. Jika anda hendak menukar kata laluan, anda boleh berbuat demikian di panel kawalan maklumat pengguna di:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Kata laluan anda telah die-melkan kepada anda. Anda dijangka menerimanya beberapa minit kemudian.<br />
+reset_login_notify:Kata laluan anda telah dikirim kepada anda. Anda dijangka menerimanya beberapa minit kemudian.
 search_update:Mencari pesanan
 selmsg_update:Melayari <a href="{TEMPLATE: selmsg_update_lnk}">Kiriman Hari Ini</a>
 showposts_update:Melihat kiriman oleh: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -1104,7 +1105,7 @@ move_msg_th_expl:Nyatakan ID topik destinasi (termasuk topik di forum lain)
 captcha_img_alt:Pengesahan Captcha; anda perlu mengecam teks dalam imej ini.
 captcha_img_help:Dalam imej ini tiada angka sifar atau satu.
 powered-by:Dijana oleh: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Hakcipta &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Hakcipta &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kod:
 code_select_all:Pilih semua
 code_show_hide:Tunjukkan/ sorokkan

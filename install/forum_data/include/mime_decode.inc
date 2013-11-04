@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -242,7 +242,14 @@ class fud_mime_msg
 	/** Extract the headers we need. */
 	function fetch_useful_headers()
 	{
+		// Get the Subject.
 		$this->subject = htmlspecialchars(decode_header_value($this->headers['subject']));
+
+		// If htmlspecialchars() truncates the 'Subject:', it's probably not UTF-8 as it's supposed to be.
+		// Try to convert it to the message's charset.
+		if (strlen($this->headers['subject']) > 0 && strlen($this->subject) == 0) {
+			$this->subject = decode_string($this->headers['subject'], $this->headers['content-transfer-encoding'], $this->headers['__other_hdr__']['content-type']['charset']);
+		}
 
 		// Attempt to Get Poster's IP from fields commonly used to store it.
 		if (isset($this->headers['x-posted-by'])) {
@@ -255,6 +262,12 @@ class fud_mime_msg
 			$this->ip = parse_ip($this->headers['x-mdremoteip']);
 		} else if (isset($this->headers['received'])) {
 			$this->ip = parse_ip($this->headers['received']);
+		}
+
+		// If htmlspecialchars() truncates the 'From:' line, it's probably not UTF-8 as it's supposed to be.
+		// Try to convert it to the message's charset.
+		if (strlen($this->headers['from']) > 0 && strlen(htmlspecialchars($this->headers['from'])) == 0) {
+			$this->headers['from'] = decode_string($this->headers['from'], $this->headers['content-transfer-encoding'], $this->headers['__other_hdr__']['content-type']['charset']);
 		}
 
 		// Fetch From email and possible name.

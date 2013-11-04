@@ -210,6 +210,7 @@ reported_reported_msg:Pesen sing dilaporna
 modque_pending_approval:Pesen-pesen sing ngenteni disetujuni
 modque_approve:Setujuni
 modque_delete:Busek
+modque_deleteall:Busek kabeh sekang panganggo
 modque_no_message:Ora ana pesen sing ngenteni nggo disetujuni
 pmsg_new_messages:Pesen-pesen pribadi sing durung kewaca
 pmsg_old_messages:Pesen-pesen pribadi sing uwis kewaca
@@ -671,6 +672,7 @@ reset_err_rstconf_title:Informasi
 reset_err_rstconf_msg:Rika bakal nampa instruksi nang imele Rika sedela maning.
 reset_newpass_title:nge-''reset'' tembung sandhi
 reset_newpass_msg:Halo,\n\nManut karo panjalukane Rika, kiye informasi logine Rika:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nTulung dieling-eling anggere tembung sandhine Rika kuwe wis diganti dadi sing nang dhuwur kuwe mau. Anggere Rika kepengin\nngganti maning tembung sandhine Rika, Rika teyeng nglakokna kuwe nang panel kendaline Rika kiye:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Tembung sandhine Rika wis dikirim ming imele Rika. Rika bakal nampa kuwe sedela maning.<br />
 search_update:Ngoleti pesen
 selmsg_update:Ndeleng <a href="{TEMPLATE: selmsg_update_lnk}">Pesen dina kiye</a>
@@ -767,8 +769,7 @@ p_STICKY:Pesen tetep
 p_POLL:Gawe polling
 p_FILE:Sisipna berkas
 p_VOTE:Aweh swara
-# Fuzzy
-p_RATE:Nilai Topik
+p_RATE:Mbiji Topik/anggota
 p_SPLIT:Mecah Topik
 p_LOCK:Ngunci Topik
 p_MOVE:Pindahna topik
@@ -1105,7 +1106,7 @@ captcha_img_alt:Verifikasi Captcha: rika kudu teyeng maca teks nang gambar kiye.
 captcha_img_help:Ora ana nol utawa siji nang gambar.
 powered-by:Didukung nang: FUDforum {GVAR: FORUM_VERSION}.
 # Fuzzy
-copyright:Copyright &copy;2001-2011 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Hak Cipta &copy;2001-2011 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kode:
 code_select_all:Pilih kabeh
 code_show_hide:Tidokna/ umpetna
@@ -1139,3 +1140,7 @@ page_list_total:{PLURAL: i|$1 kaca|$1 kaca} kedaftar.
 page_update:Ndeleng kaca
 pm_export_header:Pesen Pribadi nggo {VAR: usr->alias}
 pm_export_footer:Diekspor:
+karma:Karma
+karma_track:Ngatur reputasine pangganggo:
+karma_delete:Busek
+rate_author:Mbiji penulis:

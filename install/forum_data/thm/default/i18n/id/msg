@@ -3,15 +3,17 @@
 # Author: Anakmalaysia
 # Author: Bennylin
 # Author: Farras
+# Author: Ilham151096
 # Author: Irwangatot
 # Author: IvanLanin
+# Author: Iwan Novirion
 # Author: Kenrick95
 # Author: Naudefj
 # Author: StefanusRA
 
 action:Tindakan
 add_to_buddy_list:tambahkan ke daftar teman
-admin:Admin
+admin:Pengurus
 admin_control_panel:Administrasi
 administrator:Pengurus
 attachment:Sisipan:
@@ -30,15 +32,15 @@ pmsg_download_counter:Diunduh {PLURAL: r->dlcount|$1 time|$1 times}
 email:Surat-e:
 email_to_friend:E-mail ke teman
 email_to_friend_desc:Kirim URL halaman ini ke teman melalui e-mail
-email_user:Kirim pengguna pesan surat-e
-faq:FAQ
+email_user:Kirim pengguna pesan e-mail
+faq:Bantuan
 first_unread_msg:Menuju ke pesan blm terbaca
-first_unread_msg_desc:Menuju ke pesan perta di topik ini
-flat_view:Kembali ke tampilan rata awal
+first_unread_msg_desc:Menuju ke pesan pertama di topik ini
+flat_view:Kembali ke tampilan awal rata
 forum:Forum:
 forum_icon:Ikon forum
 forum_new_messages:Pesan baru
-forum_none_messages:Hanya anggota yang bisa menelusuri pesan blm terbaca
+forum_none_messages:Hanya anggota forum terdaftar yang bisa menelusuri pesan terbaca &amp; blm terbaca
 forum_old_messages:Tidak ada pesan baru
 from:Dari:
 gender:Jns.Kelamin:
@@ -678,6 +680,7 @@ reset_err_rstconf_title:Informasi
 reset_err_rstconf_msg:Dalam beberapa menit, anda akan menerima petunjuk di e-mail.
 reset_newpass_title:Timpa password
 reset_newpass_msg:Halo,\n\nSesuai permintaan anda, informasi login anda adalah:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nHarap diingat baik-baik bahwa password anda telah disetel ulang menjadi seperti di atas. Jika anda ingin merubah kembali password Anda\nbisa andalakukan di panel kontrol pengguna di:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Password anda sudah dikirim melalui e-mail, dalam beberapa saat anda akan menerimanya<br />
 search_update:Mencari pesan
 selmsg_update:Melihat <a href="{TEMPLATE: selmsg_update_lnk}">pesan hari ini</a>
@@ -833,7 +836,7 @@ split_th_select:Pilih
 report_report_post:Laporkan pesan
 quicklogin_login:Masuk log:
 quicklogin_password:Kata sandi:
-quicklogin_use_cookies:pergunakan "Cookies"?
+quicklogin_use_cookies:Gunakan Kuki?
 quicklogin_login_btn:Masuk log
 quick_reply:Balas dengan cepat
 quick_reply_post:Kirim Balasan Cepat
@@ -1110,6 +1113,7 @@ move_msg_th_expl:Penetapan ID dari tujuan topik (bisa juga terdapat di Forum lai
 captcha_img_alt:Verifikasi Captcha: Anda harus mengenali teks dalam gambar ini.
 captcha_img_help:Tidak ada nol atau satu pada berkas.
 powered-by:Di dukung oleh: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:Hak Cipta &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kode:
 code_select_all:Pilih semua

@@ -672,6 +672,7 @@ reset_err_rstconf_title:Informacije
 reset_err_rstconf_msg:Ty měł za por mjeńšin přez e-mejl instrukcije dóstać.
 reset_newpass_title:Hesło wróćo stajić
 reset_newpass_msg:Halo,\n\nkaž požadane, so přizjewjenske informacije deleka jewja:\n\nPřizjewjenske mjeno: {VAR: ui[1]}\nHesło: {VAR: passwd}\n\nProšu dźiwaj na to, zo so swoje hesło na hornju hódnotu wróćo stajiło. Jeli chceš swoje hesło změnić, móžeš to přez swoje wužiwarske nastajenja činić:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Twoje hesło bu ći přez e-mejl připósłane. Ty měł jo za por mjeńšin dóstać.<br />
 search_update:Přepytuje powěsće
 selmsg_update:Přepytuje <a href="{TEMPLATE: selmsg_update_lnk}">dźensniše powěsće</a>
@@ -1104,6 +1105,7 @@ move_msg_th_expl:Podaj ID ciloweje temy (móže w druhich forumach być)
 captcha_img_alt:Pruwowanje captcha: dyrbiš tekst we wobrazu spóznać.
 captcha_img_help:Njeje nula abo jedynka we wobrazu.
 powered-by:Pohonjeny přez: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kod:
 code_select_all:Wšě wubrać

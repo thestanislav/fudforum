@@ -1,4 +1,4 @@
-# Messages for Traditional Chinese (‪中文（繁體）‬)
+# Messages for Traditional Chinese (中文（繁體）‎)
 # Exported from translatewiki.net
 # Author: Anakmalaysia
 # Author: Breawycker
@@ -18,7 +18,7 @@ attachment:附件：
 avatar:頭像：
 average_post_count:{PLURAL: u->posted_msg_count|$1個消息|$1個消息}（每日平均{PLURAL: avg|$1個消息|$1個消息}）
 biography:個人簡介：
-birth_date:生日：
+birth_date:出生日期：
 by:發帖：
 by_mod:版主
 current_time:目前時間
@@ -46,7 +46,7 @@ go:跳轉
 goto_next_msg:下一樓
 goto_prev_msg:樓上
 home:首頁
-homepage:主頁：
+homepage:首頁：
 icq_control_panel:ICQ 在線信息
 icq_message_form:ICQ 信息列表：
 ignore_user:加入黑名單
@@ -669,7 +669,7 @@ register_welcome_msg:謝謝註冊，\n\n這是您註冊的詳細資料：\n\n論
 register_err_cantreg_title:錯誤：無法註冊
 regsiter_err_cantreg_msg:無法創建使用者帳戶，請聯繫管理員在<a href="mailto:<span class=" notranslate"="">{VAR: ADMIN_EMAIL}"大於 {VAR: ADMIN_EMAIL}  </a>
 register_profile_update:查看自己的個人資料
-register_register_update:註冊時間:
+register_register_update:註冊頁
 report_err_nosuchmsg_title:錯誤
 report_err_nosuchmsg_msg:沒有此類消息
 reset_err_invalidkey_title:錯誤
@@ -678,6 +678,7 @@ reset_err_rstconf_title:資訊
 reset_err_rstconf_msg:在接下來的幾分鐘內，您應該會收到您的電子郵件中的指令。
 reset_newpass_title:重設密碼
 reset_newpass_msg:您好，\n\n您每次登入的帳號都將發送給您。\n以下是您的登入資料：\n\n帳號：{VAR: ui[1]}\n密碼：{VAR: passwd}\n\n注意：您的密碼已經改為上面的值字符組合，\n如果您想修改密碼，請在個人資料中修改：\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:您的密碼已通過電子郵件發送給你。在接下來的幾分鐘內您應該會收到。<br />
 search_update:搜索消息
 selmsg_update:瀏覽<a href="{TEMPLATE: selmsg_update_lnk}">今天的文章</a>
@@ -774,8 +775,7 @@ p_STICKY:置頂帖子
 p_POLL:創建投票
 p_FILE:附加文件
 p_VOTE:投票
-# Fuzzy
-p_RATE:率主題
+p_RATE:主題評分/用戶
 p_SPLIT:拆分主題
 p_LOCK:鎖定的主題
 p_MOVE:移動主題
@@ -1112,7 +1112,7 @@ captcha_img_alt:驗證碼： 您需要認識到此圖像中的文本。
 captcha_img_help:有沒有零或圖像中的一個。
 powered-by:網站： FUDforum {GVAR: FORUM_VERSION}。
 # Fuzzy
-copyright:版權所有 © 2001年-2011 年<a href="http://fudforum.org/">FUDforum 公告板軟體</a>
+copyright:版權所有 © 2001年-2012 年<a href="http://fudforum.org/">FUDforum 公告板軟體</a>
 code_title:代碼：
 code_select_all:全選
 code_show_hide:顯示/隱藏
@@ -1146,3 +1146,7 @@ page_list_total:{PLURAL: i|$1頁 | $1 頁} 列出。
 page_update:流覽的頁面
 pm_export_header:私人消息{VAR: usr->alias}
 pm_export_footer:匯出：
+karma:業
+karma_track:管理用戶的聲譽：
+karma_delete:刪除
+rate_author:給作者評分：

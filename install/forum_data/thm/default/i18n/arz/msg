@@ -73,7 +73,9 @@ calendar:كالندر
 cal_goto_date:روح على:
 cal_day_heading:أحداث اليوم
 cal_no_events:مافيش حاجه مهمه حصلت اليوم ده
+cal_update:تصفح أجندة الفورم
 cal_birthday:عيد ميلاد: {VAR: user}
+cal_birthday_age:({PLURAL: age||سنه واحهة|سنتين|$1 سنه|$1 سنه}).
 message:رسالة
 message_counter:أرسل مستخدمونا <b>{PLURAL: post_count|رساله واحدة|$1 رسائل}</b> فى <b>{PLURAL: thread_count|موضوع واحد|$1 مواضيع}</b>.
 message_index:فهرس الرسائل
@@ -112,8 +114,7 @@ num_votes:{PLURAL: obj->total_votes|صوت|{VAR: obj->total_votes} أصوات}
 occupation:المهنة:
 off:مُطفأ
 on:مُشغّل
-# Fuzzy
-page_timings:الوقت المستغرق لتوليد الصفحة: {VAR: page_gen_time} ثانية
+page_timings:الوقت الإجمالي  لتوليد الصفحة: {PLURAL: page_gen_time|$1 ثانية}
 pm:مراسله خاصة
 poll:اقتراع:
 post_count:عد الرسائل {VAR: u_pcount}
@@ -263,7 +264,14 @@ sunday:الحد
 sunday_short:ح
 monday:الاتنين
 monday_short:إت
+tuesday:التلات
+tuesday_short:ت
+wednesday:الاربع
+wednesday_short:أر
+thursday:الخميس
+thursday_short:خ
 friday:الجمعه
+friday_short:ج
 saturday:السبت
 saturday_short:س
 male:ذكر
@@ -405,6 +413,7 @@ post_title:العنوان:
 post_body:الجسم:
 post_options:خيارات:
 post_preview_btn:عاين الرسالة
+post_cancel_btn:إلغا
 ignore_users:المستخدمون المتَجاهَلون
 add_ignore:أضف تجاهلًا
 forum_terms:شروط المنتدى
@@ -418,6 +427,7 @@ coppa:<p>يجب أن يرسل الوالد أو المرشد إذنًا موقع
 prereg_info:قوانين المنتدى
 prereg_agree:أوافق
 prereg_disagree:أعارض
+prereg_update:قراية قواعد الفورم
 coppa_fax_instructions:تعليمات للوالد أو المرشد
 coppa_fax_instructions2:من فضلك اطبع هذه الصفحه، ووقعها وأرسلها عبر الفاكس إلى:
 coppa_fax_reg_form:نموذج التسجيل
@@ -459,6 +469,7 @@ rpasswd_login:لُج
 rpasswd_cur_pass:كلمه السر الحالية:
 rpasswd_new_pass:كلمه السر الجديدة:
 rpasswd_conf_pass:تأكيد كلمه السر:
+ruser_title:تغيير نموذج تسجيل اللوجين
 ruser_cur_pass:كلمه السر دلوقتى:
 login_passwd:كلمه السر:
 reset_email:البريد الإلكتروني:
@@ -660,6 +671,7 @@ reset_err_rstconf_title:معلومات
 reset_err_rstconf_msg:ينبغى أن تتلقى التعليمات فى بريدك الإلكترونى فى الدقائق القليله القادمه.
 reset_newpass_title:إعاده ضبط كلمه السر
 reset_newpass_msg:مرحبًا!\n\nكما تطلب، فإن معلومات ولوجك ظاهره أدناه\n\n\nالولوج: {VAR: ui[1]}\nكلمه السر: {VAR: passwd}\n\nمن فضلك لاحظ أن كلمه السر أعيد ضبطها إلى القيمه أعلاه. تستطيع تغيير كلمه سرك عبر لوحه التحكم في: {FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:أرسلت كلمه سرك إليك. يجب أن تتلقاها خلال الدقائق القليله القادمه.<br />
 search_update:يبحث عن رسائل
 selmsg_update:يتصفح <a href="{TEMPLATE: selmsg_update_lnk}">رسائل اليوم</a>
@@ -756,8 +768,7 @@ p_STICKY:تثبيت رسائل
 p_POLL:إنشاء اقتراعات
 p_FILE:إرفاق ملفات
 p_VOTE:تصويت
-# Fuzzy
-p_RATE:تقييم المواضيع
+p_RATE:تقييم المواضيع/الأعضاء
 p_SPLIT:فصل المواضيع
 p_LOCK:قفل المواضيع
 p_MOVE:نقل المواضيع
@@ -1085,6 +1096,7 @@ move_msg_th_expl:حدد هويه الموضوع الهدف (يمكن أن يكو
 captcha_img_alt:تحقق كابتشا: سوف تحتاج إلى التعرف على نص هذه الصوره.
 captcha_img_help:لا يوجد صفر ولا واحد فى الصوره.
 powered-by:يشغله: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:!حقوق النشر &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:الكود
 code_select_all:اختر الكل

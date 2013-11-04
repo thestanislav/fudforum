@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -229,7 +229,9 @@ function export_msg_data(&$m, &$msg_subject, &$msg_body, &$msg_icon, &$msg_smile
 			);
 		}
 		foreach ($_FILES['attach_control']['error'] as $i => $error) {
-			if ($error == UPLOAD_ERR_INI_SIZE || $error == UPLOAD_ERR_FORM_SIZE || $_FILES['attach_control']['size'][$i] > $PRIVATE_ATTACH_SIZE) {
+			if ($error == UPLOAD_ERR_NO_FILE) {
+				// No file uploaded, so no errors.
+			} else if ($error == UPLOAD_ERR_INI_SIZE || $error == UPLOAD_ERR_FORM_SIZE || $_FILES['attach_control']['size'][$i] > $PRIVATE_ATTACH_SIZE) {
 				$MAX_F_SIZE = $PRIVATE_ATTACH_SIZE;
 				$attach_control_error = '{TEMPLATE: post_err_attach_size}';
 			} else if (filter_ext($_FILES['attach_control']['name'][$i])) {
@@ -313,7 +315,7 @@ function export_msg_data(&$m, &$msg_subject, &$msg_body, &$msg_icon, &$msg_smile
 							$aid = db_qid('INSERT INTO {SQL_TABLE_PREFIX}attach (owner, attach_opt, message_id, original_name, mime_type, fsize, location) VALUES('. $mid[0] .', 1, '. $mid[1] .', '. $v .', \'placeholder\')');
 							$aidl[] = $aid;
 							copy($FILE_STORE . $k .'.atch', $FILE_STORE . $aid .'.atch');
-							@chmod($FILE_STORE . $aid .'.atch', ($FUD_OPT_2 & 8388608 ? 0600 : 0666));
+							@chmod($FILE_STORE . $aid .'.atch', ($FUD_OPT_2 & 8388608 ? 0600 : 0644));
 						}
 					}
 					$cc = q_concat(_esc($FILE_STORE), 'id', _esc('.atch'));

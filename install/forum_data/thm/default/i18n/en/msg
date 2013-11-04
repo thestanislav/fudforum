@@ -72,6 +72,7 @@ cal_day_heading:Events for day
 cal_no_events:No events for day.
 cal_update:Browsing the forum calendar
 cal_birthday:Birthday: {VAR: user}
+cal_birthdays:{PLURAL: birthdays|$1 birthday|$1 birthdays}
 cal_birthday_age:({PLURAL: age|$1 year|$1 years} old).
 message:Message
 message_counter:Our users have posted a total of <b>{PLURAL: post_count|$1 message|$1 messages}</b> inside <b>{PLURAL: thread_count|$1 topic|$1 topics}</b>.
@@ -210,6 +211,7 @@ reported_reported_msg:Reported Messages
 modque_pending_approval:Messages pending approval
 modque_approve:Approve
 modque_delete:Delete
+modque_deleteall:Delete all from user
 modque_no_message:There are no messages pending approval
 pmsg_new_messages:Unread private message
 pmsg_old_messages:Read private message
@@ -671,7 +673,7 @@ reset_err_rstconf_title:Information
 reset_err_rstconf_msg:You should receive instructions in your e-mail in the next few minutes.
 reset_newpass_title:Reset Password
 reset_newpass_msg:Hello,\n\nAs requested, your login information appears below:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nPlease note that your password has been reset to the value above. If you wish\nto change your password you may do so via the user info control panel at:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Your password has been e-mailed to you. You should receive it within the next few minutes.<br />
+reset_login_notify:Your password has been e-mailed to you. You should receive it within the next few minutes.
 search_update:Searching messages
 selmsg_update:Browsing <a href="{TEMPLATE: selmsg_update_lnk}">Today's Posts</a>
 showposts_update:Viewing posts by: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -966,7 +968,7 @@ mnav_all_forums:Search all forums
 mnav_submit:Begin Search
 mnav_no_range:You must enter a valid date range. This value can contain a decimal point, (0.12) but it must be greater than zero.
 mnav_invalid_unit:You must specify a valid time unit.
-mnav_invalid_date:The date range you specified is larger then the one allowed by the administrator. Try a smaller range of dates.
+mnav_invalid_date:The date range you specified is larger than the one allowed by the administrator. Try a smaller range of dates.
 mnav_no_results:There are no messages matching the query.
 mnav_posted_by:Posted By:
 mnav_more:More &raquo;&raquo;
@@ -1029,7 +1031,7 @@ delete_message_extra_body:Include the body of the removed message that will be s
 delete_msg_removed_ttl:Your message was removed by administration staff.
 delete_msg_pm_body:Original message
 delete_msg_pm_subject:Subject: {VAR: data[15]}
-ip_no_whois:Whois information for <b>{VAR: ip}</b> is not available.
+ip_no_whois:WHOIS information for <b>{VAR: ip}</b> is not available.
 ip_whois_title:ISP Information
 register_theme:Theme:
 pmsg_trash:Empty Trash
@@ -1106,7 +1108,7 @@ move_msg_th_expl:Specify the ID of the destination topic (can be in other forums
 captcha_img_alt:Captcha Verification: you will need to recognize the text in this image.
 captcha_img_help:There is no zero or one in the image.
 powered-by:Powered by: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Code:
 code_select_all:Select all
 code_show_hide:Show/ hide

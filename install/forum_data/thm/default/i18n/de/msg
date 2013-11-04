@@ -1,12 +1,15 @@
 # Messages for German (Deutsch)
 # Exported from translatewiki.net
 # Author: Als-Holder
+# Author: Das Schäfchen
 # Author: George Animal
 # Author: Giftpflanze
+# Author: Hihiman
 # Author: Hydra
 # Author: JanRei
 # Author: Kghbln
 # Author: McDutchie
+# Author: Metalhead64
 # Author: Pill
 # Author: The Evil IP address
 # Author: Tiin
@@ -20,7 +23,7 @@ administrator:Administrator
 attachment:Anhang:
 avatar:Avatar:
 average_post_count:{PLURAL: u->posted_msg_count|$1 Nachricht|$1 Nachrichten} (durchschnittlich {PLURAL: avg|$1 Nachricht|$1 Nachrichten} pro Tag)
-biography:Biographie:
+biography:Biografie:
 birth_date:Geburtsdatum:
 by:Von:
 by_mod:vom Moderator
@@ -220,6 +223,7 @@ reported_reported_msg:Gemeldete Beiträge
 modque_pending_approval:Noch zu genehmigende Beiträge
 modque_approve:Genehmigen
 modque_delete:Löschen
+modque_deleteall:Alle löschen von Benutzer
 modque_no_message:Es sind keine Beiträge vorhanden, die noch genehmigt werden müssen
 pmsg_new_messages:Ungelesene private Nachrichten
 pmsg_old_messages:Gelesene private Nachrichten
@@ -383,7 +387,7 @@ post_color:Farbe
 post_font:Schriftart
 create_thread:Thema erstellen
 submit_reply:Antwort abschicken
-edit_message:Beitrag bearbeiten
+edit_message:Änderungen übernehmen
 apply_spell_changes:Rechtschreibkorrektur anwenden
 post_preview:Beitragsvorschau
 post_logedin_user:Angemeldeter Benutzer:
@@ -464,7 +468,7 @@ login_name_required:Benutzername erforderlich
 login_passwd_required:Passwort erforderlich
 login_invalid_radius:Ungültige Benutzername/Passwort-Kombination
 reset_confirmation:Danke für deine Registrierung,\n\nUm dein Konto zu aktivieren, gehe bitte auf die unten angezeigte URL:\n\n{VAR: url}\n\nSobald dein Konto aktiviert ist, wirst du am Forum angemeldet\nund zur Startseite des Forums geleitet.
-reset_reset:Hallo,\n\nDu hast darum gebeten, das Passwort zurückzusetzen, um wirklich das Passwort\nZURÜCKZUSETZEN gehe bitte zu dieser URL\n\n{VAR: url}\n\nACHTUNG: Dieses Forum verschlüsselt die Passwörter nur in eine Richtung, was\nbedeutet, dass sobald du dein Passwort eingegeben hast, es verschlüsselt\nwird, und es KEINE Möglichkeit gibt, es wiederherzustellen. Dies wird\nerreicht, in dem bei der Passworteingabe das Passwort verschlüsselt und auf\nÜbereinstimmung überprüft wird. (Bei Interesse an der\nVerschlüsselungsmethode, schlage unter MD5-Hash-Algorithmus nach.)
+reset_reset:Hallo,\n\nDu hast darum gebeten, das Passwort zurückzusetzen, um wirklich das Passwort\nZURÜCKZUSETZEN öffne bitte die nachfolgende Webseite (URL)\n\n{VAR: url}\n\nHinweis: Das Forum verschlüsselt das Passwort unidirektional. \nNach der Speicherung des Passwords im System gibt es keine Möglichkeit das\nPasswort wiederherzustellen, da nur eine verschlüsselte Prüfsumme des Passworts\ngespeichert wird. \n(Bei Interesse an der Verschlüsselungsmethode, siehe MD5-Hash-Algorithmus.)
 rpasswd_invalid_passwd:Ungültiges Passwort
 rpasswd_passwd_nomatch:Passwörter stimmen nicht überein
 rpasswd_passwd_length:Passwort muss mindestens 6 Zeichen lang sein
@@ -681,7 +685,7 @@ reset_err_rstconf_title:Information
 reset_err_rstconf_msg:Du solltest in den nächsten Minuten eine Anleitung per E-Mail erhalten.
 reset_newpass_title:Passwort zurücksetzen
 reset_newpass_msg:Hallo,\n\nWie von dir gewünscht, werden dir die Anmeldeinformationen zugesendet.\n\nBenutzername: {VAR: ui[1]}\nPasswort: {VAR: passwd}\n\nBitte beachte, dass dein Passwort auf obigen angegebenen Wert zurückgesetzt\nwurde, wenn du es ändern willst, so kannst du das in\nden persönlichen Einstellungen tun:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Das Passwort wurde an dich versendet. Du solltest es in den nächsten Minuten erhalten. Bitte überprüfe die E-Mail auf Benutzername und Passwort.<br />.<br />.<br />
+reset_login_notify:Das Passwort wurde an dich versandt. Du solltest es in den nächsten Minuten erhalten.
 search_update:Sucht nach Beiträgen
 selmsg_update:Durchsucht <a href="{TEMPLATE: selmsg_update_lnk}">die heutigen Beiträge</a>
 showposts_update:Betrachtet die Beiträge von <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -1113,7 +1117,7 @@ move_msg_th_expl:Gib die ID des Zielthemas an (kann in einem anderem Forum sein)
 captcha_img_alt:CAPTCHA-Bestätigung: Du musst den Text in diesem Bild erkennen.
 captcha_img_help:Das Bild enthält keine Null oder Eins.
 powered-by:Betrieben mit: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Copyright &copy;2001–2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001–2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Code:
 code_select_all:alles markieren
 code_show_hide:anzeigen/verstecken

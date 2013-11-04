@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -23,7 +23,7 @@ if (!defined('shell_script')) {
 		die('Sorry, cannot run from command line.');
 	}
 
-	if ($GLOBALS['FUD_OPT_2'] & 32768) {	// USE_PATH_INFO
+	if ($GLOBALS['FUD_OPT_2'] & 32768) {	// Disable USE_PATH_INFO
 		$GLOBALS['FUD_OPT_2'] ^= 32768;
 		$t = 1;
 	}
@@ -36,7 +36,6 @@ if (!defined('shell_script')) {
 	}
 
 	if (!count($_POST)) {
-		// NeXuS: WTH is this?
 		sq_check(0, $GLOBALS['usr']->sq);
 	}
 }
@@ -44,13 +43,17 @@ if (!defined('shell_script')) {
 define('__fud_index_name__', 'index.php');
 
 if (!($GLOBALS['usr']->users_opt & 1048576)) {	// not is_admin
-	// Limit access for account moderators.
+	// Limited access for account moderators.
 	if ($GLOBALS['usr']->users_opt & 268435456) {	// account moderator
 		switch (basename($_SERVER['PHP_SELF'])) {
-			case 'admuserapr.php':
-			case 'admuseradd.php':
 			case 'admuser.php':
+			case 'admuseradd.php':
+			case 'admuserapr.php':
 			case 'admusermerge.php':
+			case 'admprivlist.php':
+			case 'admbanlist.php':
+			case 'admsession.php':
+			case 'admmodfrm.php':	// Modify Moderation Permissions
 				break;
 			default:
 				header('Location: '. $GLOBALS['WWW_ROOT'] .'adm/admuser.php?'. __adm_rsidl);

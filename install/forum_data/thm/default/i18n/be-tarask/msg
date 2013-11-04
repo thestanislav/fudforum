@@ -1,8 +1,9 @@
-# Messages for Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+# Messages for Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
 # Exported from translatewiki.net
 # Author: EugeneZelenko
 # Author: Jim-by
 # Author: Naudefj
+# Author: Renessaince
 # Author: Wizardist
 
 action:Дзеяньне
@@ -213,6 +214,7 @@ reported_reported_msg:Абвяшчэньні пра паведамленьні
 modque_pending_approval:Паведамленьні, якія чакаюць зацьверджаньня
 modque_approve:Зацьвердзіць
 modque_delete:Выдаліць
+modque_deleteall:Выдаліць усё ад карыстальніка
 modque_no_message:Няма паведамленьняў, якія чакаюць зацьверджаньня
 pmsg_new_messages:Непрачытанае асабістае паведамленьне
 pmsg_old_messages:Прачытанае асабістае паведамленьне
@@ -674,6 +676,7 @@ reset_err_rstconf_title:Інфармацыя
 reset_err_rstconf_msg:Вы атрымаеце інструкцыю на Ваш адрас электроннай пошты праз некалькі наступных хвілінаў.
 reset_newpass_title:Ачысьціць пароль
 reset_newpass_msg:Вітаем!\n\nПа Вашаму запыту, высылаем імя карыстальніка і пароль:\n\nІмя карыстальніка: {VAR: ui[1]}\nПароль: {VAR: passwd}\n\nКалі ласка, запомніце, што Ваш стары пароль быў зьменены на пададзены вышэй. Калі Вы жадаеце зьмяніць Ваш пароль, Вы можаце зрабіць гэта ў панэлі кіраваньня інфармацыяй карыстальніка: {FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Ваш пароль быў дасланы на Вашую электронную пошту. Вы павінны атрымаць яго на працягу некалькіх хвілінаў.<br />
 search_update:Пошук паведамленьняў
 selmsg_update:Прагляд <a href="{TEMPLATE: selmsg_update_lnk}">сёньняшніх паведамленьняў</a>
@@ -1106,6 +1109,7 @@ move_msg_th_expl:Пазначце ідэнтыфікатар мэтавай тэ
 captcha_img_alt:Праверка Captcha: Вам неабходна распазнаць тэкст на гэтай выяве.
 captcha_img_help:На выяве няма лічбаў 0 ці 1.
 powered-by:Падтрымліваецца з дапамогай FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Код:
 code_select_all:Выбраць усё
