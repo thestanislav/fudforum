@@ -105,11 +105,11 @@ class Fud_Library
         $constants = $r->getConstants();
 
         $permissions = array();
-        if( count( $q->result_array() ) == 1 )
+        if( $q->num_rows() == 1 )
         {
-			$r = $q->row();
+			$r = $q->first_row();
 			$perms = array_keys( $constants );
-			//$values = array_values( $constants );
+			
 			foreach( $perms as $perm )
 			{
 				if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
