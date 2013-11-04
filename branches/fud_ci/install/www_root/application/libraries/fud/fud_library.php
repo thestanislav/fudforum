@@ -186,12 +186,12 @@ class Fud_Library
                 " WHERE ( g1.user_id  = '{$id2}' AND g1.resource_id = '{$rid}' ) \n";
         $q = $this->CI->db->query( $qStr );
 
-        if( count( $q->result_array() ) == 1 )
+		if( $q->num_rows() == 1 )
         {
-            $r = $q->row();
+            $r = $q->first_row();
             if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
-                ( isset($r->is_mod) AND null != $r->is_mod) OR
-                ($r->group_cache_opt & FUD_groups_opt::VISIBLE) )
+                ( isset($r->is_mod) AND null != ($r->is_mod) ) OR
+                ( $r->group_cache_opt & FUD_groups_opt::VISIBLE) )
                 return TRUE;
         }
 
