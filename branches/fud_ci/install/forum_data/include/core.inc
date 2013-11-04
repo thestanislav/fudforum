@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2012 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -9,7 +9,7 @@
 * Free Software Foundation; version 2 of the License.
 **/
 
-$FORUM_VERSION = '3.0.4';
+$FORUM_VERSION = '3.0.5';
 
 ignore_user_abort('1');
 @set_magic_quotes_runtime(0);	// Deprecated as of PHP 5.3.0.
@@ -55,15 +55,18 @@ if (get_magic_quotes_gpc()) {
 }
 
 // Enable debug mode.
-if ($GLOBALS['FUD_OPT_3'] & 1073741824) {
-	error_reporting(-1);	// Everything.
+if ($GLOBALS['FUD_OPT_3'] & 536870912) {	// Detailed logging.
+	define('fud_logging', 1);
+} else if ($GLOBALS['FUD_OPT_3'] & 1073741824) {	// Full debug mode.
+	define('fud_logging', 1);
+	define('fud_debug', 1);
+	define('fud_query_stats', 1);
+
+	error_reporting(-1);	// Show all PHP messages.
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	ini_set('log_errors_max_len', 0);
 	ini_set('error_log', $GLOBALS['ERROR_PATH'] .'/php_errors');
-
-	define('fud_debug', 1);
-	define('fud_query_stats', 1);
 }
 
 // Load and initialize the plugin system.
@@ -71,7 +74,7 @@ if ($GLOBALS['FUD_OPT_3'] & 4194304) {	// Plugins enabled.
 	include_once $GLOBALS['INCLUDE'] .'plugins.inc';
 }
 
-/** Explisteley include a file. */
+/** Explicitly include a file. */
 function fud_use($file, $static=0)
 {
 	if ($static) {
@@ -119,6 +122,19 @@ function get_ip()
 	$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0');
 	$ip = str_replace('::ffff:', '', $ip);
 	return (filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '0.0.0.0');
+}
+
+/** Prepare string for use in a SEO URL. */
+function seo_url_bit($str) {
+	$str = strtolower($str);
+	$str = strip_tags($str);
+	$str = html_entity_decode($str);
+	$str = urldecode($str);
+	$str = trim($str);
+	$str = preg_replace('/ +/', ' ', $str);
+	$str = preg_replace('/[^A-Za-z0-9\s]/', '', $str);
+	$str = preg_replace('/ /', '-', $str);
+	return $str;
 }
 
 /** Replace empty string with NULL before DB insert. */
@@ -198,9 +214,9 @@ function fud_logerror($error_msg, $logfile, $extra_data=null) {
 	}
 }
 
+
 /** Database error handler. */
-if( !function_exists( "fud_sql_error_handler" ) )
-{
+if( !function_exists( 'fud_sql_error_handler' ) ) {
 	function fud_sql_error_handler($query, $error_string, $error_number, $db_version)
 	{
 		if (db_locked() && !in_array($query, array('COMMIT', 'COMMIT WORK', 'UNLOCK TABLES'))) {

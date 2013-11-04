@@ -8,7 +8,7 @@
 action:Ober
 add_to_buddy_list:Ouzhpennañ d'ar roll mignoned
 admin:Merañ
-admin_control_panel:Mererezh
+admin_control_panel:Merañ
 administrator:Merour
 attachment:Pezh stag :
 avatar:Avatar :
@@ -159,7 +159,7 @@ sub_to_thread_desc:Resev ur c'hemenn pa vez kemennadennoù nevez e-barzh ar gaoz
 bookmark_thread:Merkañ ar gaoz-mañ
 bookmark_thread_desc:Ouzhpennañ ar gaoz-mañ d'ho roll sinedoù
 subject:Danvez
-subscribe:Evezhiañ
+subscribe:Koumanantiñ
 subscribe_desc:Resev ur c'hemenn pa vez krouet ur gaoz nevez er forom-mañ
 subscribed_forums:Foromoù evezhiet ganeoc'h
 subscribed_forums_desc:Gweredekaat/Diweredekaat ar sil evit ar foromoù evezhiet ganeoc'h (diskouez kemennadennoù eus foromoù evezhiet ganeoc'h hepken)
@@ -181,7 +181,7 @@ unanswered_posts_desc:Diskouez an holl gemennadennoù direspont
 unlock_thread:Dibrennañ ar gaoz
 unread_msg:Er gaoz-mañ ez eus kemennadennoù n'hoc'h eus ket lennet c'hoazh
 unread_msg_locked:Kaoz prennet gant kemennadennoù anlennet
-unread_posts:Kemennadennoù n'int ket bet lennet
+unread_posts:Kemennadennoù anlennet
 unread_posts_desc:Diskouez an holl gemennadennoù n'int ket bet lennet
 unsub_from_thread:Paouez da evezhiañ ar gaoz-mañ
 unsub_from_thread_desc:Paouez da resev kemennoù diwar-benn kemennadennoù nevez er gaoz-mañ
@@ -213,6 +213,7 @@ reported_reported_msg:Kemennadennoù titouret
 modque_pending_approval:Kemennadennoù o c'hortoz bezañ aprouet
 modque_approve:Aprouiñ
 modque_delete:Dilemel
+modque_deleteall:Dilemel pep tra gant an implijer-mañ
 modque_no_message:N'eus kemennadenn ebet o c'hortoz bezañ aprouet
 pmsg_new_messages:Kemennadenn brevez anlennet
 pmsg_old_messages:Lenn ur gemennadenn brevez
@@ -394,7 +395,7 @@ post_icons:Arlun ar gemennadenn :
 post_no_icon:Arlun ebet
 post_smiley:Berradennoù fromlunioù :
 post_format_tools:Binvioù furmaozañ :
-post_upload_file:Pellgargañ ar restr
+post_upload_file:Kargañ ar restr
 post_file_del:Dilemel
 post_file_name:Anv
 post_file_size:Ment
@@ -674,7 +675,7 @@ reset_err_rstconf_title:Titouroù
 reset_err_rstconf_msg:Resev a reot displegadennoù dre bostel a-benn un nebeud munutennoù.
 reset_newpass_title:Adderaouekaat ar ger-tremen
 reset_newpass_msg:Demat deoc'h,\n\nSetu amañ an titouroù hoc'h eus ezhomm evit mont d'ar forom :\n\n\nAnv implijer : {VAR: ui[1]}\nGer-tremen : {VAR: passwd}\n\nGallout a rit kemmañ ho ker-tremen ne vern pegoulz gant ar banell da gontrollañ titouroù an implijer :\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:Kaset eo bet ho ker-tremen deoc'h dre bostel. Dleout a rafec'h e resev a-benn un nebeud munutennoù.<br />
+reset_login_notify:Kaset eo bet ho ker-tremen deoc'h dre bostel. Dleout a rafec'h resev anezhañ a-benn un nebeud munutennoù
 search_update:O klask kemennadennoù
 selmsg_update:O furchal ar <a href="{TEMPLATE: selmsg_update_lnk}">c'hemennadennoù kaset hiziv</a>
 showposts_update:Gwelet ar c'hemennadennoù gant : <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -1106,7 +1107,7 @@ move_msg_th_expl:Spisait anavezer ar gaoz pal (a c'hall bezañ en ur forom all)
 captcha_img_alt:Gwiriadur dre Captcha : dav eo deoc'h anavezout an destenn er skeudenn-mañ.
 captcha_img_help:N'eus ket a zero pe a unan er skeudenn.
 powered-by:Enlusket gant : FUDforum {GVAR: FORUM_VERSION}.
-copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:KOD :
 code_select_all:Diuzañ pep tra
 code_show_hide:Diskouez / kuzhat
@@ -1114,7 +1115,7 @@ social_sites:Lec'hiennoù rouedadoù sokial :
 postcheck_min_len_err:Re verr eo ho kemennadenn. An hirded a rank bezañ  {PLURAL: post_min_len|$1 arouezenn|$1 arouezenn} da nebeutañ.
 postcheck_dup_err:Arabat krouiñ kaozioù doublet, mar plij.
 btn_new_topic:Kaoz nevez
-btn_new_pm:Kemenadenn brevez nevez
+btn_new_pm:Kemennadenn brevez nevez
 btn_post_reply:Postañ ur respont
 btn_tree_view:Diskwel gwezennadur
 btn_flat_view:Diskwel plaen

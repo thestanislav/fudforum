@@ -210,6 +210,7 @@ reported_reported_msg:Messaġġi senjalati
 modque_pending_approval:Messaġġi li qed jistennew l-approvazzjoni
 modque_approve:Approva
 modque_delete:Ħassar
+modque_deleteall:Ħassar kollox minn utent
 modque_no_message:M'hemm l-ebda messaġġ li għandu bżonn l-approvazzjoni
 pmsg_new_messages:Messaġġ privat mhux moqri
 pmsg_old_messages:Messaġġ privat moqri
@@ -671,6 +672,7 @@ reset_err_rstconf_title:Informazzjoni
 reset_err_rstconf_msg:Għandek tirċievi l-istruzzjonijiet fil-posta elettronika tiegħek fil-minuti li ġejjin.
 reset_newpass_title:Irrisettja l-password
 reset_newpass_msg:Merħba,\n\nKif tlabt, l-informazzjoni dwar kif tista' taċċessa l-kont tiegħek huma mniżżlin hawn taħt:\n\nIsem tal-utent: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nKun af li l-password tiegħek ġiet risettjata għal kif inhi miktuba hawn fuq. Jekk tixtieq tibdilha tista' tagħmel dan fil-pannell tal-kontroll tal-utent fuq: {FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Il-password tiegħek intbagħet fuq l-indirizz elettroniku tiegħek. Għandek tirċivieha fi ftit minuti oħra.<br />
 search_update:Ifittex fil-messaġġi
 selmsg_update:Iqalleb il-<a href="{TEMPLATE: selmsg_update_lnk}">messaġġi tal-lum</a>
@@ -770,8 +772,7 @@ p_STICKY:Messaġġi mwaħħlin
 p_POLL:Oħloq sondaġġi
 p_FILE:Ehmeż fajls
 p_VOTE:Ivvota
-# Fuzzy
-p_RATE:Iġġudika s-suġġetti
+p_RATE:Iġġudika s-suġġetti/l-membri
 p_SPLIT:Aqsam is-suġġetti
 p_LOCK:Agħlaq is-suġġetti
 p_MOVE:Mexxi s-suġġetti
@@ -1082,7 +1083,7 @@ post_common_underline:Sottolinja
 post_common_align_left:Allinja max-xellug
 post_common_align_center:Allinja fiċ-ċentru
 post_common_align_right:Allinja mal-lemin
-post_common_link:Daħħal Ħolqa
+post_common_link:Daħħal ħolqa
 post_common_link_popup:Pożizzjoni tal-ħolqa:
 post_common_email:Daħħal indirizz elettroniku
 post_common_email_popup:Indirizz elettroniku:
@@ -1108,7 +1109,7 @@ captcha_img_alt:Verifika tal-captcha: trid tagħraf it-test f'din l-istampa.
 captcha_img_help:M'hemmx żero jew wieħed fl-istampa.
 powered-by:Operata minn: FUDforum {GVAR: FORUM_VERSION}.
 # Fuzzy
-copyright:Copyright &copy;2001-2011 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kodiċi:
 code_select_all:Agħżel kollox
 code_show_hide:uri/aħbi
@@ -1142,3 +1143,7 @@ page_list_total:{PLURAL: i|$1 paġna|$1 paġni} elenkati.
 page_update:Paġna ta' navigazzjoni
 pm_export_header:Messaġġi privati għal {VAR: usr->alias}
 pm_export_footer:Esportati:
+karma:Karma
+karma_track:Amministra r-reputazzjoni tal-utent:
+karma_delete:Ħassar
+rate_author:Ivvaluta lill-awtur:

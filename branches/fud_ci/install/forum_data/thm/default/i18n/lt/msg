@@ -4,6 +4,7 @@
 # Author: Eitvys200
 # Author: Ignas693
 # Author: Juoand
+# Author: Mantak111
 # Author: Naudefj
 
 action:Veiksmas
@@ -214,6 +215,7 @@ reported_reported_msg:Pranešė Žinutės
 modque_pending_approval:Žinutės laukiama patvirtinimo
 modque_approve:Patvirtinti
 modque_delete:Ištrinti
+modque_deleteall:Ištrinti viską nuo vartotojo
 modque_no_message:There are no messages pending approval
 pmsg_new_messages:Neperskaitytas asmeninį pranešimą
 pmsg_old_messages:Skaityti asmeninį pranešimą
@@ -675,6 +677,7 @@ reset_err_rstconf_title:Informacija
 reset_err_rstconf_msg:Turėtumėte gauti nurodymus į savo e-paštą per ateinančias keletą minučių.
 reset_newpass_title:Atstatyti slaptažodį
 reset_newpass_msg:Hello,\n\nAs per your request your login name are being sent to you.\nHere is your login information:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nPlease not that your password has been reset the the value above, if you wish\nto change your password you may do so via the user info control panel at:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Jūsų slaptažodis buvo išsiųstas elektroniniu paštu Jums. Turėtumėte gauti per ateinančias keletą minučių. <br />
 search_update:Pranešimų paieška
 selmsg_update:Naršymos <a href="{TEMPLATE: selmsg_update_lnk}">Šiandienos Žinutės</a>
@@ -1107,6 +1110,7 @@ move_msg_th_expl:Nurodykite paskirties temą (gali būti kituose forumuose) ID.
 captcha_img_alt:Captcha patikrinimas: jums reikia atpažinti tekstą paveikslėlije.
 captcha_img_help:Nėra nulio ar vieno šiame vaizde.
 powered-by:Pagal: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:Autorinės teisės &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kodas
 code_select_all:Pasirinkti visus

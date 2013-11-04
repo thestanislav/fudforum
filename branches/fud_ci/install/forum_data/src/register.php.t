@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2012 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -107,9 +107,9 @@ function register_form_check($user_id)
 			// Try to catch submitter bots.
 			$form_completion_time = __request_timestamp__ - (int)$_POST['turing_test1'];
 			if (
-				$form_completion_time < 5 || $form_completion_time > 3600 ||	// Took 5 sec to 1 hour.
-				$_POST['turing_test2'] !== md5($GLOBALS['FORUM_TITLE']) ||	// No cross site submitions.
-				!empty($_POST['turing_test3'])					// Must always be empty.
+				$form_completion_time < 7 || $form_completion_time > 3600 ||	// Took 7 sec to 1 hour.
+				!empty($_POST['turing_test2']) ||				// Must always be empty.
+				$_POST['turing_test3'] !== md5($GLOBALS['FORUM_SETTINGS_PATH'])	// No cross site submitions.
 			) {
 				set_err('reg_turing', '{TEMPLATE: register_err_turing}');
 			}
@@ -191,17 +191,21 @@ function register_form_check($user_id)
 		}
 	}
 
-	if ($GLOBALS['FORUM_SIG_ML'] && strlen($_POST['reg_sig']) > $GLOBALS['FORUM_SIG_ML']) {
-		set_err('reg_sig', '{TEMPLATE: register_err_sig_too_long}');
-	}
+	/* Signature checks. */
+	if (isset($_POST['reg_sig']) ) {
+		/* Check signature length. */
+		if ($GLOBALS['FORUM_SIG_ML'] && strlen($_POST['reg_sig']) > $GLOBALS['FORUM_SIG_ML']) {
+			set_err('reg_sig', '{TEMPLATE: register_err_sig_too_long}');
+		}
 
-	/* Check if user is allowed to post links in signature. */
-	if (preg_match('?(\[url)|(http://)|(https://)?i', $_POST['reg_sig'])) {
-		if ( $GLOBALS['POSTS_BEFORE_LINKS'] > 0 ) {
-			$c = q_singleval('SELECT posted_msg_count FROM {SQL_TABLE_PREFIX}users WHERE id='. _uid);
-			if ( $GLOBALS['POSTS_BEFORE_LINKS'] > $c ) {
-				$posts_before_links = $GLOBALS['POSTS_BEFORE_LINKS'];
-				set_err('reg_sig', '{TEMPLATE: postcheck_no_links_allowed}');
+		/* Check if user is allowed to post links in signature. */
+		if (preg_match('?(\[url)|(http://)|(https://)?i', $_POST['reg_sig'])) {
+			if ( $GLOBALS['POSTS_BEFORE_LINKS'] > 0 ) {
+				$c = q_singleval('SELECT posted_msg_count FROM {SQL_TABLE_PREFIX}users WHERE id='. _uid);
+				if ( $GLOBALS['POSTS_BEFORE_LINKS'] > $c ) {
+					$posts_before_links = $GLOBALS['POSTS_BEFORE_LINKS'];
+					set_err('reg_sig', '{TEMPLATE: postcheck_no_links_allowed}');
+				}
 			}
 		}
 	}
@@ -611,7 +615,7 @@ function email_encode($val)
 				$uent->users_opt ^= (8388608|16777216|4194304) ^ $old_opt;
 			}
 
-			$uent->sync_user();
+			$uent->sync();
 
 			/* If the user had changed their e-mail, force them re-confirm their account (unless admin). */
 			if ($FUD_OPT_2 & 1 && $old_email && $old_email != $uent->email && !($uent->users_opt & 1048576)) {
@@ -671,6 +675,9 @@ function email_encode($val)
 
 		if ($uent->birthday) {
 			$b_year = (int) substr($uent->birthday, 4);
+			if ($b_year == 0) {
+				$b_year = '';
+			}
 			$b_month = substr($uent->birthday, 0, 2);
 			$b_day = substr($uent->birthday, 2, 2);
 		} else {
@@ -872,7 +879,7 @@ function email_encode($val)
 	$vals = implode("\n", timezone_identifiers_list());
 	$timezone_select	= tmpl_draw_select_opt($vals, $vals, $reg_time_zone);
 
-	$notification_select	= tmpl_draw_select_opt("4\n134217728", "{TEMPLATE: register_email}\n{TEMPLATE: register_none}", ($uent->users_opt & (4|134217728)));
+	$notification_select	= tmpl_draw_select_opt("4\n134217728", '{TEMPLATE: register_email}' ."\n". '{TEMPLATE: register_none}', ($uent->users_opt & (4|134217728)));
 
 	$vals = implode("\n", range(5, $THREADS_PER_PAGE_F));
 	$topics_per_page	= tmpl_draw_select_opt($vals, $vals, $uent->topics_per_page);

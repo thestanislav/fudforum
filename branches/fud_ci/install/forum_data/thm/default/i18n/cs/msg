@@ -214,6 +214,7 @@ reported_reported_msg:Oznámená zpráva
 modque_pending_approval:Zprávy ke schválení
 modque_approve:Schválit
 modque_delete:Smazat
+modque_deleteall:Smazat vše od uživatele
 modque_no_message:Žádné další zprávy ke schválení
 pmsg_new_messages:Nepřečtená pošta
 pmsg_old_messages:Přečtená pošta
@@ -675,6 +676,7 @@ reset_err_rstconf_title:Informace
 reset_err_rstconf_msg:Během pár minut by jste měl(a) dostat pokyny emailem
 reset_newpass_title:Vynulování hesla
 reset_newpass_msg:Dobrý den,\n\nna základě vašeho požadavku jsou vám zasílány přihlašovací informace.\n\nUživatelské jméno: {VAR: ui[1]}\nHeslo: {VAR: passwd}\n\nVšimněte si, že vaše heslo by nastaveno na výše uvedenou hodnotu. Pokud chcete\nzměnit své heslo, můžete tak učinit přes nastavení vašeho účtu na:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Vaše heslo vám bylo zasláno emailem. Měl(a) by jste ho dostat během několika minut. Prosím, zkontrolujte si svou emailovou schránku.<br />.<br />.<br />
 search_update:Hledáte příspěvky
 selmsg_update:Prohlížíte si <a href="{TEMPLATE: selmsg_update_lnk}">dnešní příspěvky</a>
@@ -688,7 +690,7 @@ ERR_login_msg2:<legend>CHYBA: Nejste přihlášeni</legend>Abyste získali pří
 ERR_disabled_ttl:Vypnutá vlastnost
 ERR_disabled_msg:Tato vlastnost byla vypnuta administrátorem.
 ERR_access_ttl:CHYBA: Nedostatečná oprávnění
-ERR_access_msg:Nemátě dostatečná oprávnění na provedení této akce.
+ERR_access_msg:Nemáte dostatečná oprávnění k provedení této akce.
 ERR_registration_disabled_ttl:Registrace vypnuta
 ERR_registration_disabled_msg:Administrátor vypnul registraci, prosím, zkuste to později
 ERR_emailconf_ttl:CHYBA: Váš účet ještě není potvrzen
@@ -1107,6 +1109,7 @@ move_msg_th_expl:Zadejte ID cílového téma (může být v jiných fórech)
 captcha_img_alt:Ověření Captcha: je třeba rozpoznat text v tomto obrázku.
 captcha_img_help:Na obrázku není žádná nula nebo jednička.
 powered-by:Běží na: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:Copyright © 2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Kód:
 code_select_all:Vybrat vše

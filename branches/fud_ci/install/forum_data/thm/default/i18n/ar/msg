@@ -679,6 +679,7 @@ reset_err_rstconf_title:معلومات
 reset_err_rstconf_msg:ينبغي أن تتلقى التعليمات في بريدك الإلكتروني في الدقائق القليلة القادمة.
 reset_newpass_title:إعادة ضبط كلمة السر
 reset_newpass_msg:مرحبًا!\n\nكما تطلب، فإن معلومات ولوجك ظاهرة أدناه\n\n\nالولوج: {VAR: ui[1]}\nكلمة السر: {VAR: passwd}\n\nمن فضلك لاحظ أن كلمة السر أعيد ضبطها إلى القيمة أعلاه. تستطيع تغيير كلمة سرك عبر لوحة التحكم في: {FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:أرسلت كلمة سرك إليك. يجب أن تتلقاها خلال الدقائق القليلة القادمة.<br />
 search_update:يبحث عن رسائل
 selmsg_update:يتصفح <a href="{TEMPLATE: selmsg_update_lnk}">رسائل اليوم</a>
@@ -1111,6 +1112,7 @@ move_msg_th_expl:حدد هوية الموضوع الهدف (يمكن أن يكو
 captcha_img_alt:تحقق كابتشا: سوف تحتاج إلى التعرف على نص هذه الصورة.
 captcha_img_help:لا يوجد صفر ولا واحد في الصورة.
 powered-by:يشغله: FUDforum {GVAR: FORUM_VERSION}.
+# Fuzzy
 copyright:حقوق النشر &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:الكود
 code_select_all:اختر الكل

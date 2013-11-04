@@ -1,9 +1,12 @@
 # Messages for Brazilian Portuguese (português do Brasil)
 # Exported from translatewiki.net
 # Author: Giro720
+# Author: Leosls
+# Author: Luckas
 # Author: Luckas Blade
 # Author: McDutchie
 # Author: Naudefj
+# Author: Titoncio
 # Author: 555
 
 action:Ação
@@ -20,12 +23,12 @@ by:Por:
 by_mod:por Moderador
 current_time:Hora Atual
 custom_avatar_queue:Avatar de Costume
-date_posted:Data do Post
-date_registered:Data do Registo:
+date_posted:Data de Publicação
+date_registered:Data do registro:
 download_counter:Transferido {PLURAL: v[3]|$1 vez|$1 vezes}
 pmsg_download_counter:Descarregado {PLURAL: r->dlcount|$1 vez|$1 vezes}
 email:Email:
-email_to_friend:Email a um amigo
+email_to_friend:Enviar a um amigo
 email_to_friend_desc:Enviar o endereço (URL) desta pagina a um(s)amigo(s) via email
 email_user:Enviar ao usuário uma mensagem por e-mail
 faq:F.A.Q.
@@ -35,7 +38,7 @@ flat_view:Retornar para a vista padrão
 forum:Fórum:
 forum_icon:Ícone do Fórum
 forum_new_messages:Novas Mensagens
-forum_none_messages:Apenas membros registados no fórum podem ler mensagems não lidas
+forum_none_messages:Apenas membros registados no fórum podem ler mensagens não lidas
 forum_old_messages:Não há novas mensagens
 from:De:
 gender:Sexo:
@@ -43,10 +46,10 @@ go:Avançar
 goto_next_msg:Ir para a proxima mensagem
 goto_prev_msg:Ir para a mensagem anterior
 home:Início
-homepage:página início:
+homepage:Página inicial:
 icq_control_panel:Painel de mensagens do ICQ Online
 icq_message_form:Formulario de mensagem ICQ:
-ignore_user:Ignorar todos os posts deste usuário
+ignore_user:Ignorar todas mensagens deste usuário
 im_aim:Apontar manuseamento:
 im_msnm:MSN Messenger:
 im_yahoo:Yahoo Messenger:
@@ -56,14 +59,14 @@ index_new_posts:Existem novos posts desde o último lido
 index_no_new_posts:Não existem novos posts desde o último lido
 index_url_redirection:Redirecionador
 interests:Interesses:
-last_post:Último post
+last_post:Última mensagem
 last_thread_msg:Ir para a ultima mensagem neste tópico
-legend:Legenda:
+legend:Legenda
 location:Localização:
 lock_thread:Fechar Tópico
 locked:Fechado
-locked_with_new_posts:Fechado(c/ posts não lidos)
-logged_in_list:Lista de usuários visitando o fórum
+locked_with_new_posts:Fechado (c/ posts não lidos)
+logged_in_list:Lista de usuários online
 login:Entrar
 login_header:Usuário:
 logout:Sair
@@ -75,7 +78,7 @@ cal_goto_date:Ir para:
 cal_day_heading:Eventos por dia
 cal_no_events:Não há eventos para este dia.
 cal_update:Navegando no calendário do fórum
-cal_birthday:Aniversário : {VAR: user}
+cal_birthday:Aniversário: {VAR: user}
 cal_birthday_age:({PLURAL: age|$1 ano|$1 anos}).
 message:Mensagem
 message_counter:Os nossos usuários postaram um total de <b>{PLURAL: post_count|$1 mensagem|$1 mensagens}</b> em <b>{PLURAL: thread_count|$1 tópico|$1 tópicos}</b>.
@@ -85,7 +88,7 @@ minimize_category:Minimizar Categoria
 minimize_message:Minimizar Mensagem
 moderation_queue:Moderação
 moderator:Moderador
-moderator_of:Moderador ausente:
+moderator_of:Moderador de:
 moderator_options:Opções do Moderador
 moderators:{PLURAL: modcount|Moderador|Moderadores}
 more_unread_messages:mais mensagens não lidas
@@ -94,16 +97,16 @@ move_thread:Mover
 moved:Movida para outro fórum
 moved_thread_message:Este tópico foi movido para outro Fórum
 na:n/d
-new_posts:Novos Posts
+new_posts:Novas Mensagens
 new_private_messages:Você tem <span class="GenTextRed">({VAR: c})</span> {PLURAL: c|mensagem privada não lida|mensagens privadas não lidas}
 new_thread:Criar um novo tópico
 newest_user:O mais novo membro registado é
 next_page:Próxima Página
 next_thread:Próximo Tópico:
 no_messages:Não há mensagens neste fórum.<br />Seja o primeiro a postar um tópico neste fórum.
-no_msg_body:mensagem vazia
-no_new_posts:Não há novos posts
-no_posts:sem Posts
+no_msg_body:Mensagem vazia
+no_new_posts:Não há novas mensagens
+no_posts:Não há Mensagens
 no_subscribed_forums:Não há fórums subscritos
 no_subscribed_threads:Não há topicos subscritos
 no_bookmarked_threads:Não há nenhum tópico nos favoritos
@@ -214,6 +217,7 @@ reported_reported_msg:Mensagens reportadas
 modque_pending_approval:Mensagens pendentes de aprovação
 modque_approve:Aprovar
 modque_delete:Apagar
+modque_deleteall:Apagar todos os posts do usuário
 modque_no_message:Não há mensagens pendentes de aprovação
 pmsg_new_messages:Mensagen privada não lida
 pmsg_old_messages:Mensagem privada lida
@@ -297,7 +301,7 @@ register_email:Email
 edit_time_limit:<b>Limite de tempo de edição</b>: {GVAR: EDIT_TIME_LIMIT} minutos
 no_edit_time_limit:<b>Limite de tempo de edição</b>: Ilimitado
 pmuserloc_login:Usuário:
-pmuserloc_submit:Submeter
+pmuserloc_submit:Enviar
 pmuserloc_user:Usuário
 pmuserloc_no_result:Sem resultado
 register_builtin:Embutido
@@ -431,7 +435,7 @@ prereg_disagree:Não concordo
 prereg_update:Lendo as regras do fórum
 coppa_fax_instructions:Instruções para o encarregado de educação
 coppa_fax_instructions2:Por favor imprima esta página assine e envie para:
-coppa_fax_reg_form:Formulário de registo
+coppa_fax_reg_form:Formulário de registro
 coppa_fax_sign:Por favor assine e envie-nos o formulário abaixo
 coppa_fax_conf:Vi toda a informação que o meu filho(a) me forneceu e li a Política de Privacidade para o site. Compreendo que a informação no perfil pode ser alterada por uma pessoa que tenha a senha. Eu compreendo que posso pedir para que a informação deste perfil seja removida por completo.
 coppa_fax_permission:Assine aqui se autorizar
@@ -469,7 +473,7 @@ rpasswd_change_pass:Alterar senha
 rpasswd_login:Usuário
 rpasswd_cur_pass:Senha atual:
 rpasswd_new_pass:Nova Senha:
-rpasswd_conf_pass:Confirma Senha:
+rpasswd_conf_pass:Confirmar senha:
 ruser_title:Formulário de alteração de login
 ruser_change_user:Alterar seu login no fórum
 ruser_cur_login:Identificação atual:
@@ -535,7 +539,7 @@ ppost_find_User:Procurar Usuário
 ppost_track_msg:Seguir esta mensagem
 ppost_track_msg_desc:Notificar-me (via mensagem privada) quando esta mensagem for lida.
 ppost_send:Enviar
-ppost_save_draft:Guardar rascunho
+ppost_save_draft:Salvar rascunho
 poll_blank_option:Não pode adicionar uma opção em branco.
 poll_del_conf:Se quiser apagar esta opção, carregue em OK
 poll_name:Nome da Votação:
@@ -653,20 +657,20 @@ register_err_emailexists:Este e-mail já existe, se esqueceu a senha por favor u
 register_err_shortpasswd:A Senha deve ter pelo menos 6 caracteres de tamanho
 register_err_passwdnomatch:As Senhas não coincidem.
 register_err_invalidemail:O endereço de Email que colocou não parece ser um Email válido.
-register_err_needname:Para completar com sucesso o registo, informe o seu nome.
+register_err_needname:Para completar com sucesso o registro, informe o seu nome.
 register_err_enterpasswd:informe a sua Senha atual para completar as alterações
 register_err_adminpasswd:Você deve introduzir a sua senha de <b>administrador</b> para concluir as alterações.
 register_err_notyouremail:Alguém já se registou utilizando este Email, e esse alguem não é você.
 register_err_avatartobig:O Arquivo que está a tentar enviar para o servidor é demasiado grande, passa {GVAR: CUSTOM_AVATAR_MAX_SIZE} bytes do limite
 register_err_avatarnotallowed:O avatar que você está enviando para o servidor não é permitido, verifique os tipos de arquivos permitidos.
-register_conf_subject:Confirmação de Registo
+register_conf_subject:Confirmação de registro
 register_conf_msg:Obrigado por se registar,\nPara ativar a sua conta acesse o endereço (URL) abaixo:\n\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: uent->conf_key}\n\nAssim que a sua conta for ativada, você estará acessando o fórum sendo enviado para sua pagina principal.
-register_welcome_subject:Confirmação de registo no fórum
-register_welcome_msg:Obrigado pelo registo,\n\nAqui estão os seus dados de login para o fórum:\n\nFórum URL: {TEMPLATE: index_update_lnk}\nLogin: {VAR: uent->login}\nSenha: {VAR: _POST['reg_plaintext_passwd']}\n\nNa Senha os caracteres maiúsculos ou minúsculos fazem diferença!\nPara modificar os seus dados, vá até esta pagina:\n{FULL_ROOT}{ROOT}?t=register
-register_err_cantreg_title:ERRO: Não foi possivel efetuar registo
+register_welcome_subject:Confirmação de registro no fórum
+register_welcome_msg:Obrigado pelo registro,\n\nAqui estão os seus dados de login para o fórum:\n\nFórum URL: {TEMPLATE: index_update_lnk}\nLogin: {VAR: uent->login}\nSenha: {VAR: _POST['reg_plaintext_passwd']}\n\nNa Senha os caracteres maiúsculos ou minúsculos fazem diferença!\nPara modificar os seus dados, vá até esta pagina:\n{FULL_ROOT}{ROOT}?t=register
+register_err_cantreg_title:ERRO: não foi possível registrar
 regsiter_err_cantreg_msg:Conta de usuário não foi criada, por favor contacte o administrador em <a href="mailto:{VAR: ADMIN_EMAIL}">{VAR: ADMIN_EMAIL}</a>
 register_profile_update:Vendo a sua ficha
-register_register_update:Página de Registo
+register_register_update:Página de registro
 report_err_nosuchmsg_title:ERRO
 report_err_nosuchmsg_msg:Não existe essa mensagem
 reset_err_invalidkey_title:ERRO
@@ -675,7 +679,7 @@ reset_err_rstconf_title:Informação
 reset_err_rstconf_msg:Deve receber instruções no seu Email nos próximos minutos
 reset_newpass_title:Cancelar Senha
 reset_newpass_msg:Olá,\n\no seu pedido os seus dados de login serão enviados.\nAqui está a sua informação de login:\n\nLogin: {VAR: ui[1]}\nSenha: {VAR: passwd}\n\nA sua Senha foi alterada para o valor abaixo, se quiser alterá-la pode fazê-lo através do painel de controle do usuário em : \n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:A sua senha foi enviada por email. Você deve estar recebendo-a em poucos minutos. Consulte o seu Email.<br />.<br />.<br />
+reset_login_notify:A sua senha foi enviada por email. Você deve estar recebendo-a em poucos minutos.
 search_update:A procurar posts
 selmsg_update:Visualizando <a href="{TEMPLATE: selmsg_update_lnk}">posts de Hoje</a>
 showposts_update:Vendo posts por: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -689,8 +693,8 @@ ERR_disabled_ttl:Possibilidade desabilitada
 ERR_disabled_msg:Esta funcionalidade foi desativada pelo administrador do sistema.
 ERR_access_ttl:ERRO: Permissões insuficientes
 ERR_access_msg:Você não tem as permissões necessárias para realizar esta ação.
-ERR_registration_disabled_ttl:Registo de usuários desabilitado
-ERR_registration_disabled_msg:O administrador desabiliotu o registo de usuários novos, por favor tente mais tarde
+ERR_registration_disabled_ttl:Registro desativado
+ERR_registration_disabled_msg:O administrador desabilitou o registro de usuários novos, por favor tente mais tarde
 ERR_emailconf_ttl:ERRO: A sua conta ainda não está confirmada
 ERR_emailconf_msg:Ainda não confirmou a sua conta via e-mail<br /><table border="0"><tr><td><ol><li>se não recebeu um e-mail de confirmação <a href="{TEMPLATE: ERR_emailconf_msg_lnk}">clique aqui</a><li>se {VAR: usr_d->email} não é o endereço de e-mail correto <a href="{TEMPLATE: ERR_emailconf_msg_lnk2}">clique aqui</a></ol></td></tr></table>
 ERR_user_ttl:ERRO: Usuário inexistente
@@ -702,7 +706,7 @@ finduser_title:Procurar Usuário
 help_title:Ajuda
 login_title:Formmulário de Login
 poll_title:Editor de votações
-register_title:Formulário de Registo
+register_title:Formulário de registro
 reset_title:Cancelar Senha
 rpasswd_title:Formulário de alteração de Senha
 error_title:Formulário de erro
@@ -738,7 +742,7 @@ thr_exch_orig_forum:Fórum original:
 thr_exch_dest_forum:Fórum de destino:
 thr_exch_no_threads:Não há tópicos à espera de aprovação.
 thr_exch_decl_reason:Razão para recusa de tópico <b>{VAR: data->subject}</b> into forum <b>{VAR: data->f2_name}</b>
-thr_exch_submit:Submeter
+thr_exch_submit:Enviar
 exch_decline_ttl:A mudança de tópico {VAR: data->subject} no fórum {VAR: data->f2_name} foi recusada.
 ppost_original_msg:mensagem que está encaminhando ou repondendo a
 split_thread:Dividir Tópico
@@ -771,8 +775,7 @@ p_STICKY:posts persistentes
 p_POLL:Criar mensagens
 p_FILE:adicionar arquivos
 p_VOTE:Votar
-# Fuzzy
-p_RATE:Votar tópicos
+p_RATE:Avaliar tópicos/membros
 p_SPLIT:Dividir tópicos
 p_LOCK:Trancar tópicos
 p_MOVE:Mover tópicos
@@ -957,7 +960,7 @@ post_mod_msg_notify_title:Nova mensagem no fórum "{VAR: frm->name}" aguardando 
 post_mod_msg_notify_msg:Uma mensagem nova intitulada "{VAR: msg_post->subject}", foi colocada agora num fórum moderado por você. Para revisá-la, consulte: {FULL_ROOT}{ROOT}?t=modque#{VAR: msg_post->id}\n\nEste é um processo automático. Não responda a esta mensagem.
 thread_printable_pdf:Exportar para PDF
 thread_syndicate:Adicione este fórum (XML)
-reg_conf_title:Confirmação do Registo
+reg_conf_title:Confirmação do registro
 reg_conf_email:<b>Confirmação via E-mail</b><br />Um email foi enviado para você contendo uma URL especial que deverá ser acessada para que sua conta seja ativada. Se não receber essa notificação nos próximos minutos, conecte-se no fórum com sua conta e confirme se o endereço de e-mail informado está correto. Após confirmar a sua conta você terá acesso às opções do fórum disponíveis aos usuários confirmados.
 reg_conf_account:<b>Confirmação de Conta</b><br />Antes da sua conta se tornar ativa é necessário que seja aprovada pelo(s) administrador(es), assim que isso ocorrer você receberá um e-mail indicando que a mesma foi ativada. Até esse momento você poderá acessar o fórum, porém está limitado a apenas fóruns que não necessitam de conta ativada.
 forum_banned_user:As suas ações anteriores obtiveram como resultado a sua expulsão permanente deste fórum. Adeus.
@@ -1108,8 +1111,7 @@ move_msg_th_expl:Especifique a ID do tópico de destino (pode estar em outros f�
 captcha_img_alt:Verificação por Captcha: você precisará reconhecer o texto nesta imagem.
 captcha_img_help:Não há zero ou um na imagem.
 powered-by:Powered by: FUDforum {GVAR: FORUM_VERSION}.
-# Fuzzy
-copyright:Direitos autorais &copy;2001-2011 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Código:
 code_select_all:Selecionar tudo
 code_show_hide:Mostrar/esconder
@@ -1143,3 +1145,7 @@ page_list_total:{PLURAL: i|$1 página|$1 páginas} listadas.
 page_update:Página de navegação
 pm_export_header:Mensagens privadas para {VAR: usr->alias}
 pm_export_footer:Exportado:
+karma:Karma
+karma_track:Gerir reputação para o usuário:
+karma_delete:Apagar
+rate_author:Avaliar autor:

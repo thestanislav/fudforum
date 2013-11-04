@@ -5,8 +5,7 @@
 action:Darbība
 add_to_buddy_list:pievienot kontaktu sarakstam
 admin:Admins
-# Fuzzy
-admin_control_panel:Administratīvais centrs
+admin_control_panel:Administrācija
 administrator:Administrators
 attachment:Pielikums:
 avatar:Bildītes:
@@ -25,7 +24,7 @@ email:E-pasts:
 email_to_friend:Nosūtīt E-pastu
 email_to_friend_desc:Nosūtīt URL-saiti par šo ierakstu pa E-pastu
 email_user:Nosūtīt lietotājam e-pasta ziņojumu
-faq:F.A.Q.
+faq:Palīdzība
 first_unread_msg:Pāriet uz nelasītajiem paziņojumiem
 first_unread_msg_desc:Pāriet uz pirmo nelasīto šajā tēmā
 flat_view:Pāriet uz noklusēto izplāto skatu
@@ -518,8 +517,7 @@ poll_blank_option:Tukšumu nevar pievienot.
 poll_del_conf:Lai dzēstu, spiediet OK
 poll_name:Balsojuma nosaukums:
 poll_timelimit:Termiņš:
-# Fuzzy
-poll_maxiumvotes:Maksimālais balsu skaits
+poll_maxiumvotes:Maksimālais balsu skaits:
 poll_create:Izveidot
 poll_update:Izmainīt
 poll_disablesmilies:Aizliegt smaidiņus
@@ -655,6 +653,7 @@ reset_err_rstconf_title:Informācija
 reset_err_rstconf_msg:Instrukcijas nosūtītas uz Jūsu E-pastu un tās Jūs saņemsiet pēc dažām minūtēm
 reset_newpass_title:Paroles nomaiņa
 reset_newpass_msg:Sveiki,\n\nUz Jūsu pieprasījumu tiek nosūtīta informācija par Jūsu <b>Niku</b> un <b>Paroli</b>.\nJūsu reģistrācijas dati:\n\nNiks: {VAR: ui[1]}\nParole: {VAR: passwd}\n\nAtcerieties, ka Jūsu vecā parole ir nomainīta ar šeit uzrādīto un tā pašreiz nav derīga. Ja\nJūs vēlaties to nomainīt, tad to varat izdarīt vadības panelī:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Jūsu jaunā parole ir nosūtīta uz Jūsu E-pastu un to Jūs saņemsiet pēc dažām minūtēm. Lūdzu pārbaudiet savu E-pasta kastīti..<br />.<br />.<br />
 search_update:Publikāciju meklēšana
 selmsg_update:Šodienas <a href="{TEMPLATE: selmsg_update_lnk}">publikāciju pārskats</a>
@@ -681,7 +680,7 @@ ERR_systemerr_ttl:KĻŪDA: Sistēmas kļūda
 ERR_systemerr_msg:Sistēmas kļūda, paziņojiet par to <a href="mailto:{GVAR: ADMIN_EMAIL}">webmaster</a>'?.
 email_title:E-pasta paziņojums
 finduser_title:Lietotāju meklēšana
-help_title:F.A.Q.
+help_title:Palīdzība
 login_title:Ieeja forumā
 poll_title:Balsojumu redaktors
 register_title:Reģistrācija
@@ -701,8 +700,7 @@ post_opt_html_off:<b>HTML</b>  - <b>izslēgts</b>
 post_opt_fud_off:<b>BBcode</b> - <b>izslēgts</b>
 post_opt_images_off:<b>Nozīmītes</b> - <b>izslēgtas</b>
 post_opt_smilies_off:<b>Smaidiņi</b> - <b>izslēgti</b>
-# Fuzzy
-post_opt:Foruma parametri
+post_opt:Foruma iestatījumi:
 register_change_passwd:nomainīt paroli
 approved_avatar_title:Jūsu nozīmīte apstiprināta.
 approved_avatar_msg:Jūsu nozīmīte ir apstiprināta un tai jābūt redzamai. Iespējams Jūsu Web pārlūks attēlo novecojušu lapas saturu no kešatmiņas, tādēļ atjaunojiet to.
@@ -813,8 +811,7 @@ report_report_post:Paziņojumi
 quicklogin_login:Lietotājs:
 quicklogin_password:Parole:
 quicklogin_use_cookies:Izmantot Cookies?
-# Fuzzy
-quicklogin_login_btn:Ieiet
+quicklogin_login_btn:Pieslēgties
 post_notification_desc:Paziņot man par ienākošajām atbildēm uz publikāciju.
 maximize_category:Izplest kategoriju
 maximize_message:Maksimizēt ziņojumu
@@ -866,6 +863,8 @@ polllist_action:Darbības
 polllist_update:<a href="{TEMPLATE: polllist_update_lnk}">Pieejamo balsojumu saraksts</a>
 userinfo_polls:Balsojumi:
 show_pollist:Parādīt balsojumus
+search_and:UN
+search_or:VAI
 search_desc_order:Dilstoši
 search_asc_order:Augoši
 search_logic:Loģiskie argumenti:
@@ -893,5 +892,8 @@ back_to_top:Atpakaļ uz augšu
 pm_err_disabled_title:Privātā sarakste atslēgta
 err_mod_acc_ttl:Neapstiprināts konts
 saved:Saglabāts
+login_unapproved_account_ttl:Neapstiprināts konts
+iemail_msg_reply:Atbildēt
+iemail_msg_quote:Citēt
 findu_delete:Dzēst
 usrinfo_last_visit:Pēdējais apmeklējums:

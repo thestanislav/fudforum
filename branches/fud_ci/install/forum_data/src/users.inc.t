@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -19,17 +19,17 @@ function &init_user()
 	}
 
 	/* We need to parse S & rid right away since they are used during user init. */
-	if ($o2 & 32768 && !empty($_SERVER['PATH_INFO'])) {
-		$pb = $p = explode('/', substr($_SERVER['PATH_INFO'], 1, -1));
-		if ($o1 & 128) {
+	if ($o2 & 32768 && !empty($_SERVER['PATH_INFO'])) {	// USE_PATH_INFO
+		$pb = $p = explode('/', trim($_SERVER['PATH_INFO'], '/'));
+		if ($o1 & 128) {	// SESSION_USE_URL
 			$_GET['S'] = array_pop($p);
 		}
-		if ($o2 & 8192) {
+		if ($o2 & 8192) {	// TRACK_REFERRALS
 			$_GET['rid'] = array_pop($p);
 		}
 		$_SERVER['QUERY_STRING'] = htmlspecialchars($_SERVER['PATH_INFO']) .'?'. $_SERVER['QUERY_STRING'];
 
-		/* Continuation of path info parsing. */
+		/* Default to index page. */
 		if (!isset($p[0])) {
 			$p[0] = 'i';
 		}
@@ -46,7 +46,7 @@ function &init_user()
 				$_GET['goto'] = $p[1];
 				if (isset($p[2])) {
 					$_GET['th'] = $p[2];
-					if (isset($p[3])) {
+					if (isset($p[3]) && is_numeric($p[3])) {
 						$_GET['start'] = $p[3];
 						if ($p[3]) {
 							$_GET['t'] = 'msg';
@@ -75,8 +75,11 @@ function &init_user()
 			case 't': /* view thread */
 				$_GET['t'] = 0;
 				$_GET['th'] = $p[1];
-				if (isset($p[2])) {
-					$_GET['start'] = $p[2];
+				if (isset($p[2]) && is_numeric($p[2])) {
+					// START is not currently used for thread paging.
+					// Set to 0, but keep code for possible future implementation.
+					// $_GET['start'] = $p[2];
+					$_GET['start'] = 0;
 					if (!empty($p[3])) {
 						$_GET[$p[3]] = 1;
 					}

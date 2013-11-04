@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2012 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -34,13 +34,16 @@ function ses_get($id=0)
 	if (!$id) {
 		/* Cookie or URL session? If not, check for known bots. */
 		if (!empty($_COOKIE[$GLOBALS['COOKIE_NAME']])) {
+			/* Have cookie */
 			$q_opt = 's.ses_id='. _esc($_COOKIE[$GLOBALS['COOKIE_NAME']]);
 		} else if ((isset($_GET['S']) || isset($_POST['S'])) && $GLOBALS['FUD_OPT_1'] & 128) {
+			/* Have session string */
 			$url_session = 1;
 			$q_opt = 's.ses_id='. _esc((isset($_GET['S']) ? (string) $_GET['S'] : (string) $_POST['S']));
 			/* Do not validate against expired URL sessions. */
 			$q_opt .= ' AND s.time_sec > '. (__request_timestamp__ - $GLOBALS['SESSION_TIMEOUT']);
 		} else {
+			/* Unknown user, maybe bot? */
 			// Auto login authorized bots.
 			// To test: wget --user-agent="Googlebot 1.2" http://127.0.0.1:8080/forum
 			$spider_session = 0;
@@ -69,14 +72,21 @@ function ses_get($id=0)
 				if ($spider['bot_opts'] & 2) {	// Access blocked.
 					die('Go away!');
 				}
-				if ($id = db_li('INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, ip_addr, useragent, user_id) VALUES (\''. $spider['botname'] .'\', '. __request_timestamp__ .', '. _esc(ses_make_sysid()) .', '. _esc($my_ip) .', '. _esc(substr($_SERVER['HTTP_USER_AGENT'], 0, 32)) .', '. $spider['user_id'] .')', $ef, 1)) {
+				if ($id = db_li('INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, ip_addr, useragent, user_id) VALUES (\''. $spider['botname'] .'\', '. __request_timestamp__ .', '. _esc(ses_make_sysid()) .', '. _esc($my_ip) .', '. _esc(substr($_SERVER['HTTP_USER_AGENT'], 0, 64)) .', '. $spider['user_id'] .')', $ef, 1)) {
 					$q_opt = 's.id='. $id;
 				} else {
 					$q_opt = 's.ses_id='. _esc($spider['botname']);
 				}
 				$GLOBALS['FUD_OPT_1'] ^= 128;	// Disable URL sessions for user.
 			} else {
-				return;
+				/* NeXuS: What is this? Return if user unknown? Function should
+				   return only after the query is run. */
+				//return;
+				
+				// Check sys_id, ip_addr and useragent for a possible match
+				$q_opt = 's.sys_id= '._esc(ses_make_sysid()).
+				         ' AND s.ip_addr='._esc(get_ip()).
+						 ' AND s.useragent='._esc(substr($_SERVER['HTTP_USER_AGENT'], 0, 64));
 			}
 		}
 
@@ -123,12 +133,13 @@ function ses_get($id=0)
 	return;
 }
 
+/** Create an anonymous session. */
 function ses_anon_make()
 {
 	do {
 		$uid = 2000000000 + mt_rand(1, 147483647);
 		$ses_id = md5($uid . __request_timestamp__ . getmypid());
-	} while (!($id = db_li('INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, ip_addr, useragent, user_id) VALUES (\''. $ses_id .'\', '. __request_timestamp__ .', '. _esc(ses_make_sysid()) .', '. _esc(get_ip()) .', '. _esc(substr($_SERVER['HTTP_USER_AGENT'], 0, 32)) .', '. $uid .')', $ef, 1)));
+	} while (!($id = db_li('INSERT INTO {SQL_TABLE_PREFIX}ses (ses_id, time_sec, sys_id, ip_addr, useragent, user_id) VALUES (\''. $ses_id .'\', '. __request_timestamp__ .', '. _esc(ses_make_sysid()) .', '. _esc(get_ip()) .', '. _esc(substr($_SERVER['HTTP_USER_AGENT'], 0, 64)) .', '. $uid .')', $ef, 1)));
 
 	/* When we have an anon user, we set a special cookie allowing us to see who referred this user. */
 	if (isset($_GET['rid']) && !isset($_COOKIE['frm_referer_id']) && $GLOBALS['FUD_OPT_2'] & 8192) {
@@ -139,6 +150,7 @@ function ses_anon_make()
 	return ses_get($id);
 }
 
+/** Update session status to indicate last known action. */
 function ses_update_status($ses_id, $str=null, $forum_id=0, $ret='')
 {
 	if (empty($ses_id)) {
@@ -147,6 +159,7 @@ function ses_update_status($ses_id, $str=null, $forum_id=0, $ret='')
 	q('UPDATE {SQL_TABLE_PREFIX}ses SET sys_id=\''. ses_make_sysid() .'\', forum_id='. $forum_id .', time_sec='. __request_timestamp__ .', action='. ($str ? _esc($str) : 'NULL') .', returnto='. (!is_int($ret) ? (isset($_SERVER['QUERY_STRING']) ? _esc($_SERVER['QUERY_STRING']) : 'NULL') : 'returnto') .' WHERE id='. $ses_id);
 }
 
+/** Save/ clear a session variable. */
 function ses_putvar($ses_id, $data)
 {
 	$cond = is_int($ses_id) ? 'id='. (int)$ses_id : 'ses_id=\''. $ses_id .'\'';
@@ -158,6 +171,7 @@ function ses_putvar($ses_id, $data)
 	}
 }
 
+/** Destroy a session. */
 function ses_delete($ses_id)
 {
 	if (!($GLOBALS['FUD_OPT_2'] & 256)) {	// MULTI_HOST_LOGIN

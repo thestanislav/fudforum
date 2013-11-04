@@ -5,13 +5,14 @@
 # Author: GTNS
 # Author: Giro720
 # Author: Hamilton Abreu
+# Author: Luckas
 # Author: Luckas Blade
 # Author: Malafaya
 # Author: McDutchie
 # Author: Naudefj
 # Author: Waldir
 
-action:Acção
+action:Ação
 add_to_buddy_list:Adicionar à lista de amigos
 admin:Admin
 admin_control_panel:Administração
@@ -23,7 +24,7 @@ biography:Biografia:
 birth_date:Data de Nascimento :
 by:Por:
 by_mod:por Moderador
-current_time:Hora Actual
+current_time:Hora atual
 custom_avatar_queue:Fila de avatares personalizados
 date_posted:Data de Publicação
 date_registered:Data do Registo:
@@ -33,7 +34,7 @@ email:Correio electrónico:
 email_to_friend:Enviar correio a um amigo
 email_to_friend_desc:Enviar a URL desta página a um ou mais amigos por correio electrónico
 email_user:Enviar mensagem ao utilizador por correio electrónico
-faq:Perguntas frequentes
+faq:Ajuda
 first_unread_msg:Ir para mensagens não lidas
 first_unread_msg_desc:Ir à primeira mensagem não lida neste tópico
 flat_view:Voltar para a vista plana predefinida
@@ -134,7 +135,7 @@ profile_desc:Aceder ao painel de controlo de membro
 rate_thread:Votar Tópico
 rating:Avaliação
 rating_track:Gerir as avaliações do tópico <b>{VAR: thr->subject}</b>:
-refresh_list:Actualizar a lista
+refresh_list:Atualizar a lista
 register:Registar-se
 registered:Registado:
 registered_on:Registado em {TEMPLATE: registered_on_date}
@@ -143,7 +144,7 @@ report_to_mod:Informar mensagem ao moderator
 reported_messages:mensagens informadas
 reveal_all_posts:Revelar todos os posts por {VAR: user_login}
 reveal_post:revelar posts
-search:Procurar
+search:Pesquisar
 sel_todays_posts:Posts de hoje
 sel_todays_posts_desc:Filtro para posts de hoje (só serão mostrados os posts colocados hoje)
 sel_unanswered_posts:Posts não respondidos
@@ -195,7 +196,7 @@ unbookmark_thread:Remover dos favoritos
 unbookmark_thread_desc:Remover este tópico da sua lista de favoritos
 unsubscribe:Anular subscrição
 unsubscribe_desc:Parar de receber notificações sobre novos posts neste forum
-updated_on:Actualizado em:
+updated_on:Atualizado em:
 user:Utilizador
 user_counter:Temos <b>{VAR: st_obj->user_count}</b> {PLURAL: st_obj->user_count|utilizador registado|utilizadores registados}.
 user_info:Informação do utilizador
@@ -219,6 +220,7 @@ reported_reported_msg:Mensagens reportadas
 modque_pending_approval:Mensagens pendentes de aprovação
 modque_approve:Aprovar
 modque_delete:Apagar
+modque_deleteall:Apagar tudo do utilizador
 modque_no_message:Não há mensagens pendentes de aprovação
 pmsg_new_messages:Mensagen privada não lida
 pmsg_old_messages:Mensagem privada lida
@@ -233,7 +235,7 @@ referals_none:Ainda sem indicações.
 referals_refered_by:Membros do forum indicados por: <b><a href="{TEMPLATE: referals_refered_by_lnk}" class="thLnk">{VAR: p_user[1]}</a></b>
 referals_post_count:Contador de posts
 referals_registered_on:Registado em
-referals_action:Acção
+referals_action:Ação
 pmsg_all:todos
 pmsg_none:nenhum
 folder:Pasta:
@@ -242,7 +244,7 @@ pmsg_forwarded:reencaminhado
 pmsg_subject:Assunto
 pmsg_author:Autor
 pmsg_time:Hora
-pmsg_selected:Seleccionado
+pmsg_selected:Selecionado
 pmsg_delete:Apagar
 cur_ppage_pm:Mensagens privadas
 writing_pm:Escrever uma mensagem privada
@@ -252,7 +254,7 @@ draft:Rascunho
 sent:Enviado
 trash:Lixo
 msg_author:Autor
-avatar_sel_form:Formulário de selecção de Avatar
+avatar_sel_form:Formulário de seleção de avatar
 no_avatars:Não há Avatars disponiveis
 month_1:Janeiro
 month_2:Fevereiro
@@ -295,7 +297,7 @@ finduser_no_such_user:Esse utilizador não existe
 finduser_user:Utilizador
 finduser_postcount:Contador de posts
 finduser_joindate:Data de adesão
-finduser_action:Acção
+finduser_action:Ação
 yes:Sim
 no:Não
 register_email:Email
@@ -310,11 +312,11 @@ register_specify_url:Especificar URL
 register_uploaded:Adicionar Avatar
 register_login:Utilizador:
 register_password:Senha:
-register_conf_pass:Confirmar Password:
-register_email_desc:Por favor tem de introduzir um endereço de E-mail válido. Pode escolher ocultar o email na secção preferências.
+register_conf_pass:Confirmar senha:
+register_email_desc:Por favor tem de introduzir um endereço de e-mail válido. Pode escolher ocultar o email na seção de preferências.
 register_name:Nome:
 register_your_pass:A sua Palavra-chave:
-register_update:Actualizar
+register_update:Atualizar
 register_avatar_type:Tipo de Avatar:
 register_del_avatar:Apagar Avatar
 register_avatar:Avatar:
@@ -362,9 +364,9 @@ register_invisible_mode_desc:Ocultar o estado online.
 register_show_email:Mostrar Correio Electrónico:
 register_show_email_desc:Escolha esta opção se quiser que o seu endereço de e-mail seja publicado.
 register_notification:Seleccionar Notificação por Omissão:
-register_notification_desc:Se a notificação estiver activada por omissão, pode ser desactivada ao publicar mensagens.
+register_notification_desc:Se a notificação estiver ativada por omissão, pode ser desativada ao publicar mensagens.
 register_notify_method:Escolher Método de Notificação:
-register_notify_method_desc:Defina o seu método de notificação preferido ou desactive as notificações (por exemplo, quando vai de férias).
+register_notify_method_desc:Defina o seu método de notificação preferido ou desative as notificações (por exemplo, quando vai de férias).
 register_allow_email_msg:Autorizar Mensagens por Correio Electrónico:
 register_allow_email_msg_desc:Autorizar que outros membros lhe enviem correio electrónico através do fórum.
 buddy_status:Estado
@@ -456,13 +458,13 @@ login_cookie_expired:O seu cookie expirou, e precisa de fazer novamente o login 
 login_perm_denied:Não tem permissão para aceder em modo anónimo, terá de fazer o login para aceder.
 login_want_to_register:Quer registar-se?
 login_forgot_passwd:Esqueceu a password
-login_use_cookie:Usar cookies<br /><span class="SmallText">Se está a usar um terminal público, como um computador numa biblioteca, escola, ou cibercafé, é recomendado que desactive esta opção para maior segurança. Se deixar esta opção activa, será automaticamente autenticado no fórum da próxima vez que o visitar.</span>
+login_use_cookie:Usar cookies<br /><span class="SmallText">Se está a usar um terminal público, como um computador numa biblioteca, escola, ou cibercafé, é recomendado que desative esta opção para maior segurança. Se deixar esta opção ativa, será automaticamente autenticado no fórum da próxima vez que o visitar.</span>
 login_login:Entrar
 login_login_btn:Submeter
 login_name_required:Login requer nome
 login_passwd_required:Password requerida
 login_invalid_radius:Combinação inválida de Login/password
-reset_confirmation:Obrigado por se ter registado,\n\nPara activar a sua conta vá ao URL indicado:\n\n{VAR: url}\n\nUma vez activa será logado no forum e\nredirecionado para a página pricipal do forum.
+reset_confirmation:Obrigado por se ter registrado,\n\nPara ativar a sua conta vá ao URL indicado:\n\n{VAR: url}\n\nUma vez ativa será logado no fórum e\nredirecionado para a página principal do fórum.
 reset_reset:Ola,\n\nPediu para que a sua password seja restaurada, para restaurar a sua password\npor favor vá a URL\n\n{VAR: url}\n\nNOTE: Este forum guarda as passwords com um sistema de encriptação não reversível o que quer dizer, que\uma vez entrada a password será codificada e não haverá possibilidade de a recuperar.\nIsto funciona por simples codificação da password e comparada cada vez que é introduzida com a versão codificada e\nverificando se são iguais.
 rpasswd_invalid_passwd:Password Inválida
 rpasswd_passwd_nomatch:As Passwords não são iguais
@@ -472,7 +474,7 @@ reset_reset_conf:A sua password será restaurada e enviada, no caso de não ter 
 reset_error:O email não foi encontrado na base de dados
 rpasswd_change_pass:Alterar password
 rpasswd_login:Utilizador
-rpasswd_cur_pass:Palavra-chave Actual:
+rpasswd_cur_pass:Palavra-chave atual:
 rpasswd_new_pass:Nova Password:
 rpasswd_conf_pass:Confirma Password:
 ruser_title:Formulário de alteração de nome de utilizador
@@ -509,7 +511,7 @@ remail_subject:Assunto:
 remail_message:Mensagem:
 remail_send_now:Enviar Email agora
 remail_anon_opt:Copiar esta mensagem para um cliente de email á sua escolha e envie-o aos seus amigos
-remail_done:Concluido
+remail_done:Feito
 remail_sent_conf:O email para o seu amigo {VAR-HTML: _POST['femail']} sobre {VAR: data->subject} foi enviado com sucesso.
 remail_error:Tem um erro
 mklist_type:Tipo:
@@ -518,7 +520,7 @@ mklist_additem:Adicionar item
 mklist_apply:Aplicar
 mklist_delete:Apagar
 qbud_nick_name:Nick
-qbud_add_selected:Adicionar selecção
+qbud_add_selected:Adicionar seleção
 qbud_selected:Selecionado
 qbud_no_buddies:Não há amigos para escolha
 mklist_numerical:Numérico
@@ -547,12 +549,12 @@ poll_name:Nome da Votação:
 poll_timelimit:Tempo limite:
 poll_maxiumvotes:Máximo de votos:
 poll_create:Criar
-poll_update:Actualizar
-poll_disablesmilies:desactivar smilies
+poll_update:Atualizar
+poll_disablesmilies:desativar smilies
 poll_create_poll:Criar Votação
-poll_update_poll:Actualizar Votação
+poll_update_poll:Atualizar votação
 poll_delete:Apagar
-poll_updateoption:Actualizar Opção
+poll_updateoption:Atualizar opção
 poll_addoption:Adicionar Opção
 poll_unlimited:Ilimitados
 poll_day:dia
@@ -635,7 +637,7 @@ post_err_floodtrig_msg:Por favor tente novamente em {PLURAL: tm|$1 segundo|$1 se
 post_err_attach_size:O ficheiro em anexo é demasido grande (está em cima do limite por {VAR: MAX_F_SIZE} bytes)
 post_err_attach_ext:O ficheiro que está a tentar fazer upload não condiz com os tipos de ficheiros permitidos.
 post_err_attach_filelimit:Está a tentar fazer o upload de mais ficheiros do que o permitido.
-post_err_passwd:Password Incorrecta.
+post_err_passwd:Senha incorreta.
 post_reply_update:Responder a <a href="{TEMPLATE: msg_post_lnk}">{VAR: thr->subject}</a> em {VAR: frm->name}
 post_topic_update:A escrever um tópico novo em <a href="{TEMPLATE: post_topic_update_lnk}">{VAR: frm->name}</a>
 post_error_generic:tem um erro
@@ -665,10 +667,10 @@ register_err_notyouremail:Alguém já se registou utilizando este Email, e esse 
 register_err_avatartobig:O Ficheiro que está a tentar enviar para o servidor é demasiado grande, passa {GVAR: CUSTOM_AVATAR_MAX_SIZE} bytes do limite
 register_err_avatarnotallowed:O avatar que está a tentar enviar para o servidor não é permitido, verifique os tipos de ficheiro permitidos.
 register_conf_subject:Confirmação de Registo
-register_conf_msg:Obrigado por se registar,\nPara activar a sua conta vá ao URL :\n\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: uent->conf_key}\n\nAssim que a sua conta fique activa, vai ficar registado no forum e vai ser redireccionado para a pagina prinipal.
+register_conf_msg:Obrigado por se registrar,\nPara ativar a sua conta vá ao URL :\n\n{FULL_ROOT}{ROOT}?t=emailconf&conf_key={VAR: uent->conf_key}\n\nAssim que a sua conta fique ativa, vai ficar registrado no fórum e vai ser redirecionado para a pagina principal.
 register_welcome_subject:Confirmação de registo no forum
 register_welcome_msg:Obrigado pelo registo,\n\nAqui estão os seus dados de login para o forum:\n\nForum URL: {TEMPLATE: index_update_lnk}\nLogin: {VAR: uent->login}\nPassword: {VAR: _POST['reg_plaintext_passwd']}\n\nNa Password os caracteres maiusculos ou minusculos fazem diferença!\nPara modificar os seus dados, vá a esta pagina:\n{FULL_ROOT}{ROOT}?t=register
-register_err_cantreg_title:ERRO: Não foi possivel efectuar registo
+register_err_cantreg_title:ERRO: Não foi possível efetuar registro
 regsiter_err_cantreg_msg:Conta de utilizador não foi criada, por favor contacte o administrador em <a href="mailto:{VAR: ADMIN_EMAIL}">{VAR: ADMIN_EMAIL}</a>
 register_profile_update:A ver a sua ficha
 register_register_update:Página de Registo
@@ -680,7 +682,7 @@ reset_err_rstconf_title:Informação
 reset_err_rstconf_msg:Deve receber instruções no seu Email nos próximos minutos
 reset_newpass_title:Cancelar Password
 reset_newpass_msg:Olá,\n\na seu pedido os seus dados de login estão a ser enviados para si.\nAqui está a sua informação de login:\n\nLogin: {VAR: ui[1]}\nPassword: {VAR: passwd}\n\nA sua Password foi alterada para o valor em baixo, se quiser altera-la pode fazê-lo através do painel de controlo do utilizador em : \n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:A sua password foi enviada por email para si. Deve recebê-la em poucos minutos. Consulte o seu Email.<br />.<br />.<br />
+reset_login_notify:A sua password foi enviada por email para si. Deverá recebê-la nos próiximos minutos.
 search_update:A procurar posts
 selmsg_update:A visualisar <a href="{TEMPLATE: selmsg_update_lnk}">posts de Hoje</a>
 showposts_update:A ver posts por: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -691,13 +693,13 @@ tree_update:A visualisar tópico (vista de árvore) <a href="{TEMPLATE: tree_upd
 userinfo_update:Procurar em <a href="{TEMPLATE: userinfo_update_lnk}">{VAR: u->alias}'s</a> perfil
 ERR_login_msg2:<legend>ERRO: Você não está autenticado</legend>Para aceder a esta página, você tem que ser um membro deste fórum.
 ERR_disabled_ttl:Possibilidade desabilitada
-ERR_disabled_msg:Esta funcionalidade foi desactivada pelo administrador do sistema.
+ERR_disabled_msg:Esta funcionalidade foi desativada pelo administrador do sistema.
 ERR_access_ttl:ERRO: Permissões insuficientes
-ERR_access_msg:Você não tem as permissões necessárias para executar esta acção.
+ERR_access_msg:Você não tem as permissões necessárias para executar esta ação.
 ERR_registration_disabled_ttl:Registo de utilizadores desabilitado
 ERR_registration_disabled_msg:O administrador desabiliotu o registo de utilizadores novos, por favor tenta mais tarde
 ERR_emailconf_ttl:ERRO: A sua conta ainda não está confirmada
-ERR_emailconf_msg:Ainda não confirmou a sua conta via email.<br /><table border="0"><tr><td><ol><li>Se não recebeu um email de confirmação <a href="{TEMPLATE: ERR_emailconf_msg_lnk}">peça-o novamente</a>.</li><li>Se {VAR: usr_d->email} não é o seu endereço de email, <a href="{TEMPLATE: ERR_emailconf_msg_lnk2}">indique o endereço correcto</a>.</li></ol></td></tr></table>
+ERR_emailconf_msg:Ainda não confirmou a sua conta via email.<br /><table border="0"><tr><td><ol><li>Se não recebeu um email de confirmação <a href="{TEMPLATE: ERR_emailconf_msg_lnk}">peça-o novamente</a>.</li><li>Se {VAR: usr_d->email} não é o seu endereço de email, <a href="{TEMPLATE: ERR_emailconf_msg_lnk2}">indique o endereço correto</a>.</li></ol></td></tr></table>
 ERR_user_ttl:ERRO: Utilizador inexistente
 ERR_user_msg:Utilizador não existe
 ERR_systemerr_ttl:ERRO: Erro de sistema
@@ -751,11 +753,11 @@ groupmgr_no_user:Não há nenhum utilizador com login de "{FUNC: char_fix(htmlsp
 groupmgr_already_exists:Utilizador "{FUNC: char_fix(htmlspecialchars($gr_member))}" já existe neste grupo.
 groupmgr_yes:Sim
 groupmgr_no:Não
-groupmgr_action:Acção
+groupmgr_action:Ação
 groupmgr_member:Membro
 groupmgr_cancel:Cancelar
 groupmgr_add_member:Adicionar Membro
-groupmgr_update_member:Actualizar Membro
+groupmgr_update_member:Atualizar membro
 groupmgr_edit:Editar
 groupmgr_delete:Apagar
 group_mgr_anon:Anónimo
@@ -763,7 +765,7 @@ group_mgr_reged:Todos os utilizadores registados
 show_show:Mostrar:
 group_mgr:Manager de Grupos
 group_mgr_edit_btn:Editar Grupo
-group_mgr_heading:Selecção de Editor de Grupo
+group_mgr_heading:Seleção de editor de grupo
 group_mgr_group:Grupo:
 permission_denied_title:Não tem Permissões!
 permission_denied_msg:As suas permissões de utilizador não permitem que faça o que está a tentar fazer.
@@ -789,7 +791,7 @@ rate_worst:Pior
 rate_best:Melhor
 post_quote_msg:{VAR: msg->login} escreveu em {TEMPLATE: make_report_date}
 post_quote:- Disse - :
-post_quote_selected:Citar o texto seleccionado
+post_quote_selected:Citar o texto selecionado
 userinfo_referals:Utilizadores Referidos:
 userinfo_referals_count:{VAR: referals} Membros
 pm_no_space_title:Não há espaço suficiente!
@@ -828,10 +830,10 @@ split_th_posted_on:Colocado em:
 split_th_subject:Assunto:
 split_th_new_thread_title:Novo titulo do Tópico:
 split_th_forum:Fórum:
-split_th_split_sel:Dividir mensagens seleccionadas
-split_th_split_unsel:Dividir mensagens não seleccionadas
+split_th_split_sel:Dividir mensagens selecionadas
+split_th_split_unsel:Dividir mensagens não selecionadas
 split_th_messages:Mensagens
-split_th_select:Seleccionar
+split_th_select:Selecionar
 report_report_post:Colocar Relatório
 quicklogin_login:Utilizador:
 quicklogin_password:Senha:
@@ -862,7 +864,7 @@ im_skype:Skype:
 im_twitter:Twitter:
 forum_contact:Contacto
 forum_home:Início
-post_cur_attached:actualmente anexados: {VAR: i} {PLURAL: i|ficheiro|ficheiros}
+post_cur_attached:atualmente anexados: {VAR: i} {PLURAL: i|ficheiro|ficheiros}
 ignored_anon_post:{GVAR: ANON_NICK} vai ser ignorado
 ignored_user_post:Colocado por <a href="{TEMPLATE: ignored_user_post_lnk}">{VAR: obj->login}</a> vai ser ignorado
 smladd_close_window:fechar janela
@@ -888,7 +890,7 @@ polllist_name:Nome do Comentário
 polllist_date:Criado Em
 polllist_owner:Criado Por
 polllist_votes:Total de Votos
-polllist_action:Acção
+polllist_action:Ação
 polllist_update:<a href="{TEMPLATE: polllist_update_lnk}">A ver Comentários Disponiveis</a>
 userinfo_polls:Comentários:
 show_pollist:Mostrar Comentários
@@ -920,9 +922,9 @@ insert_uploaded_image:Insira uma imagem dentro da mensagem
 finduser_help:O motor de busca vai adicionar automaticamente uma * mascara a sua pesquisa. ex. Para procurar por todos os utilizadores cujo login comece com um 'a', digite 'a' na caixa de pesquisa.
 back_to_top:Voltar ao Topo
 pm_err_disabled_title:Mensagens privadas foram desabilitadas
-pm_err_disabled_msg:Não pode enviar mensagens privadas até que active a opção 'Permitir mensagens privadas' no seu perfil.
+pm_err_disabled_msg:Não pode enviar mensagens privadas até que ative a opção 'Permitir mensagens privadas' no seu perfil.
 err_mod_acc_ttl:Conta não verificada
-err_mod_acc_msg:O administrador escolheu ver todas as contas manualmente antes de as activar. Até que a sua conta seja validada pelo administrador não vai poder utilizar todas as possibilidades do forum.
+err_mod_acc_msg:O administrador escolheu ver todas as contas manualmente antes de as ativar. Até que a sua conta seja validada pelo administrador não vai poder utilizar todas as possibilidades do fórum.
 accounts_pending_approval:Contas á espera de aprovação
 saved:Guardado
 register_err_time_limit:Foi atingido o limite de um registo por cada {GVAR: REG_TIME_LIMIT} segundos. Aguarde {PLURAL: reg_limit_reached|$1 segundo|$1 segundos} e tente registar-se novamente, por favor.
@@ -962,9 +964,9 @@ post_mod_msg_notify_msg:Uma mensagem nova, intitulada "{VAR: msg_post->subject}"
 thread_printable_pdf:Exportar para PDF
 thread_syndicate:Adicione este forum (XML)
 reg_conf_title:Confirmação do Registo
-reg_conf_email:<b>Confirmação por correio electrónico</b><br />Foi-lhe enviada uma mensagem contendo uma URL especial a que terá de aceder antes da sua conta ser activada. Se não receber essa notificação nos próximos minutos, entre na sua conta e garanta que o endereço de correio electrónico que introduziu está correcto. Após ter confirmado a sua conta, terá acesso às funcionalidades do fórum disponíveis aos utilizadores confirmados.
+reg_conf_email:<b>Confirmação por correio eletrónico</b><br />Foi-lhe enviada uma mensagem contendo uma URL especial a que terá de aceder antes da sua conta ser ativada. Se não receber essa notificação nos próximos minutos, entre na sua conta e garanta que o endereço de correio eletrónico que introduziu está correto. Após ter confirmado a sua conta, terá acesso às funcionalidades do fórum disponíveis aos utilizadores confirmados.
 reg_conf_account:<b>Confirmação de Conta</b><br />Antes da sua conta se tornar activa é necessário que seja aprovada pelo(s) administrador(es), assim que tal acontecer você receberá um e-mail indicando que a mesmo foi activada. Até essa altura você poderá aceder à sua conta, no entanto não poderá aceder às opções do forum somente disponíveis aos utilizadores confirmados.
-forum_banned_user:As suas acções anteriores obtiveram como resultado a sua expulsão permanente deste forum. Adeus.
+forum_banned_user:As suas ações anteriores obtiveram como resultado a sua expulsão permanente deste fórum. Adeus.
 mnav_description:Navegador de mensagens
 mnav_date_limit:Intervalo de datas:
 mnav_forum_limit:Pesquisar apenas em:
@@ -984,9 +986,9 @@ mnav_month:Mês (es)
 mnav_title:Navegador de Mensagens
 mnav_update:Consultando as mensagens usando o <a href="{TEMPLATE: mnav_update_lnk}">Navegador de Mensagens</a>
 pm_notify_subject:[{GVAR: FORUM_TITLE}] Notificação de Nova Mensagem Privada
-pm_notify_body_email:Você tem uma nova mensagem privada intitulada "{VAR: subject}", de "{VAR: from}", no fórum "{GVAR: FORUM_TITLE}".\nPara ver a mensagem clique aqui: {FULL_ROOT}{ROOT}?t=pmsg_view&id={VAR: pid}\n\nPara deixar de receber notificações, desactive "Notificação de Mensagens Privadas" no seu perfil.
+pm_notify_body_email:Você tem uma nova mensagem privada intitulada "{VAR: subject}", de "{VAR: from}", no fórum "{GVAR: FORUM_TITLE}".\nPara ver a mensagem clique aqui: {FULL_ROOT}{ROOT}?t=pmsg_view&id={VAR: pid}\n\nPara deixar de receber notificações, desative "Notificação de Mensagens Privadas" no seu perfil.
 register_pm_notification:Notificação de Mensagem Privada:
-register_pm_notification_desc:Se activado, será notificado sempre que lhe for enviada uma mensagem privada.
+register_pm_notification_desc:Se ativado, será notificado sempre que lhe for enviada uma mensagem privada.
 findu_admin_opts_header:Opções de administração
 findu_unban:Desbanir
 findu_ban:Banir
@@ -996,7 +998,7 @@ dmsg_reply_to:é uma resposta a
 dmsg_reply_num:mensagem n° {VAR: obj->reply_to}
 merge_topics:Unir Tópicos
 merge_topics_cp:Painel de Controlo de Fusão de Tópicos
-merge_topics_tpl:Seleccione Tópicos para Unir <font class="SmallText">(você tem que seleccionar mais que um tópico)</font>
+merge_topics_tpl:Selecione tópicos para unir <font class="SmallText">(você tem que selecionar mais que um tópico)</font>
 merge_merge:Fundir os tópicos selecionados
 merge_next:Próximos Tópicos
 merge_prev:Tópicos anteriores
@@ -1062,10 +1064,10 @@ mmd_abort_move:Cancelar
 mmd_move:Mover Tópicos
 pmsg_pdf_btn:Criar um ficheiro PDF
 search_results_hdr:{VAR: total} resultados encontrados
-thread_del_all:Apagar os seleccionados
-thread_mov_all:Mover os seleccionados
-thread_merge_all:Fundir os seleccionados
-thread_loc_all:Bloquear/desbloquear os seleccionados
+thread_del_all:Apagar os selecionados
+thread_mov_all:Mover os selecionados
+thread_merge_all:Fundir os selecionados
+thread_loc_all:Bloquear/desbloquear os selecionados
 dmsg_ip:IP:
 err_blockedaccnt_title:ERRO: Sua conta foi filtrada.
 err_blockedaccnt_msg:O acesso ao fórum foi bloqueado à sua conta devido a um dos filtros de utilizadores instalados.
@@ -1112,10 +1114,9 @@ move_msg_th_expl:Especifique a ID do tópico de destino (pode estar em outros f�
 captcha_img_alt:Verificação por Captcha: você terá que reconhecer o texto nesta imagem.
 captcha_img_help:Não há zero ou um na imagem.
 powered-by:Potenciado por: FUDforum {GVAR: FORUM_VERSION}.
-# Fuzzy
-copyright:&copy;2001-2011 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>. Todos os direitos reservados.
+copyright:Copyright &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:Código:
-code_select_all:Seleccionar todos
+code_select_all:Selecionar tudo
 code_show_hide:Mostrar / ocultar
 social_sites:Redes sociais:
 postcheck_min_len_err:A sua mensagem é demasiado curta. O tamanho mínimo permitido é {PLURAL: post_min_len|$1 caractere|$1 caracteres}.

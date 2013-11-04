@@ -1,5 +1,5 @@
 /**
-* copyright            : (C) 2001-2012 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -137,7 +137,7 @@
 
 {SECTION: thread_row_moved a row indicating that the thread has been moved}
 <tr>
-	<td class="RowStyleB wo"><img src="{THEME_IMAGE_ROOT}/moved{DEF: img_ext}" title="{MSG: moved_thread_message}" alt="" /></td>
+	<td class="RowStyleB wo"><img src="{THEME_IMAGE_ROOT}/moved.png" title="{MSG: moved_thread_message}" alt="" /></td>
 	<td class="RowStyleB ac GenText" colspan="5">{MSG: was_moved_msg}</td>
 </tr>
 {SECTION: END}
@@ -164,7 +164,7 @@
 		<input type="submit" class="button small" name="mov_sel_all" value="{MSG: thread_mov_all}" />
 		<input type="submit" class="button small" name="merge_sel_all" value="{MSG: thread_merge_all}" />
 		<input type="submit" class="button small" name="loc_sel_all" value="{MSG: thread_loc_all}" />
-		<input type="checkbox" name="toggle" title="Select all/none" onclick="jQuery(\'input:checkbox\').attr(\'checked\', this.checked);" />
+		<input type="checkbox" name="toggle" title="Select all/none" onclick="jQuery(\'input:checkbox\').prop(\'checked\', this.checked);" />
 	</td>
 	<td colspan="3" class="RowStyleC"> </td>
 </tr>
@@ -177,7 +177,7 @@
 		<input type="submit" class="button small" name="mov_sel_all" value="{MSG: thread_mov_all}" />
 		<input type="submit" class="button small" name="merge_sel_all" value="{MSG: thread_merge_all}" />
 		<input type="submit" class="button small" name="loc_sel_all" value="{MSG: thread_loc_all}" />
-		<input type="checkbox" name="toggle" title="Select all/none" onclick="jQuery(\'input:checkbox\').attr(\'checked\', this.checked);" />
+		<input type="checkbox" name="toggle" title="Select all/none" onclick="jQuery(\'input:checkbox\').prop(\'checked\', this.checked);" />
 	</td>
 	<td colspan="3" class="RowStyleC"> </td>
 </tr>

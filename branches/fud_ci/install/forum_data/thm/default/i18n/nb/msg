@@ -1,5 +1,7 @@
-# Messages for Norwegian Bokmål (‪norsk (bokmål)‬)
+# Messages for Norwegian Bokmål (norsk bokmål)
 # Exported from translatewiki.net
+# Author: Danmichaelo
+# Author: Laaknor
 # Author: McDutchie
 # Author: Naudefj
 # Author: Nghtwlkr
@@ -212,6 +214,7 @@ reported_reported_msg:Rapporterte innlegg
 modque_pending_approval:innlegg som venter på godkjenning
 modque_approve:Godkjenn
 modque_delete:Slett
+modque_deleteall:Slett alle fra bruker
 modque_no_message:Ingen innlegg ventar på godkjenning
 pmsg_new_messages:Ulest privat melding
 pmsg_old_messages:Les privat melding
@@ -673,6 +676,7 @@ reset_err_rstconf_title:Informasjon
 reset_err_rstconf_msg:Du vil motta instruksjoner per e-post innen få minutter
 reset_newpass_title:Nullstill passord
 reset_newpass_msg:Hei!\n\nDitt brukernavn og passord har blitt endret på din forespørsel.\nHer er din inloggingsinformasjon:\n\nBrukernavn: {VAR: ui[1]}\nPassord: {VAR: passwd}\n\nNoter deg at passordet ditt er endret til det overstående. Om du vil\nendre passordet ditt kan du gjøre det i kontrollpanelet:\n{FULL_ROOT}{ROOT}?t=register
+# Fuzzy
 reset_login_notify:Ditt passord har blitt sendt til deg per e-post og burde komme frem innen et par minutter. Vennligst sjekk e-posten din for ditt brukernavn og passord.<br />.<br />.<br />
 search_update:Søker blandt innleggene
 selmsg_update:Leser <a href="{TEMPLATE: selmsg_update_lnk}">Dagens innlegg</a>
@@ -1106,7 +1110,7 @@ captcha_img_alt:Captcha-verifisering: du må kjenne igjen teksten i dette bildet
 captcha_img_help:Det er ingen null eller en i bildet.
 powered-by:Levert av: FUDforum {GVAR: FORUM_VERSION}.
 # Fuzzy
-copyright:Copyright © 2001-2011 <a href="http://fudforum.org/">FUDforum Bulleting Board Software</a>
+copyright:Copyright &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulleting Board Software</a>
 code_title:Kode:
 code_select_all:Velg alle
 code_show_hide:Vis/ skjul

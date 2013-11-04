@@ -1,6 +1,6 @@
 <?php
 /**
-* copyright            : (C) 2001-2012 Advanced Internet Designs Inc.
+* copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
 * $Id$
 *
@@ -18,27 +18,36 @@
 		std_error('perms');
 	}
 
-	$appr = isset($_GET['appr']) ? (int) $_GET['appr'] : 0;
-	$del  = isset($_GET['del'])  ? (int) $_GET['del']  : 0;
+	/* Sanitize user input. */
+	$appr   = isset($_GET['appr'])   ? (int) $_GET['appr']   : 0;
+	$del    = isset($_GET['del'])    ? (int) $_GET['del']    : 0;
+	$delall = isset($_GET['delall']) ? (int) $_GET['delall'] : 0;
 
-	/* We need to determine wether or not the message exists & if the user has access to approve/delete it. */
-	if ($appr || $del) {
-		if (!q_singleval('SELECT CASE WHEN ('. q_bitand($usr->users_opt, 1048576) .' = 0) THEN mm.id ELSE 1 END FROM {SQL_TABLE_PREFIX}msg m INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id LEFT JOIN {SQL_TABLE_PREFIX}mod mm ON t.forum_id=mm.forum_id AND mm.user_id='. _uid .' WHERE m.id='. ($appr ? $appr : $del))) {
+	/* We need to determine if the message exists and if the user has access to approve/delete it. */
+	if ($appr || $del || $delall) {
+		if (!q_singleval('SELECT CASE WHEN ('. q_bitand($usr->users_opt, 1048576) .' = 0) THEN mm.id ELSE 1 END FROM {SQL_TABLE_PREFIX}msg m INNER JOIN {SQL_TABLE_PREFIX}thread t ON m.thread_id=t.id LEFT JOIN {SQL_TABLE_PREFIX}mod mm ON t.forum_id=mm.forum_id AND mm.user_id='. _uid .' WHERE m.id='. ($appr ? $appr : ($del ? $del : $delall)))) {
 			if (db_affected()) {
 				std_error('perms');
 			} else {
-				$del = $appr = 0;
+				$appr = $del = $delall = 0;
 			}
 		}
 
 		if (sq_check(0, $usr->sq)) {
 			if ($appr) {
-				fud_msg_edit::approve($appr);
 				logaction($usr->id, 'APPROVEMSG', $appr);
+				fud_msg_edit::approve($appr);
 			} else if ($del) {
+				$subj = q_singleval('SELECT subject FROM {SQL_TABLE_PREFIX}msg WHERE id='. $del);
+				logaction($usr->id, 'DELMSG', $del, $subj);
 				fud_msg_edit::delete(false, $del);
-// TODO: Create a new REJECTMSG action?
-				logaction($usr->id, 'DELMSG', $del);
+			} else if ($delall) {
+				$poster = q_singleval('SELECT poster_id FROM {SQL_TABLE_PREFIX}msg WHERE id='. $delall);
+				$c = q('SELECT id, subject FROM {SQL_TABLE_PREFIX}msg WHERE poster_id='. $poster .' AND apr=0');
+				while ($r = db_rowarr($c)) {
+					logaction($usr->id, 'DELMSG', $r[0], $r[1]);
+					fud_msg_edit::delete(false, $r[0]);
+				}
 			}
 		}
 	}
@@ -47,8 +56,8 @@
 
 	/*{POST_HTML_PHP}*/
 
-	/* For sanity sake, we only select up to POSTS_PER_PAGE messages, simply because otherwise the form will
-	 * become unmanageable.
+	/* For sanity sake, we only select up to POSTS_PER_PAGE messages,
+	 * simply because otherwise the form will become unmanageable.
 	 */
 	$r = q(q_limit('SELECT
 		m.*, COALESCE(m.flag_cc, u.flag_cc) AS disp_flag_cc, COALESCE(m.flag_country, u.flag_country) AS disp_flag_country,
@@ -96,3 +105,4 @@
 /*{POST_PAGE_PHP_CODE}*/
 ?>
 {TEMPLATE: MODQUE_PAGE}
+

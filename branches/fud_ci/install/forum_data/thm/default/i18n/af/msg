@@ -42,7 +42,7 @@ home:Tuis
 homepage:Tuisblad:
 icq_control_panel:ICQ aan-lyn boodskappe paneel
 icq_message_form:ICQ boodskapvorm:
-ignore_user:Ignoreer boodskappe van die gebruiker
+ignore_user:ignoreer die gebruiker se boodskappe
 im_aim:AIM Handle:
 im_msnm:MSN Messenger:
 im_yahoo:Yahoo Messenger:
@@ -62,7 +62,7 @@ locked_with_new_posts:Gesluit (m/ ongeleesde boodskappe)
 logged_in_list:Aangetekende gebruikers
 login:Teken aan
 login_header:Lid:
-logout:Teken uit
+logout:Teken af
 mark_all_read:Merk alle boodskappe as gelees
 mark_all_read_desc:Alle boodskappe wat u nog nie gelees het nie sal as gelees gemerk word
 members:Lede
@@ -210,6 +210,7 @@ reported_reported_msg:Gerapporteerde boodskap
 modque_pending_approval:Boodskappe wat nog goedgekeur moet word
 modque_approve:Keur goed
 modque_delete:Skrap
+modque_deleteall:Skrap almal vir gebruiker
 modque_no_message:Daar is nie nog boodskappe wat goedgekeur moet word nie.
 pmsg_new_messages:Ongeleesde privaatboodskap
 pmsg_old_messages:Geleesde privaatboodskap
@@ -225,8 +226,8 @@ referals_refered_by:Forum lede verwys deur: <b><a href="{TEMPLATE: referals_refe
 referals_post_count:Aantal verwysings
 referals_registered_on:Geregistreer op
 referals_action:Aksie
-pmsg_all:ieder
-pmsg_none:geen
+pmsg_all:alles
+pmsg_none:niks
 folder:Vouer:
 pmsg_replied:beantwoord
 pmsg_forwarded:aangestuur
@@ -377,7 +378,7 @@ edit_message:Pas wysigings toe
 apply_spell_changes:Pas spel-wysigings toe
 post_preview:Boodskap voorskou
 post_logedin_user:Aangetekende lid:
-post_logout:teken uit
+post_logout:teken af
 post_passwd:Pos Wagwoord:
 post_poll:Stemming:
 post_create_poll:SKEP STEMMING
@@ -422,7 +423,7 @@ coppa_after:Na {TEMPLATE: coppa_date}
 coppa_link:Kliek op die skakel wat ooreenstem met u geboortedatum
 coppa:<p>U voog moet via faks of e-pos toestemming na die administrateur van die forum stuur alvorens gebruikers jonger as 13 toegelaat mag word om te registreer.</p><p>Vir meer inligting kontak <a href="mailto:{GVAR: ADMIN_EMAIL}">{GVAR: ADMIN_EMAIL}</a></p>.
 prereg_info:Informasie
-prereg_agree:Akoord
+prereg_agree:Ek gaan akkoord
 prereg_disagree:Stem nie saam nie
 prereg_update:Lees die forum se reëls
 coppa_fax_instructions:Instruksies vir die voog
@@ -443,8 +444,8 @@ coppa_fax_passwd:Wagwoord
 coppa_fax_remail:E-pos
 coppa_fax_name:Naam
 login_not_logedin:U is nie aangeteken nie.  Daar kan verskeie redes hiervoor wees:
-login_cookie_expired:U "kookie" het verval en u sal weer moet aanteken om die kookie te hernu.
-login_perm_denied:U sal moet aanteken om toegang tot die inligting te verkry.
+login_cookie_expired:U koekie het verval. U sal weer moet aanmeld om die koekie te hernu.
+login_perm_denied:Anonieme gebruikers het nie toegang tot die inligting nie. U sal moet aanmeld om toegang te verkry.
 login_want_to_register:Wil u registreer?
 login_forgot_passwd:Wagwoord vergeet?
 login_use_cookie:Gebruik "kookies" <br /><span class="SmallText">Indien u 'n publieke terminaal soos 'n PC in 'n biblioteek, skool of Internet-kafee gebruik, word u aangeraai om die opsie af te skakel vir beter veiligheid.<br />Indien u die opsie kies, sal u voortaan outomaties by die forum aangeteken word.</span>
@@ -579,7 +580,7 @@ buddy_list_err_ignore:U kan nie gebruikers wat u ignoreer by u vriendelys byvoeg
 buddy_list_update:Besigtig jou vriendelys
 core_err_invinp_title:Ongeldige invoer
 core_err_invinp_err:U het 'n ongeldige skakel gevolg. Laat asseblief die <a href="mailto:{GVAR: ADMIN_EMAIL}">webmeester</a> weet hoe u hier gekom het.
-core_adm_login_msg:Administrateurs kan <a href="{GVAR: WWW_ROOT}adm/admloginuser.php">hier</a> aanteken
+core_adm_login_msg:Administrateurs kan <a href="{GVAR: WWW_ROOT}adm/admloginuser.php">hier</a> aanmeld.
 email_err_unabletoemail_title:FOUT: nie in staat om epos te stuur nie
 email_err_unabletoemail_msg:Die administrateur het die epos-stelsel gedeaktiveer.
 email_error_unabletolocaddr:Jammer, die stelsel was nie in staat om {VAR-HTML: _POST['tx_name']} te epos nie omdat die e-posadres nie gevind kon word nie
@@ -671,7 +672,7 @@ reset_err_rstconf_title:Inligting
 reset_err_rstconf_msg:U sal binne enkele minuute verdere instruksies per epos ontvang
 reset_newpass_title:Herstel wagwoord
 reset_newpass_msg:Hallo,\n\nSoos versoek, hier is u gebruikersinligting:\n\nGebruikersnaam: {VAR: ui[1]}\nWagwoord: {VAR: passwd}\n\nLet op: U wagwoord is herstel na die bovermelde waarde. Indien u u wagwoord wil verander, kan u dit in u profiel doen by:\n{FULL_ROOT}{ROOT}?t=register
-reset_login_notify:U wagwoord is per epos aan u gestuur. U sal dit binne enkele minuute ontvang.<br />
+reset_login_notify:U wagwoord is per e-pos aan u gestuur. U sal dit binne enkele minute ontvang.
 search_update:Soek deur pos
 selmsg_update:Blaai deur <a href="{TEMPLATE: selmsg_update_lnk}">vandag se pos</a>
 showposts_update:Bekyk pos van: <a href="{TEMPLATE: showposts_update_lnk}">{VAR: u_alias}</a>
@@ -868,7 +869,7 @@ poll_edit:Wysig
 register_err_not_valid_img:Die gespesifiseerde URL bevat nie 'n geldige foto nie.
 pmsg_recepient:ontvanger
 register_err_taken_alias:Die alias wat u gekies het word reeds deur 'n ander forumlid gebruik, kies asseblief 'n ander alias.
-register_alias:Alias
+register_alias:Alias:
 register_alias_desc:Indien u 'n bynaam eerder as u gebruikersnaam op die forum wil vertoon, vul dit dan hier in.
 register_allow_pm_msg:Laat privaatboodskappe toe
 register_allow_pm_msg_desc:Laat ander gebruikers toe om aan u privaatboodskappe deur die forum te stuur.
@@ -953,8 +954,8 @@ post_mod_msg_notify_msg:'n Nuwe boodskap met titel "{VAR: msg_post->subject}" is
 thread_printable_pdf:Genereer PDF-dokument
 thread_syndicate:XML-voer
 reg_conf_title:Bevestiging van registrasie
-reg_conf_email:<b>E-posbevestiging</b><br />'n E-pos is aan u gestuur met 'n spesiale URL waarop u moet kliek voordat u rekening geaktiveer sal word. Indien u nie die e-pos binne 'n paar minute ontvang nie, teken in en maak seker dat die e-posadres wat u verskaf het geldig is. Sodra u u rekening bevestig het sal u al die funksies wat aan geregistreerde lede toegeken is kan uitvoer.
-reg_conf_account:<b>Rekeningbevestiging</b><br />U rekening moet deur 'n administrateur goedgekeur word alvorens dit geaktiveer kan word. Sodra dit gebeur sal u 'n e-pos ter bevestiging ontvang. Tot dan sal u na u rekening kan aanteken, maar u sal nie funksies wat aan geregistreerde lede toegeken is kan uitvoer nie.
+reg_conf_email:<b>E-posbevestiging</b><br />'n E-pos is aan u gestuur met 'n spesiale URL waarop u moet kliek voordat u rekening geaktiveer sal word. Indien u nie die e-pos binne 'n paar minute ontvang nie, meld aan en maak seker dat die e-posadres wat u verskaf het geldig is. Sodra u u rekening bevestig het, sal u al die funksies wat aan geregistreerde lede toegeken is kan uitvoer.
+reg_conf_account:<b>Gebruikersbevestiging</b><br />U gebruiker moet deur 'n administrateur goedgekeur word alvorens dit geaktiveer sal word. Sodra dit gebeur sal u 'n e-pos ter bevestiging ontvang. Tot dan sal u met u gebruiker kan aanmeld, maar u sal nie funksies wat aan geregistreerde lede toegeken is kan uitvoer nie.
 forum_banned_user:U optrede het veroorsaak dat u permanent van die webwerf geblokkeer is. Vaarwel!
 mnav_description:Boodskapnavigasie
 mnav_date_limit:Periode:
@@ -1026,7 +1027,7 @@ delete_message_extra_body:Sluit die geskrapte boodskap in by die boodskap wat aa
 delete_msg_removed_ttl:Die administrateurs het u boodskap verwyder.
 delete_msg_pm_body:Oorspronklike boodskap
 delete_msg_pm_subject:Onderwerp: {VAR: data[15]}
-ip_no_whois:Whois inligting vir <b>{VAR: ip}</b> is nie beskikbaar nie.
+ip_no_whois:WHOIS-inligting vir die IP-adres <b>{VAR: ip}</b> is nie beskikbaar nie.
 ip_whois_title:ISP Inligting
 register_theme:Tema:
 pmsg_trash:Maak asblik leeg
@@ -1070,7 +1071,7 @@ sml_emoticon:Emotikon
 sml_code:Kode
 mnav_sub_only:Soek slegs deur forums waarop ek ingeskryf het.
 register_topics_per_page:Onderwerpe per bladsy:
-login_min_time:Die forum laat slegs een aanteken elke {VAR: MIN_TIME_BETWEEN_LOGIN} sekondes toe. Wag asseblief {FUNC: ($usr_d->last_login + $MIN_TIME_BETWEEN_LOGIN - __request_timestamp__)} sekondes voor u weer probeer.
+login_min_time:Die forum laat slegs een aanmelding elke {VAR: MIN_TIME_BETWEEN_LOGIN} sekondes toe. Wag asseblief {FUNC: ($usr_d->last_login + $MIN_TIME_BETWEEN_LOGIN - __request_timestamp__)} sekondes voor u weer probeer.
 post_not_logged_in:U is nie tans aangeteken nie, die boodskap sal anoniem gepos word.
 post_common_bold:Vet
 post_common_italics:Kursief
@@ -1103,7 +1104,7 @@ move_msg_th_expl:Spesifiseer die ID van die destinasie onderwerp (kan in 'n ande
 captcha_img_alt:Captcha-verifikasie: u moet die teks in die beeld herken.
 captcha_img_help:Daar is nie 'n nul of 'n een in die beeld nie.
 powered-by:Aangedryf deur: FUDforum {GVAR: FORUM_VERSION}.
-copyright:Kopiereg &copy;2001-2012 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
+copyright:Kopiereg &copy;2001-2013 <a href="http://fudforum.org/">FUDforum Bulletin Board Software</a>
 code_title:KODE:
 code_select_all:Kies alles
 code_show_hide:Wys/ versteek

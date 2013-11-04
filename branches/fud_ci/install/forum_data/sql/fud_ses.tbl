@@ -1,4 +1,4 @@
-#   copyright            : (C) 2001-2011 Advanced Internet Designs Inc.
+#   copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 #   email                : forum@prohost.org
 #
 #   $Id$
@@ -22,7 +22,7 @@ CREATE TABLE {SQL_TABLE_PREFIX}ses
 
 	time_sec	BIGINT NOT NULL DEFAULT 0,
 	ip_addr		VARCHAR(46),
-	useragent	VARCHAR(32),
+	useragent	VARCHAR(64),
 
 	data		TEXT,
 	returnto	VARCHAR(255)
