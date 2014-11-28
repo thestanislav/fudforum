@@ -1,0 +1,39 @@
+#!/usr/bin/php -q
+<?php
+
+require( "archive_utils" );
+
+$dir = FALSE;
+
+if( !defined('argc') ){
+	$argc = $_SERVER['argc'];
+}
+
+if( $argc == 1 ) {
+	seterr("No arguments.\n\tSyntax: deploy directory_name" );
+} 
+if ( $argc >= 2 ) {
+	$dir = preg_replace('!/+$!', '', $_SERVER['argv'][1]);
+	if( !@is_dir($dir) ) {
+		seterr("ERROR: [$dir] is not a valid valid directory.\nPlease specify a valid directory to package.");
+	}
+} 
+
+echo "Creating archive.\n\n";
+create_file_archive( "install", "fudforum_archive" );
+
+$files = array( "install.php", "upgrade.php", "unprotect.php", "fudforum_archive" );
+
+echo "Copying installation files to $$dir.\n\n";
+foreach( $files as $file ) {
+	if( !copy( $file, $dir.'/'.$file ) ) {
+		echo "$file    FAIL.\n";
+	} else  {
+		echo "$file    OK.\n";
+	}
+}
+echo "\n";
+
+unlink("fudforum_archive");
+
+echo "Deployment finished.\n";

@@ -11,7 +11,7 @@
 * (at your option) any later version.
 ***************************************************************************/
 
-require( "archive_utils ")
+require( "archive_utils");
 
 $dir = FALSE;
 $filename = FALSE;
@@ -27,7 +27,7 @@ if( $argc == 1 ) {
 if ( $argc >= 2 ) {
 	$dir = preg_replace('!/+$!', '', $_SERVER['argv'][1]);
 	if( !@is_dir($dir) ) {
-		seterr('ERROR: ['. $_SERVER['argv'][1] ."] is not a valid valid directory.\nPlease specify a valid directory to package.");
+		seterr("ERROR: [$dir] is not a valid valid directory.\nPlease specify a valid directory to package.");
 	}
 } 
 if( $argc >= 3 ) {
