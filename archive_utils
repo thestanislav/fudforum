@@ -1,7 +1,18 @@
 <?php
 
+/** Print error message and exit. */
+function seterr($msg)
+{
+	if( !defined('STDERR' ) ){
+		define('STDERR', fopen('php://stderr', 'wb'));
+	}
+
+	fwrite(STDERR, $msg ."\n"); 
+	exit;
+}
+
 /** Create an archive of all files requred to install or upgrade a forum. */
-function archive($dir, $compress)
+function archive($dir, $compress = FALSE)
 {
 	$dirs = array(realpath($dir));
 	$base = dirname($dirs[0]);
@@ -59,15 +70,11 @@ function archive($dir, $compress)
 	return $data;
 }
 
-function create_file_archive( $dir, $filename, $compress ) {
+function create_file_archive( $dir, $filename = FALSE, $compress = FALSE ) {
 	error_reporting(E_ALL);
 	@ini_set('display_errors', 1);
 	@ini_set('memory_limit', '128M');	// PHP 5.3's default, old defaults too small.
 	@set_magic_quotes_runtime(0);		// Deprecated in PHP 5.3.
-
-	if( !defined('STDERR' ) ){
-		define('STDERR', fopen('php://stderr', 'wb'));
-	}
 
 	$archive = archive($dir, $compress);
 
