@@ -12,7 +12,7 @@
 ***************************************************************************/
 
 /** Create an archive of all files requred to install or upgrade a forum. */
-function create_file_archive($dir)
+function create_file_archive($dir, $compress)
 {
 	$dirs = array(realpath($dir));
 	$base = dirname($dirs[0]);
@@ -55,6 +55,18 @@ function create_file_archive($dir)
 		closedir($d);
 	}
 
+	$check_sum = md5($data);
+
+	$clean = array('<?' => 'PHP_OPEN_TAG', '<%' => 'PHP_OPEN_ASP_TAG');
+
+	if( $compress ){
+		$a_len = str_pad(strlen($data), 10, '0', STR_PAD_LEFT);
+		$data = $check_sum . $a_len . strtr(gzcompress($data, 9), $clean);
+	} else {
+		$clean['<?'] = 'RAW_PHP_OPEN_TAG';
+		$data = $check_sum . strtr($data, $clean);
+	}
+
 	return $data;
 }
 
@@ -66,37 +78,55 @@ function seterr($msg)
 }
 
 /* main */
-	error_reporting(E_ALL);
-	@ini_set('display_errors', 1);
-	@ini_set('memory_limit', '128M');	// PHP 5.3's default, old defaults too small.
-	@set_magic_quotes_runtime(0);		// Depricated in PHP 5.3.
+error_reporting(E_ALL);
+@ini_set('display_errors', 1);
+@ini_set('memory_limit', '128M');	// PHP 5.3's default, old defaults too small.
+@set_magic_quotes_runtime(0);		// Depricated in PHP 5.3.
 
-	if (!defined('STDERR')) {
-		define('STDERR', fopen('php://stderr', 'wb'));
-	}
+if( !defined('STDERR' ) ){
+	define('STDERR', fopen('php://stderr', 'wb'));
+}
 
-	if (!isset($_SERVER['argv'][1]) ) {
-		seterr("No arguments.\n\tSyntax: create_file_archive directory_name [use compression]");
-	} else if (!@is_dir($_SERVER['argv'][1])) {
+if( !defined('argc') ){
+	$argc = $_SERVER['argc'];
+}
+
+$dir = FALSE;
+$filename = FALSE;
+$compress = FALSE;
+
+if( $argc == 1 ) {
+	seterr("No arguments.\n\tSyntax: create_file_archive directory_name [archive_name] [use compression]\n\tIf no archive_name is specified the archive is echoed");
+} 
+if ( $argc >= 2 ) {
+	$dir = preg_replace('!/+$!', '', $_SERVER['argv'][1]);
+	if( !@is_dir($dir) ) {
 		seterr('ERROR: ['. $_SERVER['argv'][1] ."] is not a valid valid directory.\nPlease specify a valid directory to package.");
 	}
-
-	if (isset($_SERVER['argv'][2]) && !extension_loaded('zlib')) {
-		seterr('The zlib extension that is required to compress the archive is not installed. Please install it or restart without compression.');
-	}	
-
-	$_SERVER['argv'][1] = preg_replace('!/+$!', '', $_SERVER['argv'][1]);
-
-	$archive = create_file_archive($_SERVER['argv'][1]);
-	$check_sum = md5($archive);
-
-	$clean = array('<?' => 'PHP_OPEN_TAG', '<%' => 'PHP_OPEN_ASP_TAG');
-
-	if (isset($_SERVER['argv'][2])) {
-		$a_len = str_pad(strlen($archive), 10, '0', STR_PAD_LEFT);
-		echo $check_sum . $a_len . strtr(gzcompress($archive, 9), $clean);
-	} else {
-		$clean['<?'] = 'RAW_PHP_OPEN_TAG';
-		echo $check_sum . strtr($archive, $clean);
+} 
+if( $argc >= 3 ) {
+	$filename = $_SERVER['argv'][2];
+}
+if( $argc >= 4 ) {
+	$compress = $_SERVER['argv'][3];
+	if( !( strcasecmp($compress, "1") || 
+		   strcasecmp($compress,"true")  || 
+		   strcasecmp($compress,"yes") ) ) {
+		$compress = TRUE;
 	}
+
+	if( $compress && !extension_loaded('zlib') )	{
+		seterr('The zlib extension that is required to compress the archive is not installed. Please install it or restart without compression.');
+	}
+}
+
+$archive = create_file_archive($dir, $compress);
+
+if( !$filename ){
+	echo $archive;
+} else {
+	$ok = file_put_contents( $filename, $archive );
+	if( $ok === FALSE ) seterr( "Error while writing to file $$filename.");
+}
+
 ?>
