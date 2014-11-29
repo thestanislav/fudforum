@@ -136,11 +136,11 @@ div#fud_navigation {
 
 /*--- tbody ---*/
 
-.fud_table tbody tr.odd {
+.fud_table tbody tr:nth-of-type(odd) {
     background-color: lighten( @Gainsboro, 10% );
 }
 
-.fud_table tbody tr.even {
+.fud_table tbody tr:nth-of-type(even) {
     background-color: lighten( @Gainsboro, 5% );
 }
 

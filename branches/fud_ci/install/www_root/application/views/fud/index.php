@@ -1,5 +1,5 @@
 
-<?php echo $navigation ?>
+<?php echo $navigation; ?>
 
 <table id="fora_table" class="fud_table" border="0" cellspacing="1" cellpadding="2">
     <thead class="table_header" >
@@ -10,16 +10,14 @@
     </thead>
     <tbody>
 <?php
+
 $i = 0;
 
 $out = "		";
+
 foreach( $cats as $cat )
 {
-	if( !array_key_exists( $cat->id, $catForums ) )
-		continue;
-    $forums = $catForums[$cat->id];
-    if( !is_array($forums) )
-        $forums = array($forums);
+    $forums = $visibleForums[$cat->id];
 
 	$cat_url = site_url( "category/{$cat->id}" );
 
@@ -27,12 +25,6 @@ foreach( $cats as $cat )
 
     foreach( $forums as $forum )
     {
-        $row_cl = "";
-        if( $i % 2 )
-            $row_cl .= " odd";
-        else
-            $row_cl .= " even";
-
         $desc = empty($forum->descr) ? "&nbsp" : $forum->descr;
 
         $last_date = null;
@@ -41,7 +33,7 @@ foreach( $cats as $cat )
 		
 		$forum_url = site_url( "forum/{$cat->id}/{$forum->id}" );
 		
-        $out .= "<tr class=\"{$row_cl}\">";
+        $out .= "<tr>";
         $out .= "<td class=\"forum\"><a href=\"{$forum_url}\">{$forum->name}</a><br/>{$desc}</td>";
         $out .= "<td class=\"messages\">{$forum->post_count}</td>";
         $out .= "<td class=\"topics\">{$forum->thread_count}</td>";
