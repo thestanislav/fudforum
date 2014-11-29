@@ -11,7 +11,7 @@ class Fud extends CI_Controller
 
         $this->load->library( 'fud/fud_library', null, 'FUD' );
 
-        $this->load->model('fud/user','user');
+        $this->load->model('fud/fud_user','user');
 
         $this->load->helper( 'fud' );
         $this->load->helper( 'br2nl' );
@@ -76,13 +76,17 @@ class Fud extends CI_Controller
 		
 		$visibleForums = array();
         $cats = $this->FUD->fetch_categories( null, TRUE );
+        $visibleCats = array();
         foreach( $cats as $cat )
         {
             $catForums[$cat->id] = $this->FUD->fetch_forums_by_category( $cat->id, TRUE );
-            for( $frmIdx=0; $frmIdx<count($catForums[$cat->id]); $frmIdx++ )
+            $forumsInCat = count($catForums[$cat->id]);
+
+            for( $frmIdx=0; $frmIdx<$forumsInCat; $frmIdx++ )
             {
                 if( !is_array($catForums[$cat->id]) )
                     $catForums[$cat->id] = array($catForums[$cat->id]);
+                
                 $forum = $catForums[$cat->id][$frmIdx];
                 if( is_object( $forum ) )
                 {
@@ -97,16 +101,20 @@ class Fud extends CI_Controller
                 else
                 {
                     if( $this->FUD->forum_is_visible( $forum, $uid ) )
-                            $visibleForums[$cat->id][] = $forum;
+                        $visibleForums[$cat->id][] = $forum;
                 }
             }
+
+            if( array_key_exists($cat->id,$visibleForums) )
+            	$visibleCats[] = $cat;
         }
-        $data = array( 'cats' => $cats, 'catForums' => $visibleForums,
+        $data = array( 'cats' => $visibleCats, 'visibleForums' => $visibleForums,
 					   'navigation' => $navigation );
         
 		$html_head = $this->load->view('fud/html_head.php', null, true);
 		$html_body = $this->load->view('fud/index.php', $data, true);
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+
 		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 

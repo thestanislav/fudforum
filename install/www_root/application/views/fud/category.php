@@ -17,11 +17,6 @@ $out = "		";
 
 foreach( $forums as $forum )
 {
-	$row_cl = "";
-	if( $i % 2 )
-		$row_cl .= " odd";
-	else
-		$row_cl .= " even";
 
 	$desc = empty($forum->descr) ? "&nbsp" : $forum->descr;
 
@@ -31,7 +26,7 @@ foreach( $forums as $forum )
 		
 	$forum_url = site_url( "forum/{$cat_id}/{$forum->id}" );
 
-	$out .= "<tr class=\"{$row_cl}\">";
+	$out .= "<tr >";
 	$out .= "<td class=\"forum\"><a href=\"{$forum_url}\">{$forum->name}</a><br/>{$desc}</td>";
 	$out .= "<td class=\"messages\">{$forum->post_count}</td>";
 	$out .= "<td class=\"topics\">{$forum->thread_count}</td>";

@@ -16,12 +16,6 @@
     for( $i=0; $i<count($topics); ++$i )
     {
         $topic = $topics[$i];
-        //die("<pre>".print_r($topic,true)."</pre>");
-        $row_cl = "";
-        if( $i % 2 )
-            $row_cl .= "odd";
-        else
-            $row_cl .= "even";
 
         $author = $topic->root_message->login;
         $desc = $topic->tdescr;
@@ -31,7 +25,7 @@
 		$topic_url = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
 
         $out = "        " .
-               "<tr class=\"{$row_cl}\" >" .
+               "<tr >" .
                "<td class=\"topic\">".
                "<div>".
                "<div class=\"width_100\"><a href=\"{$topic_url}\">{$topic->subject}</a></div>".
