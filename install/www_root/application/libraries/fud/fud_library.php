@@ -54,7 +54,7 @@ class Fud_Library
 
     function fetch_forums_by_category( $categories = null, $sort = FALSE )
     {
-		return fud_fetch_cat_forums( $categories, $sort );
+		    return fud_fetch_cat_forums( $categories, $sort );
     }
 
     function fetch_forums( $frmId = null, $sort = FALSE )
@@ -109,7 +109,7 @@ class Fud_Library
         {
 			$r = $q->first_row();
 			$perms = array_keys( $constants );
-			
+
 			foreach( $perms as $perm )
 			{
 				if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
