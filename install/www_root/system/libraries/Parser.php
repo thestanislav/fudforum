@@ -140,7 +140,13 @@ class CI_Parser {
 	 */
 	function _parse_single($key, $val, $string)
 	{
-		return str_replace($this->l_delim.$key.$this->r_delim, $val, $string);
+		if(is_string($val) || (is_object($val) && method_exists($val,'__toString')) )
+			return str_replace($this->l_delim.$key.$this->r_delim, $val, $string);
+		else {
+			log_message('error', "Parser.php -> The value associated with key {$key}".
+			                     " cannot be cast to string.");
+			return $string;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -169,7 +175,7 @@ class CI_Parser {
 			$temp = $match['1'];
 			foreach ($row as $key => $val)
 			{
-				if ( ! is_array($val))
+				if ( ! is_array($val) )
 				{
 					$temp = $this->_parse_single($key, $val, $temp);
 				}
