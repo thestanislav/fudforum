@@ -202,8 +202,7 @@ class Fud extends CI_Controller
 
 
     $data = array( 'forums' => $visibleForums,
-                   'navigation'=> $navigation,
-                   'cat_id' => $cid  );
+                   'navigation'=> $navigation );
 
     $html_head = $this->load->view('fud/html_head.php', null, true);
     $html_body = $this->parser->parse('fud/category.php', $data, true);
@@ -224,30 +223,44 @@ class Fud extends CI_Controller
 	* @param integer $start Which page to start on.
 	*
 	*/
-    public function forum( $cid, $fid, $per_page = 20, $start = 0 )
-    {
-		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
+  public function forum( $cid, $fid, $per_page = 20, $start = 0 )
+  {
+	  $uid = $this->user->getUid() ? $this->user->getUid() : 0;
 
 		$nav = $this->_get_navigation( $cid, $fid );
 		$navigation = $nav->navigation;
 		$cat = $nav->category;
 		$forum = $nav->forum;
 
-		$topics = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
-        if( !is_array( $topics ) )
-			$topics = array( $topics );
+		$data = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
+        if( !is_array( $data ) )
+		$data = array( $data );
 
-		foreach( $topics as $topic )
-        {
-			$topic->last_message = $this->FUD->fetch_message( $topic->last_post_id );
-            $topic->root_message = $this->FUD->fetch_message( $topic->root_msg_id );
-        }
+    $topics = array();
+		foreach( $data as $topic )
+    {
+      //die("<pre>".print_r($topic,true)."</pre>");
+      $t = array();
+      $t['t_id'] = $topic->topic_id;
+      $t['t_url'] = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
+      $t['t_description'] = $topic->tdescr;
+      $t['t_subject'] = $topic->subject;
+      $t['t_replies'] = $topic->replies;
+      $t['t_views'] = $topic->views;
+      $root_message = $this->FUD->fetch_message( $topic->root_msg_id );
+      $t['t_date'] = date( "D, j F Y", $root_message->post_stamp );
+      $t['t_author'] = $root_message->login;
+      $last_message = $this->FUD->fetch_message( $topic->last_post_id );
+      $t['t_last_author'] = $last_message->login;
+      $t['t_last_date'] = date( "D, j F Y", $last_message->post_stamp );
+      $topics[] = $t;
+    }
 
-        $this->load->library('pagination');
-        $config['uri_segment'] = 5;
-        $config['num_links'] = 10;
-        $config['base_url'] = site_url( "forum/{$cid}/{$fid}/{$per_page}/" );
-        $config['per_page'] = $per_page;
+    $this->load->library('pagination');
+    $config['uri_segment'] = 5;
+    $config['num_links'] = 10;
+    $config['base_url'] = site_url( "forum/{$cid}/{$fid}/{$per_page}/" );
+    $config['per_page'] = $per_page;
 		$config['total_rows'] = $forum->thread_count;
 		$config['last_link'] = '>>';
 		$config['first_link'] = '<<';
@@ -257,17 +270,17 @@ class Fud extends CI_Controller
 		$pagination = $this->pagination->create_links();
 		$pagination = empty( $pagination ) ? $pagination : "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
-        $data = array( 'forum' => $forum, 'topics' => $topics,
-		               'pagination' => $pagination, 'fid' => $fid,
-		               'navigation' => $navigation, 'cid' => $cid );
+    $data = array( 'topics' => $topics,
+	                 'pagination' => $pagination,
+		               'navigation' => $navigation );
 
 		$html_head = $this->load->view('fud/html_head.php', null, true);
-		$html_body = $this->load->view('fud/forum.php', $data, true);
+		$html_body = $this->parser->parse('fud/forum.php', $data, true);
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 		$this->load->view( 'fud/html_page.php', $html_parts );
     }
 
-    /**
+  /**
 	* Shows the messages in a topic.
 	*
 	* Shows the messages in a topic.
