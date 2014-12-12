@@ -21,12 +21,13 @@ class FUD_Forum extends FUD_Model
 	protected $messageThreshold;
 	protected $forumOptions;
 	protected $topics;
-	
+
 	public function __construct( $fid = null )
-    {
-    	parent::__construct();
-		
-		$this->topics = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
+  {
+    parent::__construct();
+
+		$this->topics = $this->FUD->fetch_topics_by_forum( $fid, true,
+			array( $start, $per_page ) );
 	}
 }
 
