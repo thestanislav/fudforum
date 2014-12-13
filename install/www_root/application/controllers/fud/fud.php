@@ -232,14 +232,13 @@ class Fud extends CI_Controller
 		$cat = $nav->category;
 		$forum = $nav->forum;
 
-		$data = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
-        if( !is_array( $data ) )
-		$data = array( $data );
+		$rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
+        if( !is_array( $rows ) )
+		$rows = array( $rows );
 
     $topics = array();
-		foreach( $data as $topic )
+		foreach( $rows as $topic )
     {
-      //die("<pre>".print_r($topic,true)."</pre>");
       $t = array();
       $t['t_id'] = $topic->topic_id;
       $t['t_url'] = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
@@ -255,6 +254,9 @@ class Fud extends CI_Controller
       $t['t_last_date'] = date( "D, j F Y", $last_message->post_stamp );
       $topics[] = $t;
     }
+    // DEBUG
+    // die("<pre>".print_r($topics,true)."</pre>");
+
 
     $this->load->library('pagination');
     $config['uri_segment'] = 5;
