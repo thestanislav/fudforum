@@ -98,7 +98,7 @@ class CI_Parser {
 			}
 			else
 			{
-				$template = $this->_parse_single($key, (string)$val, $template);
+				$template = $this->_parse_single($key, $val, $template);
 			}
 		}
 
@@ -141,9 +141,13 @@ class CI_Parser {
 	function _parse_single($key, $val, $string)
 	{
 		$res = $string;
-		try {
-			$res = str_replace($this->l_delim.$key.$this->r_delim, (string)$val, $string);
-		} catch( Exception $e ) {
+		try
+		{
+			$res = str_replace( $this->l_delim.$key.$this->r_delim, (string)$val,
+			                    $string );
+		}
+		catch( Exception $e )
+		{
 			log_message('error', "Parser.php -> The value associated with key {$key}".
 			" cannot be cast to string.");
 		}
@@ -174,16 +178,24 @@ class CI_Parser {
 		foreach ($data as $row)
 		{
 			$temp = $match['1'];
+			$singles = array();
 			foreach ($row as $key => $val)
 			{
-				if ( ! is_array($val) )
+				if (!is_array($val))
 				{
-					$temp = $this->_parse_single($key, $val, $temp);
+					// Replace single values at a later time to allow nested keys with
+					// the same name
+					$singles[] = array('key' => $key, 'val' => $val);
 				}
 				else
 				{
 					$temp = $this->_parse_pair($key, $val, $temp);
 				}
+			}
+
+			foreach ($singles as $single)
+			{
+					$temp = $this->_parse_single($single['key'], $single['val'], $temp);
 			}
 
 			$str .= $temp;

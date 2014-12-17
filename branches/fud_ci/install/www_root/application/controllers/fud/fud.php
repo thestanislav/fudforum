@@ -5,18 +5,18 @@
  */
 class Fud extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
+  public function __construct()
+  {
+    parent::__construct();
 
-        $this->load->library('parser');
-        $this->load->library( 'fud/fud_library', null, 'FUD' );
+    $this->load->library('parser');
+    $this->load->library( 'fud/fud_library', null, 'FUD' );
 
-        $this->load->model('fud/fud_user','user');
+    $this->load->model('fud/fud_user','user');
 
-        $this->load->helper( 'fud' );
-        $this->load->helper( 'br2nl' );
-    }
+    $this->load->helper( 'fud' );
+    $this->load->helper( 'br2nl' );
+  }
 
 	private function _get_navigation( $cid = null, $fid = null, $tid = null )
 	{
@@ -134,11 +134,11 @@ class Fud extends CI_Controller
     }
     $data = array( 'categories' => $visibleCats, 'navigation' => $navigation );
 
-    $html_head = $this->load->view('fud/html_head.php', null, true);
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
   	$html_body = $this->parser->parse('fud/index.php', $data, true);
   	$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 
-  	$this->load->view( 'fud/html_page.php', $html_parts );
+  	$this->parser->parse( 'fud/html_page.php', $html_parts );
   }
 
 	/**
@@ -204,10 +204,10 @@ class Fud extends CI_Controller
     $data = array( 'forums' => $visibleForums,
                    'navigation'=> $navigation );
 
-    $html_head = $this->load->view('fud/html_head.php', null, true);
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/category.php', $data, true);
     $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-    $this->load->view( 'fud/html_page.php', $html_parts );
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
   }
 
     /**
@@ -254,9 +254,6 @@ class Fud extends CI_Controller
       $t['t_last_date'] = date( "D, j F Y", $last_message->post_stamp );
       $topics[] = $t;
     }
-    // DEBUG
-    // die("<pre>".print_r($topics,true)."</pre>");
-
 
     $this->load->library('pagination');
     $config['uri_segment'] = 5;
@@ -270,17 +267,18 @@ class Fud extends CI_Controller
 
 		$pages  = ceil( $forum->thread_count / $per_page );
 		$pagination = $this->pagination->create_links();
-		$pagination = empty( $pagination ) ? $pagination : "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
+		$pagination = empty( $pagination ) ? $pagination :
+      "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
     $data = array( 'topics' => $topics,
 	                 'pagination' => $pagination,
 		               'navigation' => $navigation );
 
-		$html_head = $this->load->view('fud/html_head.php', null, true);
+		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
 		$html_body = $this->parser->parse('fud/forum.php', $data, true);
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->load->view( 'fud/html_page.php', $html_parts );
-    }
+		$this->parser->parse( 'fud/html_page.php', $html_parts );
+  }
 
   /**
 	* Shows the messages in a topic.
@@ -296,8 +294,8 @@ class Fud extends CI_Controller
 	* @param integer $start Which page to start on.
 	*
 	*/
-    public function topic( $cid, $fid, $tid, $per_page = 40, $start = 0 )
-    {
+  public function topic( $cid, $fid, $tid, $per_page = 40, $start = 0 )
+  {
 		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
 
 		$nav = $this->_get_navigation( $cid, $fid, $tid );
@@ -307,37 +305,62 @@ class Fud extends CI_Controller
 		$topic = $nav->topic;
 
 		if( !is_array($topic) )
-            $topic = array($topic);
+      $topic = array($topic);
 
 		$permissions = $this->FUD->check_permissions( $fid, $uid );
 
-        $total = count($topic);
+    $total = count($topic);
 
-        $this->load->library('pagination');
-        $config['uri_segment'] = 5;
-        $config['num_links'] = 2;
-        $config['base_url'] = site_url( "topic/{$cid}/{$tid}/{$per_page}/" );
-        $config['per_page'] = $per_page;
+    $this->load->library('pagination');
+    $config['uri_segment'] = 5;
+    $config['num_links'] = 2;
+    $config['base_url'] = site_url( "topic/{$cid}/{$tid}/{$per_page}/" );
+    $config['per_page'] = $per_page;
 		$config['total_rows'] = $total;
 		$config['last_link'] = '>>';
 		$config['first_link'] = '<<';
 		$this->pagination->initialize($config);
 		$pagination = $this->pagination->create_links();
 		$pages  = ceil( $total / $per_page );
-		$pagination = empty( $pagination ) ? $pagination : "<div id=\"fud_topic_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
-		//die( print_r( $pagination, true ) );
+		$pagination = empty( $pagination ) ? $pagination :
+      "<div id=\"fud_topic_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
-        $topic = array_slice( $topic, $start, $per_page );
-        $data = array( 'topic' => $topic, 'pagination' => $pagination,
-                       'cid' => $cid, 'navigation' => $navigation,
-                       'permissions' => $permissions, 'fid' => $fid );
+    if( !$permissions['READ'] ) {
+      // TODO(nexus): Load proper error view
+      $messages = "You don't have read permissions to this forum.";
+    }
 
-		$html_head = $this->load->view('fud/html_head.php', null, true);
-		$html_body = $this->load->view('fud/topic.php', $data, true);
+    $topic = array_slice( $topic, $start, $per_page );
+
+    $messages = array();
+    foreach( $topic as $message ) {
+      $m = array();
+      $m['m_id'] = $message->id;
+      $m['m_subject'] = $message->subject;
+      $date = date( "D, j F Y H:m", $message->post_stamp );
+      $m['m_date'] = $date;
+      $avt_height = 60; // TODO(nexus): Get from config
+      $height = 64; // 2px padding top and bottom
+      $avatar = $message->avatar_loc;
+      $avatar = preg_replace("/width=\".*\"/", "width=\"{$avt_height}\"", $avatar );
+      $avatar = preg_replace("/height=\".*\"/", "height=\"{$avt_height}\"", $avatar );
+      $m['m_avatar'] =  str_replace( "<img", "<img class=\"fud_post_author_avatar\"", $avatar);
+      $m['m_login'] =  $message->login;
+      $m['m_body'] =  $message->body;
+      $m['m_reply'] = $permissions['REPLY'] ?
+        "<span class=\"float_right\"><a href=\"reply/{$message->thread_id}/{$message->id}\">Reply</a></span> <span class=\"float_right\"><a href=\"reply/{$message->thread_id}/{$message->id}/1\">Quote</a></span>" :
+        "";
+      $messages[] = $m;
+    }
+    $data = array( 'messages' => $messages, 'pagination' => $pagination,
+                   'navigation' => $navigation );
+
+		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
+		$html_body = $this->parser->parse('fud/topic.php', $data, true);
 		$html_body = fix_relative_urls( $html_body );
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->load->view( 'fud/html_page.php', $html_parts );
-    }
+		$this->parser->parse( 'fud/html_page.php', $html_parts );
+  }
 
 	/**
 	* XXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -389,10 +412,10 @@ class Fud extends CI_Controller
 		$data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
 		               'quote' => $quote, 'reply_to_id' => $reply_to_id );
 
-		$html_head = $this->load->view('fud/html_head.php', null, true);
-		$html_body = $this->load->view('fud/reply.php', $data, true);
+		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
+		$html_body = $this->parser->parse('fud/reply.php', $data, true);
 		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->load->view( 'fud/html_page.php', $html_parts );
+		$this->parser->parse( 'fud/html_page.php', $html_parts );
 	}
 
 	/**

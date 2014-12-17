@@ -2,7 +2,7 @@
 /**
 * copyright            : (C) 2001-2013 Advanced Internet Designs Inc.
 * email                : forum@prohost.org
-* $Id: fs.inc 5741 2013-11-10 18:33:09Z naudefj $
+* $Id: fs.inc 5701 2013-10-04 19:33:15Z naudefj $
 *
 * This program is free software; you can redistribute it and/or modify it 
 * under the terms of the GNU General Public License as published by the 
@@ -49,7 +49,7 @@ function fud_dir_space_usage($dir)
 				$dirs[] = $f;
 				continue;
 			}
-			$disk_space += @filesize($f);
+			$disk_space += filesize($f);
 		}
 	}
 

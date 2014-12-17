@@ -1,7 +1,8 @@
+    <!-- Navigation -->
     {navigation}
-
+    <!-- Pagination -->
     {pagination}
-
+    <!-- Contents table -->
     <table id="topics_table" class="fud_table" border="0" cellspacing="1" cellpadding="2" >
       <thead class="table_header">
         <th class="th topic">Topic</th>
@@ -32,5 +33,5 @@
       {/topics}
       </tbody>
     </table>
-
+    <!-- Pagination -->
     {pagination}
