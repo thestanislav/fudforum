@@ -1,5 +1,5 @@
-		<div>
-			<ul id="top_menu">
+		<nav id="fud_site_navigation">
+			<ul class="fud_navigation">
 				<li><a href="#">Members</a></li>
 				<li><a href="#">Calendar</a></li>
 				<li><a href="#">Search</a></li>
@@ -7,4 +7,4 @@
 				<li><a href="#">Control Panel</a></li>
 				<li>{login_logout_link}</li>
 			</ul>
-		</div>
+		</nav>

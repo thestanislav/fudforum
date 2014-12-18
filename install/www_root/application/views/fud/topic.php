@@ -1,5 +1,7 @@
+		<!-- Menu -->
+		{site_navigation}
 		<!-- Navigation -->
-		{navigation}
+		{path_navigation}
 		<!-- Pagination -->
 		{pagination}
 		<!-- Contents -->
