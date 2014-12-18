@@ -1,3 +1,5 @@
+      <!-- Menu -->
+      {topmenu}
       <!-- Navigation -->
       {navigation}
       <!-- Contents table -->
