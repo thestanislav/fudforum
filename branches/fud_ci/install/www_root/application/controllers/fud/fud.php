@@ -18,6 +18,11 @@ class Fud extends CI_Controller
     $this->load->helper( 'br2nl' );
   }
 
+  private function _get_topmenu() {
+    //TODO(nexus): pass appropriate data array
+    return $this->parser->parse('fud/top_menu.php', array(), true );
+  }
+
 	private function _get_navigation( $cid = null, $fid = null, $tid = null )
 	{
 		$home_url = site_url( "fora" );
@@ -49,7 +54,7 @@ class Fud extends CI_Controller
 				}
 			}
 		}
-        $navigation .= "</div>";
+    $navigation .= "</div>";
 
 		$result = new StdClass;
 		$result->navigation = $navigation;
@@ -132,7 +137,12 @@ class Fud extends CI_Controller
       	//$visibleCats[] = $cat;
       }
     }
-    $data = array( 'categories' => $visibleCats, 'navigation' => $navigation );
+
+    $topmenu = $this->_get_topmenu();
+
+    $data = array( 'categories' => $visibleCats,
+                   'navigation' => $navigation,
+                   'topmenu' => $topmenu );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
   	$html_body = $this->parser->parse('fud/index.php', $data, true);
@@ -200,9 +210,11 @@ class Fud extends CI_Controller
       }
     }
 
+    $topmenu = $this->_get_topmenu();
 
     $data = array( 'forums' => $visibleForums,
-                   'navigation'=> $navigation );
+                   'navigation'=> $navigation,
+                   'topmenu' => $topmenu );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/category.php', $data, true);
@@ -270,9 +282,12 @@ class Fud extends CI_Controller
 		$pagination = empty( $pagination ) ? $pagination :
       "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
+    $topmenu = $this->_get_topmenu();
+
     $data = array( 'topics' => $topics,
 	                 'pagination' => $pagination,
-		               'navigation' => $navigation );
+		               'navigation' => $navigation,
+                   'topmenu' => $topmenu );
 
 		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
 		$html_body = $this->parser->parse('fud/forum.php', $data, true);
@@ -352,8 +367,13 @@ class Fud extends CI_Controller
         "";
       $messages[] = $m;
     }
-    $data = array( 'messages' => $messages, 'pagination' => $pagination,
-                   'navigation' => $navigation );
+
+    $topmenu = $this->_get_topmenu();
+
+    $data = array( 'messages' => $messages,
+                   'pagination' => $pagination,
+                   'navigation' => $navigation,
+                   'topmenu' => $topmenu );
 
 		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
 		$html_body = $this->parser->parse('fud/topic.php', $data, true);
