@@ -1,7 +1,7 @@
       <!-- Menu -->
-      {topmenu}
+      {site_navigation}
       <!-- Navigation -->
-      {navigation}
+      {path_navigation}
       <!-- Contents table -->
       <table id="fora_table" class="fud_table" border="0" cellspacing="1"
       cellpadding="2">

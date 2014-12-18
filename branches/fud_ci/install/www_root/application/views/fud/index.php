@@ -1,6 +1,7 @@
-
-    {navigation}
-
+    <!-- Menu -->
+    {site_navigation}
+    <!-- Navigation -->
+    {path_navigation}
     <table id="fora_table" class="fud_table" border="0" cellspacing="1" cellpadding="2">
         <thead class="table_header" >
             <th class="th forum">Forum</th>
