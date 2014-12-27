@@ -26,7 +26,8 @@ class Fud extends CI_Controller
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
   */
-  private function _get_site_navigation() {
+  private function _get_site_navigation()
+  {
     $loginLogoutLink = "";
     if( $this->user->isLoggedIn() ) {
       $address = site_url("logout");
@@ -190,6 +191,37 @@ class Fud extends CI_Controller
   	$this->parser->parse( 'fud/html_page.php', $html_parts );
   }
 
+  /**
+  * Login page.
+  *
+  * Login page.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  */
+  public function login()
+  {
+    $data = array( 'site_navigation' => $this->_get_site_navigation(),
+                           'login_url' => site_url("/login") );
+
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
+    $html_body = $this->parser->parse('fud/login.php', $data, true);
+    $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
+  }
+
+  /**
+  * Logout function.
+  *
+  * Logout function.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  */
+  public function logout()
+  {
+    // TODO(nexus): implement
+  }
+
 	/**
 	* Shows the forums in a category.
 	*
@@ -227,7 +259,8 @@ class Fud extends CI_Controller
           $pid = $forum->last_post_id;
           $last_msg  = $this->FUD->fetch_message( $pid );
           $forum->last_post = $last_msg;
-          if( $forum->post_count ) {
+          if( $forum->post_count )
+          {
             // TODO(nexus): format date properly
             $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
             $forum->last_author = "by ".$forum->last_post->login;
