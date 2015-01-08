@@ -8,7 +8,11 @@ class Fud extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-
+    
+    // TODO(nexus): fix once the options have been moved to a new location
+    require_once 'GLOBALS.php';
+    date_default_timezone_set($GLOBALS['SERVER_TZ']);
+    
     $this->load->library('parser');
     $this->load->library( 'fud/fud_library', null, 'FUD' );
 
@@ -170,7 +174,7 @@ class Fud extends CI_Controller
             $forum->last_post = $last_msg;
             if( $forum->post_count )
             {
-              // TODO(nexus): format date properly
+              // TODO(nexus): add option for date formatting
               $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
               $forum->last_author = "by ".$forum->last_post->login;
             }
@@ -329,7 +333,7 @@ class Fud extends CI_Controller
           $forum->last_post = $last_msg;
           if( $forum->post_count )
           {
-            // TODO(nexus): format date properly
+            // TODO(nexus): add option for date formatting
             $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
             $forum->last_author = "by ".$forum->last_post->login;
           }
@@ -399,10 +403,12 @@ class Fud extends CI_Controller
       $t['t_replies'] = $topic->replies;
       $t['t_views'] = $topic->views;
       $root_message = $this->FUD->fetch_message( $topic->root_msg_id );
+      // TODO(nexus): add option for date formatting
       $t['t_date'] = date( "D, j F Y", $root_message->post_stamp );
       $t['t_author'] = $root_message->login;
       $last_message = $this->FUD->fetch_message( $topic->last_post_id );
       $t['t_last_author'] = $last_message->login;
+      // TODO(nexus): add option for date formatting
       $t['t_last_date'] = date( "D, j F Y", $last_message->post_stamp );
       $topics[] = $t;
     }
@@ -493,6 +499,7 @@ class Fud extends CI_Controller
       $m = array();
       $m['m_id'] = $message->id;
       $m['m_subject'] = $message->subject;
+      // TODO(nexus): add option for date formatting
       $date = date( "D, j F Y H:m", $message->post_stamp );
       $m['m_date'] = $date;
       $avt_height = 60; // TODO(nexus): Get from config
