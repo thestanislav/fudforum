@@ -54,8 +54,8 @@ class FUD_user extends CI_Model
     {
       //TODO(nexus): understand why the previous call to the library did not work
       //TODO(nexus): fix installation so that it properly generates DNS strings for sqlite DBs (?)
-      $q = "SELECT id, passwd, salt FROM {$GLOBALS['DBHOST_TBL_PREFIX']}users WHERE login={$u}";
-      $q = $this->db->query( $q );
+      $qStr = "SELECT id, passwd, salt FROM {$GLOBALS['DBHOST_TBL_PREFIX']}users WHERE login={$u}";
+      $q = $this->db->query( $qStr );
       $row = $q->num_rows ? $q->row() : NULL;
       if ( $row && (empty($row->salt) && $row->passwd == md5($password) || $row->passwd == sha1($row->salt . sha1($password))))
       {
@@ -89,11 +89,13 @@ class FUD_user extends CI_Model
   */
   public function logout()
   {
-    if( $this->isLoggedIn() )
-    {
+    //if( $this->isLoggedIn() )
+    //{
       $this->FUD->logout( $this->FUDuid );
 
-      $this->username = null;
+      $this->username = NULL;
+      $this->FUDuid = NULL;
+      $this->FUDsid = NULL;
 
       /*
       $this->session->unset_userdata('loggedin');
@@ -103,7 +105,7 @@ class FUD_user extends CI_Model
       $this->input->set_cookie($GLOBALS['COOKIE_NAME'], '' );
       */
       $this->session->sess_destroy();
-    }
+    //}
   }
 
   /**
@@ -163,7 +165,7 @@ class FUD_user extends CI_Model
     if( $this->isLoggedIn() )
     {
       $qStr = " SELECT `id` FROM `fud30_users` AS u " .
-      " WHERE ( `u`.`users_opt` & 1048576 ) AND `u`.`id` = '{$this->FUDuid}'";
+        " WHERE ( `u`.`users_opt` & 1048576 ) AND `u`.`id` = '{$this->FUDuid}'";
       $q = $this->db->query( $qStr );
       if( $q->num_rows() == 1)
       {

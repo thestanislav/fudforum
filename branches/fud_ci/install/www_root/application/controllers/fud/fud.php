@@ -157,9 +157,14 @@ class Fud extends CI_Controller
             $forum->last_post = $last_msg;
             if( $forum->post_count )
             {
-              // TODO: format date properly
+              // TODO(nexus): format date properly
               $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
               $forum->last_author = "by ".$forum->last_post->login;
+            }
+            else
+            {
+							$forum->last_date = date( "" );
+              $forum->last_author = "";
             }
 
             $f['f_url'] = $forum->url;
