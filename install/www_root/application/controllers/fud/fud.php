@@ -22,34 +22,36 @@ class Fud extends CI_Controller
   /**
   * Returns the site navigation menu
   *
-  * Returns the site navigation menu
-  *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
   */
   private function _get_site_navigation()
   {
     $loginLogoutLink = "";
+    $cpOrRegisterLink = "";
 
     if( $this->user->isLoggedIn() )
     {
       $address = site_url("logout");
       $loginLogoutLink = "<a href=\"{$address}\">Logout</a>";
+      $address = site_url("controlpanel");
+      $cpOrRegisterLink = "<a href=\"{$address}\">Control Panel</a>";
     }
     else
     {
       $address = site_url("login");
       $loginLogoutLink = "<a href=\"{$address}\">Login</a>";
+      $address = site_url("register");
+      $cpOrRegisterLink = "<a href=\"{$address}\">Register</a>";
     }
 
-    $data = array( "login_logout_link" => $loginLogoutLink );
+    $data = array( "login_logout_link" => $loginLogoutLink,
+                   "cp_or_register_link" => $cpOrRegisterLink );
 
     return $this->parser->parse('fud/site_navigation.php', $data, true );
   }
 
   /**
-  * Returns the path navigation menu
-  *
   * Returns the path navigation menu
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
@@ -209,8 +211,6 @@ class Fud extends CI_Controller
   /**
   * Login page.
   *
-  * Login page.
-  *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   */
   public function login()
@@ -268,9 +268,7 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Logout function.
-  *
-  * Logout function.
+  * Logout page.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   */
@@ -282,9 +280,7 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Shows the forums in a category.
-  *
-  * Shows the forums in a category.
+  * Shows the forums in a given category.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
@@ -355,9 +351,7 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Shows the topics in a forum.
-  *
-  * Shows the topics in a forum.
+  * Shows the topics in a given forum.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
@@ -429,9 +423,7 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Shows the messages in a topic.
-  *
-  * Shows the messages in a topic.
+  * Shows the messages in a given topic.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *

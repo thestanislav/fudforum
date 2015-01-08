@@ -18,12 +18,15 @@ class FUD_user extends CI_Model
     {
       $this->FUDsid = $this->session->userdata('FUDsid');
       $this->FUDuid = $this->session->userdata('FUDuid');
+      //NOTE(nexus): is it really necessary to store the username in a cookie?
       $this->username = $this->session->userdata('FUDusername');
     }
   }
 
   /**
+  * Returns a copy of the user's data
   *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
   */
   public function getData( $key = '' )
   {
@@ -40,6 +43,8 @@ class FUD_user extends CI_Model
 
   /**
   * Performs user login
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
   *
   * @param string Username
   * @param string Password
@@ -86,6 +91,9 @@ class FUD_user extends CI_Model
 
   /**
   * Performs user logout
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
+  *
   */
   public function logout()
   {
@@ -119,6 +127,8 @@ class FUD_user extends CI_Model
   /**
   * Returns the session id if the user is logged in, FALSE otherwise
   *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
+  *
   * @return mixed
   */
   public function getSid()
@@ -131,6 +141,8 @@ class FUD_user extends CI_Model
 
   /**
   * Returns the user id if the user is logged in, FALSE otherwise
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
   *
   * @return mixed
   */
@@ -145,6 +157,8 @@ class FUD_user extends CI_Model
   /**
   * Returns the username if the user is logged in, FALSE otherwise
   *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
+  *
   * @return mixed
   */
   public function getUsername()
@@ -157,6 +171,8 @@ class FUD_user extends CI_Model
 
   /**
   * Returns TRUE if user is part of the default admin group
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
   *
   * @return boolean
   */
