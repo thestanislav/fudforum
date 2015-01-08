@@ -2,18 +2,16 @@
 
 class FUD_user extends CI_Model
 {
-	private $FUDsid = null;
-	private $FUDuid = null;
-	private $username = null;
+  private $FUDsid = null;
+  private $FUDuid = null;
+  private $username = null;
 
   public function __construct()
   {
     parent::__construct();
 
     $this->load->library( 'fud/fud_library', null, 'FUD' );
-
     $this->load->helper( 'fud' );
-
     $this->load->database('fud');
 
     if( $this->isLoggedIn() )
@@ -49,9 +47,22 @@ class FUD_user extends CI_Model
   */
   public function login( $username = null, $password = null )
   {
-    $u = mysql_escape_string( $username );
-    $p = mysql_escape_string( $password );
-    $this->FUDuid = $this->FUD->get_uid_by_auth( $u, $p );
+    $u = $this->db->escape( $username );
+    $p = $this->db->escape( $password );
+
+    if( ($username != null)  )
+    {
+      //TODO(nexus): understand why the previous call to the library did not work
+      //TODO(nexus): fix installation so that it properly generates DNS strings for sqlite DBs (?)
+      $q = "SELECT id, passwd, salt FROM {$GLOBALS['DBHOST_TBL_PREFIX']}users WHERE login={$u}";
+      $q = $this->db->query( $q );
+      $row = $q->num_rows ? $q->row() : NULL;
+      if ( $row && (empty($row->salt) && $row->passwd == md5($password) || $row->passwd == sha1($row->salt . sha1($password))))
+      {
+        $this->FUDuid = $row->id;
+      }
+      else return;
+    }
 
     if( null != $this->FUDuid )
     {
@@ -67,6 +78,7 @@ class FUD_user extends CI_Model
     }
     else
     {
+      //TODO(nexus): Localize error messages
       return array( 'retcode' => 'LOGIN_ERROR_USERNAME_OR_PASSWORD',
       'message' => 'Wrong username or password' );
     }
@@ -83,11 +95,14 @@ class FUD_user extends CI_Model
 
       $this->username = null;
 
+      /*
       $this->session->unset_userdata('loggedin');
       $this->session->unset_userdata('FUDsid');
       $this->session->unset_userdata('FUDuid');
       $this->session->unset_userdata('FUDusername');
       $this->input->set_cookie($GLOBALS['COOKIE_NAME'], '' );
+      */
+      $this->session->sess_destroy();
     }
   }
 

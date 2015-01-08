@@ -10,6 +10,12 @@ class Fud_Library
         $this->CI->load->helper( 'fud' );
         require_once 'GLOBALS.php';
     	require_once $GLOBALS['DATA_DIR'].'/scripts/fudapi.inc.php';
+        require_once $GLOBALS['DATA_DIR'].'/scripts/forum_login.php';
+    }
+
+    function get_uid_from_login($login)
+    {
+      return external_get_user_from_login($login);
     }
 
     function get_uid_by_auth($login, $passwd)
