@@ -25,3 +25,6 @@ Beta:
   - [ ] Implement the necessary models (user, forum, etc.)
   - [ ] Develop a new theme system to allow parenting while keeping the ease of use of CI's templating
   - [ ] Redesign the administration interface
+
+1.0:
+  - [ ] Feature parity with latest FUDf 3.x
