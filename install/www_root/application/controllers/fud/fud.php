@@ -16,6 +16,7 @@ class Fud extends CI_Controller
 
     $this->load->helper( 'fud' );
     $this->load->helper( 'br2nl' );
+
   }
 
   /**
@@ -29,10 +30,14 @@ class Fud extends CI_Controller
   private function _get_site_navigation()
   {
     $loginLogoutLink = "";
-    if( $this->user->isLoggedIn() ) {
+
+    if( $this->user->isLoggedIn() )
+    {
       $address = site_url("logout");
       $loginLogoutLink = "<a href=\"{$address}\">Logout</a>";
-    } else {
+    }
+    else
+    {
       $address = site_url("login");
       $loginLogoutLink = "<a href=\"{$address}\">Login</a>";
     }
@@ -54,75 +59,77 @@ class Fud extends CI_Controller
   * @param integer $tid Numerical topic id as in the DB.
   *
   */
-	private function _get_path_navigation( $cid = null, $fid = null, $tid = null )
-	{
-		$home_url = site_url( "fora" );
-		$category = null; $category_url = null;
-		$forum = null; $forum_url = null;
-		$topic = null; $topic_url = null;
+  private function _get_path_navigation( $cid = null, $fid = null, $tid = null )
+  {
+    $home_url = site_url( "fora" );
+    $category = null; $category_url = null;
+    $forum = null; $forum_url = null;
+    $topic = null; $topic_url = null;
 
-		$navigation = "<nav id=\"fud_path_navigation\"><a href=\"{$home_url}\">Home</a>";
+    $navigation = "<nav id=\"fud_path_navigation\"><a href=\"{$home_url}\">Home</a>";
 
     $home_html = "<a href=\"{$home_url}\">Home</a>";
     $category_html = "";
     $forum_html = "";
     $topic_html = "";
 
-		if( null != $cid )
-		{
-			$category = $this->FUD->fetch_categories( $cid );
-			$category_url = site_url( "category/{$cid}" );
-			$category_html = " >> <a href=\"{$category_url}\">{$category->name}</a>";
+    if( null != $cid )
+    {
+      $category = $this->FUD->fetch_categories( $cid );
+      $category_url = site_url( "category/{$cid}" );
+      $category_html = " >> <a href=\"{$category_url}\">{$category->name}</a>";
 
-			if( null != $fid )
-			{
-				$forum = $this->FUD->fetch_forums( $fid );
-				$forum_url = site_url( "forum/{$cid}/{$fid}" );
-				$forum_html .= " >> <a href=\"{$forum_url}\">{$forum->name}</a>";
+      if( null != $fid )
+      {
+        $forum = $this->FUD->fetch_forums( $fid );
+        $forum_url = site_url( "forum/{$cid}/{$fid}" );
+        $forum_html .= " >> <a href=\"{$forum_url}\">{$forum->name}</a>";
 
-				if( null != $tid )
-				{
-					$topic = $this->FUD->fetch_full_topic( $tid );
-					if( !is_array($topic) )
-						$topic = array( $topic );
-					$topic_url = site_url( "topic/{$cid}/{$fid}/{$tid}" );
-					$topic_html .= " >> <a href=\"{$topic_url}\">{$topic[0]->subject}</a>";
-				}
-			}
-		}
+        if( null != $tid )
+        {
+          $topic = $this->FUD->fetch_full_topic( $tid );
+          if( !is_array($topic) )
+          {
+            $topic = array( $topic );
+          }
+          $topic_url = site_url( "topic/{$cid}/{$fid}/{$tid}" );
+          $topic_html .= " >> <a href=\"{$topic_url}\">{$topic[0]->subject}</a>";
+        }
+      }
+    }
 
     $data = array( "home" => $home_html,
                    "category" => $category_html,
                    "forum" => $forum_html,
                    "topic" => $topic_html );
 
-		$nav = new stdClass();
+    $nav = new stdClass();
     $nav->navigation = $this->parser->parse( "fud/path_navigation", $data, true );
     $nav->category = $category;
     $nav->forum = $forum;
     $nav->topic = $topic;
 
     return $nav;
-	}
+  }
 
-	/**
-	* Index page.
-	*
-	* Index page for fudForum. Shows the default selection of categories
-	* and forums.
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	*/
+  /**
+  * Index page.
+  *
+  * Index page for fudForum. Shows the default selection of categories
+  * and forums.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  */
   public function index()
   {
-  	$uid = $this->user->getUid() ? $this->user->getUid() : 0;
+    $uid = $this->user->getUid() ? $this->user->getUid() : 0;
 
-  	$nav = $this->_get_path_navigation();
+    $nav = $this->_get_path_navigation();
     $path_navigation = $nav->navigation;
     $site_navigation = $this->_get_site_navigation();
 
-  	$cats = $this->FUD->fetch_categories( null, TRUE );
+    $cats = $this->FUD->fetch_categories( null, TRUE );
     $visibleCats = array();
     foreach( $cats as $cat )
     {
@@ -135,7 +142,9 @@ class Fud extends CI_Controller
       for( $frmIdx=0; $frmIdx<$forumsInCat; $frmIdx++ )
       {
         if( !is_array($catForums[$cat->id]) )
-            $catForums[$cat->id] = array($catForums[$cat->id]);
+        {
+          $catForums[$cat->id] = array($catForums[$cat->id]);
+        }
 
         $forum = $catForums[$cat->id][$frmIdx];
         if( is_object( $forum ) )
@@ -146,7 +155,8 @@ class Fud extends CI_Controller
             $pid = $forum->last_post_id;
             $last_msg  = $this->FUD->fetch_message( $pid );
             $forum->last_post = $last_msg;
-            if( $forum->post_count ) {
+            if( $forum->post_count )
+            {
               // TODO: format date properly
               $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
               $forum->last_author = "by ".$forum->last_post->login;
@@ -169,14 +179,13 @@ class Fud extends CI_Controller
         }
       }
 
-      if( count($visibleForums) ){
+      if( count($visibleForums) )
+      {
         $c['c_name'] = $cat->name;
         $c['c_url'] = $cat->url;
         $c['c_description']  = $cat->description;
         $c['forums']  = $visibleForums;
         $visibleCats[] = $c;
-        //$cat->forums = $visibleForums;
-      	//$visibleCats[] = $cat;
       }
     }
 
@@ -185,10 +194,11 @@ class Fud extends CI_Controller
                    'site_navigation' => $site_navigation );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
-  	$html_body = $this->parser->parse('fud/index.php', $data, true);
-  	$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+    $html_body = $this->parser->parse('fud/index.php', $data, true);
+    $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 
-  	$this->parser->parse( 'fud/html_page.php', $html_parts );
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
+
   }
 
   /**
@@ -200,8 +210,50 @@ class Fud extends CI_Controller
   */
   public function login()
   {
+    $errorMessage = "";
+
+    // Process login
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      if( isset( $_POST['login'] ) )
+      {
+        $username = $_POST['login'];
+      }
+
+      if( isset( $_POST['password'] ) )
+      {
+        $password = $_POST['password'];
+      }
+
+      if( isset($username) && isset($password) )
+      {
+        $result = $this->user->login( $username, $password );
+        if( $result['retcode'] == 'LOGIN_SUCCESS' )
+        {
+          //TODO(nexus): decide where to redirect after login
+          redirect('/');
+        }
+        else
+        {
+          $errorMessage = $result['message'];
+        }
+      }
+      else
+      {
+        $errorMessage = "Please input both username and password.";
+      }
+    }
+
+    if( !empty($errorMessage) )
+    {
+      //TODO(nexus): Add proper error generating function
+      //TODO(nexus): Localization
+      $errorMesage = "<div class='error'>{$errorMessage}</div>";
+    }
+
     $data = array( 'site_navigation' => $this->_get_site_navigation(),
-                           'login_url' => site_url("/login") );
+                   'login_url' => site_url("/login"),
+                   'error_message' => $errorMessage );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/login.php', $data, true);
@@ -219,19 +271,21 @@ class Fud extends CI_Controller
   */
   public function logout()
   {
-    // TODO(nexus): implement
+    //TODO(nexus): decide where to redirect after logout
+    $result = $this->user->logout();
+    redirect('/');
   }
 
-	/**
-	* Shows the forums in a category.
-	*
-	* Shows the forums in a category.
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $cid Numerical category id as in the DB.
-	*
-	*/
+  /**
+  * Shows the forums in a category.
+  *
+  * Shows the forums in a category.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $cid Numerical category id as in the DB.
+  *
+  */
   public function category( $cid )
   {
     $uid = $this->user->getUid() ? $this->user->getUid() : 0;
@@ -244,7 +298,9 @@ class Fud extends CI_Controller
     $forums = $this->FUD->fetch_forums_by_category( $cid, TRUE );
 
     if( !is_array($forums) )
-    	$forums = array( $forums );
+    {
+      $forums = array( $forums );
+    }
 
     $count = count($forums);
 
@@ -294,34 +350,36 @@ class Fud extends CI_Controller
   }
 
   /**
-	* Shows the topics in a forum.
-	*
-	* Shows the topics in a forum.
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $cid Numerical category id as in the DB.
-	* @param integer $fid Numerical forum id as in the DB.
-	* @param integer $per_page Number of topics to show per page.
-	* @param integer $start Which page to start on.
-	*
-	*/
+  * Shows the topics in a forum.
+  *
+  * Shows the topics in a forum.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $cid Numerical category id as in the DB.
+  * @param integer $fid Numerical forum id as in the DB.
+  * @param integer $per_page Number of topics to show per page.
+  * @param integer $start Which page to start on.
+  *
+  */
   public function forum( $cid, $fid, $per_page = 20, $start = 0 )
   {
-	  $uid = $this->user->getUid() ? $this->user->getUid() : 0;
+    $uid = $this->user->getUid() ? $this->user->getUid() : 0;
 
-		$nav = $this->_get_path_navigation( $cid, $fid );
-		$path_navigation = $nav->navigation;
+    $nav = $this->_get_path_navigation( $cid, $fid );
+    $path_navigation = $nav->navigation;
     $site_navigation = $this->_get_site_navigation();
-		$cat = $nav->category;
-		$forum = $nav->forum;
+    $cat = $nav->category;
+    $forum = $nav->forum;
 
-		$rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
-        if( !is_array( $rows ) )
-		$rows = array( $rows );
+    $rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
+    if( !is_array( $rows ) )
+    {
+      $rows = array( $rows );
+    }
 
     $topics = array();
-		foreach( $rows as $topic )
+    foreach( $rows as $topic )
     {
       $t = array();
       $t['t_id'] = $topic->topic_id;
@@ -344,56 +402,58 @@ class Fud extends CI_Controller
     $config['num_links'] = 10;
     $config['base_url'] = site_url( "forum/{$cid}/{$fid}/{$per_page}/" );
     $config['per_page'] = $per_page;
-		$config['total_rows'] = $forum->thread_count;
-		$config['last_link'] = '>>';
-		$config['first_link'] = '<<';
-		$this->pagination->initialize($config);
+    $config['total_rows'] = $forum->thread_count;
+    $config['last_link'] = '>>';
+    $config['first_link'] = '<<';
+    $this->pagination->initialize($config);
 
-		$pages  = ceil( $forum->thread_count / $per_page );
-		$pagination = $this->pagination->create_links();
-		$pagination = empty( $pagination ) ? $pagination :
+    $pages  = ceil( $forum->thread_count / $per_page );
+    $pagination = $this->pagination->create_links();
+    $pagination = empty( $pagination ) ? $pagination :
       "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
     $data = array( 'topics' => $topics,
-	                 'pagination' => $pagination,
-		               'path_navigation' => $path_navigation,
+                   'pagination' => $pagination,
+                   'path_navigation' => $path_navigation,
                    'site_navigation' => $site_navigation );
 
-		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
-		$html_body = $this->parser->parse('fud/forum.php', $data, true);
-		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->parser->parse( 'fud/html_page.php', $html_parts );
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
+    $html_body = $this->parser->parse('fud/forum.php', $data, true);
+    $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
   }
 
   /**
-	* Shows the messages in a topic.
-	*
-	* Shows the messages in a topic.
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $cid Numerical category id as in the DB.
-	* @param integer $fid Numerical forum id as in the DB.
-	* @param integer $tid Numerical topic id as in the DB.
-	* @param integer $per_page Number of topics to show per page.
-	* @param integer $start Which page to start on.
-	*
-	*/
+  * Shows the messages in a topic.
+  *
+  * Shows the messages in a topic.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $cid Numerical category id as in the DB.
+  * @param integer $fid Numerical forum id as in the DB.
+  * @param integer $tid Numerical topic id as in the DB.
+  * @param integer $per_page Number of topics to show per page.
+  * @param integer $start Which page to start on.
+  *
+  */
   public function topic( $cid, $fid, $tid, $per_page = 40, $start = 0 )
   {
-		$uid = $this->user->getUid() ? $this->user->getUid() : 0;
+    $uid = $this->user->getUid() ? $this->user->getUid() : 0;
 
-		$nav = $this->_get_path_navigation( $cid, $fid, $tid );
+    $nav = $this->_get_path_navigation( $cid, $fid, $tid );
     $path_navigation = $nav->navigation;
     $site_navigation = $this->_get_site_navigation();
     $cat = $nav->category;
-		$forum = $nav->forum;
-		$topic = $nav->topic;
+    $forum = $nav->forum;
+    $topic = $nav->topic;
 
-		if( !is_array($topic) )
+    if( !is_array($topic) )
+    {
       $topic = array($topic);
+    }
 
-		$permissions = $this->FUD->check_permissions( $fid, $uid );
+    $permissions = $this->FUD->check_permissions( $fid, $uid );
 
     $total = count($topic);
 
@@ -402,16 +462,17 @@ class Fud extends CI_Controller
     $config['num_links'] = 2;
     $config['base_url'] = site_url( "topic/{$cid}/{$tid}/{$per_page}/" );
     $config['per_page'] = $per_page;
-		$config['total_rows'] = $total;
-		$config['last_link'] = '>>';
-		$config['first_link'] = '<<';
-		$this->pagination->initialize($config);
-		$pagination = $this->pagination->create_links();
-		$pages  = ceil( $total / $per_page );
-		$pagination = empty( $pagination ) ? $pagination :
+    $config['total_rows'] = $total;
+    $config['last_link'] = '>>';
+    $config['first_link'] = '<<';
+    $this->pagination->initialize($config);
+    $pagination = $this->pagination->create_links();
+    $pages  = ceil( $total / $per_page );
+    $pagination = empty( $pagination ) ? $pagination :
       "<div id=\"fud_topic_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
-    if( !$permissions['READ'] ) {
+    if( !$permissions['READ'] )
+    {
       // TODO(nexus): Load proper error view
       $messages = "You don't have read permissions to this forum.";
     }
@@ -419,7 +480,8 @@ class Fud extends CI_Controller
     $topic = array_slice( $topic, $start, $per_page );
 
     $messages = array();
-    foreach( $topic as $message ) {
+    foreach( $topic as $message )
+    {
       $m = array();
       $m['m_id'] = $message->id;
       $m['m_subject'] = $message->subject;
@@ -444,86 +506,92 @@ class Fud extends CI_Controller
                    'path_navigation' => $path_navigation,
                    'site_navigation' => $site_navigation );
 
-		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
-		$html_body = $this->parser->parse('fud/topic.php', $data, true);
-		$html_body = fix_relative_urls( $html_body );
-		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->parser->parse( 'fud/html_page.php', $html_parts );
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
+    $html_body = $this->parser->parse('fud/topic.php', $data, true);
+    $html_body = fix_relative_urls( $html_body );
+    $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
   }
 
-	/**
-	* XXXXXXXXXXXXXXXXXXXXXXXXXX
-	*
-	* XXXXXXXXXXXXXXXXXXXXXXXXXX
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $tid Numerical topic id used to reply.
-	* @param integer $mid OPTIONAL. Numerical message id used to reply.
-	* @param boolean $do_quote OPTIONAL. True to quote $mid's message's body*
-	*
-	*/
+  /**
+  * Function to manage replies.
+  *
+  * Displays a new message form, message preview or message edit form
+  * as required by the situation.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid OPTIONAL. Numerical message id used to reply.
+  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body*
+  *
+  */
   public function reply( $tid, $mid = null, $do_quote = FALSE )
   {
-		if( !strcasecmp( $_SERVER['method'], 'post' ) )
-		{
-			if( array_key_exists( 'preview', $_POST ) )
-				$this->_reply_preview( $tid, $mid = null, $do_quote = FALSE, $preview = TRUE );
-			else if( array_key_exists( 'submit', $_POST ) )
-				$this->_reply_post( $tid, $mid = null, $do_quote = FALSE );
-		}
-		else
-		{
-			$this->_reply_new( $tid, $mid = null, $do_quote = FALSE );
-		}
-	}
+    if( !strcasecmp( $_SERVER['method'], 'post' ) )
+    {
+      if( array_key_exists( 'preview', $_POST ) )
+      {
+        $this->_reply_preview( $tid, $mid = null, $do_quote = FALSE, $preview = TRUE );
+      }
+      else if( array_key_exists( 'submit', $_POST ) )
+      {
+        $this->_reply_post( $tid, $mid = null, $do_quote = FALSE );
+      }
+    }
+    else
+    {
+        $this->_reply_new( $tid, $mid = null, $do_quote = FALSE );
+    }
+  }
 
-	/**
-	* Displays a new reply form
-	*
-	* Displays a new reply form
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $tid Numerical topic id used to reply.
-	* @param integer $mid OPTIONAL. Numerical message id used to reply.
-	* @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
-	*
-	*/
+  /**
+  * Displays a new reply form.
+  *
+  * Displays a new reply form. Parameters will determine the topic and
+  * possibly message message to, as well as whether to quote or not.
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid OPTIONAL. Numerical message id used to reply.
+  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
+  *
+  */
   private function _reply_new( $tid, $mid = null, $do_quote = FALSE )
-	{
-		$topic = $this->FUD->fetch_full_topic( $tid );
-		$reply_to_id = null == $mid ? $topic->root_msg_id : $mid;
-		$quote = FALSE == $do_quote ? "" : $this->FUD->fetch_message( $mid )->body;
-		$quote = br2nl( $quote );
-		$quote = "[quote]{$quote}[/quote]\n&nbsp;";
+  {
+    $topic = $this->FUD->fetch_full_topic( $tid );
+    $reply_to_id = null == $mid ? $topic->root_msg_id : $mid;
+    $quote = FALSE == $do_quote ? "" : $this->FUD->fetch_message( $mid )->body;
+    $quote = br2nl( $quote );
+    $quote = "[quote]{$quote}[/quote]\n&nbsp;";
 
-		$data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
-		               'quote' => $quote, 'reply_to_id' => $reply_to_id );
+    $data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
+                  'quote' => $quote, 'reply_to_id' => $reply_to_id );
 
-		$html_head = $this->parser->parse('fud/html_head.php', $data, true);
-		$html_body = $this->parser->parse('fud/reply.php', $data, true);
-		$html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
-		$this->parser->parse( 'fud/html_page.php', $html_parts );
-	}
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
+    $html_body = $this->parser->parse('fud/reply.php', $data, true);
+    $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
+    $this->parser->parse( 'fud/html_page.php', $html_parts );
+  }
 
-	/**
-	* Displays a reply preview
-	*
-	* Displays a reply preview. Parameters will usually be passed as per the
+  /**
+  * Displays a reply preview
+  *
+  * Displays a reply preview. Parameters will usually be passed as per the
   * initial _reply_new() call.
-	*
-	* @author  Massimo Fierro <massimo.fierro@gmail.com>
-	*
-	* @param integer $tid Numerical topic id used to reply.
-	* @param integer $mid OPTIONAL. Numerical message id used to reply.
-	* @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
-	*
-	*/
+  *
+  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid OPTIONAL. Numerical message id used to reply.
+  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
+  *
+  */
   private function _reply_preview( $tid, $mid = null, $do_quote = FALSE )
-	{
+  {
 
-	}
+  }
 
   /**
   * Posts a reply to the forum
@@ -538,8 +606,8 @@ class Fud extends CI_Controller
   * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
   *
   */
-	private function _reply_post( $tid, $mid = null, $do_quote = FALSE )
-	{
+  private function _reply_post( $tid, $mid = null, $do_quote = FALSE )
+  {
 
-	}
+  }
 }
