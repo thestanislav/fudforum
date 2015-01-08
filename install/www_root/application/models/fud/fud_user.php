@@ -180,8 +180,9 @@ class FUD_user extends CI_Model
   {
     if( $this->isLoggedIn() )
     {
-      $qStr = " SELECT `id` FROM `fud30_users` AS u " .
-        " WHERE ( `u`.`users_opt` & 1048576 ) AND `u`.`id` = '{$this->FUDuid}'";
+      $qStr = " SELECT `id` FROM `fud30_users` AS u 
+                WHERE ( `u`.`users_opt` & 1048576 ) 
+                  AND `u`.`id` = '{$this->FUDuid}'";
       $q = $this->db->query( $qStr );
       if( $q->num_rows() == 1)
       {

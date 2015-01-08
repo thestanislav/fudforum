@@ -6,5 +6,6 @@
 				<li><a href="#">Help</a></li>
 				<li>{cp_or_register_link}</li>
 				<li>{login_logout_link}</li>
+				<li>{administration_link}</li>
 			</ul>
 		</nav>

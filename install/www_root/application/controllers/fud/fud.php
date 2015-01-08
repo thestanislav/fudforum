@@ -29,6 +29,7 @@ class Fud extends CI_Controller
   {
     $loginLogoutLink = "";
     $cpOrRegisterLink = "";
+    $administrationLink = "";
 
     if( $this->user->isLoggedIn() )
     {
@@ -36,6 +37,14 @@ class Fud extends CI_Controller
       $loginLogoutLink = "<a href=\"{$address}\">Logout</a>";
       $address = site_url("controlpanel");
       $cpOrRegisterLink = "<a href=\"{$address}\">Control Panel</a>";
+      
+      if( $this->user->isAdmin() )
+      {
+        // TODO(nexus): fix temporary link to old admin panel
+        //$address = site_url("administration");
+        $address = base_url("/adm/admloginuser.php");
+        $administrationLink = "<a href=\"{$address}\">Administration</a>";
+      }
     }
     else
     {
@@ -43,10 +52,12 @@ class Fud extends CI_Controller
       $loginLogoutLink = "<a href=\"{$address}\">Login</a>";
       $address = site_url("register");
       $cpOrRegisterLink = "<a href=\"{$address}\">Register</a>";
+      $administrationLink = "";
     }
 
     $data = array( "login_logout_link" => $loginLogoutLink,
-                   "cp_or_register_link" => $cpOrRegisterLink );
+                   "cp_or_register_link" => $cpOrRegisterLink,
+                   "administration_link" => $administrationLink );
 
     return $this->parser->parse('fud/site_navigation.php', $data, true );
   }
