@@ -203,6 +203,7 @@ class Fud extends CI_Controller
 
       if( count($visibleForums) )
       {
+        $c['c_id'] = $cat->id;
         $c['c_name'] = $cat->name;
         $c['c_url'] = $cat->url;
         $c['c_description']  = $cat->description;
