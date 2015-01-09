@@ -149,7 +149,7 @@ nav#fud_site_navigation ul li {
 }
 
 /*--- thead ---*/
-
+/*
 .fud_table thead {
     background-color: @Gainsboro;
 }
@@ -157,9 +157,19 @@ nav#fud_site_navigation ul li {
 .fud_table th {
     padding: 2px 5px 2px 5px;
 }
+*/
 
 /*--- tbody ---*/
 
+.fud_table span.toggler {
+  font-family: monospace;
+}
+
+.fud_table td.category span {
+  margin-right: 1em;  
+}
+
+/*
 .fud_table tbody tr:nth-of-type(odd) {
     background-color: lighten( @Gainsboro, 10% );
 }
@@ -171,6 +181,7 @@ nav#fud_site_navigation ul li {
 .fud_table td {
     padding: 2px 5px 2px 5px;
 }
+*/
 
 /*--- List of fora ---*/
 
