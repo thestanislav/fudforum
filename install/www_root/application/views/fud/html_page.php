@@ -5,8 +5,8 @@
     {html_head}
   </head>
   <body>
-    <div id="wrapper-grid" class="pure-g">
-      <div id="wrapper-unit" class="pure-u-22-24 margin_auto">
+    <div id="wrapper-grid" class="pure-g pure-skin-fud">
+      <div id="wrapper-unit" class="pure-u-22-24 pure-skin-fud margin_auto">
         {html_body}
       </div>
     </div>
