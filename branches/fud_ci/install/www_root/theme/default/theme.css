@@ -155,6 +155,11 @@ nav#fud_site_navigation ul li {
     border: 1px solid gray;
 }
 
+.fud_table .fud_first_col {
+  min-width: 75%;
+  width: 75%;
+}
+
 /*--- thead ---*/
 
 .fud_table th {
@@ -186,19 +191,6 @@ nav#fud_site_navigation ul li {
   margin-right: 1em;  
 }
 
-/*
-.fud_table tbody tr:nth-of-type(odd) {
-    background-color: lighten( @Gainsboro, 10% );
-}
-
-.fud_table tbody tr:nth-of-type(even) {
-    background-color: lighten( @Gainsboro, 5% );
-}
-
-.fud_table td {
-    padding: 2px 5px 2px 5px;
-}
-*/
 
 /*--- List of fora ---*/
 
