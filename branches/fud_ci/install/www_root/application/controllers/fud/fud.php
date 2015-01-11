@@ -133,7 +133,7 @@ class Fud extends CI_Controller
   * Index page.
   *
   * Index page for fudForum. Shows the default selection of categories
-  * and forums.
+  * and fora.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
@@ -150,20 +150,20 @@ class Fud extends CI_Controller
     $visibleCats = array();
     foreach( $cats as $cat )
     {
-      $visibleForums = array();
+      $visibleFora = array();
 
       $cat->url = site_url( "category/{$cat->id}" );
-      $catForums[$cat->id] = $this->FUD->fetch_forums_by_category( $cat->id, TRUE );
-      $forumsInCat = count($catForums[$cat->id]);
+      $catFora[$cat->id] = $this->FUD->fetch_forums_by_category( $cat->id, TRUE );
+      $foraInCat = count($catFora[$cat->id]);
 
-      for( $frmIdx=0; $frmIdx<$forumsInCat; $frmIdx++ )
+      for( $frmIdx=0; $frmIdx<$foraInCat; $frmIdx++ )
       {
-        if( !is_array($catForums[$cat->id]) )
+        if( !is_array($catFora[$cat->id]) )
         {
-          $catForums[$cat->id] = array($catForums[$cat->id]);
+          $catFora[$cat->id] = array($catFora[$cat->id]);
         }
 
-        $forum = $catForums[$cat->id][$frmIdx];
+        $forum = $catFora[$cat->id][$frmIdx];
         if( is_object( $forum ) )
         {
           if( $this->FUD->forum_is_visible( $forum->id, $uid ) )
@@ -191,32 +191,33 @@ class Fud extends CI_Controller
             $f['f_thread_count'] = $forum->thread_count;
             $f['f_last_date'] = $forum->last_date;
             $f['f_last_author'] = $forum->last_author;
-            $visibleForums[] = $f;
+            $visibleFora[] = $f;
           }
         }
         else
         {
           if( $this->FUD->forum_is_visible( $forum, $uid ) )
-            $visibleForums[] = $forum;
+            $visibleFora[] = $forum;
         }
       }
 
-      if( count($visibleForums) )
+      if( count($visibleFora) )
       {
         $c['c_id'] = $cat->id;
         $c['c_name'] = $cat->name;
         $c['c_url'] = $cat->url;
         $c['c_description']  = $cat->description;
-        $c['forums']  = $visibleForums;
+        $c['fora']  = $visibleFora;
         $visibleCats[] = $c;
       }
     }
 
+    $header_data = array( 'base_url' => base_url('/') );
     $data = array( 'categories' => $visibleCats,
                    'path_navigation' => $path_navigation,
-                   'site_navigation' => $site_navigation );
+                   'site_navigation' => $site_navigation,);
 
-    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
+    $html_head = $this->parser->parse('fud/html_head.php', $header_data, true);
     $html_body = $this->parser->parse('fud/index.php', $data, true);
     $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 
@@ -296,7 +297,7 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Shows the forums in a given category.
+  * Shows the fora in a given category.
   *
   * @author  Massimo Fierro <massimo.fierro@gmail.com>
   *
@@ -312,18 +313,18 @@ class Fud extends CI_Controller
     $site_navigation = $this->_get_site_navigation();
     $cat = $nav->category;
 
-    $forums = $this->FUD->fetch_forums_by_category( $cid, TRUE );
+    $fora = $this->FUD->fetch_forums_by_category( $cid, TRUE );
 
-    if( !is_array($forums) )
+    if( !is_array($fora) )
     {
-      $forums = array( $forums );
+      $fora = array( $fora );
     }
 
-    $count = count($forums);
+    $count = count($fora);
 
     for( $frmIdx=0; $frmIdx<$count; $frmIdx++ )
     {
-      $forum = $forums[$frmIdx];
+      $forum = $fora[$frmIdx];
       if( is_object( $forum ) )
       {
         if( $this->FUD->forum_is_visible( $forum->id, $uid ) )
@@ -346,17 +347,17 @@ class Fud extends CI_Controller
           $f['f_thread_count'] = $forum->thread_count;
           $f['f_last_date'] = $forum->last_date;
           $f['f_last_author'] = $forum->last_author;
-          $visibleForums[] = $f;
+          $visibleFora[] = $f;
         }
       }
       else
       {
         if( $this->FUD->forum_is_visible( $forum, $uid ) )
-          $visibleForums[] = $forum;
+          $visibleFora[] = $forum;
       }
     }
 
-    $data = array( 'forums' => $visibleForums,
+    $data = array( 'fora' => $visibleFora,
                    'path_navigation'=> $path_navigation,
                    'site_navigation' => $site_navigation );
 

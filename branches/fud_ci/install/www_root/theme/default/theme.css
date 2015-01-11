@@ -147,15 +147,18 @@ nav#fud_site_navigation ul li {
 
 /*--- table ---*/
 
-.fud_table {
+#wrapper-unit table.fud_table {
     width: 100%;
     font-size: 10pt;
     .rounded( 5px );
     padding: 0;
+    /* In order for border-radius to work on tables 
+     * borders must NOT be collapsed */
+    border-collapse: separate;
     border: 1px solid gray;
 }
 
-.fud_table .fud_first_col {
+#wrapper-unit .fud_table .fud_first_col {
   min-width: 75%;
   width: 75%;
 }
@@ -165,16 +168,6 @@ nav#fud_site_navigation ul li {
 .fud_table th {
   border-bottom: thin solid gray;
 }
-
-/*
-.fud_table thead {
-    background-color: @Gainsboro;
-}
-
-.fud_table th {
-    padding: 2px 5px 2px 5px;
-}
-*/
 
 /*--- tbody ---*/
 
