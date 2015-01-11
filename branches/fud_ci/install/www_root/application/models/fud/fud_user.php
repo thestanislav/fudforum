@@ -170,7 +170,7 @@ class FUD_user extends CI_Model
   }
 
   /**
-  * Returns TRUE if user is part of the default admin group
+  * Returns TRUE if user is the admin user or part of the default admin group
   *
   * @author Massimo Fierro <massimo.fierro@gmail.com>
   *
@@ -187,6 +187,59 @@ class FUD_user extends CI_Model
       if( $q->num_rows() == 1)
       {
         return TRUE;
+      }
+    }
+    return FALSE;
+  }
+  
+  /**
+  * Returns TRUE if user is moderator for ANY forum
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @return boolean
+  */
+  public function isModerator()
+  {
+    if( $this->isLoggedIn() )
+    {
+      // TODO(nexus): retrieve prefix from config
+      $qStr = "SELECT `id` FROM `fud30_users` AS u 
+               WHERE ( `u`.`users_opt` & 524288 ) 
+                 AND `u`.`id` = '{$this->FUDuid}'";
+      $q = $this->db->query( $qStr );
+      if( $q->num_rows() == 1)
+      {
+        return TRUE
+      }
+    }
+    return FALSE;
+  }
+  
+  /**
+  * Returns TRUE if user is moderator for forum with id $fid
+  *
+  * @author Massimo Fierro <massimo.fierro@gmail.com>
+  *
+  * @return boolean
+  */
+  public function isModerator( $fid )
+  {
+    if( $this->isModerator() )
+    {
+      // TODO(nexus): retrieve prefix from config
+      $qStr = "SELECT moderators 
+               FROM fud30_forum 
+               WHERE id={$fid}";
+      $q = $this->db->query( $qStr );
+      if( $q->num_rows() == 1)
+      {
+        $u = $this->username;
+        $l = $u;
+        if( strstr( $q['moderators'], "s:{$l}:\"{$u}\"" ) )
+        {
+          return TRUE;
+        }
       }
     }
     return FALSE;

@@ -3,7 +3,7 @@
   "files":[
     {  "svn":1  },
     { "directory":"fud_ci",
-      "filters":["*.php"],
+      "filters":["*.php","*.css","*.inc"],
 		  "recursive":1 }
   ]
 }
