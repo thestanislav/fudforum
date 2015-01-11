@@ -2,8 +2,15 @@
 @Gainsboro: #DCDCDC;
 
 body {
-    font-family: Verdana,Geneva,Lucida,'Lucida Grande',Arial,Helvetica,Sans-serif;
     font-size: 10pt;
+}
+
+#wrapper {
+  width: 95%;
+}
+
+.margin_auto {
+  margin: auto;
 }
 
 .fora_table {
@@ -149,6 +156,11 @@ nav#fud_site_navigation ul li {
 }
 
 /*--- thead ---*/
+
+.fud_table th {
+  border-bottom: thin solid gray;
+}
+
 /*
 .fud_table thead {
     background-color: @Gainsboro;
@@ -161,8 +173,13 @@ nav#fud_site_navigation ul li {
 
 /*--- tbody ---*/
 
+.fud_table td.category {  
+  border-bottom: thin solid gray;
+}
+
 .fud_table span.toggler {
   font-family: monospace;
+  padding: .25em .5em;
 }
 
 .fud_table td.category span {
