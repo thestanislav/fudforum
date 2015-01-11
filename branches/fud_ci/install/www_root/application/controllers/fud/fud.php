@@ -340,6 +340,11 @@ class Fud extends CI_Controller
             $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
             $forum->last_author = "by ".$forum->last_post->login;
           }
+          else 
+          {
+            $forum->last_date = "";
+            $forum->last_author = "";
+          }
 
           $f['f_url'] = $forum->url;
           $f['f_name'] = $forum->name;
