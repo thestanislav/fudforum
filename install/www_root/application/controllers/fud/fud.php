@@ -212,12 +212,12 @@ class Fud extends CI_Controller
       }
     }
 
-    $header_data = array( 'base_url' => base_url('/') );
     $data = array( 'categories' => $visibleCats,
                    'path_navigation' => $path_navigation,
-                   'site_navigation' => $site_navigation,);
+                   'site_navigation' => $site_navigation,
+                   'base_url' => base_url('/') );
 
-    $html_head = $this->parser->parse('fud/html_head.php', $header_data, true);
+    $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/index.php', $data, true);
     $html_parts = array( 'html_body' => $html_body, 'html_head' => $html_head);
 
@@ -275,7 +275,8 @@ class Fud extends CI_Controller
 
     $data = array( 'site_navigation' => $this->_get_site_navigation(),
                    'login_url' => site_url("/login"),
-                   'error_message' => $errorMessage );
+                   'error_message' => $errorMessage,
+                   'base_url' => base_url('/') );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/login.php', $data, true);
@@ -359,7 +360,8 @@ class Fud extends CI_Controller
 
     $data = array( 'fora' => $visibleFora,
                    'path_navigation'=> $path_navigation,
-                   'site_navigation' => $site_navigation );
+                   'site_navigation' => $site_navigation,
+                   'base_url' => base_url('/') );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/category.php', $data, true);
@@ -433,7 +435,8 @@ class Fud extends CI_Controller
     $data = array( 'topics' => $topics,
                    'pagination' => $pagination,
                    'path_navigation' => $path_navigation,
-                   'site_navigation' => $site_navigation );
+                   'site_navigation' => $site_navigation,
+                   'base_url' => base_url('/') );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/forum.php', $data, true);
@@ -521,7 +524,8 @@ class Fud extends CI_Controller
     $data = array( 'messages' => $messages,
                    'pagination' => $pagination,
                    'path_navigation' => $path_navigation,
-                   'site_navigation' => $site_navigation );
+                   'site_navigation' => $site_navigation,
+                   'base_url' => base_url('/') );
 
     $html_head = $this->parser->parse('fud/html_head.php', $data, true);
     $html_body = $this->parser->parse('fud/topic.php', $data, true);
