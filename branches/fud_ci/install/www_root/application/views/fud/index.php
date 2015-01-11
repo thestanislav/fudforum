@@ -2,7 +2,7 @@
     {site_navigation}
     <!-- Navigation -->
     {path_navigation}
-    <table id="fora_table" class="fud_table pure-table pure-table-striped" border="0" cellspacing="1" cellpadding="2">
+    <table id="fora_table" class="fud_table pure-table pure-table-striped pure-skin-fud" border="0" cellspacing="1" cellpadding="2">
         <script>
           // TODO(nexus): move in common script file (?)
           $().ready( function() {
@@ -28,7 +28,7 @@
         {categories}
           <tr id="cat_{c_id}">
             <td class="category" colspan="4" >
-              <span id="{c_id}_toggler" class="toggler pure-button">-</span>
+              <span id="{c_id}_toggler" class="toggler pure-button pure-skin-fud">-</span>
               <span id="{c_id}_link"><a href="{c_url}">{c_name}</a></span>
               <span id="{c_id}_description">{c_description}</span> 
               

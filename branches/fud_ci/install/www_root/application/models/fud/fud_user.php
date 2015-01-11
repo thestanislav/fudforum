@@ -1,6 +1,6 @@
 <?php
 
-class FUD_user extends CI_Model
+class FUD_user extends CI_model
 {
   private $FUDsid = null;
   private $FUDuid = null;
@@ -193,57 +193,54 @@ class FUD_user extends CI_Model
   }
   
   /**
-  * Returns TRUE if user is moderator for ANY forum
+  * Returns TRUE if user is moderator for any forum or a given one
   *
   * @author Massimo Fierro <massimo.fierro@gmail.com>
   *
   * @return boolean
   */
-  public function isModerator()
+  public function isModerator( $fid = NULL )
   {
-    if( $this->isLoggedIn() )
+    if( $fid == NULL ) 
     {
-      // TODO(nexus): retrieve prefix from config
-      $qStr = "SELECT `id` FROM `fud30_users` AS u 
-               WHERE ( `u`.`users_opt` & 524288 ) 
-                 AND `u`.`id` = '{$this->FUDuid}'";
-      $q = $this->db->query( $qStr );
-      if( $q->num_rows() == 1)
+      if( $this->isLoggedIn() )
       {
-        return TRUE
-      }
-    }
-    return FALSE;
-  }
-  
-  /**
-  * Returns TRUE if user is moderator for forum with id $fid
-  *
-  * @author Massimo Fierro <massimo.fierro@gmail.com>
-  *
-  * @return boolean
-  */
-  public function isModerator( $fid )
-  {
-    if( $this->isModerator() )
-    {
-      // TODO(nexus): retrieve prefix from config
-      $qStr = "SELECT moderators 
-               FROM fud30_forum 
-               WHERE id={$fid}";
-      $q = $this->db->query( $qStr );
-      if( $q->num_rows() == 1)
-      {
-        $u = $this->username;
-        $l = $u;
-        if( strstr( $q['moderators'], "s:{$l}:\"{$u}\"" ) )
+        $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+        $qStr = "SELECT `id` FROM `{$prefix}_users` AS u 
+                WHERE ( `u`.`users_opt` & 524288 ) 
+                  AND `u`.`id` = '{$this->FUDuid}'";
+        $q = $this->db->query( $qStr );
+        if( $q->num_rows() == 1)
         {
           return TRUE;
         }
       }
+      return FALSE;
     }
-    return FALSE;
+    else 
+    {
+      if( $this->isModerator() )
+      {
+        $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+        $qStr = "SELECT `moderators`
+                FROM `{$prefix}_forum` 
+                WHERE `id`='{$fid}'";
+        $q = $this->db->query( $qStr );
+        if( $q->num_rows() == 1)
+        {
+          $u = $this->username;
+          $l = $u;
+          if( strstr( $q['moderators'], "s:{$l}:\"{$u}\"" ) )
+          {
+            return TRUE;
+          }
+        }
+      }
+      return FALSE;
+    }
   }
+  
+  
 }
 
 ?>
