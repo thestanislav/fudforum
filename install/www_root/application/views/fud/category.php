@@ -15,7 +15,7 @@
             <th class="th last_message">Last message</th>
           </thead>
           <tbody>
-            {forums}
+            {fora}
             <tr>
               <td class="forum fud_first_col"><a href="{f_url}">{f_name}</a><br/>{f_description}</td>
               <td class="messages">{f_post_count}</td>
@@ -25,7 +25,7 @@
                 <span class="author">{f_last_author}</span>
               </td>
             </tr>
-            {/forums}
+            {/fora}
           </tbody>
         </table>
       </div>
