@@ -104,11 +104,11 @@ body {
 /*--- pagination links ---*/
 
 .fud_pagination {
-	background-color: @Gainsboro;
-	padding: 5px;
-	margin-bottom: 5px;
-	.rounded( 5px );
-    border: 1px solid gray;
+  background-color: @Gainsboro;
+  padding: 5px;
+  margin-bottom: 5px;
+  .rounded( 10px );
+  border: 1px solid gray;
 }
 
 /*--- path navigation ---*/
@@ -117,7 +117,7 @@ nav#fud_path_navigation {
   background-color: @Gainsboro;
   padding: 5px;
   margin-bottom: 5px;
-  .rounded( 5px );
+  .rounded( 10px );
   border: 1px solid gray;
 }
 
@@ -128,11 +128,11 @@ nav#fud_path_navigation a {
 /*--- site navigation ---*/
 
 nav#fud_site_navigation {
-	background-color: @Gainsboro;
-	padding: 5px;
-	margin-bottom: 5px;
-	.rounded( 5px );
-    border: 1px solid gray;
+  background-color: @Gainsboro;
+  padding: 5px;
+  margin-bottom: 5px;
+  .rounded( 10px );
+  border: 1px solid gray;
 }
 
 nav#fud_site_navigation ul {
@@ -148,14 +148,27 @@ nav#fud_site_navigation ul li {
 /*--- table ---*/
 
 #wrapper-unit table.fud_table {
-    width: 100%;
-    font-size: 10pt;
-    .rounded( 5px );
-    padding: 0;
-    /* In order for border-radius to work on tables 
-     * borders must NOT be collapsed */
-    border-collapse: separate;
-    border: 1px solid gray;
+  width: 100%;
+  font-size: 10pt;
+  .rounded( 10px );
+  padding: 0;
+  /* In order for border-radius to work on tables 
+    * borders must NOT be collapsed */
+  border-collapse: separate;
+  border: 1px solid gray;
+}
+
+#wrapper-unit table.fud_table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+#wrapper-unit table.fud_table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+#wrapper-unit table.fud_table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+#wrapper-unit table.fud_table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
 }
 
 #wrapper-unit .fud_table .fud_first_col {
