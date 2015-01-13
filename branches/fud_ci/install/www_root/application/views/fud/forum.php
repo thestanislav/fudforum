@@ -1,6 +1,9 @@
     <div id="wrapper-grid" class="pure-g pure-skin-fud">
       <div class="pure-u-1-24 pure-skin-fud">&nbsp;</div>
-      <div id="wrapper-unit" class="pure-u-22-24 pure-skin-fud">          <!-- Menu -->
+      <div id="wrapper-unit" class="pure-u-22-24 pure-skin-fud">          
+        <!-- Header -->
+        {header}
+        <!-- Menu -->
         {site_navigation}
         <!-- Navigation -->
         {path_navigation}

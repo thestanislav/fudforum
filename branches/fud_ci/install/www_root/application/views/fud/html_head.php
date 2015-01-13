@@ -9,3 +9,4 @@
 <script src="{base_url}js/jquery.min.js" ></script>
 <script src="{base_url}js/jquery-ui.min.js" ></script>
 <script src="{base_url}js/less-1.3.0.min.js" ></script>
+<script src="{base_url}js/ckeditor/ckeditor.js" ></script>
