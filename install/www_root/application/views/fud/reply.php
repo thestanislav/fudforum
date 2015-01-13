@@ -1,13 +1,13 @@
 
-	<?php $action = "/reply/{$tid}/{$mid}/{$do_quote}"; ?>
-	<form action="<? echo $action ?>" method="post">
+	<form action="/reply/{tid}/{mid}/{do_quote}" method="post">
 		<label>Reply to message # </label>
-		<input name="reply_to" type="text" readonly="true" value="<?echo $reply_to_id; ?>"><br/>
+		<input name="reply_to" type="text" readonly="true" value="{reply_to_id}"><br/>
 		<label>Reply body</label>
-		<textarea name="reply_contents"><?php echo $quote; ?></textarea><br/>
+		<textarea name="reply_contents" >
+      {quote}
+    </textarea><br/>
 		<script type="text/javascript">
 			//<![CDATA[
-
 			// Replace the <textarea id="editor"> with an CKEditor
 			// instance, using the "bbcode" plugin, shaping some of the
 			// editor configuration to fit BBCode environment.
@@ -47,5 +47,5 @@
 
 			//]]>
 		</script>
-		<input name="preview" type="Submit" value="Preview"/> <input name="submit" type="submit" />
+		<input name="preview" type="Submit" value="Preview"/> <input name="submit" type="submit" value="Submit reply" />
 	</form>

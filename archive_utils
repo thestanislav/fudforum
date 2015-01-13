@@ -39,7 +39,7 @@ function archive($dir, $compress = FALSE)
 					$fdata = preg_replace($multiline_comment, '', $fdata);
 					$singleline_comment = '/[^:]\/\/.*/';
 					$fdata = preg_replace($singleline_comment, '', $fdata);
-					$extra_space = '/\s+/';
+          $extra_space = '/\s+/';
 					// $fdata = preg_replace($extra_space, ' ', $fdata);
 					$removable_space = '/\s?([\{\};\=\(\)\/\+\*-])\s?/';
 					$fdata = preg_replace($removable_space, "\\1", $fdata);
