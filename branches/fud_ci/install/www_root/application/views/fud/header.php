@@ -1,12 +1,9 @@
         <div id="fud_header">
-            <img id="fud_logo" >
-            <span>
-                <hgroup>
-                  <h1 id="fud_title">My forum, my way!</h1>
-                  <h3 id="fud_subtitle">Fast Uncompromising Discussions. FUDforum will get your users talking.</h3>
-                </hgroup>
-            <span>
-            <span id="fud_search">
-
-            </span>
+          <div>
+            <img style="float: left; height: 5em; margin-right:1em;"  id="fud_logo" src="images/fudlogo.gif" >
+            <hgroup>
+              <h1 id="fud_title">{title}</h1>
+              <h3 id="fud_subtitle">{description}</h3>
+            </hgroup>
+          </div>
         </div>

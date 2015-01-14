@@ -138,7 +138,9 @@ class Fud extends CI_Controller
   */
   private function _get_header()
   {
-    $header = $this->load->view( "fud/header", NULL, TRUE );
+    $data = array( 'title' => $GLOBALS['FORUM_TITLE'],
+                   'description' => $GLOBALS['FORUM_DESCR'] );
+    $header = $this->parser->parse( "fud/header", $data, TRUE );
     return $header;
   }
 
