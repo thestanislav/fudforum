@@ -1,5 +1,28 @@
 @import "elements.less";
 @Gainsboro: #DCDCDC;
+@big-radius: 9px;
+@med-radius: 7px;
+@small-radius: 5px;
+
+.rounded-bottom(@radius: @med-radius) {
+  -webkit-border-bottom-left-radius: @radius;
+  -moz-border-bottom-left-radius: @radius;
+  border-bottom-left-radius: @radius;
+  -webkit-border-bottom-right-radius: @radius;
+  -moz-border-bottom-right-radius: @radius;
+  border-bottom-right-radius: @radius;
+}
+
+.rounded-top(@radius: @med-radius) {
+  -webkit-border-top-left-radius: @radius;
+  -moz-border-top-left-radius: @radius;
+  border-top-left-radius: @radius;
+  -webkit-border-top-right-radius: @radius;
+  -moz-border-top-right-radius: @radius;
+  border-top-right-radius: @radius;
+}
+
+/* --------------------------- */
 
 body {
     font-size: 10pt;
@@ -101,38 +124,62 @@ body {
     clear: both;
 }
 
+pure-button {
+  .rounded(@small-radius);
+}
+
+/*--- Header ---*/
+
+div#fud_header {
+  border: thin solid gray;
+  border-top: none;
+  .rounded-bottom(@med-radius);
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding: 1em;
+}
+
+div#fud_header h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0;
+}
+
+div#fud_header h1 {
+  margin-bottom: .5em;
+}
+
+div#fud_header h2 {
+  font-size: .5em;
+}
+
 /*--- pagination links ---*/
 
 .fud_pagination {
-  background-color: @Gainsboro;
+  /*  background-color: @Gainsboro; */
   padding: 5px;
   margin-bottom: 5px;
-  .rounded( 10px );
-  border: 1px solid gray;
+  .rounded( @med-radius );
+  border: thin solid gray;
 }
 
 /*--- path navigation ---*/
 
 nav#fud_path_navigation {
-  background-color: @Gainsboro;
-  padding: 5px;
-  margin-bottom: 5px;
-  .rounded( 10px );
-  border: 1px solid gray;
+  padding: 1em 0;
 }
 
 nav#fud_path_navigation a {
-  padding: 5px;
+  margin-bottom: 1em;
 }
 
 /*--- site navigation ---*/
 
 nav#fud_site_navigation {
-  background-color: @Gainsboro;
   padding: 5px;
   margin-bottom: 5px;
-  .rounded( 10px );
-  border: 1px solid gray;
+  .rounded( @med-radius );
+  /* border: 1px solid gray; */
+  text-align: center;
 }
 
 nav#fud_site_navigation ul {
@@ -150,25 +197,15 @@ nav#fud_site_navigation ul li {
 #wrapper-unit table.fud_table {
   width: 100%;
   font-size: 10pt;
-  .rounded( 10px );
   padding: 0;
-  /* In order for border-radius to work on tables 
-    * borders must NOT be collapsed */
-  border-collapse: separate;
-  border: 1px solid gray;
+  margin-bottom: 1em;
+  border: none;
 }
 
-#wrapper-unit table.fud_table thead th:first-child {
-  border-top-left-radius: 10px;
-}
-#wrapper-unit table.fud_table thead th:last-child {
-  border-top-right-radius: 10px;
-}
-#wrapper-unit table.fud_table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
-}
-#wrapper-unit table.fud_table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
+#wrapper-unit div#table_wrapper {
+  .rounded(@med-radius);
+  border: thin solid gray;
+  padding: 1em 0;
 }
 
 #wrapper-unit .fud_table .fud_first_col {
@@ -179,13 +216,14 @@ nav#fud_site_navigation ul li {
 /*--- thead ---*/
 
 .fud_table th {
-  border-bottom: thin solid gray;
+  /* border-bottom: thin solid gray; */
 }
 
 /*--- tbody ---*/
 
-.fud_table td.category {  
-  border-bottom: thin solid gray;
+table.fud_table td.category {  
+  border-top: thin solid gray;
+  background-color: #CCF;
 }
 
 .fud_table span.toggler {
@@ -196,7 +234,6 @@ nav#fud_site_navigation ul li {
 .fud_table td.category span {
   margin-right: 1em;  
 }
-
 
 /*--- List of fora ---*/
 
@@ -214,7 +251,7 @@ nav#fud_site_navigation ul li {
 }
 
 #fora_table tr .category {
-    background-color: darken( @Gainsboro, 10% );
+    /* background-color: darken( @Gainsboro, 10% ); */
 }
 
 #fora_table td span.date {
@@ -250,10 +287,10 @@ nav#fud_site_navigation ul li {
 /*--- List of messages within a topic ---*/
 
 .fud_post {
-    background-color: Gainsboro;
+    /* background-color: Gainsboro; */
     border: 1px solid;
     margin-bottom: 5px;
-    .rounded(5px);
+    .rounded(@med-radius);
 }
 
 .fud_post div.header {
@@ -282,12 +319,12 @@ nav#fud_site_navigation ul li {
 .fud_post div.author {
     border-bottom: 1px solid gray;
     padding: 5px 5px 5px 5px;
-    background-color: lighten( @Gainsboro, 5% );
+    /* background-color: lighten( @Gainsboro, 5% ); */
 }
 
 .fud_post div.body {
     padding: 10px 5px 10px 5px;
-    background-color: lighten( @Gainsboro, 10% );
+    /*  background-color: lighten( @Gainsboro, 10% ); */
 }
 
 .fud_post div.actions span {

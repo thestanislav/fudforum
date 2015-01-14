@@ -7,5 +7,6 @@
 				<li>{cp_or_register_link}</li>
 				<li>{login_logout_link}</li>
 				<li>{administration_link}</li>
+				<li><a href="{home_url}">Home</a></li>
 			</ul>
 		</nav>

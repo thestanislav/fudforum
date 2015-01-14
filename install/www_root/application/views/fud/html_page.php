@@ -5,6 +5,16 @@
     {html_head}
   </head>
   <body>
-    {html_body}
+    <div id="wrapper-grid" class="pure-g">
+      <div class="pure-u-1-24">&nbsp;</div>
+      <div id="wrapper-unit" class="pure-u-22-24">
+        <!-- Header -->
+        {header}
+        <!-- Menu -->
+        {site_navigation}
+        {html_body}
+      </div>
+      <div class="pure-u-1-24">&nbsp;</div>
+    </div>
   </body>
 </html>

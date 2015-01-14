@@ -2,8 +2,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <link rel="stylesheet" type="text/css" 
       href="{base_url}theme/default/pure-min.css" >
-<link rel="stylesheet" type="text/css" 
-      href="{base_url}theme/default/pure_skin.css" >
 <link rel="stylesheet/less" type="text/css" 
       href="{base_url}theme/default/theme.css" >
 <script src="{base_url}js/jquery.min.js" ></script>
