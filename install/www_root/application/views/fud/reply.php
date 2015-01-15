@@ -2,7 +2,7 @@
           <div class="pure-u-1-24">&nbsp;</div>
           <div class="pure-u-22-24">
             <!-- Reply form -->
-            <form action="/reply/{tid}/{mid}/{do_quote}" method="post"
+            <form action="{site_url}/reply/{tid}/{mid}" method="post"
                   class="pure-form-aligned pure-form">
               <fieldset>
                 <div class="pure-control-group">
@@ -10,8 +10,7 @@
                   <input name="reply_to" type="text" readonly="true" value="{reply_to_id}">
                 </div>
                 <div class="pure-control-group">
-                  <textarea name="reply_contents" >
-                    {quote}
+                  <textarea name="reply_contents" >{quote}
                   </textarea>
                 </div>
                 <div class="text_right"> 

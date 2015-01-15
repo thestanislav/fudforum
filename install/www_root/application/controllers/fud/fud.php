@@ -138,8 +138,10 @@ class Fud extends CI_Controller
   */
   private function _get_header()
   {
+    // TODO(nexus): un-escape title and description
     $data = array( 'title' => $GLOBALS['FORUM_TITLE'],
-                   'description' => $GLOBALS['FORUM_DESCR'] );
+                   'description' => $GLOBALS['FORUM_DESCR'],
+                   'base_url' => base_url() );
     $header = $this->parser->parse( "fud/header", $data, TRUE );
     return $header;
   }
@@ -564,15 +566,15 @@ class Fud extends CI_Controller
   */
   public function reply( $tid, $mid = NULL, $do_quote = FALSE )
   {
-    if( isset($_SERVER['method']) && !strcasecmp( $_SERVER['method'], 'post' ) )
+    if( isset($_POST) AND !empty( $_POST ) )
     {
-      if( isset( $_POST['preview'] ) )
+      if( array_key_exists( 'preview', $_POST ) )
       {
-        $this->_reply_preview( $tid, $mid, $do_quote, TRUE );
+        $this->_reply_preview( $tid, $mid );
       }
-      else if( isset( $_POST['submit'] ) )
+      else if( array_key_exists( 'submit', $_POST ) )
       {
-        $this->_reply_post( $tid, $mid, $do_quote );
+        $this->_reply_post( $tid, $mid );
       }
     }
     else
@@ -605,11 +607,14 @@ class Fud extends CI_Controller
       $quote = "[quote]{$quote}[/quote]\n&nbsp;";
     }
 
-    $data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
-                   'quote' => $quote, 'reply_to_id' => $reply_to_id,
+    $data = array( 'tid' => $tid, 
+                   'mid' => $mid, 
+                   'quote' => $quote, 
+                   'reply_to_id' => $reply_to_id,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
-                   'base_url' => base_url('/') );
+                   'base_url' => base_url(),
+                   'site_url' => site_url() );
 
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
@@ -634,17 +639,16 @@ class Fud extends CI_Controller
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
-    $quote = "";
-    if( $do_quote )
-    {
-      $quote = $this->FUD->fetch_message( $mid )->body;
-      $quote = br2nl( $quote );
-      $quote = "[quote]{$quote}[/quote]\n&nbsp;";
-    }
+    $quote = $_POST['reply_contents'];
 
-    $data = array( 'tid' => $tid, 'mid' => $mid, 'do_quote' => $do_quote,
-                   'quote' => $quote, 'reply_to_id' => $reply_to_id,
-                   'base_url' => base_url('/') );
+    $data = array( 'tid' => $tid, 
+                   'mid' => $mid, 
+                   'quote' => $quote, 
+                   'reply_to_id' => $reply_to_id,
+                   'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'base_url' => base_url(),
+                   'site_url' => site_url() );
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
     $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
@@ -664,8 +668,20 @@ class Fud extends CI_Controller
   * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
   *
   */
-  private function _reply_post( $tid, $mid = NULL, $do_quote = FALSE )
+  private function _reply_post( $tid, $mid = NULL )
   {
-
+    $topic = $this->FUD->fetch_full_topic( $tid );
+    $subject = $topic->subject;
+    $pos = strpos( $subject, 'RE: ');
+    if( ($pos == FALSE) OR ($pos != 0) )
+    {
+      $subject = "RE: {$subject}";
+    }
+    $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
+    $this->FUD->new_reply( $subject, $_POST['reply_contents'], 0, 
+                           $this->user->getUid(), $reply_to_id );
+    
+    // TODO(nexus): get the right behaviour from trunk
+    redirect( site_url() );
   }
 }

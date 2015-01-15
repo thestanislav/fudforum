@@ -152,6 +152,12 @@ div#fud_header h2 {
   font-size: .5em;
 }
 
+div#fud_header img#fud_logo {
+  float: left; 
+  height: 5em; 
+  margin-right:1em;
+}
+
 /*--- pagination links ---*/
 
 .fud_pagination {
@@ -208,7 +214,7 @@ nav#fud_site_navigation ul li {
   padding: 1em 0;
 }
 
-#wrapper-unit .fud_table .fud_first_col {
+#wrapper-unit .fud_table .first_column{
   min-width: 75%;
   width: 75%;
 }
