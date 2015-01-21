@@ -1,19 +1,20 @@
         <div id="reply_wrapper_grid" class="pure-g">
           <div id="reply_wrapper_unit" class="pure-u-1">
-            <div class="contents">
+            <div id="contents">
               <!-- Reply form -->
               <form action="{site_url}/reply/{tid}/{mid}" method="post"
                     class="pure-form-aligned pure-form">
                 <fieldset>
                   <div class="pure-control-group">
-                    <label>Forum </label>
-                    <input name="forum" type="text" readonly="true" value="{forum}">
-                    <label>Reply to message # </label>
+                    <label >Forum </label>
+                    <input class="pure-input-2-3" name="forum" type="text" readonly="true" value="{forum}">
+                    <br>
+                    <label >Reply to message # </label>
                     <input name="reply_to" type="text" readonly="true" value="{reply_to_id}">
                   </div>
                   <div class="pure-control-group">
-                    <label>Subject </label>
-                    <input name="subject" type="text" value="{subject}">
+                    <label >Subject </label>
+                    <input class="pure-input-2-3" name="subject" type="text" value="{subject}">
                   </div>
                   <div class="pure-control-group">
                     <textarea name="reply_contents" >{quote}
