@@ -570,7 +570,7 @@ class Fud extends CI_Controller
     {
       if( array_key_exists( 'preview', $_POST ) )
       {
-        $this->_reply_preview( $tid, $mid );
+        $this->_reply( $tid, $mid, FALSE, TRUE );
       }
       else if( array_key_exists( 'submit', $_POST ) )
       {
@@ -579,7 +579,7 @@ class Fud extends CI_Controller
     }
     else
     {
-        $this->_reply_new( $tid, $mid, $do_quote );
+        $this->_reply( $tid, $mid, $do_quote );
     }
   }
 
@@ -595,11 +595,12 @@ class Fud extends CI_Controller
   * @param integer $mid OPTIONAL. Numerical message id used to reply.
   * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
   */
-  private function _reply_new( $tid, $mid = NULL, $do_quote = FALSE )
+  private function _reply( $tid, $mid = NULL, $do_quote = FALSE, $preview = FALSE )
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
     $message = $this->FUD->fetch_message( $reply_to_id );
+    $forum = $this->FUD->fetch_forums( $message->forum_id );
     
     $quote = "";
     if( $do_quote )
@@ -607,6 +608,10 @@ class Fud extends CI_Controller
       $quote = $message->body;
       $quote = br2nl( $quote );
       $quote = "[quote]{$quote}[/quote]\n&nbsp;";
+    } 
+    else if( $preview )
+    {
+      $quote = $_POST['reply_contents'];
     }
     
     $subject = "RE: ".$message->subject;
@@ -615,51 +620,13 @@ class Fud extends CI_Controller
                    'mid' => $mid, 
                    'quote' => $quote, 
                    'subject' => $subject,
+                   'forum' => $forum->name,
                    'reply_to_id' => $reply_to_id,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
                    'base_url' => base_url(),
                    'site_url' => site_url() );
 
-
-    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
-    $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
-    $this->parser->parse( 'fud/html_page.php', $data );
-  }
-
-  /**
-  * Displays a reply preview
-  *
-  * Displays a reply preview. Parameters will usually be passed as per the
-  * initial _reply_new() call.
-  *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
-  *
-  * @param integer $tid Numerical topic id used to reply.
-  * @param integer $mid OPTIONAL. Numerical message id used to reply.
-  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
-  *
-  */
-  private function _reply_preview( $tid, $mid = NULL )
-  {
-    $topic = $this->FUD->fetch_full_topic( $tid );
-    $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
-    
-    if( $mid != NULL ) $message = $this->FUD->fetch_message( $mid );
-    
-    $quote = $_POST['reply_contents'];
-    
-    $subject = "RE: ".$message->subject;
-
-    $data = array( 'tid' => $tid, 
-                   'mid' => $mid, 
-                   'quote' => $quote, 
-                   'subject' => $subject,
-                   'reply_to_id' => $reply_to_id,
-                   'site_navigation' => $this->_get_site_navigation(),
-                   'header' => $this->_get_header(),
-                   'base_url' => base_url(),
-                   'site_url' => site_url() );
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
     $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
@@ -682,7 +649,7 @@ class Fud extends CI_Controller
   private function _reply_post( $tid, $mid = NULL )
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
-    $subject = $topic->subject;
+    $subject = $_POST['subject'];
     $pos = strpos( $subject, 'RE: ');
     if( ($pos == FALSE) OR ($pos != 0) )
     {
