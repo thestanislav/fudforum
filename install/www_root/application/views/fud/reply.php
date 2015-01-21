@@ -6,6 +6,8 @@
                     class="pure-form-aligned pure-form">
                 <fieldset>
                   <div class="pure-control-group">
+                    <label>Forum </label>
+                    <input name="forum" type="text" readonly="true" value="{forum}">
                     <label>Reply to message # </label>
                     <input name="reply_to" type="text" readonly="true" value="{reply_to_id}">
                   </div>
