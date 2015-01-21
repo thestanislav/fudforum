@@ -1,4 +1,5 @@
 List of important TODOs 
 -----------------------
+  - [ ] Sanitize, sanitize, sanitize!
   - [ ] Normalize DB
     - [ ] The current user.is_mod and forum.moderators fields are non normalized: use a separate table and view

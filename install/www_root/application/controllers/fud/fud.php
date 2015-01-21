@@ -191,7 +191,7 @@ class Fud extends CI_Controller
             if( $forum->post_count )
             {
               // TODO(nexus): add option for date formatting
-              $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
+              $forum->last_date = date( "j F Y", $forum->last_post->post_stamp );
               $forum->last_author = "by ".$forum->last_post->login;
             }
             else
@@ -349,7 +349,7 @@ class Fud extends CI_Controller
           if( $forum->post_count )
           {
             // TODO(nexus): add option for date formatting
-            $forum->last_date = date( "D, j F Y", $forum->last_post->post_stamp );
+            $forum->last_date = date( "j F Y", $forum->last_post->post_stamp );
             $forum->last_author = "by ".$forum->last_post->login;
           }
           else 
@@ -424,12 +424,12 @@ class Fud extends CI_Controller
       $t['t_views'] = $topic->views;
       $root_message = $this->FUD->fetch_message( $topic->root_msg_id );
       // TODO(nexus): add option for date formatting
-      $t['t_date'] = date( "D, j F Y", $root_message->post_stamp );
+      $t['t_date'] = date( "j F Y", $root_message->post_stamp );
       $t['t_author'] = $root_message->login;
       $last_message = $this->FUD->fetch_message( $topic->last_post_id );
       $t['t_last_author'] = $last_message->login;
       // TODO(nexus): add option for date formatting
-      $t['t_last_date'] = date( "D, j F Y", $last_message->post_stamp );
+      $t['t_last_date'] = date( "j F Y", $last_message->post_stamp );
       $topics[] = $t;
     }
 
@@ -599,17 +599,22 @@ class Fud extends CI_Controller
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
+    $message = $this->FUD->fetch_message( $reply_to_id );
+    
     $quote = "";
     if( $do_quote )
     {
-      $quote = $this->FUD->fetch_message( $mid )->body;
+      $quote = $message->body;
       $quote = br2nl( $quote );
       $quote = "[quote]{$quote}[/quote]\n&nbsp;";
     }
+    
+    $subject = "RE: ".$message->subject;
 
     $data = array( 'tid' => $tid, 
                    'mid' => $mid, 
                    'quote' => $quote, 
+                   'subject' => $subject,
                    'reply_to_id' => $reply_to_id,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
@@ -639,11 +644,17 @@ class Fud extends CI_Controller
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
+    
+    if( $mid != NULL ) $message = $this->FUD->fetch_message( $mid );
+    
     $quote = $_POST['reply_contents'];
+    
+    $subject = "RE: ".$message->subject;
 
     $data = array( 'tid' => $tid, 
                    'mid' => $mid, 
                    'quote' => $quote, 
+                   'subject' => $subject,
                    'reply_to_id' => $reply_to_id,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),

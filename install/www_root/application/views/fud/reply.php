@@ -1,29 +1,34 @@
-        <div id="table_wrapper" class="pure-g">
-          <div class="pure-u-1-24">&nbsp;</div>
-          <div class="pure-u-22-24">
-            <!-- Reply form -->
-            <form action="{site_url}/reply/{tid}/{mid}" method="post"
-                  class="pure-form-aligned pure-form">
-              <fieldset>
-                <div class="pure-control-group">
-                  <label>Reply to message # </label>
-                  <input name="reply_to" type="text" readonly="true" value="{reply_to_id}">
-                </div>
-                <div class="pure-control-group">
-                  <textarea name="reply_contents" >{quote}
-                  </textarea>
-                </div>
-                <div class="text_right"> 
-                  <button name="cancel" type="cancel" 
-                          class="pure-button">Cancel</button>
-                  <button name="preview" type="submit" 
-                          class="pure-button">Preview</button>
-                  <button name="submit" type="submit" 
-                          class="pure-button pure-button-primary">Submit</button>
-                </div>
-              </fieldset>         
-            </form>
-          <div class="pure-u-1-24 pure-skin-fud">&nbsp;</div>
+        <div id="reply_wrapper_grid" class="pure-g">
+          <div id="reply_wrapper_unit" class="pure-u-1">
+            <div class="contents">
+              <!-- Reply form -->
+              <form action="{site_url}/reply/{tid}/{mid}" method="post"
+                    class="pure-form-aligned pure-form">
+                <fieldset>
+                  <div class="pure-control-group">
+                    <label>Reply to message # </label>
+                    <input name="reply_to" type="text" readonly="true" value="{reply_to_id}">
+                  </div>
+                  <div class="pure-control-group">
+                    <label>Subject </label>
+                    <input name="subject" type="text" value="{subject}">
+                  </div>
+                  <div class="pure-control-group">
+                    <textarea name="reply_contents" >{quote}
+                    </textarea>
+                  </div>
+                  <div class="text_right"> 
+                    <button name="cancel" type="cancel" 
+                            class="pure-button">Cancel</button>
+                    <button name="preview" type="submit" 
+                            class="pure-button">Preview</button>
+                    <button name="submit" type="submit" 
+                            class="pure-button pure-button-primary">Submit</button>
+                  </div>
+                </fieldset>         
+              </form>
+            </div>
+          </div>
         </div>
       
       <script type="text/javascript">

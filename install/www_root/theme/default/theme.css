@@ -124,8 +124,18 @@ body {
     clear: both;
 }
 
-pure-button {
+.pure-button {
   .rounded(@small-radius);
+}
+
+div#main-wrapper-div {
+  padding: 0 2em;
+}
+
+div#contents {
+  border: thin solid gray;
+  .rounded(@med-radius);
+  padding: 2em;
 }
 
 /*--- Header ---*/
@@ -162,8 +172,8 @@ div#fud_header img#fud_logo {
 
 .fud_pagination {
   /*  background-color: @Gainsboro; */
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
   .rounded( @med-radius );
   border: thin solid gray;
 }
@@ -171,18 +181,13 @@ div#fud_header img#fud_logo {
 /*--- path navigation ---*/
 
 nav#fud_path_navigation {
-  padding: 1em 0;
-}
-
-nav#fud_path_navigation a {
   margin-bottom: 1em;
 }
 
 /*--- site navigation ---*/
 
 nav#fud_site_navigation {
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 1em 0;
   .rounded( @med-radius );
   /* border: 1px solid gray; */
   text-align: center;
@@ -195,12 +200,12 @@ nav#fud_site_navigation ul {
 
 nav#fud_site_navigation ul li {
   display: inline;
-  padding: 5px;
+  padding: .5em;
 }
 
 /*--- table ---*/
 
-#wrapper-unit table.fud_table {
+div#table_wrapper_unit div#contents table.fud_table {
   width: 100%;
   font-size: 10pt;
   padding: 0;
@@ -208,13 +213,7 @@ nav#fud_site_navigation ul li {
   border: none;
 }
 
-#wrapper-unit div#table_wrapper {
-  .rounded(@med-radius);
-  border: thin solid gray;
-  padding: 1em 0;
-}
-
-#wrapper-unit .fud_table .first_column{
+div#table_wrapper_unit div#contents table.fud_table .first_column{
   min-width: 75%;
   width: 75%;
 }
@@ -260,7 +259,7 @@ table.fud_table td.category {
     /* background-color: darken( @Gainsboro, 10% ); */
 }
 
-#fora_table td span.date {
+#fora_table td div.date {
     font-size: smaller;
 }
 
@@ -286,7 +285,7 @@ table.fud_table td.category {
     .text_right;
 }
 
-#topics_table td span.date {
+#topics_table td div.date {
     font-size: smaller;
 }
 
