@@ -8,18 +8,22 @@
                       class="fud_table pure-table pure-table-striped pure-skin-fud" 
                       border="0" cellspacing="1" cellpadding="2">
                 <thead class="table_header" >
-                  <th class="th forum first_column">Forum</th>
-                  <th class="th messages">Messages</th>
-                  <th class="th topics">Topics</th>
-                  <th class="th last_message">Last&nbsp;message</th>
+                  <th class="fud_wide_column" colspan="3" >Forum</th>
+                  <th class="">Messages</th>
+                  <th class="">Topics</th>
+                  <th class="">Last&nbsp;message</th>
                 </thead>
                 <tbody>
                   {fora}
                   <tr>
-                    <td class="forum first_column"><a href="{f_url}">{f_name}</a><br/>{f_description}</td>
-                    <td class="messages">{f_post_count}</td>
-                    <td class="topics">{f_thread_count}</td>
-                    <td class="last_message">
+                    <td class="">{f_icon}</td>
+                    <td class=""></td>
+                    <td class="forum fud_wide_column">
+                      <a href="{f_url}">{f_name}</a><br/>{f_description}
+                    </td>
+                    <td class="">{f_post_count}</td>
+                    <td class="">{f_thread_count}</td>
+                    <td class="">
                       <div class="date">{f_last_date}</div>
                       <div class="author">{f_last_author}</div>
                     </td>

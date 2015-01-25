@@ -21,7 +21,7 @@
                     });
                   </script>
                   <thead class="table_header" >
-                      <th class="first_column">Forum</th>
+                      <th class="fud_wide_column" colspan="3" >Forum</th>
                       <th class="">Messages</th>
                       <th class="">Topics</th>
                       <th class="">Last&nbsp;message</th>
@@ -29,7 +29,7 @@
                   <tbody>
                   {categories}
                     <tr id="cat_{c_id}">
-                      <td class="category first_column" colspan="4" >
+                      <td class="category fud_wide_column" colspan="6" >
                         <span id="{c_id}_toggler" class="toggler pure-button">-</span>
                         <span id="{c_id}_link"><a href="{c_url}">{c_name}</a></span>
                         <span id="{c_id}_description">{c_description}</span>                   
@@ -37,7 +37,11 @@
                     </tr>
                     {fora}
                       <tr class="cat_{c_id}_child">
-                        <td class="forum first_column"><a href="{f_url}">{f_name}</a><br/>{f_description}</td>
+                        <td class="">{f_icon}</td>
+                        <td class=""></td>
+                        <td class="forum fud_wide_column">
+                          <a href="{f_url}">{f_name}</a><br/>{f_description}
+                        </td>                        
                         <td class="messages">{f_post_count}</td>
                         <td class="topics">{f_thread_count}</td>
                         <td class="last_message">
