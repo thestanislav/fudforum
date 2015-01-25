@@ -213,7 +213,7 @@ div#table_wrapper_unit div#contents table.fud_table {
   border: none;
 }
 
-div#table_wrapper_unit div#contents table.fud_table .first_column{
+div#table_wrapper_unit div#contents table.fud_table .fud_wide_column{
   min-width: 75%;
   width: 75%;
 }
@@ -242,10 +242,14 @@ table.fud_table td.category {
 
 /*--- List of fora ---*/
 
+#fora_table img.fud_forum_icon {
+  float: left;
+}
+
 #fora_table td.messages {
     .text_center;
 }
-
+    
 #fora_table td.topics {
     .text_center;
 }

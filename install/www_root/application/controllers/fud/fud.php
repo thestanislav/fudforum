@@ -146,6 +146,39 @@ class Fud extends CI_Controller
     return $header;
   }
 
+  private function _prepare_forum_for_output( $cat, $forum ) 
+  {
+    $forum->url = site_url( "forum/{$cat->id}/{$forum->id}" );
+    $pid = $forum->last_post_id;
+    $last_msg  = $this->FUD->fetch_message( $pid );
+    $forum->last_post = $last_msg;
+    if( $forum->post_count )
+    {
+      // TODO(nexus): add option for date formatting
+      $forum->last_date = date( "j F Y", $forum->last_post->post_stamp );
+      $forum->last_author = "by ".$forum->last_post->login;
+    }
+    else
+    {
+      $forum->last_date = date( "" );
+      $forum->last_author = "";
+    }
+
+    $f['f_url'] = $forum->url;
+    $f['f_name'] = $forum->name;
+    $f['f_description'] = $forum->descr;
+    $f['f_post_count'] = $forum->post_count;
+    $f['f_thread_count'] = $forum->thread_count;
+    $f['f_last_date'] = $forum->last_date;
+    $f['f_last_author'] = $forum->last_author;
+    $iconUrl = base_url("images/forum_icons/{$forum->forum_icon}");
+    $f['f_icon'] = empty($forum->forum_icon) ? "" :
+      "<img class=\"fud_forum_icon\" alt=\"Forum icon\" src=\"{$iconUrl}\" />";
+    $f['f_redirect_url'] = $forum->url_redirect;
+    
+    return $f;
+  }
+  
   /**
   * Index page.
   *
@@ -184,29 +217,7 @@ class Fud extends CI_Controller
         {
           if( $this->FUD->forum_is_visible( $forum->id, $uid ) )
           {
-            $forum->url = site_url( "forum/{$cat->id}/{$forum->id}" );
-            $pid = $forum->last_post_id;
-            $last_msg  = $this->FUD->fetch_message( $pid );
-            $forum->last_post = $last_msg;
-            if( $forum->post_count )
-            {
-              // TODO(nexus): add option for date formatting
-              $forum->last_date = date( "j F Y", $forum->last_post->post_stamp );
-              $forum->last_author = "by ".$forum->last_post->login;
-            }
-            else
-            {
-              $forum->last_date = date( "" );
-              $forum->last_author = "";
-            }
-
-            $f['f_url'] = $forum->url;
-            $f['f_name'] = $forum->name;
-            $f['f_description'] = $forum->descr;
-            $f['f_post_count'] = $forum->post_count;
-            $f['f_thread_count'] = $forum->thread_count;
-            $f['f_last_date'] = $forum->last_date;
-            $f['f_last_author'] = $forum->last_author;
+            $f = $this->_prepare_forum_for_output( $cat, $forum );
             $visibleFora[] = $f;
           }
         }
@@ -342,29 +353,7 @@ class Fud extends CI_Controller
       {
         if( $this->FUD->forum_is_visible( $forum->id, $uid ) )
         {
-          $forum->url = site_url( "forum/{$cat->id}/{$forum->id}" );
-          $pid = $forum->last_post_id;
-          $last_msg  = $this->FUD->fetch_message( $pid );
-          $forum->last_post = $last_msg;
-          if( $forum->post_count )
-          {
-            // TODO(nexus): add option for date formatting
-            $forum->last_date = date( "j F Y", $forum->last_post->post_stamp );
-            $forum->last_author = "by ".$forum->last_post->login;
-          }
-          else 
-          {
-            $forum->last_date = "";
-            $forum->last_author = "";
-          }
-
-          $f['f_url'] = $forum->url;
-          $f['f_name'] = $forum->name;
-          $f['f_description'] = $forum->descr;
-          $f['f_post_count'] = $forum->post_count;
-          $f['f_thread_count'] = $forum->thread_count;
-          $f['f_last_date'] = $forum->last_date;
-          $f['f_last_author'] = $forum->last_author;
+          $f = $this->_prepare_forum_for_output( $cat, $forum );
           $visibleFora[] = $f;
         }
       }
@@ -509,7 +498,7 @@ class Fud extends CI_Controller
     {
       // TODO(nexus): Load proper error view
       $messages = "You don't have read permissions to this forum.";
-    }
+  }
 
     $topic = array_slice( $topic, $start, $per_page );
 
