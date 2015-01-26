@@ -22,14 +22,14 @@
                   </script>
                   <thead class="table_header" >
                       <th class="fud_wide_column" colspan="3" >Forum</th>
-                      <th class="">Messages</th>
-                      <th class="">Topics</th>
-                      <th class="">Last&nbsp;message</th>
+                      <th class="fud_text_center">Messages</th>
+                      <th class="fud_text_center">Topics</th>
+                      <th class="fud_text_center">Last&nbsp;message</th>
                   </thead>
                   <tbody>
                   {categories}
                     <tr id="cat_{c_id}">
-                      <td class="category fud_wide_column" colspan="6" >
+                      <td class="fud_wide_column" colspan="6" >
                         <span id="{c_id}_toggler" class="toggler pure-button">-</span>
                         <span id="{c_id}_link"><a href="{c_url}">{c_name}</a></span>
                         <span id="{c_id}_description">{c_description}</span>                   
@@ -37,14 +37,15 @@
                     </tr>
                     {fora}
                       <tr class="cat_{c_id}_child">
-                        <td class="">{f_icon}</td>
-                        <td class=""></td>
+                        <td class="fud_padding_sm">{f_icon}</td>
+                        <td class="fud_padding_sm">{f_new_messages_icon}</td>
                         <td class="forum fud_wide_column">
-                          <a href="{f_url}">{f_name}</a><br/>{f_description}
+                          <div><a href="{f_url}">{f_name}</a></div>
+                          <div>{f_description}</div>
                         </td>                        
-                        <td class="messages">{f_post_count}</td>
-                        <td class="topics">{f_thread_count}</td>
-                        <td class="last_message">
+                        <td class="fud_text_center">{f_post_count}</td>
+                        <td class="fud_text_center">{f_thread_count}</td>
+                        <td class="fud_text_center">
                           <div class="date">{f_last_date}</div>
                           <div class="author">{f_last_author}</div>
                         </td>

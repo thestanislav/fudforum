@@ -27,7 +27,8 @@
                   <span>{m_body}</span>
                 </div>
                 <div class="actions width_100 float_left">
-                  <span class="float_left ">Profile</span> <span class="float_right">{m_reply_buttons}</span>
+                  <span class="float_left ">Profile</span> 
+                  <span class="float_right">{m_reply_buttons}</span>
                 </div>
                 <div class="clear"></div>
               </div>

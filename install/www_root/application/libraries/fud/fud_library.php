@@ -88,7 +88,80 @@ class Fud_Library
   {
     return fud_update_user($vals, $err);
   }
-
+  
+  function get_last_forum_visit( $fid, $uid )
+  {
+    $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+    $time = time();
+    
+    $qStr = "SELECT last_view FROM {$prefix}forum_read
+             WHERE `forum_id`='{$fid}' AND `user_id`='{$uid}' ";
+    $q = $this->CI->db->query( $qStr );
+    
+    if( $q->num_rows() == 1 )
+    {
+      return $q->row()->last_view;
+    }
+    
+    return NULL;
+  }
+  
+  function update_last_forum_visit( $fid, $uid )
+  {
+    $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+    $time = time();
+    /* 
+      // MySQL
+      INSERT INTO ...
+      ON DUPLICATE KEY UPDATE ..
+    */
+    /* 
+      // SQLite
+      // One way is:
+      INSERT OR IGNORE INTO ....;
+      UPDATE ...;
+      
+      // Another
+      INSERT... ON CONFLICT REPALCE ...;
+      
+      Also -> http://stackoverflow.com/questions/418898/sqlite-upsert-not-insert-or-replace/4330694#4330694
+    */
+    /*
+      // PostgreSQL
+      // http://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql
+      UPDATE table SET field='C', field2='Z' WHERE id=3;
+        INSERT INTO table (id, field, field2)
+      SELECT 3, 'C', 'Z'
+      WHERE NOT EXISTS (SELECT 1 FROM table WHERE id=3);
+    */
+    /*
+      // Standard SQL>=2003
+      // http://en.wikipedia.org/wiki/Merge_(SQL)
+      MERGE INTO tablename USING table_reference ON (condition)
+        WHEN MATCHED THEN
+       UPDATE SET column1 = value1 [, column2 = value2 ...]
+        WHEN NOT MATCHED THEN
+       INSERT (column1 [, column2 ...]) VALUES (value1 [, value2 ...
+    */
+    $qStr = "SELECT * FROM {$prefix}forum_read
+             WHERE `forum_id`='{$fid}' AND `user_id`='{$uid}' ";
+    $q = $this->CI->db->query( $qStr );
+    
+    if( $q->num_rows() == 1 )
+    {
+      $qStr = "UPDATE {$prefix}forum_read
+              SET `last_view`='{$time}' 
+              WHERE `forum_id`='{$fid}' AND `user_id`='{$uid}' ";
+    }
+    else
+    {
+      $qStr = "INSERT INTO {$prefix}forum_read (user_id, forum_id, last_view)
+               VALUES ( '{$uid}' , '{$fid}', '{$time}' ) ";
+    }
+    $q = $this->CI->db->query( $qStr );
+              
+  }
+  
   function check_permissions( $rid, $uid = 0 )
   {
     $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];

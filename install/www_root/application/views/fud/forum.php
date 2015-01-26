@@ -11,27 +11,26 @@
                       border="0" cellspacing="1" cellpadding="2" >
                 <thead class="table_header">
                   <th class="fud_wide_column">Topic</th>
-                  <th >Replies</th>
-                  <th >Views</th>
-                  <th >Last&nbsp;message</th>
+                  <th>First&nbsp;message</th>
+                  <th>Replies</th>
+                  <th>Views</th>
+                  <th>Last&nbsp;message</th>
                 </thead>
                 <tbody>
                 {topics}
                   <tr>
                     <td class="fud_wide_column">
                       <div>
-                        <div>
-                          <a href="{t_url}">{t_subject}</a>
-                          <span class="float_right">
-                            <span class="author">By {t_author}</span>
-                            <span class="date">on {t_date}</span>
-                          </span>
-                        </div>
+                        <div><a href="{t_url}">{t_subject}</a></div>
                         <div>{t_description}</div>
                       </div>
                     </td>
-                    <td>{t_replies}</td>
-                    <td>{t_views}</td>
+                    <td>
+                      <div class="date">{t_date}</div>
+                      <div class="author">by {t_author}</div>  
+                    </td>
+                    <td class="fud_text_center">{t_replies}</td>
+                    <td class="fud_text_center">{t_views}</td>
                     <td>
                       <div class="date">{t_last_date}</div>
                       <div class="author">by {t_last_author}</div>
