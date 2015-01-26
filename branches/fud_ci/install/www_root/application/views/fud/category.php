@@ -16,13 +16,14 @@
                 <tbody>
                   {fora}
                   <tr>
-                    <td class="">{f_icon}</td>
-                    <td class=""></td>
-                    <td class="forum fud_wide_column">
-                      <a href="{f_url}">{f_name}</a><br/>{f_description}
+                    <td class="fud_padding_sm">{f_icon}</td>
+                    <td class="fud_padding_sm">{f_new_messages_icon}</td>
+                    <td class="fud_wide_column">
+                      <div><a href="{f_url}">{f_name}</a></div>
+                      <div>{f_description}</div>
                     </td>
-                    <td class="">{f_post_count}</td>
-                    <td class="">{f_thread_count}</td>
+                    <td class="fud_text_center">{f_post_count}</td>
+                    <td class="fud_text_center">{f_thread_count}</td>
                     <td class="">
                       <div class="date">{f_last_date}</div>
                       <div class="author">{f_last_author}</div>

@@ -20,7 +20,7 @@
                     <textarea name="reply_contents" >{quote}
                     </textarea>
                   </div>
-                  <div class="text_right"> 
+                  <div class="fud_text_right"> 
                     <button name="cancel" type="cancel" 
                             class="pure-button">Cancel</button>
                     <button name="preview" type="submit" 
@@ -35,15 +35,11 @@
         </div>
       
       <script type="text/javascript">
-            //<![CDATA[
-            // Replace the <textarea id="editor"> with an CKEditor
-            // instance, using the "bbcode" plugin, shaping some of the
-            // editor configuration to fit BBCode environment.
             CKEDITOR.replace( 'reply_contents',
               {
                 extraPlugins : 'bbcode',
                 // Remove unused plugins.
-                removePlugins : 'bidi,button,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
+                removePlugins : 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
                 // Width and height are not supported in the BBCode format, so object resizing is disabled.
                 disableObjectResizing : true,
                 // Define font sizes in percent values.
@@ -72,6 +68,4 @@
                   'indecision', 'angel', 'cool', 'crying', 'kiss'
                 ]
             } );
-
-            //]]>
           </script>

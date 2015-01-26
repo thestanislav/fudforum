@@ -52,16 +52,28 @@ body {
     vertical-align: bottom;
 }
 
-.text_left {
+.fud_text_left {
     text-align: left;
 }
 
-.text_center {
+.fud_text_center {
     text-align: center;
 }
 
-.text_right {
+.fud_text_right {
     text-align: right;
+}
+
+.fud_padding_sm {
+  padding: .15em .3em;
+}
+
+.fud_padding_md {
+  padding: .25em .5em;
+}
+
+.fud_padding_bg {
+  padding: .5em .1em;
 }
 
 .font-bold {
@@ -246,17 +258,16 @@ table.fud_table td.category {
   float: left;
 }
 
-#fora_table td.messages {
-    .text_center;
-}
-    
-#fora_table td.topics {
-    .text_center;
+#fora_table .fud_padding_sm {
+  .fud_padding_sm;
 }
 
-#fora_table td.last_message {
-    .text_center;
-    font-size: small;
+#fora_table .fud_padding_md {
+  .fud_padding_md;
+}
+
+#fora_table .fud_padding_bg {
+  .fud_padding_bg;
 }
 
 #fora_table tr .category {
@@ -267,26 +278,23 @@ table.fud_table td.category {
     font-size: smaller;
 }
 
+#fora_table img.fud_new_messages_icon {
+height: 1em; 
+}
+
+#fora_table img.fud_forum_icon {
+height: 1em; 
+}
+
 /*--- List of topics within a forum ---*/
 
-#topics_table td.replies {
-    .text_center;
-}
-
-#topics_table td.views {
-    .text_center;
-}
-
-#topics_table td.last_message {
-    .text_center;
-}
 
 #topics_table td.last_message span.author {
     font-size: small;
 }
 
 #topics_table td.topic div.author_and_date {
-    .text_right;
+    .fud_text_right;
 }
 
 #topics_table td div.date {

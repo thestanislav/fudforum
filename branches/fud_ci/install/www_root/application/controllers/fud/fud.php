@@ -163,6 +163,22 @@ class Fud extends CI_Controller
       $forum->last_date = date( "" );
       $forum->last_author = "";
     }
+    
+    $last_view = NULL;
+    $new_messages_icon = "";
+    if( $this->user->isLoggedIn() )
+    {
+      $last_view = $this->FUD->get_last_forum_visit( $forum->id, 
+                                                     $this->user->getUid() );
+      $last_post = $forum->post_count ? $forum->last_post->post_stamp : 0;
+      if( $last_post > $last_view  )
+      {
+        // TODO(nexus): appropriately retrieve the icon according to theme
+        $iconUrl = base_url("theme/default/images/appbar.email.png");
+        $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
+      }
+    }
+   
 
     $f['f_url'] = $forum->url;
     $f['f_name'] = $forum->name;
@@ -174,6 +190,7 @@ class Fud extends CI_Controller
     $iconUrl = base_url("images/forum_icons/{$forum->forum_icon}");
     $f['f_icon'] = empty($forum->forum_icon) ? "" :
       "<img class=\"fud_forum_icon\" alt=\"Forum icon\" src=\"{$iconUrl}\" />";
+    $f['f_new_messages_icon'] = $new_messages_icon;
     $f['f_redirect_url'] = $forum->url_redirect;
     
     return $f;
@@ -394,6 +411,11 @@ class Fud extends CI_Controller
     $path_navigation = $nav->navigation;
     $cat = $nav->category;
     $forum = $nav->forum;
+    
+    if( $uid != 0 )
+    {
+      $this->FUD->update_last_forum_visit( $fid, $uid );
+    }
 
     $rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
     if( !is_array( $rows ) )
