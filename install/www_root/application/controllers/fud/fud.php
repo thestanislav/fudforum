@@ -433,7 +433,7 @@ class Fud extends CI_Controller
       {
         $last_view = $this->FUD->get_last_topic_visit( $topic->id, 
                                                        $this->user->getUid() );
-        $last_post = $topic->last_post_date;
+        $last_post = $topic->post_stamp;
         if( $last_post > $last_view  )
         {
           $iconUrl = base_url("theme/default/images/new_messages.png");
@@ -457,11 +457,9 @@ class Fud extends CI_Controller
       // TODO(nexus): add option for date formatting
       $t['t_last_date'] = date( "j F Y", $last_message->post_stamp );
       // TODO(nexus): retrieve icon from first message
-      $t['t_icon'] = "";
-      /*
-      $t['t_icon'] = empty($topic->forum_icon) ? "" :
+      $iconUrl = base_url("images/message_icons/{$root_message->icon}");
+      $t['t_icon'] = empty($root_message->icon) ? "" :
         "<img class=\"fud_forum_icon\" alt=\"Forum icon\" src=\"{$iconUrl}\" />";
-      */
       $t['t_new_messages_icon'] = $new_messages_icon;
     
       $topics[] = $t;
