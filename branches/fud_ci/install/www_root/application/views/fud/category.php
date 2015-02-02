@@ -9,9 +9,9 @@
                       border="0" cellspacing="1" cellpadding="2">
                 <thead class="table_header" >
                   <th class="fud_wide_column" colspan="3" >Forum</th>
-                  <th class="">Messages</th>
-                  <th class="">Topics</th>
-                  <th class="">Last&nbsp;message</th>
+                  <th class="fud_text_center">Messages</th>
+                  <th class="fud_text_center">Topics</th>
+                  <th class="fud_text_center">Last&nbsp;message</th>
                 </thead>
                 <tbody>
                   {fora}
