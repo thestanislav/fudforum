@@ -16,8 +16,8 @@
                 <tbody>
                   {fora}
                   <tr>
-                    <td class="fud_padding_sm">{f_icon}</td>
-                    <td class="fud_padding_sm">{f_new_messages_icon}</td>
+                    <td class="fud_padding_sm fud_text_center">{f_icon}</td>
+                    <td class="fud_padding_sm fud_text_center">{f_new_messages_icon}</td>
                     <td class="fud_wide_column">
                       <div><a href="{f_url}">{f_name}</a></div>
                       <div>{f_description}</div>

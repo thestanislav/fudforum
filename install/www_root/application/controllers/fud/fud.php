@@ -164,8 +164,9 @@ class Fud extends CI_Controller
       $forum->last_author = "";
     }
     
+    // TODO(nexus): appropriately retrieve the icon according to theme
     $last_view = NULL;
-    $new_messages_icon = "";
+    $iconUrl = base_url("theme/default/images/no_new_messages.png");
     if( $this->user->isLoggedIn() )
     {
       $last_view = $this->FUD->get_last_forum_visit( $forum->id, 
@@ -173,11 +174,10 @@ class Fud extends CI_Controller
       $last_post = $forum->post_count ? $forum->last_post->post_stamp : 0;
       if( $last_post > $last_view  )
       {
-        // TODO(nexus): appropriately retrieve the icon according to theme
-        $iconUrl = base_url("theme/default/images/appbar.email.png");
-        $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
+        $iconUrl = base_url("theme/default/images/new_messages.png");
       }
     }
+    $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
    
 
     $f['f_url'] = $forum->url;
@@ -426,6 +426,21 @@ class Fud extends CI_Controller
     $topics = array();
     foreach( $rows as $topic )
     {
+      // TODO(nexus): appropriately retrieve the icon according to theme
+      $last_view = NULL;
+      $iconUrl = base_url("theme/default/images/no_new_messages.png");
+      if( $this->user->isLoggedIn() )
+      {
+        $last_view = $this->FUD->get_last_topic_visit( $topic->id, 
+                                                       $this->user->getUid() );
+        $last_post = $topic->last_post_date;
+        if( $last_post > $last_view  )
+        {
+          $iconUrl = base_url("theme/default/images/new_messages.png");
+        }
+      }
+      $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
+    
       $t = array();
       $t['t_id'] = $topic->topic_id;
       $t['t_url'] = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
@@ -441,6 +456,14 @@ class Fud extends CI_Controller
       $t['t_last_author'] = $last_message->login;
       // TODO(nexus): add option for date formatting
       $t['t_last_date'] = date( "j F Y", $last_message->post_stamp );
+      // TODO(nexus): retrieve icon from first message
+      $t['t_icon'] = "";
+      /*
+      $t['t_icon'] = empty($topic->forum_icon) ? "" :
+        "<img class=\"fud_forum_icon\" alt=\"Forum icon\" src=\"{$iconUrl}\" />";
+      */
+      $t['t_new_messages_icon'] = $new_messages_icon;
+    
       $topics[] = $t;
     }
 
@@ -520,7 +543,7 @@ class Fud extends CI_Controller
     {
       // TODO(nexus): Load proper error view
       $messages = "You don't have read permissions to this forum.";
-  }
+    }
 
     $topic = array_slice( $topic, $start, $per_page );
 
