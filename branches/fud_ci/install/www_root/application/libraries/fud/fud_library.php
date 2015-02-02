@@ -106,6 +106,23 @@ class Fud_Library
     return NULL;
   }
   
+  function get_last_topic_visit( $tid, $uid )
+  {
+    $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+    $time = time();
+    
+    $qStr = "SELECT last_view FROM {$prefix}read
+             WHERE `thread_id`='{$tid}' AND `user_id`='{$uid}' ";
+    $q = $this->CI->db->query( $qStr );
+    
+    if( $q->num_rows() == 1 )
+    {
+      return $q->row()->last_view;
+    }
+    
+    return NULL;
+  }
+  
   function update_last_forum_visit( $fid, $uid )
   {
     $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
@@ -162,6 +179,31 @@ class Fud_Library
               
   }
   
+  function update_last_topic_visit( $fid, $uid )
+  {
+    /*
+    $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
+    $time = time();
+    
+    $qStr = "SELECT * FROM {$prefix}forum_read
+             WHERE `forum_id`='{$fid}' AND `user_id`='{$uid}' ";
+    $q = $this->CI->db->query( $qStr );
+    
+    if( $q->num_rows() == 1 )
+    {
+      $qStr = "UPDATE {$prefix}forum_read
+              SET `last_view`='{$time}' 
+              WHERE `forum_id`='{$fid}' AND `user_id`='{$uid}' ";
+    }
+    else
+    {
+      $qStr = "INSERT INTO {$prefix}forum_read (user_id, forum_id, last_view)
+               VALUES ( '{$uid}' , '{$fid}', '{$time}' ) ";
+    }
+    $q = $this->CI->db->query( $qStr );
+    */              
+  }
+  
   function check_permissions( $rid, $uid = 0 )
   {
     $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
@@ -215,7 +257,7 @@ class Fud_Library
 		}
 
     return FALSE;
-	}
+  }
 
   function check_permission( $rid, $uid = 0, $permission )
   {

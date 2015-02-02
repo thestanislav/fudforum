@@ -279,11 +279,11 @@ table.fud_table td.category {
 }
 
 #fora_table img.fud_new_messages_icon {
-height: 1em; 
+  height: 25px; 
 }
 
 #fora_table img.fud_forum_icon {
-height: 1em; 
+  height: 25px; 
 }
 
 /*--- List of topics within a forum ---*/
@@ -299,6 +299,14 @@ height: 1em;
 
 #topics_table td div.date {
     font-size: smaller;
+}
+
+#topics_table img.fud_new_messages_icon {
+height: 25px; 
+}
+
+#topic_table img.fud_forum_icon {
+height: 25px; 
 }
 
 /*--- List of messages within a topic ---*/

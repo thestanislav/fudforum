@@ -10,7 +10,7 @@
                       class="fud_table pure-table pure-table-striped pure-skin-fud" 
                       border="0" cellspacing="1" cellpadding="2" >
                 <thead class="table_header">
-                  <th class="fud_wide_column">Topic</th>
+                  <th class="fud_wide_column" colspan="3">Topic</th>
                   <th>First&nbsp;message</th>
                   <th>Replies</th>
                   <th>Views</th>
@@ -19,6 +19,8 @@
                 <tbody>
                 {topics}
                   <tr>
+                    <td class="fud_padding_sm fud_text_center">{t_icon}</td>
+                    <td class="fud_padding_sm fud_text_center">{t_new_messages_icon}</td>
                     <td class="fud_wide_column">
                       <div>
                         <div><a href="{t_url}">{t_subject}</a></div>
