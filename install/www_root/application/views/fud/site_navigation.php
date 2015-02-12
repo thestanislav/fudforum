@@ -6,7 +6,9 @@
 				<li><a href="#">Help</a></li>
 				<li>{cp_or_register_link}</li>
 				<li>{login_logout_link}</li>
+				<?php if( !empty($administration_link) ) { ?>
 				<li>{administration_link}</li>
+				<?php } ?>
 				<li><a href="{home_url}">Home</a></li>
 			</ul>
 		</nav>
