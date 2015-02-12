@@ -416,6 +416,14 @@ class Fud extends CI_Controller
     {
       $this->FUD->update_last_forum_visit( $fid, $uid );
     }
+    $permissions = $this->FUD->check_permissions( $fid, $uid );
+    
+    // TODO(nexus): add theming function to wrap data in tags
+    $newTopicLink = "";
+    if( $permissions['POST'] )
+    {
+      $newTopicLink = site_url("post/{$fid}");
+    }
 
     $rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
     if( !is_array( $rows ) )
@@ -481,6 +489,7 @@ class Fud extends CI_Controller
       "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
     $data = array( 'topics' => $topics,
+                   'new_topic_link' => $newTopicLink,
                    'pagination' => $pagination,
                    'path_navigation' => $path_navigation,
                    'site_navigation' => $this->_get_site_navigation(),

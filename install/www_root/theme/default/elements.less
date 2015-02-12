@@ -9,9 +9,12 @@
       Ryan Faerman
 
     More info at: http://lesselements.com
+
+    Modified by theonlynexus for FUDforum to achieve
+    better compliance with CSS3
 -----------------------------------------------------*/
 .newgrad(@color: #F5F5F5, @start: #EEE, @stop: #FFF ) {
-   background: @color; 
+   background: linear-gradient( @start, @stop); 
    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
    background: -webkit-linear-gradient(top, @start, @stop); 
    background: -moz-linear-gradient(top, @start, @stop);
@@ -20,7 +23,7 @@
 }
 
 .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
-  background: @color;
+  background: linear-gradient( @start, @stop); 
   background: -webkit-gradient(linear,
                                left bottom,
                                left top,
@@ -34,7 +37,7 @@
                                    @stop 100%);
 }
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
-  background: @color;
+  background: linear-gradient( rgb(@start,@start,@start), rgb(@stop,@stop,@stop) ); 
   background: -webkit-gradient(linear,
                                left bottom,
                                left top,
@@ -77,7 +80,9 @@
   border-bottom-right-radius: @bottomright;
   border-bottom-left-radius: @bottomleft;
   border-top-left-radius: @topleft;
-  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+  -moz-background-clip: padding; 
+  -webkit-background-clip: padding-box; 
+  background-clip: padding-box; 
 }
 .opacity(@opacity: 0.5) {
   -moz-opacity: @opacity;
