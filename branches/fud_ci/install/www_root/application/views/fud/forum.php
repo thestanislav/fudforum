@@ -6,6 +6,11 @@
               <!-- Pagination -->
               {pagination}
               <!-- Contents table -->
+              <div class="pos_relative height_2em">
+		<span style="" id="fud_new_topic_button_top" class="pure-button">
+		  <a href="{new_topic_link}">New topic</a>
+		</span>
+	      </div>
               <table id="topics_table" 
                       class="fud_table pure-table pure-table-striped pure-skin-fud" 
                       border="0" cellspacing="1" cellpadding="2" >
@@ -41,6 +46,11 @@
                 {/topics}
                 </tbody>
               </table>
+              <div class="pos_relative height_2em">
+		<span style="" id="fud_new_topic_button_bottom" class="pure-button">
+		  <a href="{new_topic_link}">New topic</a>
+		</span>
+	      </div>
               <!-- Pagination -->
               {pagination}
             </div>

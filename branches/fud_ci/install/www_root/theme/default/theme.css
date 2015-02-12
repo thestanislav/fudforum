@@ -88,6 +88,20 @@ body {
     float: right;
 }
 
+.pos_relative {
+    position: relative;
+}
+
+.height_1em {
+  /* Assuming normal line height is 1.2em */
+  height: 1.2em;
+}
+
+.height_2em {
+  /* Assuming normal line height is 1.2em */
+  height: 2.2em;
+}
+
 .width_25 {
     width: 25%;
 }
@@ -215,12 +229,25 @@ nav#fud_site_navigation ul li {
   padding: .5em;
 }
 
+/*--- New topic buttons ---*/
+
+span#fud_new_topic_button_bottom {
+  position: absolute; 
+  right: 0;
+}
+
+span#fud_new_topic_button_top {
+  position: absolute; 
+  right: 0;
+}
+
 /*--- table ---*/
 
 div#table_wrapper_unit div#contents table.fud_table {
   width: 100%;
   font-size: 10pt;
   padding: 0;
+  margin-top: 1em;
   margin-bottom: 1em;
   border: none;
 }

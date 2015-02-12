@@ -241,20 +241,24 @@ class Fud_Library
     $permissions = array();
     if( $q->num_rows() == 1 )
     {
-			$r = $q->first_row();
-			$perms = array_keys( $constants );
+      $r = $q->first_row();
+      $perms = array_keys( $constants );
 
-			foreach( $perms as $perm )
-			{
-				if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
-					( isset($r->is_mod) AND null != $r->is_mod) OR
-					($r->group_cache_opt & $constants[$perm]) )
-					$permissions[$perm] = TRUE;
-				else
-					$permissions[$perm] = FALSE;
-			}
-			return $permissions;
-		}
+      foreach( $perms as $perm )
+      {
+	if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
+	  ( isset($r->is_mod) AND null != $r->is_mod) OR
+	  ($r->group_cache_opt & $constants[$perm]) )
+	{
+	  $permissions[$perm] = TRUE;
+	}
+	else
+	{
+	  $permissions[$perm] = FALSE;
+	}
+      }
+      return $permissions;
+    }
 
     return FALSE;
   }
