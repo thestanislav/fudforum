@@ -78,7 +78,12 @@ class Fud_Library
   {
     return fud_new_reply($subject, $body, $mode, $author, $rep_id, $icon, $attach, $poll, $time);
   }
-
+  
+  function new_topic( $subject, $desc=null, $body, $mode, $author, $fid, $icon=null, $attach=null, $poll=null, $time=null )
+  {
+    fud_new_topic($subject, $body, $mode, $author, $fid, $icon, $attach, $poll, $time, $desc);
+  }
+  
   function add_user($vals, &$err)
   {
     return fud_add_user($vals, $err);

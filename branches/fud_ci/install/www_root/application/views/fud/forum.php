@@ -6,13 +6,13 @@
               <!-- Pagination -->
               {pagination}
               <!-- Contents table -->
-              <?php if( !empty($new_topic_link) ) { ?>
-	      <div class="pos_relative height_2em">
-		<span style="" id="fud_new_topic_button_top" class="pure-button">
-		  <a href="{new_topic_link}">New topic</a>
-		</span>
-	      </div>
-	      <?php } ?>
+              <?php if( !empty($new_topic_url) ) { ?>
+              <div class="pos_relative height_2em">
+                <span style="" id="fud_new_topic_button_top" class="pure-button">
+                  <a href="{new_topic_url}">New topic</a>
+                </span>
+              </div>
+              <?php } ?>
               <table id="topics_table" 
                       class="fud_table pure-table pure-table-striped pure-skin-fud" 
                       border="0" cellspacing="1" cellpadding="2" >
@@ -48,13 +48,13 @@
                 {/topics}
                 </tbody>
               </table>
-              <?php if( !empty($new_topic_link) ) { ?>
+              <?php if( !empty($new_topic_url) ) { ?>
               <div class="pos_relative height_2em">
-		<span style="" id="fud_new_topic_button_bottom" class="pure-button">
-		  <a href="{new_topic_link}">New topic</a>
-		</span>
-	      </div>
-	      <?php } ?>
+                <span style="" id="fud_new_topic_button_bottom" class="pure-button">
+                  <a href="{new_topic_url}">New topic</a>
+                </span>
+              </div>
+              <?php } ?>
               <!-- Pagination -->
               {pagination}
             </div>

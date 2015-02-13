@@ -2,7 +2,7 @@
           <div id="reply_wrapper_unit" class="pure-u-1">
             <div id="contents">
               <!-- Reply form -->
-              <form action="{site_url}/post/{fid}" method="post"
+              <form action="{site_url}/newtopic/{fid}" method="post"
                     class="pure-form-aligned pure-form">
                 <fieldset>
                   <div class="pure-control-group">
