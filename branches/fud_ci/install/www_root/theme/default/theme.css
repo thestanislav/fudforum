@@ -164,6 +164,10 @@ div#contents {
   padding: 2em;
 }
 
+div#cke_message_contents {
+  margin-left: 11.2em;
+}
+
 /*--- Header ---*/
 
 div#fud_header {

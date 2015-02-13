@@ -17,7 +17,7 @@
                     <input class="pure-input-2-3" name="subject" type="text" value="{subject}">
                   </div>
                   <div class="pure-control-group">
-                    <textarea name="reply_contents" >{quote}
+                    <textarea name="message_contents" >{quote}
                     </textarea>
                   </div>
                   <div class="fud_text_right"> 
@@ -35,8 +35,9 @@
         </div>
       
       <script type="text/javascript">
-            CKEDITOR.replace( 'reply_contents',
+            CKEDITOR.replace( 'message_contents',
               {
+                width: '66%',
                 extraPlugins : 'bbcode',
                 // Remove unused plugins.
                 removePlugins : 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',

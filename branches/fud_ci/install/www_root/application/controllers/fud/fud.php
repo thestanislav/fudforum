@@ -641,6 +641,7 @@ class Fud extends CI_Controller
   {
     $forum = $this->FUD->fetch_forums( $fid );
     
+    $username = "";
     if( $this->user->isLoggedIn() )
     {
       $username = $this->user->getUsername();
@@ -665,7 +666,7 @@ class Fud extends CI_Controller
     $quote = "";
     if( $preview )
     {
-      $quote = $_POST['post_contents'];
+      $quote = $_POST['message_contents'];
     }
     
     $data = array( 'fid' => $fid,
@@ -744,7 +745,7 @@ class Fud extends CI_Controller
     } 
     else if( $preview )
     {
-      $quote = $_POST['reply_contents'];
+      $quote = $_POST['message_contents'];
     }
     
     $subject = "RE: ".$message->subject;
@@ -789,7 +790,7 @@ class Fud extends CI_Controller
       $subject = "RE: {$subject}";
     }
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
-    $this->FUD->new_reply( $subject, $_POST['reply_contents'], 0, 
+    $this->FUD->new_reply( $subject, $_POST['message_contents'], 0, 
                            $this->user->getUid(), $reply_to_id );
     
     // TODO(nexus): get the right behaviour from trunk
