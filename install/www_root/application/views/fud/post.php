@@ -23,8 +23,7 @@
                     <input class="pure-input-2-3" name="description" type="text" value="{description}">
                   </div>
                   <div class="pure-control-group">
-                    <textarea name="post_contents" >{quote}
-                    </textarea>
+                    <textarea name="message_contents" >{quote}</textarea>
                   </div>
                   <div class="fud_text_right"> 
                     <button name="cancel" type="cancel" 
@@ -41,8 +40,9 @@
         </div>
       
       <script type="text/javascript">
-            CKEDITOR.replace( 'post_contents',
+            CKEDITOR.replace( 'message_contents',
               {
+                width: '66%',
                 extraPlugins : 'bbcode',
                 // Remove unused plugins.
                 removePlugins : 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
