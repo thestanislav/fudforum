@@ -425,10 +425,10 @@ class Fud extends CI_Controller
     $permissions = $this->FUD->check_permissions( $fid, $uid );
     
     // TODO(nexus): add theming function to wrap data in tags
-    $newTopicLink = "";
+    $newTopicUrl = "";
     if( $permissions['POST'] )
     {
-      $newTopicLink = site_url("post/{$fid}");
+      $newTopicUrl = site_url("newtopic/{$fid}");
     }
 
     $rows = $this->FUD->fetch_topics_by_forum( $fid, true, array( $start, $per_page ) );
@@ -495,7 +495,7 @@ class Fud extends CI_Controller
       "<div id=\"fud_forum_pagination\" class=\"fud_pagination\">Pages ({$pages}): [{$pagination}]</div>";
 
     $data = array( 'topics' => $topics,
-                   'new_topic_link' => $newTopicLink,
+                   'new_topic_url' => $newTopicUrl,
                    'pagination' => $pagination,
                    'path_navigation' => $path_navigation,
                    'site_navigation' => $this->_get_site_navigation(),
@@ -609,22 +609,22 @@ class Fud extends CI_Controller
   *
   * @param integer $fid Numerical forum id in which to create new post.
   */
-  public function post( $fid )
+  public function newtopic( $fid )
   {
     if( isset($_POST) AND !empty( $_POST ) )
     {
       if( array_key_exists( 'preview', $_POST ) )
       {
-        $this->_post( $fid, TRUE );
+        $this->_newtopic( $fid, TRUE );
       }
       else if( array_key_exists( 'submit', $_POST ) )
       {
-        $this->_post_post( $fid );
+        $this->_newtopic_add( $fid );
       }
     }
     else
     {
-        $this->_post( $fid );
+        $this->_newtopic( $fid );
     }
   }
   
@@ -635,9 +635,8 @@ class Fud extends CI_Controller
   *
   * @param integer $fid Numerical forum id in which to create new post.
   * @param boolean $preview TRUE if user has requested a preview
-  */
-  
-  private function _post( $fid, $preview = FALSE )
+  */  
+  private function _newtopic( $fid, $preview = FALSE )
   {
     $forum = $this->FUD->fetch_forums( $fid );
     
@@ -649,6 +648,7 @@ class Fud extends CI_Controller
     else
     {
       //TODO(nexus): redirect to session expired page
+      redirect( site_url() );
     }
     
     $subject = "";
@@ -687,6 +687,38 @@ class Fud extends CI_Controller
   }
   
   /**
+  * Adds a new topic to a forum
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $fid Numerical forum id in which to create new post.
+  */
+  private function _newtopic_add( $fid )
+  {
+    $forum = $this->FUD->fetch_forums( $fid );
+    
+    $username = "";
+    if( $this->user->isLoggedIn() )
+    {
+      $username = $this->user->getUsername();
+    }
+    else
+    {
+      //TODO(nexus): redirect to session expired page
+      redirect( site_url() );
+    }
+    
+    $subject = $_POST['subject'];
+    $this->FUD->new_topic( $_POST['subject'], 
+                           $_POST['description'],
+                           $_POST['message_contents'], 0, 
+                           $this->user->getUid(), $fid );
+    
+    // TODO(nexus): get the right behaviour from trunk
+    redirect( site_url() );
+  }
+  
+  /**
   * Function to manage replies.
   *
   * Displays a new message form, message preview or message edit form
@@ -708,7 +740,7 @@ class Fud extends CI_Controller
       }
       else if( array_key_exists( 'submit', $_POST ) )
       {
-        $this->_reply_post( $tid, $mid );
+        $this->_reply_add( $tid, $mid );
       }
     }
     else
@@ -768,9 +800,9 @@ class Fud extends CI_Controller
   }
 
   /**
-  * Posts a reply to the forum
+  * Adds a reply to the forum
   *
-  * Posts a reply to the forum. Parameters will usually be passed as per the
+  * Adds a reply to the forum. Parameters will usually be passed as per the
   * initial _reply_new() call.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
@@ -780,7 +812,7 @@ class Fud extends CI_Controller
   * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body
   *
   */
-  private function _reply_post( $tid, $mid = NULL )
+  private function _reply_add( $tid, $mid = NULL )
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $subject = $_POST['subject'];

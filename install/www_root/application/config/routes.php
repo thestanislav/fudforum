@@ -55,7 +55,7 @@ $route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3/$4/
 $route['reply/(:num)'] = "fud/fud/reply/$1";
 $route['reply/(:num)/(:num)'] = "fud/fud/reply/$1/$2";
 $route['reply/(:num)/(:num)/(:num)'] = "fud/fud/reply/$1/$2/$3";
-$route['post/(:num)'] = "fud/fud/post/$1";
+$route['newtopic/(:num)'] = "fud/fud/newtopic/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
