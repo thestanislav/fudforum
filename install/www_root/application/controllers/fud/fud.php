@@ -26,7 +26,7 @@ class Fud extends CI_Controller
   /**
   * Returns the site navigation menu
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   */
   private function _get_site_navigation()
@@ -70,7 +70,7 @@ class Fud extends CI_Controller
   /**
   * Returns the path navigation menu
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $cid Numerical category id as in the DB.
   * @param integer $fid Numerical forum id as in the DB.
@@ -133,19 +133,25 @@ class Fud extends CI_Controller
   /**
   * Returns the site header
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   */
   private function _get_header()
   {
     // TODO(nexus): un-escape title and description
-    $data = array( 'title' => $GLOBALS['FORUM_TITLE'],
-                   'description' => $GLOBALS['FORUM_DESCR'],
+    $data = array( 'title' => html_entity_decode($GLOBALS['FORUM_TITLE']),
+                   'description' => html_entity_decode($GLOBALS['FORUM_DESCR']),
                    'base_url' => base_url() );
     $header = $this->parser->parse( "fud/header", $data, TRUE );
     return $header;
   }
 
+  /**
+  * Prepares the necessary data (dates, URL, etc) for the output of a forum
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  */
   private function _prepare_forum_for_output( $cat, $forum ) 
   {
     $forum->url = site_url( "forum/{$cat->id}/{$forum->id}" );
@@ -202,7 +208,7 @@ class Fud extends CI_Controller
   * Index page for fudForum. Shows the default selection of categories
   * and fora.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   */
   public function index()
@@ -270,7 +276,7 @@ class Fud extends CI_Controller
   /**
   * Login page.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
   public function login()
   {
@@ -329,7 +335,7 @@ class Fud extends CI_Controller
   /**
   * Logout page.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
   public function logout()
   {
@@ -341,7 +347,7 @@ class Fud extends CI_Controller
   /**
   * Shows the fora in a given category.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $cid Numerical category id as in the DB.
   *
@@ -395,7 +401,7 @@ class Fud extends CI_Controller
   /**
   * Shows the topics in a given forum.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $cid Numerical category id as in the DB.
   * @param integer $fid Numerical forum id as in the DB.
@@ -504,7 +510,7 @@ class Fud extends CI_Controller
   /**
   * Shows the messages in a given topic.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $cid Numerical category id as in the DB.
   * @param integer $fid Numerical forum id as in the DB.
@@ -594,12 +600,98 @@ class Fud extends CI_Controller
   }
 
   /**
+  * Function to manage new postings (topics).
+  *
+  * Displays a new message form, message preview or message edit form
+  * as required by the situation.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $fid Numerical forum id in which to create new post.
+  */
+  public function post( $fid )
+  {
+    if( isset($_POST) AND !empty( $_POST ) )
+    {
+      if( array_key_exists( 'preview', $_POST ) )
+      {
+        $this->_post( $fid, TRUE );
+      }
+      else if( array_key_exists( 'submit', $_POST ) )
+      {
+        $this->_post_post( $fid );
+      }
+    }
+    else
+    {
+        $this->_post( $fid );
+    }
+  }
+  
+  /**
+  * Displays a new message form with preview (if necessary)
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $fid Numerical forum id in which to create new post.
+  * @param boolean $preview TRUE if user has requested a preview
+  */
+  
+  private function _post( $fid, $preview = FALSE )
+  {
+    $forum = $this->FUD->fetch_forums( $fid );
+    
+    if( $this->user->isLoggedIn() )
+    {
+      $username = $this->user->getUsername();
+    }
+    else
+    {
+      //TODO(nexus): redirect to session expired page
+    }
+    
+    $subject = "";
+    if( $preview )
+    {
+      $subject = $_POST['subject'];
+    }
+    
+    $description = "";
+    if( $preview )
+    {
+      $description = $_POST['description'];
+    }
+    
+    $quote = "";
+    if( $preview )
+    {
+      $quote = $_POST['post_contents'];
+    }
+    
+    $data = array( 'fid' => $fid,
+                   'username' => $username,
+                   'forum' => $forum->name,
+                   'subject' => $subject,
+                   'description' => $description,
+                   'quote' => $quote, // Used for preview
+                   'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'base_url' => base_url(),
+                   'site_url' => site_url() );
+
+
+    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
+    $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/post.php', $data, true) );
+    $this->parser->parse( 'fud/html_page.php', $data );
+  }
+  
+  /**
   * Function to manage replies.
   *
   * Displays a new message form, message preview or message edit form
   * as required by the situation.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $tid Numerical topic id used to reply.
   * @param integer $mid OPTIONAL. Numerical message id used to reply.
@@ -630,7 +722,7 @@ class Fud extends CI_Controller
   * Displays a new reply form. Parameters will determine the topic and
   * possibly message message to, as well as whether to quote or not.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $tid Numerical topic id used to reply.
   * @param integer $mid OPTIONAL. Numerical message id used to reply.
@@ -680,7 +772,7 @@ class Fud extends CI_Controller
   * Posts a reply to the forum. Parameters will usually be passed as per the
   * initial _reply_new() call.
   *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $tid Numerical topic id used to reply.
   * @param integer $mid OPTIONAL. Numerical message id used to reply.
