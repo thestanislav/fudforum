@@ -453,7 +453,10 @@ class Fud extends CI_Controller
       $t['t_url'] = site_url( "topic/{$cid}/{$fid}/{$topic->topic_id}" );
       $t['t_description'] = $topic->tdescr;
       $t['t_subject'] = $topic->subject;
-      $t['t_replies'] = $topic->replies;
+      // TODO(nexus): fix the logic
+      // This is quirky, the replies field actually containes the number
+      // of messages, no the number of replies
+      $t['t_replies'] = $topic->replies-1;
       $t['t_views'] = $topic->views;
       $root_message = $this->FUD->fetch_message( $topic->root_msg_id );
       // TODO(nexus): add option for date formatting
