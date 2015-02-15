@@ -1,9 +1,15 @@
 {
   "name":"FUD_CI",
-  "files":[
-    {  "svn":1  },
-    { "directory":"fud_ci",
+  "files":  [
+    { "svn":1  }, 
+    { 
+      "directory":"fud_ci", 
       "filters":["*.php","*.css","*.inc"],
-		  "recursive":1 }
-  ]
+      "recursive":1
+    } 
+  ],
+  "build": {
+    "directory":"~/src/fudforum/branches/fud_ci/",
+    "make":"cp -R install/www_root/application/models install/www_root/application/views install/www_root/application/controllers install/www_root/application/libraries ~/public_html/fudci/application/.; cp -R install/www_root/theme/default ~/public_html/fudci/theme/."
+  }
 }
