@@ -27,7 +27,6 @@ class Fud extends CI_Controller
   * Returns the site navigation menu
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
-  *
   */
   private function _get_site_navigation()
   {
@@ -75,7 +74,6 @@ class Fud extends CI_Controller
   * @param integer $cid Numerical category id as in the DB.
   * @param integer $fid Numerical forum id as in the DB.
   * @param integer $tid Numerical topic id as in the DB.
-  *
   */
   private function _get_path_navigation( $cid = NULL, $fid = NULL, $tid = NULL )
   {
@@ -134,7 +132,6 @@ class Fud extends CI_Controller
   * Returns the site header
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
-  *
   */
   private function _get_header()
   {
@@ -150,7 +147,6 @@ class Fud extends CI_Controller
   * Prepares the necessary data (dates, URL, etc) for the output of a forum
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
-  *
   */
   private function _prepare_forum_for_output( $cat, $forum ) 
   {
@@ -205,11 +201,10 @@ class Fud extends CI_Controller
   /**
   * Index page.
   *
-  * Index page for fudForum. Shows the default selection of categories
+  * Index page for FUDforum. Shows the default selection of categories
   * and fora.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
-  *
   */
   public function index()
   {
@@ -350,7 +345,6 @@ class Fud extends CI_Controller
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $cid Numerical category id as in the DB.
-  *
   */
   public function category( $cid )
   {
@@ -407,7 +401,6 @@ class Fud extends CI_Controller
   * @param integer $fid Numerical forum id as in the DB.
   * @param integer $per_page Number of topics to show per page.
   * @param integer $start Which page to start on.
-  *
   */
   public function forum( $cid, $fid, $per_page = 20, $start = 0 )
   {
@@ -517,7 +510,6 @@ class Fud extends CI_Controller
   * @param integer $tid Numerical topic id as in the DB.
   * @param integer $per_page Number of topics to show per page.
   * @param integer $start Which page to start on.
-  *
   */
   public function topic( $cid, $fid, $tid, $per_page = 40, $start = 0 )
   {
@@ -652,22 +644,13 @@ class Fud extends CI_Controller
     }
     
     $subject = "";
-    if( $preview )
-    {
-      $subject = $_POST['subject'];
-    }
+    if( $preview ) $subject = $_POST['subject'];
     
     $description = "";
-    if( $preview )
-    {
-      $description = $_POST['description'];
-    }
+    if( $preview ) $description = $_POST['description'];
     
     $quote = "";
-    if( $preview )
-    {
-      $quote = $_POST['message_contents'];
-    }
+    if( $preview ) $quote = $_POST['message_contents'];
     
     $data = array( 'fid' => $fid,
                    'username' => $username,
@@ -679,7 +662,6 @@ class Fud extends CI_Controller
                    'header' => $this->_get_header(),
                    'base_url' => base_url(),
                    'site_url' => site_url() );
-
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
     $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/post.php', $data, true) );
@@ -711,8 +693,10 @@ class Fud extends CI_Controller
     $subject = $_POST['subject'];
     $this->FUD->new_topic( $_POST['subject'], 
                            $_POST['description'],
-                           $_POST['message_contents'], 0, 
-                           $this->user->getUid(), $fid );
+                           $_POST['message_contents'], 
+                           0, // TODO(nexus): get proper flags  from form
+                           $this->user->getUid(), 
+                           $fid );
     
     // TODO(nexus): get the right behaviour from trunk
     redirect( site_url() );
