@@ -30,37 +30,47 @@ class Fud extends CI_Controller
   */
   private function _get_site_navigation()
   {
-    $loginLogoutLink = "";
-    $cpOrRegisterLink = "";
-    $administrationLink = "";
+    $loginLogoutUrl = "";
+    $loginLogoutText = "";
+    $cpOrRegisterUrl = "";
+    $cpOrRegisterText = "";
+    $administrationUrl = "";    
+    $administrationText = "";    
 
     if( $this->user->isLoggedIn() )
     {
       $address = site_url("logout");
-      $loginLogoutLink = "<a href=\"{$address}\">Logout</a>";
+      $loginLogoutUrl = $address;      
+      $loginLogoutText = "Logout";
       $address = site_url("controlpanel");
-      $cpOrRegisterLink = "<a href=\"{$address}\">Control Panel</a>";
+      $cpOrRegisterUrl = $address;
+      $cpOrRegisterText = "Control panel";
       
       if( $this->user->isAdmin() )
       {
         // TODO(nexus): fix temporary link to old admin panel
-        //$address = site_url("administration");
         $address = base_url("/adm/admloginuser.php");
-        $administrationLink = "<a href=\"{$address}\">Administration</a>";
+        $administrationUrl = $address;
+        $administrationText = "Administrative panel";    
       }
     }
     else
     {
       $address = site_url("login");
-      $loginLogoutLink = "<a href=\"{$address}\">Login</a>";
+      $loginLogoutUrl = $address;
+      $loginLogoutText = "Login";
       $address = site_url("register");
-      $cpOrRegisterLink = "<a href=\"{$address}\">Register</a>";
-      $administrationLink = "";
+      $cpOrRegisterUrl = $address;
+      $cpOrRegisterText = "Register";
+      $administrationUrl = "";
     }
 
-    $data = array( "login_logout_link" => $loginLogoutLink,
-                   "cp_or_register_link" => $cpOrRegisterLink,
-                   "administration_link" => $administrationLink,
+    $data = array( "login_logout_url" => $loginLogoutUrl,
+                   "login_logout_text" => $loginLogoutText,
+                   "cp_or_register_url" => $cpOrRegisterUrl,
+                   "cp_or_register_text" => $cpOrRegisterText,
+                   "administration_url" => $administrationUrl,
+                   "administration_text" => $administrationText,
                    "home_url" => site_url() );
 
     return $this->parser->parse('fud/site_navigation.php', $data, true );
@@ -816,3 +826,4 @@ class Fud extends CI_Controller
     redirect( site_url() );
   }
 }
+
