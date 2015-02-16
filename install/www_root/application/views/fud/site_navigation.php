@@ -4,11 +4,11 @@
 				<li><a href="#">Calendar</a></li>
 				<li><a href="#">Search</a></li>
 				<li><a href="#">Help</a></li>
-				<li>{cp_or_register_link}</li>
-				<li>{login_logout_link}</li>
-				<?php if( !empty($administration_link) ) { ?>
-				<li>{administration_link}</li>
-				<?php } ?>
+				<li><a href="{cp_or_register_url}">{cp_or_register_text}</a></li>
+				<li><a href="{login_logout_url}">{login_logout_text}</a></li>
+				<?php if( !empty($administration_link) ): ?>
+				<li><a href="{administration_url}">{administration_text}</a></li>
+				<?php endif; ?>
 				<li><a href="{home_url}">Home</a></li>
 			</ul>
 		</nav>
