@@ -807,15 +807,29 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 			'DBHOST_TBL_PREFIX'	=> $_POST['DBHOST_TBL_PREFIX'],
 			'DBHOST_DBTYPE'		=> $_POST['DBHOST_DBTYPE'],
 		));
+		
+		/* Write CodeIgniter session configuration and create sessions dir */
+		// TODO(nexus): move to more appropriate spot
+    $fpath = "{$_POST['SERVER_ROOT']}application/config/config.php";
+    $session_path = "{$_POST['SERVER_ROOT']}application/sessions";
+    $contents = file_get_contents( $fpath );
+    $new_contents = str_replace( "\$config['sess_save_path'] = NULL;",
+                                 "\$config['sess_save_path'] = '{$session_path}';",
+                                 $contents );
+    file_put_contents( $fpath, $new_contents );
+    
+    if (!__mkdir($session_path) ) {
+      exit('ERROR: failed creating '. $path .' directory.');
+    }
 
 		/* Write CodeIgniter database settings */
-		$fpath = "{$_POST['SERVER_ROOT']}/application/config/database.php";
+		$fpath = "{$_POST['SERVER_ROOT']}application/config/database.php";
 		$contents = file_get_contents( $fpath );
-		// TODO: conform error output to standard (NeXuS)
+		// TODO(nexus): conform error output to standard
 		if( !$contents )
 			die( "Cannot find file {$fpath} for modification" );
 		
-		// TODO: Add all possible PDO driver definitions
+		// TODO(nexus): Add all possible PDO driver definitions
 		$output_string = '';
 		if( $_POST['DBHOST_DBTYPE'] == 'pdo_sqlite' )  {
 		$output_string = "\$db['fud']['hostname'] = 'sqlite:{$_POST['DBHOST']}';\n".
