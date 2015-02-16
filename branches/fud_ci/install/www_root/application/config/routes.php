@@ -38,24 +38,24 @@
 |
 */
 
-$route['default_controller'] = "fud/Fud";
+$route['default_controller'] = "fud/fud";
 $route['404_override'] = '';
 
 /* FUD routes */
-$route['login'] = "fud/Fud/login";
-$route['logout'] = "fud/Fud/logout";
-$route['fora'] = "fud/Fud/index";
-$route['category/(:num)'] = "fud/Fud/category/$1";
-$route['forum/(:num)/(:num)'] = "fud/Fud/forum/$1/$2";
-$route['forum/(:num)/(:num)/(:num)'] = "fud/Fud/forum/$1/$2/$3";
-$route['forum/(:num)/(:num)/(:num)/(:num)'] = "fud/Fud/forum/$1/$2/$3/$4";
-$route['topic/(:num)/(:num)/(:num)'] = "fud/Fud/topic/$1/$2/$3";
-$route['topic/(:num)/(:num)/(:num)/(:num)'] = "fud/Fud/topic/$1/$2/$3/$4";
-$route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/Fud/topic/$1/$2/$3/$4/$5";
-$route['reply/(:num)'] = "fud/Fud/reply/$1";
-$route['reply/(:num)/(:num)'] = "fud/Fud/reply/$1/$2";
-$route['reply/(:num)/(:num)/(:num)'] = "fud/Fud/reply/$1/$2/$3";
-$route['newtopic/(:num)'] = "fud/Fud/newtopic/$1";
+$route['login'] = "fud/fud/login";
+$route['logout'] = "fud/fud/logout";
+$route['fora'] = "fud/fud/index";
+$route['category/(:num)'] = "fud/fud/category/$1";
+$route['forum/(:num)/(:num)'] = "fud/fud/forum/$1/$2";
+$route['forum/(:num)/(:num)/(:num)'] = "fud/fud/forum/$1/$2/$3";
+$route['forum/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/forum/$1/$2/$3/$4";
+$route['topic/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3";
+$route['topic/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3/$4";
+$route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3/$4/$5";
+$route['reply/(:num)'] = "fud/fud/reply/$1";
+$route['reply/(:num)/(:num)'] = "fud/fud/reply/$1/$2";
+$route['reply/(:num)/(:num)/(:num)'] = "fud/fud/reply/$1/$2/$3";
+$route['newtopic/(:num)'] = "fud/fud/newtopic/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
