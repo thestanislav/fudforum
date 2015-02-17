@@ -4,7 +4,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  *  FUDForum display integration class
  */
-class Fud extends CI_Controller
+class Main extends CI_Controller
 {
   public function __construct()
   {
