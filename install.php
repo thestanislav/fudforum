@@ -838,8 +838,7 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 						 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
 						 "\$db['fud']['dbdriver'] = 'pdo';\n".
 						 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
-						 "\n".
-						 "/* End of file database.php */";
+						 "\n";
 		} else if( $_POST['DBHOST_DBTYPE'] == 'pdo_mysql' ) {
 			$output_string = "\$db['fud']['hostname'] = 'mysql:host={$_POST['DBHOST']};dbname={$_POST['DBHOST_DBNAME']}';\n".
 							 "\$db['fud']['username'] = '{$_POST['DBHOST_USER']}';\n".
@@ -847,8 +846,7 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 							 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
 							 "\$db['fud']['dbdriver'] = 'pdo';\n".
 							 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
-							 "\n".
-							 "/* End of file database.php */";
+							 "\n";
 		} else {
 			// Standard driver
 			$output_string = "\$db['fud']['hostname'] = '{$_POST['DBHOST']}';\n".
@@ -857,10 +855,9 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 							 "\$db['fud']['database'] = '{$_POST['DBHOST_DBNAME']}';\n".
 							 "\$db['fud']['dbdriver'] = '{$_POST['DBHOST_DBTYPE']}';\n".
 							 "\$db['fud']['dbprefix'] = '{$_POST['DBHOST_TBL_PREFIX']}';\n".
-							 "\n".
-							 "/* End of file database.php */";
+							 "\n";
 		}
-		$contents = str_replace( "/* End of file database.php */", $output_string, $contents );
+		$contents = $contents."\n\n".$output_string;
 		file_put_contents( $fpath, $contents );
 	}
 
