@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
-| -------------------------------------------------------------------------
+| --------------------------------------------  -----------------------------
 |
 | There are three reserved routes:
 |
@@ -49,25 +49,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples: my-controller/index -> my_controller/index
 |       my-controller/my-method -> my_controller/my_method
 */
-$route['default_controller'] = "fud/fud";
+$route['default_controller'] = "welcome";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
 /* FUD routes */
-$route['login'] = "fud/fud/login";
-$route['logout'] = "fud/fud/logout";
-$route['fora'] = "fud/fud/index";
-$route['category/(:num)'] = "fud/fud/category/$1";
-$route['forum/(:num)/(:num)'] = "fud/fud/forum/$1/$2";
-$route['forum/(:num)/(:num)/(:num)'] = "fud/fud/forum/$1/$2/$3";
-$route['forum/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/forum/$1/$2/$3/$4";
-$route['topic/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3";
-$route['topic/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3/$4";
-$route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/fud/topic/$1/$2/$3/$4/$5";
-$route['reply/(:num)'] = "fud/fud/reply/$1";
-$route['reply/(:num)/(:num)'] = "fud/fud/reply/$1/$2";
-$route['reply/(:num)/(:num)/(:num)'] = "fud/fud/reply/$1/$2/$3";
-$route['newtopic/(:num)'] = "fud/fud/newtopic/$1";
+$route['login'] = "fud/main/login";
+$route['logout'] = "fud/main/logout";
+$route['fora'] = "fud/main/index";
+$route['category/(:num)'] = "fud/main/category/$1";
+$route['forum/(:num)/(:num)'] = "fud/main/forum/$1/$2";
+$route['forum/(:num)/(:num)/(:num)'] = "fud/main/forum/$1/$2/$3";
+$route['forum/(:num)/(:num)/(:num)/(:num)'] = "fud/main/forum/$1/$2/$3/$4";
+$route['topic/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3";
+$route['topic/(:num)/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3/$4";
+$route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3/$4/$5";
+$route['reply/(:num)'] = "fud/main/reply/$1";
+$route['reply/(:num)/(:num)'] = "fud/main/reply/$1/$2";
+$route['reply/(:num)/(:num)/(:num)'] = "fud/main/reply/$1/$2/$3";
+$route['newtopic/(:num)'] = "fud/main/newtopic/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
