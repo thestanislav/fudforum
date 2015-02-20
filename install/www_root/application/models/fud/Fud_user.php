@@ -12,7 +12,7 @@ class FUD_user extends CI_model
 
     $this->load->library( 'fud/fud_library', null, 'FUD' );
     $this->load->helper( 'fud' );
-    $this->load->database('fud');
+    $this->load->database( 'fud' );
 
     if( $this->isLoggedIn() )
     {
@@ -52,17 +52,16 @@ class FUD_user extends CI_model
   */
   public function login( $username = null, $password = null )
   {
-    $u = $this->db->escape( $username );
-    $p = $this->db->escape( $password );
-
     if( ($username != null)  )
     {
       //TODO(nexus): understand why the previous call to the library did not work
       //TODO(nexus): fix installation so that it properly generates DNS strings for sqlite DBs (?)
-      $qStr = "SELECT id, passwd, salt FROM {$GLOBALS['DBHOST_TBL_PREFIX']}users WHERE login={$u}";
-      $q = $this->db->query( $qStr );
-      $row = $q->num_rows ? $q->row() : NULL;
-      if ( $row && (empty($row->salt) && $row->passwd == md5($password) || $row->passwd == sha1($row->salt . sha1($password))))
+      $this->db->where('login',$username);
+      $this->db->from('users');
+      $q = $this->db->get();
+      $row = $q->num_rows() ? $q->row() : NULL;
+      if( $row && (empty($row->salt) && $row->passwd == md5($password) || 
+          $row->passwd == sha1($row->salt . sha1($password))) )
       {
         $this->FUDuid = $row->id;
       }
@@ -97,23 +96,13 @@ class FUD_user extends CI_model
   */
   public function logout()
   {
-    //if( $this->isLoggedIn() )
-    //{
-      $this->FUD->logout( $this->FUDuid );
+    $this->FUD->logout( $this->FUDuid );
 
-      $this->username = NULL;
-      $this->FUDuid = NULL;
-      $this->FUDsid = NULL;
+    $this->username = NULL;
+    $this->FUDuid = NULL;
+    $this->FUDsid = NULL;
 
-      /*
-      $this->session->unset_userdata('loggedin');
-      $this->session->unset_userdata('FUDsid');
-      $this->session->unset_userdata('FUDuid');
-      $this->session->unset_userdata('FUDusername');
-      $this->input->set_cookie($GLOBALS['COOKIE_NAME'], '' );
-      */
-      $this->session->sess_destroy();
-    //}
+    $this->session->sess_destroy();
   }
 
   /**
@@ -134,7 +123,9 @@ class FUD_user extends CI_model
   public function getSid()
   {
     if( $this->isLoggedIn() )
+    {
       return $this->FUDsid;
+    }
 
     return FALSE;
   }
@@ -149,7 +140,9 @@ class FUD_user extends CI_model
   public function getUid()
   {
     if( $this->isLoggedIn() )
+    {
       return $this->FUDuid;
+    }
 
     return FALSE;
   }
@@ -189,6 +182,7 @@ class FUD_user extends CI_model
         return TRUE;
       }
     }
+    
     return FALSE;
   }
   

@@ -62,6 +62,15 @@ if( !class_exists('FUD_users_opt') ) {
     }
 }
 
+
+if( !function_exists('debug_echo')) 
+{
+  function debug_echo( $data )
+  {
+    echo '<pre>'.var_dump($data).'</pre>';
+  }
+}
+
 /**
   * TRANSITIONAL. Fixes relative URLs using the CI's site_url() function.
   *
@@ -77,17 +86,20 @@ if( !class_exists('FUD_users_opt') ) {
   * 
   * @return string Contents of $html_body with corrected URLs
   */
-function fix_relative_urls( $html_body )
+if( !function_exists('fix_relative_urls')) 
 {
-	$pattern = array( '#(src|href)(\s*)=(\s*)"(.*)"#' );
-	return preg_replace_callback( $pattern, "preg_callback", $html_body );
-}
-
-function preg_callback( $matches )
-{
-	$pos = strpos( $matches[4], 'http' );
-	if( FALSE === $pos )
-		return $matches[1].' = "'.base_url( $matches[4] ).'"';
-	else
-		return $matches[0];
+  function fix_relative_urls( $html_body )
+  {
+    $pattern = array( '#(src|href)(\s*)=(\s*)"(.*)"#' );
+    return preg_replace_callback( $pattern, "rel_url_preg_callback", $html_body );
+  }
+  
+  function rel_url_preg_callback( $matches )
+  {
+    $pos = strpos( $matches[4], 'http' );
+    if( FALSE === $pos )
+      return $matches[1].' = "'.base_url( $matches[4] ).'"';
+    else
+      return $matches[0];
+  }
 }
