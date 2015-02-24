@@ -10,6 +10,7 @@ class FUD_user extends CI_model
   {
     parent::__construct();
 
+    $this->load->library('session');
     $this->load->library( 'fud/fud_library', null, 'FUD' );
     $this->load->helper( 'fud' );
     $this->load->database( 'fud' );
@@ -58,17 +59,18 @@ class FUD_user extends CI_model
       //TODO(nexus): fix installation so that it properly generates DNS strings for sqlite DBs (?)
       $this->db->where('login',$username);
       $this->db->from('users');
+      $this->db->select('id, login, passwd, salt');
       $q = $this->db->get();
       $row = $q->num_rows() ? $q->row() : NULL;
-      if( $row && (empty($row->salt) && $row->passwd == md5($password) || 
-          $row->passwd == sha1($row->salt . sha1($password))) )
+      if( $row && ( empty($row->salt) && $row->passwd == md5($password) || 
+          $row->passwd == sha1($row->salt . sha1($password)) ) )
       {
         $this->FUDuid = $row->id;
       }
       else return;
     }
 
-    if( null != $this->FUDuid )
+    if( $this->FUDuid != NULL )
     {
       $this->FUDsid = $this->FUD->login( $this->FUDuid );
 
@@ -157,8 +159,10 @@ class FUD_user extends CI_model
   public function getUsername()
   {
     if( $this->isLoggedIn() )
+    {
       return $this->username;
-
+    }
+      
     return FALSE;
   }
 

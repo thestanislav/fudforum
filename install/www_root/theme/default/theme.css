@@ -394,6 +394,10 @@ height: 25px;
     /* background-color: lighten( @Gainsboro, 5% ); */
 }
 
+.fud_post div.author div.contact_actions {
+  vertical-align: top;
+}
+
 .fud_post div.author div.contact_actions .pure-button {
   margin: 0 0 .5em 0;
 }

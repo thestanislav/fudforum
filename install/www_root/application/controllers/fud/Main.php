@@ -14,6 +14,8 @@ class Main extends CI_Controller
     require_once 'GLOBALS.php';
     date_default_timezone_set($GLOBALS['SERVER_TZ']);
     
+    $this->load->library('session');
+    
     $this->load->library('parser');
     $this->load->library( 'fud/fud_library', NULL, 'FUD' );
 
