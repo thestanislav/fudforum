@@ -154,6 +154,22 @@ body {
   .rounded(@small-radius);
 }
 
+.button-xsmall {
+  font-size: 70%;
+}
+
+.button-small {
+  font-size: 85%;
+}
+
+.button-large {
+  font-size: 110%;
+}
+
+.button-xlarge {
+  font-size: 125%;
+}
+
 div#main-wrapper-div {
   padding: 0 2em;
 }
@@ -378,11 +394,21 @@ height: 25px;
     /* background-color: lighten( @Gainsboro, 5% ); */
 }
 
+.fud_post div.author div.contact_actions .pure-button {
+  margin: 0 0 .5em 0;
+}
+
 .fud_post div.body {
     padding: 10px 5px 10px 5px;
     /*  background-color: lighten( @Gainsboro, 10% ); */
 }
 
+.fud_post div.actions {
+  border-top: thin solid gray;
+  .fud_text_right;
+  padding: .5em 2em 0;
+  margin-bottom: 1em;
+}
 .fud_post div.actions span {
 	padding: 5px 5px 5px 5px;
 }

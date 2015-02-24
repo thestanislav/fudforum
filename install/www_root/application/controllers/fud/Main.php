@@ -193,6 +193,7 @@ class Main extends CI_Controller
     $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
    
 
+    $f['f_c_id'] = $cat->id;
     $f['f_url'] = $forum->url;
     $f['f_name'] = $forum->name;
     $f['f_description'] = $forum->descr;
@@ -586,15 +587,24 @@ class Main extends CI_Controller
       // TODO(nexus): localization and load proper view
       $reply_url = site_url("reply/{$message->thread_id}/{$message->id}");
       $quote_url = site_url("reply/{$message->thread_id}/{$message->id}/1");
-      $m['m_reply_buttons'] = $permissions['REPLY'] ?
-        "<span class=\"float_right\"><a href=\"{$reply_url}\">Reply</a></span>"
-        ."<span class=\"float_right\"><a href=\"{$quote_url}\">Quote</a></span>" :
-        "";
+      
+      $m['m_reply_url'] = '';
+      $m['m_reply_text'] = '';
+      $m['m_quote_url'] = '';
+      $m['m_quote_text'] = '';
+      if( $permissions['REPLY'] )
+      {
+        $m['m_reply_url'] = $reply_url;
+        $m['m_reply_text'] = 'Reply'; //TODO(nexus): localization
+        $m['m_quote_url'] = $quote_url;
+        $m['m_quote_text'] = 'Quote'; //TODO(nexus): localization
+      }
       $messages[] = $m;
     }
 
     $data = array( 'messages' => $messages,
                    'pagination' => $pagination,
+                   'can_reply' => $permissions['REPLY'],
                    'path_navigation' => $path_navigation,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
