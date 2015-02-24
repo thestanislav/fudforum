@@ -36,7 +36,7 @@
                       </td>
                     </tr>
                     {fora}
-                      <tr class="cat_{c_id}_child">
+                      <tr class="cat_{f_c_id}_child">
                         <td class="fud_padding_sm fud_text_center">{f_icon}</td>
                         <td class="fud_padding_sm fud_text_center">{f_new_messages_icon}</td>
                         <td class="forum fud_wide_column">

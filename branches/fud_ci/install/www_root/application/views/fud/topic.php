@@ -17,18 +17,34 @@
                     <span class="date">{m_date}</span>
                   </div>
                 </div>
-                <div class="author" style="height:64px">
+                <div class="author" >
                   {m_avatar}
+                  <div class="contact_actions inline_block">
+                    <div>
+                      <a class="pure-button button-xsmall" href="#">Profile</a>
+                    </div>
+                    <div>
+                      <a class="pure-button button-xsmall" href="#">PM</a>
+                    </div>
+                    <div>
+                      <a class="pure-button button-xsmall" href="#">Email</a>
+                    </div>
+                  </span>
+                  </div>
                   <div class="inline_block vertical_top">
                     <span class="author">{m_login}</span>
-                  </div>
+                  </div>                  
                 </div>
                 <div class="clear body">
-                  <span>{m_body}</span>
+                  <span>
+                    {m_body}
+                  </span>
                 </div>
-                <div class="actions width_100 float_left">
-                  <span class="float_left ">Profile</span> 
-                  <span class="float_right">{m_reply_buttons}</span>
+                <div class="actions">
+                  <?php if($can_reply): ?>
+                  <a class="pure-button" href="{m_reply_url}">{m_reply_text}</a>
+                  <a class="pure-button" href="{m_quote_url}">{m_quote_text}</a>
+                  <?php endif; ?>
                 </div>
                 <div class="clear"></div>
               </div>

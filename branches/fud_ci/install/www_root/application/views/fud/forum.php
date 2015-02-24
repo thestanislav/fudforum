@@ -8,8 +8,8 @@
               <!-- Contents table -->
               <?php if( !empty($new_topic_url) ) { ?>
               <div class="pos_relative height_2em">
-                <span style="" id="fud_new_topic_button_top" class="pure-button">
-                  <a href="{new_topic_url}">New topic</a>
+                <span style="" id="fud_new_topic_button_top">
+                  <a class="pure-button" href="{new_topic_url}">New topic</a>
                 </span>
               </div>
               <?php } ?>
@@ -50,8 +50,8 @@
               </table>
               <?php if( !empty($new_topic_url) ) { ?>
               <div class="pos_relative height_2em">
-                <span style="" id="fud_new_topic_button_bottom" class="pure-button">
-                  <a href="{new_topic_url}">New topic</a>
+                <span style="" id="fud_new_topic_button_bottom">
+                  <a class="pure-button" href="{new_topic_url}">New topic</a>
                 </span>
               </div>
               <?php } ?>
