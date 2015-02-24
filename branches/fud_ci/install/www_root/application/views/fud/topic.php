@@ -31,6 +31,15 @@
                     </div>
                   </span>
                   </div>
+                  <div class="contact_actions inline_block">
+                    <div>
+                      <a class="pure-button button-xsmall" href="#">Add buddy</a>
+                    </div>
+                    <div>
+                      <a class="pure-button button-xsmall" href="#">Ignore</a>
+                    </div>
+                  </span>
+                  </div>
                   <div class="inline_block vertical_top">
                     <span class="author">{m_login}</span>
                   </div>                  
