@@ -32,49 +32,28 @@
  * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Model Class
+ * SessionHandlerInterface
  *
- * @package		CodeIgniter
+ * PHP 5.4 compatibility interface
+ *
+ * @package	CodeIgniter
  * @subpackage	Libraries
- * @category	Libraries
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/config.html
+ * @category	Sessions
+ * @author	Andrey Andreev
+ * @link	http://codeigniter.com/user_guide/libraries/sessions.html
  */
-class CI_Model {
+interface SessionHandlerInterface {
 
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		log_message('info', 'Model Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * __get magic
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
-	 */
-	public function __get($key)
-	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
-	}
-
+	public function open($save_path, $name);
+	public function close();
+	public function read($session_id);
+	public function write($session_id, $session_data);
+	public function destroy($session_id);
+	public function gc($maxlifetime);
 }

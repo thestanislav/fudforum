@@ -32,49 +32,30 @@
  * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Model Class
+ * SQLite3 Utility Class
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/config.html
+ * @category	Database
+ * @author	Andrey Andreev
+ * @link	http://codeigniter.com/user_guide/database/
  */
-class CI_Model {
+class CI_DB_sqlite3_utility extends CI_DB_utility {
 
 	/**
-	 * Class constructor
+	 * Export
 	 *
-	 * @return	void
+	 * @param	array	$params	Preferences
+	 * @return	mixed
 	 */
-	public function __construct()
+	protected function _backup($params = array())
 	{
-		log_message('info', 'Model Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * __get magic
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
-	 */
-	public function __get($key)
-	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
+		// Not supported
+		return $this->db->display_error('db_unsupported_feature');
 	}
 
 }
