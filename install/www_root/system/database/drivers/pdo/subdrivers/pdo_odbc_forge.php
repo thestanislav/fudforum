@@ -32,49 +32,39 @@
  * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Model Class
+ * PDO ODBC Forge Class
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
+ * @category	Database
  * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/config.html
+ * @link		http://codeigniter.com/database/
  */
-class CI_Model {
+class CI_DB_pdo_odbc_forge extends CI_DB_pdo_forge {
 
 	/**
-	 * Class constructor
+	 * UNSIGNED support
 	 *
-	 * @return	void
+	 * @var	bool|array
 	 */
-	public function __construct()
-	{
-		log_message('info', 'Model Class Initialized');
-	}
+	protected $_unsigned		= FALSE;
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * __get magic
+	 * Field attribute AUTO_INCREMENT
 	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
+	 * @param	array	&$attributes
+	 * @param	array	&$field
+	 * @return	void
 	 */
-	public function __get($key)
+	protected function _attr_auto_increment(&$attributes, &$field)
 	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
+		// Not supported (in most databases at least)
 	}
 
 }

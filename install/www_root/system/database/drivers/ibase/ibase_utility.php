@@ -32,49 +32,38 @@
  * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	http://codeigniter.com
- * @since	Version 1.0.0
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Model Class
+ * Interbase/Firebird Utility Class
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
+ * @category	Database
  * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/config.html
+ * @link		http://codeigniter.com/user_guide/database/
  */
-class CI_Model {
+class CI_DB_ibase_utility extends CI_DB_utility {
 
 	/**
-	 * Class constructor
+	 * Export
 	 *
-	 * @return	void
+	 * @param	string	$filename
+	 * @return	mixed
 	 */
-	public function __construct()
+	protected function _backup($filename)
 	{
-		log_message('info', 'Model Class Initialized');
-	}
+		if ($service = ibase_service_attach($this->db->hostname, $this->db->username, $this->db->password))
+		{
+			$res = ibase_backup($service, $this->db->database, $filename.'.fbk');
 
-	// --------------------------------------------------------------------
+			// Close the service connection
+			ibase_service_detach($service);
+			return $res;
+		}
 
-	/**
-	 * __get magic
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
-	 */
-	public function __get($key)
-	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
+		return FALSE;
 	}
 
 }
