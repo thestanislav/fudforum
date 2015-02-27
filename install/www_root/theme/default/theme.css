@@ -233,9 +233,14 @@ nav#fud_path_navigation {
 /*--- site navigation ---*/
 
 nav#fud_site_navigation {
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+/*
+nav#fud_site_navigation {
   padding: 1em 0;
   .rounded( @med-radius );
-  /* border: 1px solid gray; */
   text-align: center;
 }
 
@@ -248,6 +253,7 @@ nav#fud_site_navigation ul li {
   display: inline;
   padding: .5em;
 }
+*/
 
 /*--- New topic buttons ---*/
 
