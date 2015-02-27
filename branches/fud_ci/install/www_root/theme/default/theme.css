@@ -237,24 +237,6 @@ nav#fud_site_navigation {
   margin-bottom: .5em;
 }
 
-/*
-nav#fud_site_navigation {
-  padding: 1em 0;
-  .rounded( @med-radius );
-  text-align: center;
-}
-
-nav#fud_site_navigation ul {
-  margin: 0;
-  padding: 0;
-}
-
-nav#fud_site_navigation ul li {
-  display: inline;
-  padding: .5em;
-}
-*/
-
 /*--- New topic buttons ---*/
 
 span#fud_new_topic_button_bottom {
@@ -363,62 +345,69 @@ height: 25px;
 }
 
 /*--- List of messages within a topic ---*/
-
-.fud_post {
-    /* background-color: Gainsboro; */
-    border: 1px solid;
-    margin-bottom: 5px;
-    .rounded(@med-radius);
+div#messages div.fud-message:nth-child(2n+1){
+  background-color: GhostWhite;
 }
 
-.fud_post div.header {
-    border-bottom: 1px solid gray;
+div#messages div.fud-message:nth-child(2){
+  background-color: Ivory;
+}
+
+.fud-message {
+    border-top: thin solid LightGray;
+    border-bottom:  thin solid LightGray;
+    margin-bottom: 1.2em;
+    /* .rounded(@med-radius); */
+}
+
+.fud-message div.fud-message-header {
+    border-bottom: medium solid white;
     padding: 5px 5px 5px 5px;
 }
 
-.fud_post div.header span.subject {
+.fud-message div.fud-message-header span.fud-message-subject {
     font-weight: bold;
     margin-right: 1.5em;
     vertical-align: middle;
 }
 
-.fud_post div.header span.id {
+.fud-message div.fud-message-header span.fud-message-id {
     font-size: small;
     margin-right: 3em;
     vertical-align: middle;
 }
 
-.fud_post div.header span.date {
+.fud-message div.fud-message-header span.fud-message-date {
     font-size: small;
     vertical-align: middle;
     text-align: right;
 }
 
-.fud_post div.author {
-    border-bottom: 1px solid gray;
+.fud-message div.fud-message-author-info {
+  border-bottom: medium solid white;
     padding: 5px 5px 5px 5px;
-    /* background-color: lighten( @Gainsboro, 5% ); */
 }
 
-.fud_post div.author div.contact_actions {
+.fud-message div.fud-message-author-info div.fud-contact-actions {
   vertical-align: top;
+  margin-right: 2em;
+  display: inline-block;
 }
 
-.fud_post div.author div.contact_actions .pure-button {
-  margin: 0 0 .5em 0;
+.fud-message div.fud-message-author-info div.fud-contact-actions .pure-button {
+  margin-right: .5em;
 }
 
-.fud_post div.body {
+.fud-message div.fud-message-body {
     padding: 10px 5px 10px 5px;
-    /*  background-color: lighten( @Gainsboro, 10% ); */
 }
 
-.fud_post div.actions {
-  border-top: thin solid gray;
+.fud-message div.fud-message-actions {
   .fud_text_right;
   padding: .5em 2em 0;
   margin-bottom: 1em;
 }
-.fud_post div.actions span {
+
+.fud-message div.fud-message-actions span {
 	padding: 5px 5px 5px 5px;
 }
