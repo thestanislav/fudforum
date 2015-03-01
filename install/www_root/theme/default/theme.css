@@ -362,7 +362,7 @@ div#messages div.fud-message:nth-child(2){
 
 .fud-message div.fud-message-header {
     border-bottom: medium solid white;
-    padding: 5px 5px 5px 5px;
+    padding: .5em;
 }
 
 .fud-message div.fud-message-header span.fud-message-subject {
@@ -383,31 +383,36 @@ div#messages div.fud-message:nth-child(2){
     text-align: right;
 }
 
-.fud-message div.fud-message-author-info {
-  border-bottom: medium solid white;
-    padding: 5px 5px 5px 5px;
+.fud-message div.fud-message-author {
+  border-bottom: medium solid white;  
+  padding: .5em 1em;
 }
 
-.fud-message div.fud-message-author-info div.fud-contact-actions {
-  vertical-align: top;
-  margin-right: 2em;
+.fud-message div.fud-message-author div.fud-message-author-info {
+  margin-bottom: .5em;
+}
+
+.fud-message div.fud-message-author div.fud-message-author-info img.fud-message-author-avatar {
+  margin-right: 1em;
+}
+
+.fud-message div.fud-message-author div.fud-message-author-textual-info {
   display: inline-block;
+  vertical-align: top;
 }
 
-.fud-message div.fud-message-author-info div.fud-contact-actions .pure-button {
+.fud-message div.fud-message-author div.fud-contact-actions-container {
+}
+
+.fud-message div.fud-message-author div.fud-contact-actions-button-set  {
+  display: inline-block;  
+  margin-right: 2em; 
+}
+
+.fud-message div.fud-message-author div.fud-contact-actions .pure-button {
   margin-right: .5em;
 }
 
 .fud-message div.fud-message-body {
-    padding: 10px 5px 10px 5px;
-}
-
-.fud-message div.fud-message-actions {
-  .fud_text_right;
-  padding: .5em 2em 0;
-  margin-bottom: 1em;
-}
-
-.fud-message div.fud-message-actions span {
-	padding: 5px 5px 5px 5px;
+    padding: .5em 1em;
 }

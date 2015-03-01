@@ -195,7 +195,7 @@ class Main extends CI_Controller
     $new_messages_icon = "<img class=\"fud_new_messages_icon\" alt=\"New messages icon\" src=\"{$iconUrl}\" />";
    
 
-    $f['f_c_id'] = $cat->id;
+    $f['c_id'] = $cat->id;
     $f['f_url'] = $forum->url;
     $f['f_name'] = $forum->name;
     $f['f_description'] = $forum->descr;
@@ -282,6 +282,68 @@ class Main extends CI_Controller
     $this->parser->parse( 'fud/html_page.php', $data );
   }
 
+  
+  /**
+  * Register page.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */
+  public function register()
+  {
+    $errorMessage = "";
+
+    // Process login
+    /*
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      if( isset( $_POST['login'] ) )
+      {
+        $username = $_POST['login'];
+      }
+
+      if( isset( $_POST['password'] ) )
+      {
+        $password = $_POST['password'];
+      }
+
+      if( isset($username) && isset($password) )
+      {
+        $result = $this->user->login( $username, $password );
+        if( $result['retcode'] == 'LOGIN_SUCCESS' )
+        {
+          // TODO(nexus): decide where to redirect after login
+          redirect('/');
+        }
+        else
+        {
+          $errorMessage = $result['message'];
+        }
+      }
+      else
+      {
+        $errorMessage = "Please input both username and password.";
+      }
+    }
+    */
+
+    if( !empty($errorMessage) )
+    {
+      //TODO(nexus): Add proper error generating function
+      //TODO(nexus): Localization
+      $errorMesage = "<div class='error'>{$errorMessage}</div>";
+    }
+
+    $data = array( 'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'register_url' => site_url("/register"),
+                   'error_message' => $errorMessage,
+                   'base_url' => base_url('/') );
+
+    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
+    $data['html_body'] = $this->parser->parse('fud/register.php', $data, true);
+    $this->parser->parse( 'fud/html_page.php', $data );
+  }
+  
   /**
   * Login page.
   *
@@ -578,12 +640,11 @@ class Main extends CI_Controller
       // TODO(nexus): add option for date formatting
       $date = date( "D, j F Y H:m", $message->post_stamp );
       $m['m_date'] = $date;
-      $avt_height = 60; // TODO(nexus): Get from config
-      $height = 64; // 2px padding top and bottom
-      $avatar = $message->avatar_loc;
-      $avatar = preg_replace("/width=\".*\"/", "width=\"{$avt_height}\"", $avatar );
-      $avatar = preg_replace("/height=\".*\"/", "height=\"{$avt_height}\"", $avatar );
-      $m['m_avatar'] =  str_replace( "<img", "<img class=\"fud_post_author_avatar\"", $avatar);
+      // NOTE(nexus): this is a hack to get around the current API/DB
+      $src_start = strpos( $message->avatar_loc, "src=\"")+5;
+      $src_end = strpos( $message->avatar_loc, "\"", $src_start);
+      $image_location = substr( $message->avatar_loc, $src_start, $src_end-$src_start );
+      $m['m_avatar_url'] =  base_url($image_location);
       $m['m_login'] =  $message->login;
       $m['m_body'] =  $message->body;
       // TODO(nexus): localization and load proper view
@@ -613,7 +674,7 @@ class Main extends CI_Controller
                    'base_url' => base_url('/') );
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
-    $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/topic.php', $data, true) );
+    $data['html_body'] = $this->parser->parse('fud/topic.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
   }
 
