@@ -18,24 +18,26 @@
                       <span class="fud-message-date">{m_date}</span>
                     </div>
                   </div>
-                  <div class="fud-message-author-info" >
-                    <div>
-                      {m_avatar}
-                      <div class="inline_block vertical_top">
-                        <span class="fud-message-author">{m_login}</span>
+                  <div class="fud-message-author" >
+                    <div class="vertical_top fud-message-author-info">
+                      <img class="fud-message-author-avatar" src="{m_avatar_url}">
+                      <div class="fud-message-author-textual-info">
+                        <div class="fud-message-author-name">{m_login}</div>
                       </div>
                     </div>
-                    <div class="fud-contact-actions">
-                      <a class="pure-button button-xsmall" href="#">Profile</a>
-                    </div>
-                    <div class="fud-contact-actions">
-                      <a class="pure-button button-xsmall" href="#">PM</a>
-                      <a class="pure-button button-xsmall" href="#">Email</a>
-                    </div>
-                    <div class="fud-contact-actions">
-                      <a class="pure-button button-xsmall" href="#">Add buddy</a>
-                      <a class="pure-button button-xsmall" href="#">Ignore</a>
-                    </div>
+                    <div class="fud-contact-actions-container">
+                      <div class="fud-contact-actions-button-set">
+                        <a class="pure-button button-small" href="#">Profile</a>
+                      </div>
+                      <div class="fud-contact-actions-button-set">
+                        <a class="pure-button button-small" href="#">PM</a>
+                        <a class="pure-button button-small" href="#">Email</a>
+                      </div>
+                      <div class="fud-contact-actions-button-set">
+                        <a class="pure-button button-small" href="#">Add buddy</a>
+                        <a class="pure-button button-small" href="#">Ignore</a>
+                      </div>
+                    </div>                    
                   </div>
                   <div class="clear fud-message-body">
                     <span>

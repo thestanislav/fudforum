@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 /* FUD routes */
 $route['login'] = "fud/main/login";
 $route['logout'] = "fud/main/logout";
+$route['register'] = "fud/main/register";
 $route['fora'] = "fud/main/index";
 $route['category/(:num)'] = "fud/main/category/$1";
 $route['forum/(:num)/(:num)'] = "fud/main/forum/$1/$2";
