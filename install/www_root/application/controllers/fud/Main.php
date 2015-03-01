@@ -6,6 +6,8 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  */
 class Main extends CI_Controller
 {
+  private $captcha = NULL;
+
   public function __construct()
   {
     parent::__construct();
@@ -23,7 +25,6 @@ class Main extends CI_Controller
 
     $this->load->helper( 'fud' );
     $this->load->helper( 'br2nl' );
-
   }
 
   /**
@@ -898,6 +899,51 @@ class Main extends CI_Controller
     
     // TODO(nexus): get the right behaviour from trunk
     redirect( site_url() );
+  }
+  
+  /**
+  * Generates a captcha query with the specified number of options.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $num Number of options to generate.
+  */
+  function captcha( $num )
+  {
+    $this->load->helper( 'captcha' );
+    $captcha = new \visualCaptcha\Captcha( $this->session );
+    $captcha->generate( $howMany );
+    // TODO(nexus): Add page loading
+  }
+  
+  /**
+  * Streams the captcha image at the given index.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $idx Index.
+  */
+  function captchaImage( $idx )
+  {
+    $this->load->helper( 'captcha' );
+    $captcha = new \visualCaptcha\Captcha( $this->session );
+    $captcha->streamImage($app->response, $index, FALSE);
+    // TODO(nexus): Add page loading
+  }
+  
+   /**
+  * Streams the requested captcha audio type.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $type 1 if OGG streaming is needed.
+  */
+  function captchaAudio( $type )
+  {
+    $this->load->helper( 'captcha' );
+    $captcha = new \visualCaptcha\Captcha( $this->session );
+    $captcha->streamAudio( $app->response, $type )
+    // TODO(nexus): Add page loading
   }
 }
 

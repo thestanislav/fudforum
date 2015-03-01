@@ -1,13 +1,17 @@
         <div id="login_wrapper_grid" class="pure-g">
           <div id="login_wrapper_unit" class="pure-u-1">
             <div id="contents">
-              You are not logged in. This could be due to one of several reasons:
+              <div id="description">
+                You are not logged in. This could be due to one of several reasons:
                 <ol>
                   <li class="GenText">Your cookie has expired, and you need to login to renew your cookie.</li>
                   <li class="GenText">You do not have permission to access the requested resource as an anonymous user.
                     You must login to gain permission.</li>
                 </ol>
-              {error_message}
+              </div>
+              <div id="error-message">
+                {error_message}
+              </div>
               <form id="login" method="post" action="{login_url}"
                 class="pure-form-aligned pure-form">
                 <fieldset>
