@@ -339,8 +339,8 @@ class Main extends CI_Controller
         //'word'          => 'Random word',
         'img_path'      => './captcha/',
         'img_url'       => site_url('captcha/'),
-        'font_path'     => './path/to/fonts/texb.ttf',
-        'img_width'     => '150',
+        //'font_path'     => './path/to/fonts/texb.ttf',
+        'img_width'     => 150,
         'img_height'    => 30,
         'expiration'    => 7200,
         'word_length'   => 4,
@@ -349,14 +349,14 @@ class Main extends CI_Controller
         'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
         // White background and border, black text and red grid
         'colors'        => array(
-                'background' => array(255, 255, 255),
-                'border' => array(255, 255, 255),
-                'text' => array(0, 0, 0),
-                'grid' => array(255, 40, 40)
+        'background' => array(255, 255, 255),
+        'border' => array(255, 255, 255),
+        'text' => array(255, 60, 60),
+        'grid' => array(255, 40, 40)
         )
     );
 
-$cap = create_captcha($vals);
+    $captcha = create_captcha($vals);
 
     $data = array( 'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
@@ -926,45 +926,45 @@ $cap = create_captcha($vals);
   }
   
   /**
-  * Generates a captcha query with the specified number of options.
+  * VisualCaptcha - Generates a captcha query with the specified number of options.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $num Number of options to generate.
   */
-  function captcha( $num )
+  function vCaptcha( $num )
   {
-    $this->load->helper( 'captcha' );
+    $this->load->helper( 'visualcaptcha' );
     $captcha = new \visualCaptcha\Captcha( $this->session );
     $captcha->generate( $howMany );
     // TODO(nexus): Add page loading
   }
   
   /**
-  * Streams the captcha image at the given index.
+  * VisualCaptcha - Streams the captcha image at the given index.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
   * @param integer $idx Index.
   */
-  function captchaImage( $idx )
+  function vCaptchaImage( $idx )
   {
-    $this->load->helper( 'captcha' );
+    $this->load->helper( 'visualcaptcha' );
     $captcha = new \visualCaptcha\Captcha( $this->session );
     $captcha->streamImage($app->response, $index, FALSE);
     // TODO(nexus): Add page loading
   }
   
-   /**
-  * Streams the requested captcha audio type.
+  /**
+  * VisualCaptcha - Streams the requested captcha audio type.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   *
-  * @param integer $type 1 if OGG streaming is needed.
+  * @param integer $type Is it int????? 
   */
-  function captchaAudio( $type )
+  function vCaptchaAudio( $type )
   {
-    $this->load->helper( 'captcha' );
+    $this->load->helper( 'visualcaptcha' );
     $captcha = new \visualCaptcha\Captcha( $this->session );
     $captcha->streamAudio( $app->response, $type );
     // TODO(nexus): Add page loading
