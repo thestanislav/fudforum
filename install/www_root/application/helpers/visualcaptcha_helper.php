@@ -2,7 +2,7 @@
 
 namespace visualCaptcha;
 
-class Captcha {
+class VisualCaptcha {
     // Object that will have a reference for the session object
     // It will have .visualCaptcha.images, .visualCaptcha.audios, .visualCaptcha.validImageOption, and .visualCaptcha.validAudioOption
     private $session = null;
