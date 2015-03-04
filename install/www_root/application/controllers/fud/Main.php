@@ -338,32 +338,42 @@ class Main extends CI_Controller
     $vals = array(
         //'word'          => 'Random word',
         'img_path'      => './captcha/',
-        'img_url'       => site_url('captcha/'),
+        'img_url'       => base_url('captcha/'),
         //'font_path'     => './path/to/fonts/texb.ttf',
         'img_width'     => 150,
         'img_height'    => 30,
         'expiration'    => 7200,
         'word_length'   => 4,
-        'font_size'     => 16,
+        'font_size'     => 24,
         'img_id'        => 'Imageid',
         'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
         // White background and border, black text and red grid
         'colors'        => array(
-        'background' => array(255, 255, 255),
-        'border' => array(255, 255, 255),
-        'text' => array(255, 60, 60),
-        'grid' => array(255, 40, 40)
+          'background' => array(255, 255, 255),
+          'border' => array(255, 255, 255),
+          'text' => array(255, 60, 60),
+          'grid' => array(255, 40, 40)
         )
     );
+    
+    $captcha = create_captcha($vals);    
+    $captcha_data = array(
+        'captcha_time'  => $captcha['time'],
+        'ip_address'    => $this->input->ip_address(),
+        'word'          => $captcha['word']
+    );
 
-    $captcha = create_captcha($vals);
+    $q_str = $this->db->insert_string('captcha', $captcha_data);
+    $this->db->query($q_str);
+
 
     $data = array( 'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
                    'register_url' => site_url("/register"),
+                   'captcha_image' => $captcha['image'],
                    'error_message' => $errorMessage,
                    'base_url' => base_url('/') );
-
+    
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
     $data['html_body'] = $this->parser->parse('fud/register.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
