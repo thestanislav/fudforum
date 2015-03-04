@@ -27,6 +27,11 @@
                     <input tabindex="3" name="password2" type="password">
                   </div>
                   <div class="pure-control-group">
+                    <label>Captcha:</label>
+                    <input type="text" name="captcha" value="" />
+                    {captcha_image}
+                  </div>
+                  <div class="pure-control-group">
                     <label></label>
                     <button name="submit" type="submit"  
                             class="pure-button pure-button-primary">Submit</button>

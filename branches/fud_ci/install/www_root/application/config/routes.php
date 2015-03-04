@@ -70,9 +70,9 @@ $route['reply/(:num)'] = "fud/main/reply/$1";
 $route['reply/(:num)/(:num)'] = "fud/main/reply/$1/$2";
 $route['reply/(:num)/(:num)/(:num)'] = "fud/main/reply/$1/$2/$3";
 $route['newtopic/(:num)'] = "fud/main/newtopic/$1";
-$route['captcha/(:num)'] = "fud/captcha/$1";
-$route['captcha/image/(:num)'] = "fud/captchaimage/$1";
-$route['captcha/audio/(:num)'] = "fud/captchaaudio/$1";
+$route['vcaptcha/(:num)'] = "fud/captcha/$1";
+$route['vcaptcha/image/(:num)'] = "fud/captchaimage/$1";
+$route['vcaptcha/audio/(:num)'] = "fud/captchaaudio/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
