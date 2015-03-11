@@ -285,6 +285,58 @@ class Main extends CI_Controller
 
   
   /**
+  * Private function to handle registration.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */
+  private function _register() 
+  {
+    if( isset( $_POST['login'] ) )
+    {
+      $username = $_POST['login'];
+    }
+
+    if( isset( $_POST['password'] ) )
+    {
+      $password = $_POST['password'];
+    }
+
+    if( isset($username) && isset($password) )
+    {
+      $result = $this->user->login( $username, $password );
+      if( $result['retcode'] == 'LOGIN_SUCCESS' )
+      {
+        // TODO(nexus): decide where to redirect after login
+        redirect('/');
+      }
+      else
+      {
+        $errorMessage = $result['message'];
+      }
+    }
+    else
+    {
+      $errorMessage = "Please input both username and password.";
+    }
+    
+    // First, delete old captchas
+    // TODO(nexus): get captcha expiration from config
+    $expiration = time() - 7200; // Two hour limit
+    $this->db->where('captcha_time < ', $expiration)->delete('captcha');
+
+    // Then see if a captcha exists:
+    $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
+    $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
+    $query = $this->db->query($sql, $binds);
+    $row = $query->row();
+
+    if ($row->count == 0)
+    {
+      $errorMessage .= "Your captcha was wrong!";
+    }
+  }
+  
+  /**
   * Register page.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
@@ -294,38 +346,10 @@ class Main extends CI_Controller
     $errorMessage = "";
 
     // Process login
-    /*
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-      if( isset( $_POST['login'] ) )
-      {
-        $username = $_POST['login'];
-      }
-
-      if( isset( $_POST['password'] ) )
-      {
-        $password = $_POST['password'];
-      }
-
-      if( isset($username) && isset($password) )
-      {
-        $result = $this->user->login( $username, $password );
-        if( $result['retcode'] == 'LOGIN_SUCCESS' )
-        {
-          // TODO(nexus): decide where to redirect after login
-          redirect('/');
-        }
-        else
-        {
-          $errorMessage = $result['message'];
-        }
-      }
-      else
-      {
-        $errorMessage = "Please input both username and password.";
-      }
+      
     }
-    */
 
     if( !empty($errorMessage) )
     {
