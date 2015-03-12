@@ -311,9 +311,8 @@ class Main extends CI_Controller
     // Then see if a captcha exists:
     $where = array('word' => $user_input, 'ip_address' => $ip, 'captcha_time >' => $exp);
     $query = $this->db->get_where('captcha', $where );
-    echo '<br/><pre>'.print_r($this->db).'</pre><br/>';
     
-    if ($query->num_rows == 0)
+    if( $query->num_rows() == 0 )
     {
       return FALSE;
     }
@@ -395,9 +394,9 @@ class Main extends CI_Controller
     {
       if($this->_validate_registration_form())
       {
-        $email = $post['email'];
-        $username = $post['username'];
-        $password = $post['username'];
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['username'];
       }
       else 
       {
