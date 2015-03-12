@@ -970,7 +970,7 @@ class Main extends CI_Controller
     }
     
     // Only add RE: once
-    $pos = strpos( $subject, 'RE: ');
+    $pos = strpos( $message->subject, 'RE: ');
     if( ($pos == FALSE) OR ($pos != 0) )
     {
       $subject = "RE: ".trim($message->subject);
