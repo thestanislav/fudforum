@@ -753,10 +753,16 @@ class Main extends CI_Controller
       $date = date( "D, j F Y H:m", $message->post_stamp );
       $m['m_date'] = $date;
       // NOTE(nexus): this is a hack to get around the current API/DB
-      $src_start = strpos( $message->avatar_loc, "src=\"")+5;
-      $src_end = strpos( $message->avatar_loc, "\"", $src_start);
-      $image_location = substr( $message->avatar_loc, $src_start, $src_end-$src_start );
-      $m['m_avatar_url'] =  base_url($image_location);
+      // TODO(nexus): let the user have a default avatar if not present 
+      // NOTE(nexus): select random avatar at registration?
+      $src_start = strpos( $message->avatar_loc, "src=\"");
+      $m['m_avatar_url'] =  "";
+      if( $src_start ){
+        $src_start += 5;
+        $src_end = strpos( $message->avatar_loc, "\"", $src_start);
+        $image_location = substr( $message->avatar_loc, $src_start, $src_end-$src_start );
+        $m['m_avatar_url'] =  base_url($image_location);
+      }      
       $m['m_login'] =  $message->login;
       $m['m_body'] =  $message->body;
       // TODO(nexus): localization and load proper view
@@ -978,7 +984,8 @@ class Main extends CI_Controller
 
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
-    $data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
+    //$data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
+    $data['html_body'] = $this->parser->parse('fud/reply.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
   }
 
