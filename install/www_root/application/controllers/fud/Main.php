@@ -969,7 +969,12 @@ class Main extends CI_Controller
       $quote = $_POST['message_contents'];
     }
     
-    $subject = "RE: ".$message->subject;
+    // Only add RE: once
+    $pos = strpos( $subject, 'RE: ');
+    if( ($pos == FALSE) OR ($pos != 0) )
+    {
+      $subject = "RE: ".trim($message->subject);
+    }
 
     $data = array( 'tid' => $tid, 
                    'mid' => $mid, 
@@ -1006,7 +1011,8 @@ class Main extends CI_Controller
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $subject = $_POST['subject'];
-    $pos = strpos( $subject, 'RE: ');
+    // Only add RE: once
+    $pos = strpos( trim($subject), 'RE: ');
     if( ($pos == FALSE) OR ($pos != 0) )
     {
       $subject = "RE: {$subject}";
