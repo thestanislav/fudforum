@@ -302,7 +302,7 @@ class Main extends CI_Controller
   {
     // First, delete old captchas
     // TODO(nexus): get captcha expiration from config
-    $expiration = time() - 7200; // Two hour limit
+    $expiration = time() - 360; // Ten minutes limit
     $this->db->where('captcha_time < ', $expiration)->delete('captcha');
 
     $ip = $this->input->ip_address();
