@@ -311,7 +311,11 @@ class Main extends CI_Controller
     // Then see if a captcha exists:
     $where = array('word' => $user_input, 'ip_address' => $ip, 'captcha_time >' => $exp);
     $query = $this->db->get_where('captcha', $where );
-    
+
+    if( $query == NULL or $query == FALSE)
+    {
+      $this->db->display_error();
+    }
     if( $query->num_rows() == 0 )
     {
       return FALSE;
@@ -329,8 +333,9 @@ class Main extends CI_Controller
   {  
     $this->load->library('form_validation');
   
-    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash|is_unique[users.login]');
+    $this->form_validation->set_rules('fullname', 'Full name', 'trim|required');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('password', 'Password', 'required');
     $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|matches[password]');
     $this->form_validation->set_rules('captcha', 'Captcha', 'required|alpha_numeric|callback_validate_captcha');
@@ -392,11 +397,21 @@ class Main extends CI_Controller
     // Process login
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-      if($this->_validate_registration_form())
+      if($this->_validate_registration_form() )
       {
-        $email = $_POST['email'];
-        $username = $_POST['username'];
-        $password = $_POST['username'];
+        $values = array( 'login' => $_POST['username'],
+                         'email' => $_POST['email'],
+                         'name' => $_POST['fullname'],
+                         'passwd' => $_POST['password'] );
+        if( $this->FUD->add_user($values) == TRUE )
+        {
+          redirect(site_url(registration_ok));
+        }
+        else 
+        {
+          // TODO(nexus): properly display error
+          $this->db->display_error( $this->db->error()['message'] );
+        }
       }
       else 
       {
@@ -422,6 +437,22 @@ class Main extends CI_Controller
     
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
     $data['html_body'] = $this->parser->parse('fud/register.php', $data, true);
+    $this->parser->parse( 'fud/html_page.php', $data );
+  }
+  
+  /**
+  * Register page.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */
+  public function registration_ok()
+  {
+    $data = array( 'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'base_url' => base_url('/'),
+                   'login_url' => site_url('login') );
+    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
+    $data['html_body'] = $this->parser->parse('fud/registration_ok.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
   }
   
@@ -1025,5 +1056,7 @@ class Main extends CI_Controller
     $captcha->streamAudio( $app->response, $type );
     // TODO(nexus): Add page loading
   }
+  
+  
 }
 

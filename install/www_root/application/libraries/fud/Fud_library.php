@@ -84,9 +84,152 @@ class Fud_Library
     fud_new_topic($subject, $body, $mode, $author, $fid, $icon, $attach, $poll, $time, $desc);
   }
   
-  function add_user($vals, &$err)
+  function add_user($vals)
   {
-    return fud_add_user($vals, $err);
+    // Check for required fields.
+    foreach (array('login', 'passwd', 'email', 'name') as $v) {
+        if (empty($vals[$v])) {
+            $err = 'missing value for a required field '. $v;
+            return $err;
+        }
+    }
+
+    $passwd = $vals['passwd'];
+
+    // Generate unique salt to distrupt rainow tables
+    if( !array_key_exists('salt', $vals) || empty( $vals['salt'] ) ) {
+        $vals['salt'] = substr(md5(uniqid(mt_rand(), true)), 0, 9);
+    }
+
+    $salt = $vals['salt'];
+
+    // Password may already be encrypted (prefixed with 'MD5' or 'SHA1').
+    if (!strncmp($passwd, 'SHA1:', 5)) {
+        $vals['passwd'] = substr($passwd, 5);
+    } else if (!strncmp($vals['passwd'], 'MD5:', 4)) {
+        $vals['passwd'] = substr($passwd, 4);
+        $vals['salt']   = '';
+    } else {
+        // Probably a plain text password.
+        $vals['passwd'] = sha1($salt . sha1($passwd));
+    }
+
+    if (empty($vals['alias'])) {
+        if (strlen($vals['login']) > $GLOBALS['MAX_LOGIN_SHOW']) {
+            $vals['alias'] = substr($vals['login'], 0, $GLOBALS['MAX_LOGIN_SHOW']);
+        } else {
+            $vals['alias'] = $vals['login'];
+        }
+        $vals['alias'] = htmlspecialchars($vals['alias']);
+    }
+
+    // Some fields must be unique, check them.
+    foreach (array('login', 'email', 'alias') as $v) {
+        if (q_singleval('SELECT id FROM '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users WHERE '. $v .'='. _esc($vals[$v]))) {
+            $err = 'value for '. $v .' must be unique, specified value of '. $vals[$v] .' already exists.';
+            return $err;
+        }
+    }
+
+    $o2 =& $GLOBALS['FUD_OPT_2'];
+    $users_opt = 4|16|32|128|256|512|2048|4096|8192|16384|131072|4194304;
+    $theme = q_singleval(q_limit('SELECT id FROM '. $GLOBALS['DBHOST_TBL_PREFIX'] .'themes WHERE theme_opt>=2 AND '. q_bitand('theme_opt', 2) .' > 0', 1));
+    $time_zone =& $GLOBALS['SERVER_TZ'];
+    $posts_ppg =& $GLOBALS['POSTS_PER_PAGE'];
+    if (!($o2 & 4)) {
+        $users_opt ^= 128;
+    }
+    if (!($o2 & 8)) {
+        $users_opt ^= 256;
+    }
+    if ($o2 & 1) {
+        $o2 ^= 1;
+    }
+    $reg_ip = '127.0.0.1';
+    $last_visit = $last_read = $join_date = __request_timestamp__;
+
+    // Make sure all fields are set.
+    foreach( array('login','alias','passwd','name','email','icq','aim','yahoo','msnm','jabber','google','skype','twitter',
+        'affero','posts_ppg','time_zone','birthday','last_visit','conf_key','user_image',
+        'join_date','location','theme','occupation','interests','referer_id','last_read',
+        'sig','home_page','bio','users_opt','reg_ip') as $v) {
+        if (empty($vals[$v])) {
+            $vals[$v] = isset($$v) ? $$v : '';
+        }
+    }
+    $qStr = 'INSERT INTO
+            '.$GLOBALS['DBHOST_TBL_PREFIX'].'users (
+                login,
+                alias,
+                passwd,
+                salt,
+                name,
+                email,
+                icq,
+                aim,
+                yahoo,
+                msnm,
+                jabber,
+                google,
+                skype,
+                twitter,
+                affero,
+                posts_ppg,
+                time_zone,
+                birthday,
+                last_visit,
+                conf_key,
+                user_image,
+                join_date,
+                location,
+                theme,
+                occupation,
+                interests,
+                referer_id,
+                last_read,
+                sig,
+                home_page,
+                bio,
+                users_opt
+            ) VALUES (
+                '. _esc($vals['login']) .',
+                '. _esc($vals['alias']) .',
+                \''. $vals['passwd'] .'\',
+                \''. $vals['salt'] .'\',
+                '. _esc($vals['name']) .',
+                '. _esc($vals['email']) .',
+                '. (int)$vals['icq'] .',
+                '. ssn(urlencode($vals['aim'])) .',
+                '. ssn(urlencode($vals['yahoo'])) .',
+                '. ssn(urlencode($vals['msnm'])) .',
+                '. ssn(htmlspecialchars($vals['jabber'])) .',
+                '. ssn(htmlspecialchars($vals['google'])) .',
+                '. ssn(htmlspecialchars($vals['skype'])) .',
+                '. ssn(htmlspecialchars($vals['twitter'])) .',
+                '. ssn(urlencode($vals['affero'])) .',
+                '. (int)$vals['posts_ppg'] .',
+                '. _esc($vals['time_zone']) .',
+                '. ssn($vals['birthday']) .',
+                '. (int)$vals['last_visit'] .',
+                \''. $vals['conf_key'] .'\',
+                '. ssn(htmlspecialchars($vals['user_image'])) .',
+                '. $vals['join_date'] .',
+                '. ssn($vals['location']) .',
+                '. (int)$vals['theme'] .',
+                '. ssn($vals['occupation']) .',
+                '. ssn($vals['interests']) .',
+                '. (int)$vals['referer_id'] .',
+                '. (int)$vals['last_read'] .',
+                '. ssn($vals['sig']) .',
+                '. ssn(htmlspecialchars($vals['home_page'])) .',
+                '. ssn($vals['bio']) .',
+                '. (int)$vals['users_opt'] .'
+            )
+        ';
+    
+    $q = $this->CI->db->query($qStr);
+        
+    return $q;
   }
 
   function update_user($vals, &$err)
