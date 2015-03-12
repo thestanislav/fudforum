@@ -805,7 +805,7 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
 			'DBHOST_PASSWORD'	=> $_POST['DBHOST_PASSWORD'],
 			'DBHOST_DBNAME'		=> $_POST['DBHOST_DBNAME'],
 			'DBHOST_TBL_PREFIX'	=> $_POST['DBHOST_TBL_PREFIX'],
-			'DBHOST_DBTYPE'		=> $_POST['DBHOST_DBTYPE'],
+			'DBHOST_DBTYPE'		=> $_POST['DBHOST_DBTYPE']
 		));
 		
 		/* Write CodeIgniter session configuration and create sessions dir */
@@ -818,7 +818,14 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
                                  $contents );
     file_put_contents( $fpath, $new_contents );
     
+    // Create directory for sessions
     if (!__mkdir($session_path) ) {
+      exit('ERROR: failed creating '. $path .' directory.');
+    }
+    
+    // Create directory for captchas
+    $captcha_path = "{$_POST['SERVER_ROOT']}application/captcha";
+    if (!__mkdir($captcha_path) ) {
       exit('ERROR: failed creating '. $path .' directory.');
     }
 
