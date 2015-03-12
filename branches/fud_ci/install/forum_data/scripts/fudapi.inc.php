@@ -638,13 +638,13 @@ function fud_fetch_top_poster()
  *	users_opt - Account settings, consult fud_users.sql inside the sql/ directory for details.
  *	reg_ip - Registration IP, will default to 127.0.0.1
  */
-function fud_add_user($vals, &$err)
+function fud_add_user($vals)
 {
 	// Check for required fields.
 	foreach (array('login', 'passwd', 'email', 'name') as $v) {
 		if (empty($vals[$v])) {
 			$err = 'missing value for a required field '. $v;
-			return 0;
+			return $err;
 		}
 	}
 
@@ -681,7 +681,7 @@ function fud_add_user($vals, &$err)
 	foreach (array('login', 'email', 'alias') as $v) {
 		if (q_singleval('SELECT id FROM '. $GLOBALS['DBHOST_TBL_PREFIX'] .'users WHERE '. $v .'='. _esc($vals[$v]))) {
 			$err = 'value for '. $v .' must be unique, specified value of '. $vals[$v] .' already exists.';
-			return 0;
+			return $err;
 		}
 	}
 
