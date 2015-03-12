@@ -71,35 +71,3 @@ if( !function_exists('debug_echo'))
   }
 }
 
-/**
-  * TRANSITIONAL. Fixes relative URLs using the CI's site_url() function.
-  *
-  * This function is TRANSITIONAL, it should be removed once the core of 
-  * fudForum has been migrated to CI. The function takes as input some 
-  * HTML code and replaces relative links (which do not work) with absolute 
-  * links generated using CI's site_url() function.
-  *
-  * @author  Massimo Fierro <massimo.fierro@gmail.com>
-  *
-  * @param string $html_body  The body of the HTML page which URLs need to
-  * be fixed.
-  * 
-  * @return string Contents of $html_body with corrected URLs
-  */
-if( !function_exists('fix_relative_urls')) 
-{
-  function fix_relative_urls( $html_body )
-  {
-    $pattern = array( '#(src|href)(\s*)=(\s*)"(.*)"#' );
-    return preg_replace_callback( $pattern, "rel_url_preg_callback", $html_body );
-  }
-  
-  function rel_url_preg_callback( $matches )
-  {
-    $pos = strpos( $matches[4], 'http' );
-    if( FALSE === $pos )
-      return $matches[1].' = "'.base_url( $matches[4] ).'"';
-    else
-      return $matches[0];
-  }
-}

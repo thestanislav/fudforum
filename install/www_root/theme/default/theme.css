@@ -25,7 +25,7 @@
 /* --------------------------- */
 
 body {
-    font-size: 10pt;
+    font-size: 12pt;
 }
 
 #wrapper {
@@ -253,7 +253,7 @@ span#fud_new_topic_button_top {
 
 div#table_wrapper_unit div#contents table.fud_table {
   width: 100%;
-  font-size: 80%;
+  /* font-size: 80%; */
   padding: 0;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -310,7 +310,7 @@ table.fud_table td.category {
 }
 
 #fora_table td div.date {
-    font-size: smaller;
+    /* font-size: smaller; */
 }
 
 #fora_table img.fud_new_messages_icon {
@@ -325,7 +325,7 @@ table.fud_table td.category {
 
 
 #topics_table td.last_message span.author {
-    font-size: small;
+    /* font-size: small; */
 }
 
 #topics_table td.topic div.author_and_date {
@@ -333,7 +333,7 @@ table.fud_table td.category {
 }
 
 #topics_table td div.date {
-    font-size: smaller;
+    /* font-size: smaller; */
 }
 
 #topics_table img.fud_new_messages_icon {
@@ -372,13 +372,13 @@ div#messages div.fud-message:nth-child(2){
 }
 
 .fud-message div.fud-message-header span.fud-message-id {
-    font-size: small;
+    /* font-size: small; */
     margin-right: 3em;
     vertical-align: middle;
 }
 
 .fud-message div.fud-message-header span.fud-message-date {
-    font-size: small;
+    /* font-size: small; */
     vertical-align: middle;
     text-align: right;
 }
