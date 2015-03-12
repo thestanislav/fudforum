@@ -970,10 +970,11 @@ class Main extends CI_Controller
     }
     
     // Only add RE: once
-    $pos = strpos( $message->subject, 'RE: ');
-    if( ($pos == FALSE) OR ($pos != 0) )
+    $subject = trim($message->subject);
+    $pos = strpos( $subject, 'RE:');
+    if( ($pos === FALSE) OR ($pos > 0) )
     {
-      $subject = "RE: ".trim($message->subject);
+      $subject = "RE: {$subject}";
     }
 
     $data = array( 'tid' => $tid, 
@@ -1011,12 +1012,6 @@ class Main extends CI_Controller
   {
     $topic = $this->FUD->fetch_full_topic( $tid );
     $subject = $_POST['subject'];
-    // Only add RE: once
-    $pos = strpos( trim($subject), 'RE: ');
-    if( ($pos == FALSE) OR ($pos != 0) )
-    {
-      $subject = "RE: {$subject}";
-    }
     $reply_to_id = $mid == NULL ? $topic->root_msg_id : $mid;
     $this->FUD->new_reply( $subject, $_POST['message_contents'], 0, 
                            $this->user->getUid(), $reply_to_id );
