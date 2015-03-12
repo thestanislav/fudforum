@@ -283,81 +283,69 @@ class Main extends CI_Controller
     $this->parser->parse( 'fud/html_page.php', $data );
   }
 
+  /**
+  * Callback for username validation upon register.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */
+  public function validate_username() 
+  {  
+    
+  }
+  
+  /**
+  * Callback for captcha validation, must be public.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */  
+  public function validate_captcha( $user_input ) 
+  {
+    // First, delete old captchas
+    // TODO(nexus): get captcha expiration from config
+    $expiration = time() - 7200; // Two hour limit
+    $this->db->where('captcha_time < ', $expiration)->delete('captcha');
+
+    $ip = $this->input->ip_address();
+    $exp = $expiration;
+    
+    // Then see if a captcha exists:
+    $where = array('word' => $user_input, 'ip_address' => $ip, 'captcha_time >' => $exp);
+    $query = $this->db->get_where('captcha', $where );
+    echo '<br/><pre>'.print_r($this->db).'</pre><br/>';
+    
+    if ($query->num_rows == 0)
+    {
+      return FALSE;
+    }
+    
+    return TRUE;
+  }
   
   /**
   * Private function to handle registration.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
-  private function _register() 
-  {
-    if( isset( $_POST['login'] ) )
-    {
-      $username = $_POST['login'];
-    }
-
-    if( isset( $_POST['password'] ) )
-    {
-      $password = $_POST['password'];
-    }
-
-    if( isset($username) && isset($password) )
-    {
-      $result = $this->user->login( $username, $password );
-      if( $result['retcode'] == 'LOGIN_SUCCESS' )
-      {
-        // TODO(nexus): decide where to redirect after login
-        redirect('/');
-      }
-      else
-      {
-        $errorMessage = $result['message'];
-      }
-    }
-    else
-    {
-      $errorMessage = "Please input both username and password.";
-    }
+  private function _validate_registration_form() 
+  {  
+    $this->load->library('form_validation');
+  
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+    $this->form_validation->set_rules('username', 'Username', 'trim|required|alpha_dash|is_unique[users.login]');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|matches[password]');
+    $this->form_validation->set_rules('captcha', 'Captcha', 'required|alpha_numeric|callback_validate_captcha');
     
-    // First, delete old captchas
-    // TODO(nexus): get captcha expiration from config
-    $expiration = time() - 7200; // Two hour limit
-    $this->db->where('captcha_time < ', $expiration)->delete('captcha');
-
-    // Then see if a captcha exists:
-    $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
-    $binds = array($_POST['captcha'], $this->input->ip_address(), $expiration);
-    $query = $this->db->query($sql, $binds);
-    $row = $query->row();
-
-    if ($row->count == 0)
-    {
-      $errorMessage .= "Your captcha was wrong!";
-    }
+    return $this->form_validation->run();
   }
   
   /**
-  * Register page.
+  * Private function to create a CI captcha.
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
-  public function register()
+  private function _create_captcha() 
   {
-    $errorMessage = "";
-
-    // Process login
-    if ($_SERVER['REQUEST_METHOD'] === 'POST')
-    {
-      
-    }
-
-    if( !empty($errorMessage) )
-    {
-      //TODO(nexus): Add proper error generating function
-      //TODO(nexus): Localization
-      $errorMesage = "<div class='error'>{$errorMessage}</div>";
-    }
-    
     $this->load->helper('captcha');
     $vals = array(
         //'word'          => 'Random word',
@@ -389,7 +377,42 @@ class Main extends CI_Controller
 
     $q_str = $this->db->insert_string('captcha', $captcha_data);
     $this->db->query($q_str);
+    
+    return $captcha;
+  }
+  
+  /**
+  * Register page.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  */
+  public function register()
+  {
+    $errorMessage = "";
 
+    // Process login
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
+    {
+      if($this->_validate_registration_form())
+      {
+        $email = $post['email'];
+        $username = $post['username'];
+        $password = $post['username'];
+      }
+      else 
+      {
+        $errorMessage = validation_errors();
+      }
+    }
+
+    if( !empty($errorMessage) )
+    {
+      //TODO(nexus): Add proper error generating function
+      //TODO(nexus): Localization
+      $errorMesage = "<div class='error'>{$errorMessage}</div>";
+    }
+    
+    $captcha = $this->_create_captcha();
 
     $data = array( 'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),

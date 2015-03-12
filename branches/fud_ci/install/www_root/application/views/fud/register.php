@@ -11,15 +11,15 @@
                 class="pure-form-aligned pure-form">
                 <fieldset>
                   <div class="pure-control-group">
-                    <label>Name:</label>
-                    <input tabindex="1" name="name" type="text" 
-                           placeholder="Your (full) name" autofocus required>
+                    <label>Email:</label>
+                    <input tabindex="1" name="email" type="email" 
+                           placeholder="Your email address" autofocus required>
                   </div>
                   <div class="pure-control-group">
-                    <label>Login:</label>
-                    <input tabindex="2" name="login" type="text" 
+                    <label>Username:</label>
+                    <input tabindex="2" name="username" type="text" 
                            placeholder="Desired username" required>
-                  </div>                
+                  </div>                                  
                   <div class="pure-control-group">
                     <label>Password:</label>
                     <input tabindex="3" name="password" type="password" 

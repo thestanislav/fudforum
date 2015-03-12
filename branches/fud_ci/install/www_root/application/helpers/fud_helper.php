@@ -67,7 +67,7 @@ if( !function_exists('debug_echo'))
 {
   function debug_echo( $data )
   {
-    echo '<pre>'.var_dump($data).'</pre>';
+    echo '<br/><pre>'.print_r($data,true).'</pre><br/>';
   }
 }
 
