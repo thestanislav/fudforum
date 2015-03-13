@@ -107,7 +107,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 * Sanitizes the save_path directory.
 	 *
 	 * @param	string	$save_path	Path to session files' directory
-	 * @param	string	$name		Session cookie name
+	 * @param	string	$name		Session cookie name, unused
 	 * @return	bool
 	 */
 	public function open($save_path, $name)
@@ -269,7 +269,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	 *
 	 * Releases locks and closes file descriptor.
 	 *
-	 * @return	bool
+	 * @return	void
 	 */
 	public function close()
 	{
@@ -299,9 +299,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 	{
 		if ($this->close())
 		{
-			return file_exists($this->_file_path.$session_id)
-				? (unlink($this->_file_path.$session_id) && $this->_cookie_destroy())
-				: TRUE;
+			return unlink($this->_file_path.$session_id) && $this->_cookie_destroy();
 		}
 		elseif ($this->_file_path !== NULL)
 		{
@@ -334,16 +332,10 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 
 		$ts = time() - $maxlifetime;
 
-		$pattern = sprintf(
-			'/^%s[0-9a-f]{%d}$/',
-			preg_quote($this->_config['cookie_name'], '/'),
-			($this->_config['match_ip'] === TRUE ? 72 : 40)
-		);
-
 		foreach ($files as $file)
 		{
 			// If the filename doesn't match this pattern, it's either not a session file or is not ours
-			if ( ! preg_match($pattern, $file)
+			if ( ! preg_match('/(?:[0-9a-f]{32})?[0-9a-f]{40}$/i', $file)
 				OR ! is_file($this->_config['save_path'].DIRECTORY_SEPARATOR.$file)
 				OR ($mtime = filemtime($this->_config['save_path'].DIRECTORY_SEPARATOR.$file)) === FALSE
 				OR $mtime > $ts)
