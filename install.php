@@ -824,7 +824,7 @@ if ($section == 'db' || php_sapi_name() == 'cli') {
     }
     
     // Create directory for captchas
-    $captcha_path = "{$_POST['SERVER_ROOT']}application/captcha";
+    $captcha_path = "{$_POST['SERVER_ROOT']}/captcha";
     if (!__mkdir($captcha_path) ) {
       exit('ERROR: failed creating '. $path .' directory.');
     }
