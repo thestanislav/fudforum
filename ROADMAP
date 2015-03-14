@@ -2,17 +2,18 @@ Roadmap for FUD-CI (FUDforum CodeIgniter)
 ========================================
 
 Alpha:
-  - [ ] Have a working forum system
+  - [ ] Have a working forum system exploiting the existing library
     - [ ] Views (index, category, forum, topic, new topic, topic reply, etc.)
-    - [ ] Login/logout
+    - [X] Login/logout
+    - [X] User registration
     - [ ] Actions
       - [ ] Messages
-        - [ ] New
+        - [X] New
         - [ ] Edit
         - [ ] Delete
-        - [ ] Reply
+        - [X] Reply/Quote
       - [ ] Topics
-        - [ ] New
+        - [X] New
         - [ ] Delete
     - [ ] Enable UI elements according to permissions
       - [x] Only visible forums/categories
@@ -27,7 +28,7 @@ Beta:
     - [ ] Forum model
     - [ ] Topic model
     - [ ] Message model
-  - [ ] Develop a new theme system to allow parenting while keeping the ease of use of CI's templating
+  - [ ] New theme system to allow parenting while keeping the ease of use of CI's templating
   - [ ] Redesign the administration interface
 
 1.0:
