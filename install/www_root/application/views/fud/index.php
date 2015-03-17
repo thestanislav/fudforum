@@ -21,33 +21,41 @@
                     });
                   </script>
                   <thead class="table_header" >
-                      <th class="fud_wide_column" colspan="3" >Forum</th>
+                      <th class="fud_wide_column">Forum</th>
                       <th class="fud_text_center">Messages</th>
                       <th class="fud_text_center">Topics</th>
-                      <th class="fud_text_center">Last&nbsp;message</th>
+                      <th class="fud_text_center fud-hide-sm">Last&nbsp;message</th>
                   </thead>
                   <tbody>
                   {categories}
                     <tr id="cat_{c_id}">
-                      <td class="fud_wide_column" colspan="6" >
+                      <td class="fud_wide_column" colspan="4" >
                         <span id="{c_id}_toggler" class="toggler pure-button">-</span>
                         <span id="{c_id}_link"><a href="{c_url}">{c_name}</a></span>
-                        <span id="{c_id}_description">{c_description}</span>                   
+                        <span id="{c_id}_description" class="fud-hide-sm">
+                          {c_description}
+                        </span>                   
                       </td>
                     </tr>
                     {fora}
                       <tr class="cat_{c_id}_child">
-                        <td class="fud_padding_sm fud_text_center">{f_icon}</td>
-                        <td class="fud_padding_sm fud_text_center">{f_new_messages_icon}</td>
                         <td class="forum fud_wide_column">
-                          <div><a href="{f_url}">{f_name}</a></div>
-                          <div>{f_description}</div>
+                          <div class="fud_padding_sm fud_text_center inline_block fud-hide-sm">
+                            {f_icon}
+                          </div>
+                          <div class="fud_padding_sm fud_text_center inline_block fud-hide-sm">
+                            {f_new_messages_icon}
+                          </div>
+                          <div class="inline_block">
+                            <div><a href="{f_url}">{f_name}</a></div>
+                            <div class="fud-hide-sm">{f_description}</div>
+                          </div>
                         </td>                        
                         <td class="fud_text_center">{f_post_count}</td>
                         <td class="fud_text_center">{f_thread_count}</td>
-                        <td class="fud_text_center">
-                          <div class="date">{f_last_date}</div>
-                          <div class="author">{f_last_author}</div>
+                        <td class="fud_text_center fud-hide-sm">
+                          <div class="date fud-hide-sm">{f_last_date}</div>
+                          <div class="author fud-hide-sm">{f_last_author}</div>
                         </td>
                       </tr>
                     {/fora}
