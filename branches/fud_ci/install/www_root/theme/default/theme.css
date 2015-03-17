@@ -21,7 +21,6 @@
   -moz-border-top-right-radius: @radius;
   border-top-right-radius: @radius;
 }
-
 /* --------------------------- */
 
 #wrapper {
@@ -412,3 +411,44 @@ div#messages div.fud-message:nth-child(2){
 .fud-message div.fud-message-body {
     padding: .5em 1em;
 }
+
+
+/* ---------------------------------------------- */
+
+
+@media screen and (max-width: 35.5em) {
+  .fud-hide-sm {
+    display: none;
+  }
+  
+  /* Reduce font size */
+  #main-wrapper-grid {
+    font-size: .75em;
+  }
+  
+  /* Make logo 100% wide */
+  #main-wrapper-grid {
+    #fud_logo {
+      width:100%;
+    }
+  }
+}
+
+@media screen and (max-width: 48em) {
+  .fud-hide-md {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 64em) {
+  .fud-hide-lg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 80em) {
+  .fud-hide-xl {
+    display: none;
+  }
+}
+
