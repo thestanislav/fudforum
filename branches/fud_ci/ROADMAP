@@ -19,6 +19,9 @@ Alpha:
       - [x] Only visible forums/categories
       - [ ] (User) PM, info buttons
       - [ ] (Message) new, edit, reply, delete buttons
+ - [ ] New default theme
+    - [ ] Responsive
+    - [ ] High visibility
 
 Beta:
   - [ ] Correctly parse all user options (location, date format, etc.)
@@ -34,3 +37,6 @@ Beta:
 1.0:
   - [ ] Feature parity with latest FUDf 3.x
     - [ ] Internationalization
+    
+Desiderata (after 1.0):
+  - [ ] Realtime chat
