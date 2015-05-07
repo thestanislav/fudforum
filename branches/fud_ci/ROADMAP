@@ -41,3 +41,4 @@ Beta:
 Desiderata (after 1.0):
   - [ ] Realtime chat
   - [ ] User selectable post order (ascending/descending)
+  - [ ] Redesign plugins so that custom data is allowed (e.g DB tables)
