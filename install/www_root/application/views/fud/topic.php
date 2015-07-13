@@ -48,6 +48,8 @@
                     <?php if($can_reply): ?>
                     <a class="pure-button" href="{m_reply_url}">{m_reply_text}</a>
                     <a class="pure-button" href="{m_quote_url}">{m_quote_text}</a>
+                    <a class="pure-button" href="{m_edit_url}">{m_edit_text}</a>
+                    <a class="pure-button" href="{m_delete_url}">{m_delete_text}</a>
                     <?php endif; ?>
                   </div>
                   <div class="clear"></div>
