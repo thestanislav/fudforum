@@ -4,32 +4,39 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  *  FUDforum main controller class
  */
-class Message extends CI_Controller
+class Message extends MY_FudBaseController
 {
   public function __construct()
   {
     parent::__construct();
-    
-    // TODO(nexus): fix once the options have been moved to a new location
-    require_once 'GLOBALS.php';
-    date_default_timezone_set($GLOBALS['SERVER_TZ']);
-    
-    $this->load->library('session');
-    
-    $this->load->library('parser');
-    $this->load->library( 'fud/fud_library', NULL, 'FUD' );
-
-    $this->load->model('fud/fud_user','user');
-
-    $this->load->helper( 'fud' );
-    $this->load->helper( 'br2nl' );
   }
 
+  /**
+  * Displays a single message.
+  *
+  * NOTE(nexus): Any actual use? Reserve for AJAX?
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $mid Numerical message id to display/retrieve.
+  */
   public function get( $mid )
   {
   
   }
   
+  /**
+  * Function to manage new messages/replies.
+  *
+  * Displays a new message form, message preview or message edit form
+  * as required by the situation.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid OPTIONAL. Numerical message id used to reply.
+  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body.
+  */
   public function new( $tid, $mid = NULL, $doQuote = FALSE )
   {
     if( isset($_POST) AND !empty( $_POST ) )
@@ -131,12 +138,56 @@ class Message extends CI_Controller
     redirect( site_url() );
   }
   
-  public function edit( $mid )
+  /**
+  * Shows the message edit form.
+  *
+  * Shows the message edit form if the user has the right permissions.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $cid Numerical topic id used to reply.
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid Numerical message id used to reply.
+  *
+  */
+  public function edit( $mid, $newBody = NULL )
+  {
+    $msg = $this->fud->fetch_message( $mid );
+    $tid = $msg->thread_id;
+    
+    $topic = $this->FUD->fetch_full_topic( $tid );
+    $forum = $this->FUD->fetch_forums( $message->forum_id );
+    
+    $subject = trim($message->subject);
+    
+    if( !$newBody )
+    {
+      $newBody = $message->body;
+      $newBody = br2nl( $newBody );
+    } 
+    
+    $data = array( 'mid' => $mid, 
+                   'newBody' => $newBody, 
+                   'subject' => $subject,
+                   'forum' => $forum->name,                   
+                   'reply_to_id' => $message->reply_to,
+                   'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'base_url' => base_url(),
+                   'site_url' => site_url() );
+                   
+    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
+    $data['html_body'] = $this->parser->parse('fud/message_edit.php', $data, true);
+    $this->parser->parse( 'fud/html_page.php', $data );
+  }
+  
+  
+  public function delete( $mid )
   {
   
   }
   
-  public function delete()
+  public function delete( $tid, $mid )
   {
   
   }
