@@ -237,6 +237,12 @@ class Fud_Library
     return fud_update_user($vals, $err);
   }
   
+  function update_message( $subject, $body, $mode, $author, $mid, $icon=null, $attach=null,
+                           $poll=null )
+  {
+    fud_update_message( $subject, $body, $mode, $author, $mid, $icon, $attach, $poll);
+  }
+  
   function get_last_forum_visit( $fid, $uid )
   {
     $prefix = $GLOBALS['DBHOST_TBL_PREFIX'];
