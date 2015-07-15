@@ -1,10 +1,12 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require(__DIR__.'/FudBaseController.php');
+
 /**
  *  FUDforum main controller class
  */
-class Message extends MY_FudBaseController
+class Message extends FudBaseController
 {
   public function __construct()
   {
@@ -37,7 +39,7 @@ class Message extends MY_FudBaseController
   * @param integer $mid OPTIONAL. Numerical message id used to reply.
   * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body.
   */
-  public function new( $tid, $mid = NULL, $doQuote = FALSE )
+  public function reply( $tid, $mid = NULL, $doQuote = FALSE )
   {
     if( isset($_POST) AND !empty( $_POST ) )
     {
@@ -139,6 +141,37 @@ class Message extends MY_FudBaseController
   }
   
   /**
+  * Function to manage new messages/replies.
+  *
+  * Displays a new message form, message preview or message edit form
+  * as required by the situation.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $tid Numerical topic id used to reply.
+  * @param integer $mid OPTIONAL. Numerical message id used to reply.
+  * @param boolean $do_quote OPTIONAL. True to quote $mid's message's body.
+  */
+  public function edit( $mid )
+  {
+    if( isset($_POST) AND !empty( $_POST ) )
+    {
+      if( array_key_exists( 'preview', $_POST ) )
+      {        
+        $this->_edit( $mid, TRUE );
+      }
+      else if( array_key_exists( 'edit', $_POST ) )
+      {
+        $this->_edit_submit( $mid );
+      }
+    }
+    else
+    {
+        $this->_edit( $mid );
+    }
+  }
+  
+  /**
   * Shows the message edit form.
   *
   * Shows the message edit form if the user has the right permissions.
@@ -150,15 +183,20 @@ class Message extends MY_FudBaseController
   * @param integer $mid Numerical message id used to reply.
   *
   */
-  public function edit( $mid, $newBody = NULL )
+  public function _edit( $mid, $preview = FALSE )
   {
-    $msg = $this->fud->fetch_message( $mid );
-    $tid = $msg->thread_id;
+    $message = $this->FUD->fetch_message( $mid );
+    $tid = $message->thread_id;
     
     $topic = $this->FUD->fetch_full_topic( $tid );
     $forum = $this->FUD->fetch_forums( $message->forum_id );
     
     $subject = trim($message->subject);
+    
+    if( $preview )
+      $newBody = $_POST['message_contents'];
+    else
+      $newBody = br2nl( $message->body );
     
     if( !$newBody )
     {
@@ -167,7 +205,7 @@ class Message extends MY_FudBaseController
     } 
     
     $data = array( 'mid' => $mid, 
-                   'newBody' => $newBody, 
+                   'new_message_body' => $newBody, 
                    'subject' => $subject,
                    'forum' => $forum->name,                   
                    'reply_to_id' => $message->reply_to,
@@ -181,17 +219,35 @@ class Message extends MY_FudBaseController
     $this->parser->parse( 'fud/html_page.php', $data );
   }
   
-  
+  /**
+  * Shows the message delete form.
+  *
+  * Shows the message delete form if the user has the right permissions.
+  *
+  * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
+  *
+  * @param integer $mid Numerical message id used to reply.
+  *
+  */
   public function delete( $mid )
   {
-  
-  }
-  
-  public function delete( $tid, $mid )
-  {
-  
-  }
-  
-  
-  
+    $msg = $this->fud->fetch_message( $mid );
+    $tid = $msg->thread_id;
+    
+    $topic = $this->FUD->fetch_full_topic( $tid );    
+    $forum = $this->FUD->fetch_forums( $message->forum_id );
+    
+    $data = array( 'mid' => $mid, 
+                   'message_body' => $message->body, 
+                   'subject' => $message->subject,
+                   'forum' => $forum->name,
+                   'site_navigation' => $this->_get_site_navigation(),
+                   'header' => $this->_get_header(),
+                   'base_url' => base_url(),
+                   'site_url' => site_url() );
+                   
+    $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
+    $data['html_body'] = $this->parser->parse('fud/message_delete.php', $data, true);
+    $this->parser->parse( 'fud/html_page.php', $data );
+  }  
 }

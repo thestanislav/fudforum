@@ -1,13 +1,13 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require(__DIR__.'/FudBaseController.php');
+
 /**
  *  FUDforum main controller class
  */
-class Main extends MY_FudBaseController
+class Main extends FudBaseController
 {
-  private $captcha = NULL;
-
   public function __construct()
   {
     parent::__construct();
@@ -623,8 +623,10 @@ class Main extends MY_FudBaseController
       $m['m_login'] =  $message->login;
       $m['m_body'] =  $message->body;
       // TODO(nexus): localization and load proper view
-      $reply_url = site_url("reply/{$message->thread_id}/{$message->id}");
-      $quote_url = site_url("reply/{$message->thread_id}/{$message->id}/1");
+      $reply_url = site_url("message/reply/{$message->thread_id}/{$message->id}");
+      $quote_url = site_url("message/reply/{$message->thread_id}/{$message->id}/1");
+      $delete_url = site_url("message/delete/{$message->id}");
+      $edit_url = site_url("message/edit/{$message->id}");
       
       $m['m_reply_url'] = '';
       $m['m_reply_text'] = '';
@@ -637,6 +639,11 @@ class Main extends MY_FudBaseController
         $m['m_quote_url'] = $quote_url;
         $m['m_quote_text'] = 'Quote'; //TODO(nexus): localization
       }
+      //TODO(nexus): Check permisisons!!!
+      $m['m_delete_url'] = $delete_url;
+      $m['m_delete_text'] = 'Delete'; //TODO(nexus): localization
+      $m['m_edit_url'] = $edit_url;
+      $m['m_edit_text'] = 'Edit'; //TODO(nexus): localization
       $messages[] = $m;
     }
 

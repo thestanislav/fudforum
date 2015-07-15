@@ -4,9 +4,9 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  *  FUDforum main controller class
  */
-class MY_FudBaseController extends CI_Controller
+class FudBaseController extends CI_Controller
 {
-  private $captcha = NULL;
+  protected $captcha = NULL;
 
   public function __construct()
   {
@@ -32,7 +32,7 @@ class MY_FudBaseController extends CI_Controller
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
-  private function _get_site_navigation()
+  protected function _get_site_navigation()
   {
     $loginLogoutUrl = "";
     $loginLogoutText = "";
@@ -89,7 +89,7 @@ class MY_FudBaseController extends CI_Controller
   * @param integer $fid Numerical forum id as in the DB.
   * @param integer $tid Numerical topic id as in the DB.
   */
-  private function _get_path_navigation( $cid = NULL, $fid = NULL, $tid = NULL )
+  protected function _get_path_navigation( $cid = NULL, $fid = NULL, $tid = NULL )
   {
     $home_url = site_url( "fora" );
     $category = NULL; $category_url = NULL;
@@ -147,7 +147,7 @@ class MY_FudBaseController extends CI_Controller
   *
   * @author  Massimo Fierro (theonlynexus) <massimo.fierro@gmail.com>
   */
-  private function _get_header()
+  protected function _get_header()
   {
     // TODO(nexus): un-escape title and description
     $data = array( 'title' => html_entity_decode($GLOBALS['FORUM_TITLE']),

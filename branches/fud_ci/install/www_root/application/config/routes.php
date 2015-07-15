@@ -68,18 +68,15 @@ $route['topic/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3";
 $route['topic/(:num)/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3/$4";
 $route['topic/(:num)/(:num)/(:num)/(:num)/(:num)'] = "fud/main/topic/$1/$2/$3/$4/$5";
 
+
 $route['message/get/(:num)'] = "fud/message/get/$1";
-$route['message/new/(:num)'] = "fud/message/new/$1";
-$route['message/new/(:num)/(:num)'] = "fud/messaeg/new/$1/$2";
-$route['message/new/(:num)/(:num)/(:num)'] = "fud/message/new/$1/$2/$3";\
+$route['message/reply/(:num)'] = "fud/message/reply/$1";
+$route['message/reply/(:num)/(:num)'] = "fud/message/reply/$1/$2";
+$route['message/reply/(:num)/(:num)/(:num)'] = "fud/message/reply/$1/$2/$3";
 $route['message/edit/(:num)'] = "fud/message/edit/$1";
 $route['message/delete/(:num)'] = "fud/message/delete/$1/";
 
 
-
-$route['reply/(:num)'] = "fud/main/reply/$1";
-$route['reply/(:num)/(:num)'] = "fud/main/reply/$1/$2";
-$route['reply/(:num)/(:num)/(:num)'] = "fud/main/reply/$1/$2/$3";
 $route['newtopic/(:num)'] = "fud/main/newtopic/$1";
 $route['vcaptcha/(:num)'] = "fud/captcha/$1";
 $route['vcaptcha/image/(:num)'] = "fud/captchaimage/$1";
