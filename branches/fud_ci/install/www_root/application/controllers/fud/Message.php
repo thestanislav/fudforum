@@ -171,6 +171,17 @@ class Message extends FudBaseController
     }
   }
   
+  public function _edit_submit( $mid )
+  {
+    $message = $this->FUD->fetch_message( $mid );
+        
+    $subject = $_POST['subject'];
+    $body = $_POST['message_contents'];
+    
+    //TODO(nexus): check for changes in icon, poll, attachments...
+    $this->FUD->update_message( $subject, $body, $message->mode, $message->author, $mid );
+  }
+  
   /**
   * Shows the message edit form.
   *
@@ -231,7 +242,7 @@ class Message extends FudBaseController
   */
   public function delete( $mid )
   {
-    $msg = $this->fud->fetch_message( $mid );
+    $msg = $this->FUD->fetch_message( $mid );
     $tid = $msg->thread_id;
     
     $topic = $this->FUD->fetch_full_topic( $tid );    
