@@ -160,7 +160,7 @@ class Message extends FudBaseController
       {        
         $this->_edit( $mid, TRUE );
       }
-      else if( array_key_exists( 'edit', $_POST ) )
+      else if( array_key_exists( 'submit', $_POST ) )
       {
         $this->_edit_submit( $mid );
       }
@@ -251,8 +251,8 @@ class Message extends FudBaseController
   */
   public function delete( $mid )
   {
-    $msg = $this->FUD->fetch_message( $mid );
-    $tid = $msg->thread_id;
+    $message = $this->FUD->fetch_message( $mid );
+    $tid = $message->thread_id;
     
     $topic = $this->FUD->fetch_full_topic( $tid );    
     $forum = $this->FUD->fetch_forums( $message->forum_id );
@@ -260,6 +260,7 @@ class Message extends FudBaseController
     $data = array( 'mid' => $mid, 
                    'message_body' => $message->body, 
                    'subject' => $message->subject,
+                   'confirm_deletion_text' => $confirm_deletion_text,
                    'forum' => $forum->name,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),
