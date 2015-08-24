@@ -17,8 +17,11 @@
                     <input class="pure-input-2-3" name="subject" type="text" readonly="true" value="{subject}">
                   </div>
                   <div class="pure-control-group">
-                    <textarea name="message_contents" readonly="true" >{new_message_body}
+                    <textarea name="message_contents" readonly="true" >{message_body}
                     </textarea>
+                  </div>
+                  <div>
+                  	<p>{confirm_deletion_text}</p>
                   </div>
                   <div class="fud_text_right"> 
                     <button name="cancel" type="cancel" 
@@ -35,8 +38,9 @@
       <script type="text/javascript">
             CKEDITOR.replace( 'message_contents',
               {
+              	readOnly: true,
                 width: '66%',
-                extraPlugins : 'bbcode',
+                //extraPlugins : 'bbcode',
                 // Remove unused plugins.
                 removePlugins : 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
                 // Width and height are not supported in the BBCode format, so object resizing is disabled.
@@ -52,7 +56,8 @@
                   ['FontSize'],
                   ['TextColor'],
                   ['NumberedList','BulletedList','-','Blockquote'],
-                  ['Source','-','Undo','Redo']
+                  //['Source','-','Undo','Redo']
+                  ['Undo','Redo']
                 ],
                 // Strip CKEditor smileys to those commonly used in BBCode.
                 smiley_images :

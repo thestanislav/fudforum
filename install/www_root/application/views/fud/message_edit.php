@@ -25,7 +25,7 @@
                             class="pure-button">Cancel</button>
                     <button name="preview" type="submit" 
                             class="pure-button">Preview</button>
-                    <button name="edit" type="submit" 
+                    <button name="submit" type="submit" 
                             class="pure-button pure-button-primary">Edit</button>
                   </div>
                 </fieldset>         
