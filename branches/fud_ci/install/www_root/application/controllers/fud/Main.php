@@ -632,6 +632,10 @@ class Main extends FudBaseController
       $m['m_reply_text'] = '';
       $m['m_quote_url'] = '';
       $m['m_quote_text'] = '';
+      $m['m_edit_url'] = '';
+      $m['m_edit_text'] = '';
+      $m['m_delete_url'] = '';
+      $m['m_delete_text'] = '';
       if( $permissions['REPLY'] )
       {
         $m['m_reply_url'] = $reply_url;
@@ -639,17 +643,24 @@ class Main extends FudBaseController
         $m['m_quote_url'] = $quote_url;
         $m['m_quote_text'] = 'Quote'; //TODO(nexus): localization
       }
-      //TODO(nexus): Check permisisons!!!
-      $m['m_delete_url'] = $delete_url;
-      $m['m_delete_text'] = 'Delete'; //TODO(nexus): localization
-      $m['m_edit_url'] = $edit_url;
-      $m['m_edit_text'] = 'Edit'; //TODO(nexus): localization
+      if( $permissions['DEL'] )
+      {
+		    $m['m_delete_url'] = $delete_url;
+		    $m['m_delete_text'] = 'Delete'; //TODO(nexus): localization
+		  }
+      if( $permissions['REPLY'] )
+      {
+		    $m['m_edit_url'] = $edit_url;
+		    $m['m_edit_text'] = 'Edit'; //TODO(nexus): localization
+		  }
       $messages[] = $m;
     }
 
     $data = array( 'messages' => $messages,
                    'pagination' => $pagination,
                    'can_reply' => $permissions['REPLY'],
+                   'can_delete' => $permissions['DEL'],
+                   'can_edit' => $permissions['EDIT'],
                    'path_navigation' => $path_navigation,
                    'site_navigation' => $this->_get_site_navigation(),
                    'header' => $this->_get_header(),

@@ -164,6 +164,11 @@ class Message extends FudBaseController
       {
         $this->_edit_submit( $mid );
       }
+      else if( array_key_exists( 'cancel', $_POST ) )
+      {
+        // TODO(nexus): get the right behaviour from trunk
+		    redirect( site_url() );
+      }
     }
     else
     {
@@ -179,7 +184,10 @@ class Message extends FudBaseController
     $body = $_POST['message_contents'];
     
     //TODO(nexus): check for changes in icon, poll, attachments...
-    $this->FUD->update_message( $subject, $body, $message->mode, $message->author, $mid );
+    $this->FUD->update_message( $subject, $body, 0, $message->poster_id, $mid );
+	
+    // TODO(nexus): get the right behaviour from trunk
+    redirect( site_url() );
   }
   
   /**
@@ -207,12 +215,13 @@ class Message extends FudBaseController
     if( $preview )
       $newBody = $_POST['message_contents'];
     else
-      $newBody = br2nl( $message->body );
+      //$newBody = br2nl( $message->body );
+      $newBody = $message->body;
     
     if( !$newBody )
     {
       $newBody = $message->body;
-      $newBody = br2nl( $newBody );
+      //$newBody = br2nl( $newBody );
     } 
     
     $data = array( 'mid' => $mid, 
