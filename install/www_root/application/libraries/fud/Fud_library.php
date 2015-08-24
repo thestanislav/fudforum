@@ -400,16 +400,16 @@ class Fud_Library
 
       foreach( $perms as $perm )
       {
-	if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) OR
-	  ( isset($r->is_mod) AND null != $r->is_mod) OR
-	  ($r->group_cache_opt & $constants[$perm]) )
-	{
-	  $permissions[$perm] = TRUE;
-	}
-	else
-	{
-	  $permissions[$perm] = FALSE;
-	}
+				if( ( isset($r->users_opt) AND ($r->users_opt & FUD_users_opt::IS_ADMIN) ) 
+				  OR ( isset($r->is_mod) AND (null != $r->is_mod) ) 
+				  OR ($r->group_cache_opt & $constants[$perm]) )
+				{
+					$permissions[$perm] = TRUE;
+				}
+				else
+				{
+					$permissions[$perm] = FALSE;
+				}
       }
       return $permissions;
     }

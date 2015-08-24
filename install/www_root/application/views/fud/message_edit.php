@@ -25,7 +25,7 @@
                             class="pure-button">Cancel</button>
                     <button name="preview" type="submit" 
                             class="pure-button">Preview</button>
-                    <button name="submit" type="submit" 
+                    <button name="edit" type="submit" 
                             class="pure-button pure-button-primary">Edit</button>
                   </div>
                 </fieldset>         
@@ -38,7 +38,7 @@
             CKEDITOR.replace( 'message_contents',
               {
                 width: '66%',
-                extraPlugins : 'bbcode',
+                //extraPlugins : 'bbcode',
                 // Remove unused plugins.
                 removePlugins : 'bidi,dialogadvtab,div,filebrowser,flash,format,forms,horizontalrule,iframe,indent,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
                 // Width and height are not supported in the BBCode format, so object resizing is disabled.
@@ -54,7 +54,8 @@
                   ['FontSize'],
                   ['TextColor'],
                   ['NumberedList','BulletedList','-','Blockquote'],
-                  ['Source','-','Undo','Redo']
+                  //['Source','-','Undo','Redo']
+                  ['Undo','Redo']
                 ],
                 // Strip CKEditor smileys to those commonly used in BBCode.
                 smiley_images :
