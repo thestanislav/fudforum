@@ -744,8 +744,7 @@ class Main extends FudBaseController
                    'site_url' => site_url() );
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
-    //$data['html_body'] = fix_relative_urls( $this->parser->parse('fud/post.php', $data, true) );
-    $data['html_body'] = $this->parser->parse('fud/post.php', $data, true);
+    $data['html_body'] = $this->parser->parse('fud/message_new.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
   }
   

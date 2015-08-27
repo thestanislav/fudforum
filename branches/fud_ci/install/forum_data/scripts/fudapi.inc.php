@@ -1173,12 +1173,14 @@ function _fud_message_post($subject, $body, $mode, $author, $icon, $id, $forum, 
 		$msg->post_stamp = time();
 	}
 
-
+  //TODO(nexus): reset this back to being able to use HTML or BBCODE
+  /*
 	if ($forum_opt & 16) {
 		$msg->body = tags_to_html($msg->body, 1);
 	} else if ($forum_opt & 8) {
 		$msg->body = nl2br(char_fix(htmlspecialchars($msg->body)));
 	}
+	*/
 
 	if ($mode & 2) {
 		$msg->body = smiley_to_post($msg->body);
