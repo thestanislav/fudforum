@@ -81,8 +81,6 @@ class Message extends FudBaseController
     if( $do_quote )
     {
       $quote = $message->body;
-      $quote = br2nl( $quote );
-      $quote = "[quote]{$quote}[/quote]\n&nbsp;";
     } 
     else if( $preview )
     {
@@ -110,7 +108,6 @@ class Message extends FudBaseController
 
 
     $data['html_head'] = $this->parser->parse('fud/html_head.php', $data, true);
-    //$data['html_body'] = fix_relative_urls( $this->parser->parse('fud/reply.php', $data, true) );
     $data['html_body'] = $this->parser->parse('fud/reply.php', $data, true);
     $this->parser->parse( 'fud/html_page.php', $data );
   }
@@ -215,13 +212,11 @@ class Message extends FudBaseController
     if( $preview )
       $newBody = $_POST['message_contents'];
     else
-      //$newBody = br2nl( $message->body );
       $newBody = $message->body;
     
     if( !$newBody )
     {
       $newBody = $message->body;
-      //$newBody = br2nl( $newBody );
     } 
     
     $data = array( 'mid' => $mid, 
